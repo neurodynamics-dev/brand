@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Brand guidelines e central de assets da NeuroDynamics: logo, cores, tipografia, elementos visuais e geradores de mídia da equipe.">
+<meta name="theme-color" content="#050807">
+<title>Brand — NeuroDynamics</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2300352F'/%3E%3Ccircle cx='11' cy='16' r='5' fill='%23F5F5F7'/%3E%3Ccircle cx='23' cy='9.5' r='2.8' fill='%23F5F5F7'/%3E%3Ccircle cx='23' cy='22.5' r='2.8' fill='%23F5F5F7'/%3E%3Cpath d='M15 13.8 20.6 10.6M15 18.2 20.6 21.4' stroke='%23CEDC00' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ---- paleta oficial (ver seção Cores) ---- */
+  --cortex:#00352F; --axon:#00594F; --soma:#0B7D6E; --synapse:#CEDC00;
+  --void:#050807; --painel:#0B1210; --blackout:#1D1D1F;
+  --ink:#F5F5F7; --aura:#F8F7FF; --nevoa:#9AA5A1; --grafite:#616C68;
+  --ion:#2DD4BF; --vital:#4ADE97; --mielina:#F5C36A; --pulso:#F1806F;
+  --plasma:#7FA7F2; --dendrito:#A78BFA;
+  /* ---- tokens de interface ---- */
+  --bg:var(--void); --muted:var(--nevoa); --dim:var(--grafite);
+  --line:rgba(245,245,247,.08); --line2:rgba(245,245,247,.16);
+  --card:rgba(255,255,255,.03); --glass:rgba(7,12,10,.62);
+  --r:18px; --max:1240px;
+  --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);font-size:15px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+h1,h2,h3,h4{font-family:var(--fd);letter-spacing:-.015em}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:none;font-size:inherit}
+input,select{font-family:inherit;font-size:14px;color:var(--ink)}
+img{max-width:100%}
+[hidden]{display:none!important}
+::selection{background:var(--synapse);color:var(--cortex)}
+
+/* ============ BACKGROUND ============ */
+#bg{position:fixed;inset:0;z-index:-2;overflow:hidden;background:
+  radial-gradient(120% 90% at 72% -12%, #081511 0%, var(--bg) 58%)}
+#bg::after{content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(245,245,247,.028) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(245,245,247,.028) 1px,transparent 1px);
+  background-size:130px 130px;
+  -webkit-mask-image:radial-gradient(85% 62% at 50% 26%, #000 0%, transparent 100%);
+          mask-image:radial-gradient(85% 62% at 50% 26%, #000 0%, transparent 100%)}
+.blob{position:absolute;border-radius:50%;filter:blur(120px);will-change:transform;opacity:.32}
+.b1{width:56vmax;height:56vmax;left:-18vmax;top:-24vmax;
+  background:radial-gradient(circle,var(--axon) 0%,rgba(0,89,79,0) 70%);
+  animation:fl1 38s ease-in-out infinite alternate}
+.b2{width:42vmax;height:42vmax;right:-16vmax;top:8vmax;opacity:.2;
+  background:radial-gradient(circle,var(--soma) 0%,rgba(11,125,110,0) 70%);
+  animation:fl2 32s ease-in-out infinite alternate}
+.b3{width:30vmax;height:30vmax;left:36vw;bottom:-18vmax;opacity:.06;
+  background:radial-gradient(circle,var(--synapse) 0%,rgba(206,220,0,0) 70%);
+  animation:fl3 44s ease-in-out infinite alternate}
+@keyframes fl1{from{transform:translate(0,0) scale(1)}to{transform:translate(8vw,6vh) scale(1.14)}}
+@keyframes fl2{from{transform:translate(0,0) scale(1.08)}to{transform:translate(-10vw,10vh) scale(.94)}}
+@keyframes fl3{from{transform:translate(0,0) scale(1)}to{transform:translate(-7vw,-12vh) scale(1.2)}}
+@media (prefers-reduced-motion:reduce){
+  .blob{animation:none!important}
+  *{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+
+/* ============ HEADER ============ */
+#hd{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:60;
+  width:min(var(--max),calc(100vw - 28px));
+  border:1px solid var(--line);border-radius:16px;
+  background:var(--glass);backdrop-filter:blur(18px) saturate(1.5);
+  -webkit-backdrop-filter:blur(18px) saturate(1.5);
+  transition:border-color .3s, box-shadow .3s, background .3s}
+#hd.rolou{border-color:var(--line2);box-shadow:0 18px 50px rgba(0,0,0,.45);background:rgba(7,12,10,.8)}
+.hd-in{display:flex;align-items:center;gap:16px;padding:0 10px 0 20px;height:58px}
+.hd-logo{display:flex;align-items:center;gap:10px;flex-shrink:0;margin-right:auto}
+.hd-logo img{height:18px;width:auto;display:block;filter:brightness(0) invert(1)}
+.logotype{font-family:var(--fd);font-weight:700;font-size:16.5px;letter-spacing:-.02em;white-space:nowrap}
+.hd-tag{font-family:var(--fm);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--synapse);border:1px solid rgba(206,220,0,.35);border-radius:999px;padding:3px 9px;white-space:nowrap}
+nav.hd-nav{display:flex;gap:2px}
+nav.hd-nav a{font-family:var(--fd);font-size:12.5px;font-weight:500;color:var(--muted);
+  padding:8px 11px;border-radius:10px;transition:color .15s,background .15s;white-space:nowrap}
+nav.hd-nav a:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+@media (max-width:1080px){nav.hd-nav{display:none}}
+
+/* ============ LAYOUT ============ */
+main{max-width:var(--max);margin:0 auto;padding:0 26px}
+section{margin:0 0 clamp(80px,10vh,130px);scroll-margin-top:100px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--fm);font-size:11px;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.eyebrow::before{content:'';width:7px;height:7px;background:var(--synapse);flex-shrink:0}
+.sec-head{display:grid;grid-template-columns:220px 1fr;gap:26px;align-items:start;margin-bottom:42px}
+.sec-head h2{font-size:clamp(26px,3.8vw,42px);font-weight:600;line-height:1.08;max-width:680px}
+.sec-head .sub{color:var(--muted);max-width:620px;margin-top:12px;font-size:15px}
+@media (max-width:820px){.sec-head{grid-template-columns:1fr;gap:14px}}
+.card{border:1px solid var(--line);border-radius:var(--r);background:var(--card);
+  backdrop-filter:blur(6px);padding:24px}
+.btn{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 20px;border-radius:11px;
+  font-family:var(--fd);font-weight:600;font-size:13.5px;white-space:nowrap;
+  transition:transform .15s, box-shadow .15s, background .15s, border-color .15s}
+.btn.solid{background:var(--synapse);color:var(--cortex)}
+.btn.solid:hover{transform:translateY(-1px);box-shadow:0 8px 26px rgba(206,220,0,.22)}
+.btn.claro{background:var(--ink);color:#0A0F0E}
+.btn.claro:hover{transform:translateY(-1px);box-shadow:0 8px 26px rgba(245,245,247,.14)}
+.btn.ghost{border:1px solid var(--line2);background:rgba(255,255,255,.03)}
+.btn.ghost:hover{background:rgba(255,255,255,.07);border-color:var(--dim)}
+.btn.mini{height:34px;padding:0 13px;font-size:12px;border-radius:9px}
+.mono{font-family:var(--fm)}
+.nota{font-size:12.5px;color:var(--dim);line-height:1.6}
+
+/* ============ HERO ============ */
+#hero{min-height:78svh;display:flex;flex-direction:column;justify-content:center;padding:150px 0 30px}
+#hero h1{font-size:clamp(40px,6.8vw,88px);font-weight:600;letter-spacing:-.03em;line-height:1;
+  margin:20px 0 22px;max-width:980px}
+#hero h1 em{font-style:normal;color:var(--synapse)}
+.hero-sub{font-size:clamp(15px,1.7vw,18px);color:var(--muted);max-width:620px;margin-bottom:34px}
+.hero-meta{margin-top:56px;padding-top:22px;display:flex;justify-content:space-between;gap:14px;
+  flex-wrap:wrap;border-top:1px solid var(--line)}
+.hero-meta span{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.hero-meta span em{font-style:normal;color:var(--muted)}
+
+/* ============ LOGO ============ */
+.logo-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}
+@media (max-width:860px){.logo-grid{grid-template-columns:1fr}}
+.logo-stage{border:1px solid var(--line);border-radius:var(--r);min-height:230px;display:flex;
+  align-items:center;justify-content:center;position:relative;overflow:hidden;padding:40px}
+.logo-stage.escuro{background:
+  radial-gradient(120% 130% at 20% -10%, rgba(0,89,79,.35), transparent 60%), var(--painel)}
+.logo-stage.claro{background:var(--ink)}
+.logo-stage img{height:44px;width:auto}
+.logo-stage.escuro img{filter:brightness(0) invert(1)}
+.logo-stage .lb{position:absolute;left:14px;bottom:12px;font-family:var(--fm);font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.logo-stage.claro .lb{color:#8A8A90}
+.crop{position:absolute;width:14px;height:14px;color:rgba(245,245,247,.25)}
+.logo-stage.claro .crop{color:rgba(29,29,31,.3)}
+.crop.tl{top:10px;left:10px;border-top:1px solid;border-left:1px solid}
+.crop.tr{top:10px;right:10px;border-top:1px solid;border-right:1px solid}
+.crop.bl{bottom:10px;left:10px;border-bottom:1px solid;border-left:1px solid}
+.crop.br{bottom:10px;right:10px;border-bottom:1px solid;border-right:1px solid}
+.regras{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+@media (max-width:820px){.regras{grid-template-columns:1fr}}
+.regra{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--card)}
+.regra b{font-family:var(--fd);font-size:13.5px;display:block;margin-bottom:4px}
+.regra p{font-size:12.5px;color:var(--muted)}
+.regra.nao b{color:var(--pulso)}
+
+/* ============ CORES ============ */
+.cor-bloco{margin-bottom:28px}
+.cor-bloco > h3{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+.cores{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.cor{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);
+  cursor:pointer;transition:transform .15s, border-color .15s;text-align:left}
+.cor:hover{transform:translateY(-2px);border-color:var(--line2)}
+.cor .sw{height:86px;position:relative}
+.cor .sw .pct{position:absolute;right:10px;top:8px;font-family:var(--fm);font-size:10px;opacity:.75}
+.cor .info{padding:12px 14px}
+.cor .nm{font-family:var(--fd);font-weight:600;font-size:14px}
+.cor .hx{font-family:var(--fm);font-size:11.5px;color:var(--muted);margin-top:2px}
+.cor .uso{font-size:11.5px;color:var(--dim);margin-top:6px;line-height:1.45}
+.prop-bar{display:flex;height:34px;border-radius:10px;overflow:hidden;border:1px solid var(--line2);margin:10px 0 6px}
+.prop-bar div{height:100%}
+.cor-acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+
+/* ============ TIPOGRAFIA ============ */
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:860px){.type-grid{grid-template-columns:1fr}}
+.spec .fam{font-family:var(--fm);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--synapse);margin-bottom:12px;display:block}
+.spec .amostra{font-size:clamp(30px,4.4vw,52px);line-height:1.05;letter-spacing:-.02em;margin-bottom:12px}
+.spec.archivo .amostra{font-family:var(--fd);font-weight:600}
+.spec.plex .amostra{font-family:var(--fm);font-weight:400;font-size:clamp(20px,3vw,32px);letter-spacing:0}
+.spec .glyphs{color:var(--dim);font-size:14px;word-break:break-all;line-height:1.8}
+.spec.archivo .glyphs{font-family:var(--fd)}
+.spec.plex .glyphs{font-family:var(--fm);font-size:12.5px}
+.spec p.uso{font-size:13px;color:var(--muted);margin-top:12px}
+.escala{margin-top:16px}
+.escala .row{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:baseline;
+  padding:14px 4px;border-top:1px solid var(--line)}
+.escala .row:last-child{border-bottom:1px solid var(--line)}
+.escala .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+@media (max-width:640px){.escala .row{grid-template-columns:1fr;gap:4px}}
+
+/* ============ ELEMENTOS ============ */
+.el-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:960px){.el-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.el-grid{grid-template-columns:1fr}}
+.el{border:1px solid var(--line);border-radius:var(--r);background:var(--card);overflow:hidden;
+  display:flex;flex-direction:column}
+.el .demo{height:150px;position:relative;border-bottom:1px solid var(--line);overflow:hidden;
+  display:flex;align-items:center;justify-content:center;background:var(--painel)}
+.el .txt{padding:16px 18px}
+.el .txt b{font-family:var(--fd);font-size:14px;display:block;margin-bottom:3px}
+.el .txt p{font-size:12.5px;color:var(--muted)}
+.demo-grade{background-image:linear-gradient(rgba(245,245,247,.05) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(245,245,247,.05) 1px,transparent 1px);background-size:36px 36px}
+.demo-blob::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;
+  left:-40px;top:-60px;background:radial-gradient(circle,var(--axon),transparent 70%);filter:blur(40px)}
+.demo-blob::after{content:'';position:absolute;width:120px;height:120px;border-radius:50%;
+  right:-30px;bottom:-50px;background:radial-gradient(circle,rgba(206,220,0,.5),transparent 70%);filter:blur(36px);opacity:.5}
+.demo-vidro .painel-vidro{width:70%;height:58%;border:1px solid var(--line2);border-radius:14px;
+  background:rgba(7,12,10,.55);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;
+  font-family:var(--fm);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.demo-banda{background:linear-gradient(118deg,var(--cortex) 0%,var(--axon) 62%,#0A6F62 100%)}
+.demo-banda::after{content:'';position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;
+  background:radial-gradient(circle,rgba(206,220,0,.25),transparent 70%);filter:blur(20px)}
+.demo-fig .glyph{position:absolute;right:-6px;bottom:-34px;font-family:var(--fd);font-weight:700;
+  font-size:120px;line-height:1;color:rgba(245,245,247,.05);user-select:none}
+.demo-fig .fig{position:absolute;left:12px;bottom:10px;font-family:var(--fm);font-size:9.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line2);
+  border-radius:999px;padding:3px 10px;color:var(--muted)}
+.pill .dt{width:7px;height:7px;border-radius:50%}
+
+/* ============ ESTÚDIO (geradores) ============ */
+.estudio{display:grid;grid-template-columns:340px 1fr;gap:18px;align-items:start}
+@media (max-width:960px){.estudio{grid-template-columns:1fr}}
+.ctl{background:var(--painel);border:1px solid var(--line2);border-radius:20px;padding:24px}
+.fld{margin-bottom:16px}
+.fld label{display:block;font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--muted);
+  margin-bottom:7px;text-transform:uppercase}
+.fld input,.fld select{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line2);
+  border-radius:11px;padding:10px 12px;transition:border-color .15s;outline:none}
+.fld select option{background:var(--painel);color:var(--ink)}
+.fld input:focus,.fld select:focus{border-color:var(--synapse);background:rgba(206,220,0,.04)}
+.fld .mini{font-size:11px;color:var(--dim);margin-top:5px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:8px 13px;border-radius:18px;font-size:12.5px;font-weight:500;
+  background:rgba(255,255,255,.04);border:1px solid var(--line2);color:var(--muted);transition:all .15s}
+.chip:hover{border-color:var(--dim);color:var(--ink)}
+.chip.on{background:var(--synapse);border-color:var(--synapse);color:var(--cortex);font-weight:600}
+.vchips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vchip{border:1px solid var(--line2);border-radius:12px;padding:9px 12px;display:flex;
+  align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:var(--muted);transition:all .15s;text-align:left}
+.vchip:hover{border-color:var(--dim);color:var(--ink)}
+.vchip.on{border-color:var(--synapse);color:var(--ink);background:rgba(206,220,0,.05)}
+.vchip .sw{width:26px;height:26px;border-radius:8px;flex:none;border:1px solid var(--line2)}
+.palco{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;
+  display:flex;flex-direction:column;gap:14px;min-height:320px}
+.palco .quadro{flex:1;display:flex;align-items:center;justify-content:center;min-height:240px}
+.palco canvas{max-width:100%;max-height:62vh;height:auto;border-radius:10px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);border:1px solid var(--line2)}
+.palco .base{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.palco .dim{font-family:var(--fm);font-size:11px;color:var(--dim);margin-right:auto}
+
+/* ============ ASSINATURAS ============ */
+.sig-panel{background:var(--painel);border:1px solid var(--line2);border-radius:20px;padding:26px}
+.sig-cards{display:none;flex-direction:column;gap:18px;margin-top:20px}
+.sig-cards.show{display:flex}
+.sig-card{background:var(--aura);color:var(--blackout);border-radius:16px;overflow:hidden;
+  border:1px solid rgba(0,0,0,.06)}
+.sig-head{padding:14px 20px 12px;border-bottom:1px solid rgba(0,53,47,.10);
+  display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.sig-title{font-weight:700;font-size:14.5px;color:var(--cortex);font-family:var(--fd)}
+.sig-tag{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--axon);font-weight:700}
+.sig-preview{padding:22px 20px;background:#fff;overflow-x:auto;min-height:100px}
+.sig-foot{padding:14px 20px 18px;border-top:1px solid rgba(0,53,47,.08)}
+.sig-msg{margin-top:12px;font-size:13px;min-height:18px}
+.sig-msg.err{color:var(--pulso)}.sig-msg.info{color:var(--muted)}
+details.gmail{margin-top:18px;border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--card)}
+details.gmail summary{cursor:pointer;font-family:var(--fd);font-weight:600;font-size:14px}
+details.gmail ol{margin:14px 0 0 18px;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:var(--muted)}
+details.gmail .k{color:var(--synapse);font-weight:600}
+
+/* ============ DOWNLOADS ============ */
+.dl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:960px){.dl-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.dl-grid{grid-template-columns:1fr}}
+.dl{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:22px;
+  display:flex;flex-direction:column;gap:8px}
+.dl .lb{font-family:var(--fm);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.dl h3{font-size:16px;font-weight:600}
+.dl p{font-size:12.5px;color:var(--muted);flex:1}
+.dl .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+
+/* ============ FOOTER / TOAST ============ */
+footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
+.ft-in{max-width:var(--max);margin:0 auto;padding:40px 26px;display:flex;
+  justify-content:space-between;gap:14px;flex-wrap:wrap;
+  font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:99;display:flex;
+  flex-direction:column;gap:8px;align-items:center;width:max-content;max-width:92vw}
+.toast{background:#151B19;border:1px solid var(--line2);color:var(--ink);border-radius:12px;
+  padding:12px 20px;font-size:13.5px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+</style>
+</head>
+<body>
+
+<div id="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+<header id="hd">
+  <div class="hd-in">
+    <a class="hd-logo" href="#hero" aria-label="NeuroDynamics Brand — topo">
+      <img id="logo-hd" src="" alt="NeuroDynamics">
+      <span class="hd-tag">Brand</span>
+    </a>
+    <nav class="hd-nav">
+      <a href="#logo">Marca</a>
+      <a href="#cores">Cores</a>
+      <a href="#tipografia">Tipografia</a>
+      <a href="#elementos">Elementos</a>
+      <a href="#estudio">Estúdio</a>
+      <a href="#assinaturas">Assinaturas</a>
+      <a href="#downloads">Downloads</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <span class="eyebrow">Brand guidelines · NeuroDynamics</span>
+  <h1>Uma marca para tecnologia que <em>cuida</em>.</h1>
+  <p class="hero-sub">Este é o sistema visual da NeuroDynamics — a referência de logo, cores,
+    tipografia e elementos usados no site, no SOMA, no portal do membro e em tudo que a
+    equipe publica. Aqui também ficam os geradores de mídia e as assinaturas de e-mail.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap">
+    <a class="btn solid" href="#estudio">Gerar um asset</a>
+    <a class="btn ghost" href="#downloads">Baixar a marca</a>
+  </div>
+  <div class="hero-meta">
+    <span>Uso · <em>equipe e parceiros autorizados</em></span>
+    <span>Origem · <em>LABBIO — UFMG</em></span>
+    <span>Belo Horizonte · <em>19°52′S 43°58′W</em></span>
+    <span>Versão · <em id="versao">1.0</em></span>
+  </div>
+</section>
+
+<!-- ================= LOGO ================= -->
+<section id="logo">
+  <div class="sec-head">
+    <span class="eyebrow">01 · Marca</span>
+    <div>
+      <h2>O imagotipo é um só.<br>O respeito a ele também.</h2>
+      <p class="sub">Neurônio + palavra: o símbolo conecta duas sinapses ao corpo celular — o
+        <b>soma</b> — e dá nome ao nosso sistema interno. Use os arquivos oficiais; nunca
+        redesenhe, recolora ou distorça.</p>
+    </div>
+  </div>
+  <div class="logo-grid">
+    <div class="logo-stage escuro">
+      <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+      <img class="logo-img" src="" alt="Imagotipo NeuroDynamics em branco sobre fundo escuro">
+      <span class="lb">Fundo escuro — versão branca</span>
+    </div>
+    <div class="logo-stage claro">
+      <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+      <img class="logo-img" src="" alt="Imagotipo NeuroDynamics em preto sobre fundo claro">
+      <span class="lb">Fundo claro — versão preta</span>
+    </div>
+  </div>
+  <div class="regras">
+    <div class="regra"><b>Respiro</b><p>Reserve, ao redor do logo, um espaço livre equivalente à
+      altura do símbolo. Nada encosta na marca.</p></div>
+    <div class="regra"><b>Tamanho mínimo</b><p>16&nbsp;px de altura em telas, 5&nbsp;mm em
+      impressos. Abaixo disso, use apenas o símbolo.</p></div>
+    <div class="regra"><b>Sobre fotos</b><p>Prefira a versão branca sobre áreas escuras e de
+      baixo contraste. Se a foto competir, escureça-a com um véu Void a 60%.</p></div>
+    <div class="regra nao"><b>Não distorcer</b><p>Sem esticar, condensar, rotacionar, aplicar
+      sombra, contorno ou gradiente sobre a marca.</p></div>
+    <div class="regra nao"><b>Não recolorir</b><p>Somente branco (Ink) ou preto (Blackout).
+      O Synapse é acento do sistema, nunca cor do logo.</p></div>
+    <div class="regra nao"><b>Não recompor</b><p>Não separe, realinhe nem troque a tipografia
+      do imagotipo. Símbolo sozinho só nos tamanhos mínimos e favicons.</p></div>
+  </div>
+</section>
+
+<!-- ================= CORES ================= -->
+<section id="cores">
+  <div class="sec-head">
+    <span class="eyebrow">02 · Cores</span>
+    <div>
+      <h2>Verde profundo, um lampejo de Synapse.</h2>
+      <p class="sub">A base é sóbria — verdes profundos e neutros quase-pretos — e o
+        <b>Synapse</b> aparece pouco, como um disparo: seleção, foco, destaque. As cores
+        auxiliares existem para dados, status e marcos; nunca competem com a identidade.
+        Clique em qualquer cartão para copiar o hex.</p>
+    </div>
+  </div>
+  <div id="cores-blocos"></div>
+  <div class="cor-bloco">
+    <h3>Proporção de uso</h3>
+    <div class="prop-bar" id="prop-bar" title="Proporção aproximada de uso da paleta"></div>
+    <p class="nota">Superfícies Void/Painel dominam; verdes estruturam; Ink escreve;
+      Synapse pontua. Auxiliares aparecem só onde significam algo.</p>
+  </div>
+  <div class="cor-acts">
+    <button class="btn ghost" onclick="baixarPaletaJSON()">Baixar paleta (.json)</button>
+    <button class="btn ghost" onclick="copiarTokensCSS()">Copiar tokens CSS</button>
+  </div>
+</section>
+
+<!-- ================= TIPOGRAFIA ================= -->
+<section id="tipografia">
+  <div class="sec-head">
+    <span class="eyebrow">03 · Tipografia</span>
+    <div>
+      <h2>Archivo fala. Plex Mono mede.</h2>
+      <p class="sub">Duas vozes: <b>Archivo</b> (500–700) para títulos, botões e navegação;
+        <b>IBM Plex Mono</b> (400–500) para dados, códigos, rótulos e coordenadas. O texto
+        corrido usa a pilha do sistema — rápida e neutra em qualquer dispositivo.</p>
+    </div>
+  </div>
+  <div class="type-grid">
+    <div class="card spec archivo">
+      <span class="fam">Archivo · 500 / 600 / 700</span>
+      <div class="amostra">Intelligent systems for human health.</div>
+      <div class="glyphs">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789</div>
+      <p class="uso">Títulos, subtítulos, botões, navegação e números de destaque.
+        Tracking levemente negativo (−0.015em a −0.03em) nos tamanhos grandes.</p>
+    </div>
+    <div class="card spec plex">
+      <span class="fam">IBM Plex Mono · 400 / 500</span>
+      <div class="amostra">EVT-041 · 19°52′S 43°58′W · SOL26-0001</div>
+      <div class="glyphs">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789 {}[]()·—</div>
+      <p class="uso">Eyebrows, protocolos, datas, legendas técnicas e rótulos em caixa alta
+        com tracking largo (.14em a .22em).</p>
+    </div>
+  </div>
+  <div class="card escala" style="margin-top:16px">
+    <div class="row"><span class="k">Display / H1</span>
+      <span style="font-family:var(--fd);font-weight:600;font-size:clamp(28px,4vw,44px);letter-spacing:-.025em;line-height:1.05">Título de página</span></div>
+    <div class="row"><span class="k">H2 · seção</span>
+      <span style="font-family:var(--fd);font-weight:600;font-size:clamp(22px,3vw,30px)">Título de seção</span></div>
+    <div class="row"><span class="k">Eyebrow</span>
+      <span class="eyebrow">Rótulo de contexto</span></div>
+    <div class="row"><span class="k">Corpo</span>
+      <span style="color:var(--muted)">Texto corrido na pilha do sistema, 14–15&nbsp;px, entrelinha 1.6.</span></div>
+    <div class="row"><span class="k">Mono / dado</span>
+      <span class="mono" style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)">FIG.01 — protótipo · imagery in production</span></div>
+  </div>
+  <p class="nota" style="margin-top:14px">Webfonts:
+    <a style="border-bottom:1px solid var(--line2)" href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Archivo</a> ·
+    <a style="border-bottom:1px solid var(--line2)" href="https://fonts.google.com/specimen/IBM+Plex+Mono" target="_blank" rel="noopener">IBM Plex Mono</a>
+    (Google Fonts, licença aberta).</p>
+</section>
+
+<!-- ================= ELEMENTOS ================= -->
+<section id="elementos">
+  <div class="sec-head">
+    <span class="eyebrow">04 · Elementos visuais</span>
+    <div>
+      <h2>O laboratório aparece nos detalhes.</h2>
+      <p class="sub">O sistema vive de poucos gestos, repetidos com disciplina — nas páginas
+        públicas, no portal e nas peças geradas aqui.</p>
+    </div>
+  </div>
+  <div class="el-grid">
+    <div class="el"><div class="demo demo-grade"></div>
+      <div class="txt"><b>Grade técnica</b><p>Linhas de 1px a cada ~130px, quase invisíveis
+        (3–5% de Ink), com máscara radial. Sugere bancada e projeto.</p></div></div>
+    <div class="el"><div class="demo demo-blob"></div>
+      <div class="txt"><b>Blobs orgânicos</b><p>Radiais de Axon/Soma desfocados (blur 120px),
+        opacidade até 32%; Synapse só como brilho eventual (≤8%).</p></div></div>
+    <div class="el"><div class="demo demo-vidro"><div class="painel-vidro">painel de vidro</div></div>
+      <div class="txt"><b>Vidro</b><p>Superfícies flutuantes com blur(18px), borda de 1px
+        Ink a 8–16% e cantos de 14–22px.</p></div></div>
+    <div class="el"><div class="demo demo-banda"></div>
+      <div class="txt"><b>Banda em gradiente</b><p>Cortex → Axon → Soma a 118°, com glow
+        Synapse no canto. Reservada a chamadas e destaques.</p></div></div>
+    <div class="el"><div class="demo demo-fig demo-grade"><span class="glyph">N</span>
+        <span class="fig">FIG.01 — <em style="font-style:normal;color:var(--muted)">Órion</em> · imagery in production</span>
+        <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span></div>
+      <div class="txt"><b>Placeholder técnico</b><p>Sem foto? Grade, marcas de corte, letra
+        gigante a 4% e legenda FIG. Honesto e no sistema.</p></div></div>
+    <div class="el"><div class="demo" style="gap:8px;flex-wrap:wrap;padding:0 14px">
+        <span class="eyebrow">eyebrow</span>
+        <span class="pill"><span class="dt" style="background:var(--vital)"></span>Ativo</span>
+        <span class="pill"><span class="dt" style="background:var(--mielina)"></span>Em análise</span></div>
+      <div class="txt"><b>Eyebrow &amp; pills</b><p>Contexto antes do título: quadrado Synapse +
+        mono em caixa alta. Status sempre em pill com ponto colorido auxiliar.</p></div></div>
+  </div>
+</section>
+
+<!-- ================= ESTÚDIO ================= -->
+<section id="estudio">
+  <div class="sec-head">
+    <span class="eyebrow">05 · Estúdio</span>
+    <div>
+      <h2>Gere a peça. Já sai no padrão.</h2>
+      <p class="sub">Banners de rede social, posts de entrada na equipe, wallpapers, fundos de
+        reunião e capas — escolha o recurso, o formato e o visual, preencha os campos e baixe
+        o PNG em alta resolução.</p>
+    </div>
+  </div>
+  <div class="estudio">
+    <div class="ctl">
+      <div class="fld"><label>Recurso</label><select id="g-recurso" onchange="trocarRecurso()"></select></div>
+      <div class="fld"><label>Formato</label><select id="g-formato" onchange="renderPeca()"></select></div>
+      <div class="fld"><label>Visual</label><div class="vchips" id="g-variantes"></div></div>
+      <div id="g-campos"></div>
+      <button class="btn solid" style="width:100%;justify-content:center" onclick="baixarPeca()">Baixar PNG</button>
+      <p class="mini" style="margin-top:10px;color:var(--dim);font-size:11px">Renderizado no seu
+        navegador, na resolução final — nada é enviado a servidor.</p>
+    </div>
+    <div class="palco">
+      <div class="quadro"><canvas id="g-canvas" width="1584" height="396"></canvas></div>
+      <div class="base">
+        <span class="dim" id="g-dim">1584 × 396 px</span>
+        <button class="btn ghost mini" onclick="renderPeca()">Atualizar prévia</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ASSINATURAS ================= -->
+<section id="assinaturas">
+  <div class="sec-head">
+    <span class="eyebrow">06 · Assinaturas de e-mail</span>
+    <div>
+      <h2>A mesma assinatura, para todo mundo.</h2>
+      <p class="sub">A Central de Assinaturas vive aqui também: selecione seu nome e copie a
+        assinatura pronta para o Gmail — uma para mensagens novas, outra para respostas.
+        Os dados vêm do quadro oficial mantido pelo Depto. de Pessoal
+        (repositório <span class="mono" style="font-size:12px">signature</span>).</p>
+    </div>
+  </div>
+  <div class="sig-panel">
+    <div class="fld" style="max-width:420px;margin-bottom:0">
+      <label for="sig-person">Quem é você?</label>
+      <select id="sig-person"><option value="">— Carregando equipe… —</option></select>
+    </div>
+    <div class="sig-msg info" id="sig-msg" role="status">Carregando os dados da equipe…</div>
+    <div class="sig-cards" id="sig-cards">
+      <div class="sig-card">
+        <div class="sig-head"><span class="sig-title">Assinatura de e-mail</span><span class="sig-tag">Mensagens novas</span></div>
+        <div class="sig-preview" id="sig-prev-email"></div>
+        <div class="sig-foot"><button class="btn claro" style="width:100%;justify-content:center" id="sig-copy-email">Copiar assinatura</button></div>
+      </div>
+      <div class="sig-card">
+        <div class="sig-head"><span class="sig-title">Assinatura de resposta</span><span class="sig-tag">Respostas</span></div>
+        <div class="sig-preview" id="sig-prev-reply"></div>
+        <div class="sig-foot"><button class="btn claro" style="width:100%;justify-content:center" id="sig-copy-reply">Copiar assinatura</button></div>
+      </div>
+    </div>
+    <details class="gmail">
+      <summary>Como configurar no Gmail (2 minutos)</summary>
+      <ol>
+        <li>No Gmail (computador), engrenagem → <span class="k">Ver todas as configurações</span>.</li>
+        <li>Na aba <span class="k">Geral</span>, seção <span class="k">Assinatura</span>, clique em <span class="k">Criar nova</span> e nomeie como "NRO — novos".</li>
+        <li>Copie aqui a assinatura de <span class="k">Mensagens novas</span> e cole (Ctrl+V) no campo do Gmail.</li>
+        <li>Crie outra assinatura "NRO — respostas" e cole a <span class="k">Assinatura de resposta</span>.</li>
+        <li>Em <span class="k">Padrões da assinatura</span>, selecione uma para novos e-mails e outra para respostas/encaminhamentos.</li>
+        <li>Desça e clique em <span class="k">Salvar alterações</span>.</li>
+      </ol>
+    </details>
+  </div>
+</section>
+
+<!-- ================= DOWNLOADS ================= -->
+<section id="downloads">
+  <div class="sec-head">
+    <span class="eyebrow">07 · Downloads &amp; assets</span>
+    <div>
+      <h2>Tudo oficial, num lugar só.</h2>
+      <p class="sub">Arquivos da marca e atalhos do ecossistema. Em dúvida sobre algum uso,
+        fale com a Comunicação antes de publicar.</p>
+    </div>
+  </div>
+  <div class="dl-grid">
+    <div class="dl"><span class="lb">Logo</span><h3>Imagotipo — preto</h3>
+      <p>PNG oficial com fundo transparente, para fundos claros e documentos.</p>
+      <div class="acts"><a class="btn ghost mini" id="dl-logo-preto" href="#" target="_blank" rel="noopener">Abrir PNG ↗</a></div></div>
+    <div class="dl"><span class="lb">Logo</span><h3>Imagotipo — branco</h3>
+      <p>Versão branca gerada a partir do arquivo oficial, para fundos escuros e fotos.</p>
+      <div class="acts"><button class="btn ghost mini" onclick="baixarLogoBranco()">Baixar PNG</button></div></div>
+    <div class="dl"><span class="lb">Logo</span><h3>Símbolo (favicon)</h3>
+      <p>O neurônio em SVG vetorial, no tile Cortex — favicons, avatares e apps.</p>
+      <div class="acts"><button class="btn ghost mini" onclick="baixarSimboloSVG()">Baixar SVG</button></div></div>
+    <div class="dl"><span class="lb">Cores</span><h3>Paleta</h3>
+      <p>Todas as cores com nome, hex, RGB e uso — em JSON e como tokens CSS.</p>
+      <div class="acts"><button class="btn ghost mini" onclick="baixarPaletaJSON()">JSON</button>
+        <button class="btn ghost mini" onclick="copiarTokensCSS()">Copiar CSS</button></div></div>
+    <div class="dl"><span class="lb">Tipografia</span><h3>Fontes</h3>
+      <p>Archivo e IBM Plex Mono no Google Fonts, com os pesos usados pelo sistema.</p>
+      <div class="acts"><a class="btn ghost mini" href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Archivo ↗</a>
+        <a class="btn ghost mini" href="https://fonts.google.com/specimen/IBM+Plex+Mono" target="_blank" rel="noopener">Plex Mono ↗</a></div></div>
+    <div class="dl"><span class="lb">Ecossistema</span><h3>Onde a marca vive</h3>
+      <p>Site institucional, processo seletivo, portal do membro e SOMA.</p>
+      <div class="acts"><a class="btn ghost mini" href="https://neurodynamics.dev" target="_blank" rel="noopener">Site ↗</a>
+        <a class="btn ghost mini" href="https://membro.neurodynamics.dev" target="_blank" rel="noopener">Portal ↗</a>
+        <a class="btn ghost mini" href="https://selecao.neurodynamics.dev" target="_blank" rel="noopener">Seleção ↗</a></div></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="ft-in">
+    <span>© <span id="ft-ano">2026</span> NeuroDynamics — uso interno e de parceiros autorizados</span>
+    <span>LABBIO · Escola de Engenharia · UFMG</span>
+  </div>
+</footer>
+
+<div id="toast"></div>
+<div id="clipboardSrc" style="position:absolute;left:-9999px;top:0" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+/* ============================================================
+   CONFIG
+   ============================================================ */
+const LOGO_URL = 'https://raw.githubusercontent.com/matheusmarcondes1/nro/refs/heads/main/imagotipo%20preto.png';
+/* Quadro oficial de assinaturas — mantido no repositório "signature". */
+const SIG_DADOS_URL = 'https://raw.githubusercontent.com/neurodynamics-dev/signature/main/signature/quadro-assinaturas.xlsx';
+
+const $ = s => document.querySelector(s);
+const esc = v => v == null ? '' : String(v).replace(/[&<>"']/g, c =>
+  ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(msg){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg;
+  $('#toast').appendChild(t); setTimeout(()=>t.remove(), 4200); }
+$('#ft-ano').textContent = new Date().getFullYear();
+
+/* ============================================================
+   PALETA — nomes oficiais (sistema neural) + auxiliares
+   ============================================================ */
+const PALETA = [
+  { grupo:'Primárias', cores:[
+    { nome:'Cortex',  hex:'#00352F', uso:'Verde profundo institucional: bandas, fundos de marca, favicon.', pct:10 },
+    { nome:'Axon',    hex:'#00594F', uso:'Verde estrutural: gradientes, botões e superfícies de destaque.', pct:8 },
+    { nome:'Synapse', hex:'#CEDC00', uso:'O disparo da marca: seleção, foco, acentos. Em pequenas doses.', pct:4 }
+  ]},
+  { grupo:'Profundos e neutros', cores:[
+    { nome:'Void',     hex:'#050807', uso:'O fundo de tudo nas interfaces escuras.', pct:34 },
+    { nome:'Painel',   hex:'#0B1210', uso:'Cartões e superfícies elevadas sobre o Void.', pct:12 },
+    { nome:'Blackout', hex:'#1D1D1F', uso:'Texto sobre fundos claros; assinaturas e impressos.', pct:4 },
+    { nome:'Ink',      hex:'#F5F5F7', uso:'Texto e marca em branco sobre fundos escuros.', pct:14 },
+    { nome:'Aura',     hex:'#F8F7FF', uso:'Fundos claros de documentos e cartões de assinatura.', pct:6 },
+    { nome:'Névoa',    hex:'#9AA5A1', uso:'Texto secundário sobre escuro.', pct:5 },
+    { nome:'Grafite',  hex:'#616C68', uso:'Legendas, rótulos técnicos e bordas visíveis.', pct:3 }
+  ]},
+  { grupo:'Auxiliares — dados e status', cores:[
+    { nome:'Soma',     hex:'#0B7D6E', uso:'Terceiro verde: gradientes longos e visualizações.', pct:0 },
+    { nome:'Íon',      hex:'#2DD4BF', uso:'Links de destaque, taglines, eventos no calendário.', pct:0 },
+    { nome:'Vital',    hex:'#4ADE97', uso:'Sucesso: confirmado, ativo, concluído.', pct:0 },
+    { nome:'Mielina',  hex:'#F5C36A', uso:'Atenção: prazos, pendências, em análise.', pct:0 },
+    { nome:'Pulso',    hex:'#F1806F', uso:'Erro e urgência: falhas, recusas, avisos críticos.', pct:0 },
+    { nome:'Plasma',   hex:'#7FA7F2', uso:'Informação neutra; férias no calendário.', pct:0 },
+    { nome:'Dendrito', hex:'#A78BFA', uso:'Processo seletivo e pesquisa nas visualizações.', pct:0 }
+  ]}
+];
+function hex2rgb(h){ const n=parseInt(h.slice(1),16); return [(n>>16)&255,(n>>8)&255,n&255]; }
+function corTextoSobre(hex){ const [r,g,b]=hex2rgb(hex); return (r*.299+g*.587+b*.114)>150 ? '#1D1D1F' : '#F5F5F7'; }
+function desenhaCores(){
+  $('#cores-blocos').innerHTML = PALETA.map(bl => `
+    <div class="cor-bloco"><h3>${esc(bl.grupo)}</h3>
+      <div class="cores">${bl.cores.map(c => `
+        <button class="cor" onclick="copiarHex('${c.hex}')" title="Copiar ${c.hex}">
+          <span class="sw" style="background:${c.hex};display:block">
+            <span class="pct" style="color:${corTextoSobre(c.hex)}">${c.pct?c.pct+'%':''}</span></span>
+          <span class="info" style="display:block">
+            <span class="nm" style="display:block">${esc(c.nome)}</span>
+            <span class="hx" style="display:block">${c.hex} · rgb(${hex2rgb(c.hex).join(', ')})</span>
+            <span class="uso" style="display:block">${esc(c.uso)}</span></span>
+        </button>`).join('')}
+      </div></div>`).join('');
+  const usadas = PALETA.flatMap(b=>b.cores).filter(c=>c.pct);
+  $('#prop-bar').innerHTML = usadas.map(c =>
+    `<div style="width:${c.pct}%;background:${c.hex}" title="${esc(c.nome)} ${c.pct}%"></div>`).join('');
+}
+function copiarHex(hex){
+  navigator.clipboard?.writeText(hex).then(()=>toast(hex+' copiado.')).catch(()=>toast(hex));
+}
+function baixarPaletaJSON(){
+  const data = { marca:'NeuroDynamics', versao:'1.0',
+    cores: PALETA.flatMap(b => b.cores.map(c => ({
+      grupo:b.grupo, nome:c.nome, hex:c.hex, rgb:hex2rgb(c.hex), uso:c.uso }))) };
+  baixarBlob(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}), 'nro-paleta.json');
+  toast('Paleta baixada.');
+}
+function copiarTokensCSS(){
+  const nm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const css = ':root{\n' + PALETA.flatMap(b=>b.cores).map(c=>`  --${nm(c.nome)}:${c.hex};`).join('\n') + '\n}';
+  navigator.clipboard?.writeText(css).then(()=>toast('Tokens CSS copiados.')).catch(()=>toast('Não foi possível copiar.'));
+}
+function baixarBlob(blob, nome){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = nome;
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 800);
+}
+
+/* ============================================================
+   LOGO — carga, versão branca e símbolo
+   ============================================================ */
+let LOGO_IMG = null;
+const logoPronto = new Promise(res => {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => { LOGO_IMG = img; res(true); };
+  img.onerror = () => res(false);
+  img.src = LOGO_URL;
+});
+[['#logo-hd']].forEach(([sel])=>{
+  const img = $(sel);
+  img.onerror = () => { const s=document.createElement('span'); s.className='logotype'; s.textContent='NeuroDynamics'; img.replaceWith(s); };
+  img.src = LOGO_URL;
+});
+document.querySelectorAll('.logo-img').forEach(img=>{
+  img.onerror = () => { const s=document.createElement('span'); s.className='logotype';
+    s.textContent='NeuroDynamics'; s.style.color='inherit'; img.replaceWith(s); };
+  img.src = LOGO_URL;
+});
+$('#dl-logo-preto').href = LOGO_URL;
+
+function logoTintado(cor){
+  if (!LOGO_IMG) return null;
+  const c = document.createElement('canvas');
+  c.width = LOGO_IMG.naturalWidth; c.height = LOGO_IMG.naturalHeight;
+  const x = c.getContext('2d');
+  x.drawImage(LOGO_IMG, 0, 0);
+  x.globalCompositeOperation = 'source-in';
+  x.fillStyle = cor; x.fillRect(0,0,c.width,c.height);
+  return c;
+}
+async function baixarLogoBranco(){
+  await logoPronto;
+  const t = logoTintado('#F5F5F7');
+  if (!t){ toast('O arquivo do logo não carregou — tente de novo com internet.'); return; }
+  t.toBlob(b => { baixarBlob(b, 'nro-imagotipo-branco.png'); toast('Logo branco baixado.'); }, 'image/png');
+}
+const SIMBOLO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#00352F"/><circle cx="11" cy="16" r="5" fill="#F5F5F7"/><circle cx="23" cy="9.5" r="2.8" fill="#F5F5F7"/><circle cx="23" cy="22.5" r="2.8" fill="#F5F5F7"/><path d="M15 13.8 20.6 10.6M15 18.2 20.6 21.4" stroke="#CEDC00" stroke-width="1.7" stroke-linecap="round"/></svg>`;
+function baixarSimboloSVG(){
+  baixarBlob(new Blob([SIMBOLO_SVG],{type:'image/svg+xml'}), 'nro-simbolo.svg');
+  toast('Símbolo SVG baixado.');
+}
+
+/* ============================================================
+   ESTÚDIO — geradores de mídia em canvas
+   ============================================================ */
+const VARIANTES = {
+  void:    { l:'Void',    sw:'linear-gradient(135deg,#050807,#0B1210)', bg:'escuro' },
+  cortex:  { l:'Cortex',  sw:'linear-gradient(118deg,#00352F,#00594F 62%,#0A6F62)', bg:'banda' },
+  synapse: { l:'Synapse', sw:'#CEDC00', bg:'lima' },
+  aura:    { l:'Aura',    sw:'#F5F5F7', bg:'claro' }
+};
+const GERADORES = {
+  banner: { l:'Banner / header de rede social', campos:['frase'], formatos:[
+    { id:'linkedin', l:'LinkedIn — capa (1584×396)', w:1584, h:396 },
+    { id:'x',        l:'X / Twitter — header (1500×500)', w:1500, h:500 },
+    { id:'youtube',  l:'YouTube — banner (2560×1440, área segura central)', w:2560, h:1440 }
+  ]},
+  entrada: { l:'Post de entrada na equipe', campos:['nome','cargo','departamento','foto'], formatos:[
+    { id:'feed',     l:'Instagram — feed (1080×1350)', w:1080, h:1350 },
+    { id:'quadrado', l:'Quadrado (1080×1080)', w:1080, h:1080 },
+    { id:'story',    l:'Story (1080×1920)', w:1080, h:1920 }
+  ]},
+  wallpaper: { l:'Wallpaper', campos:[], formatos:[
+    { id:'desktop',   l:'Desktop (2560×1440)', w:2560, h:1440 },
+    { id:'ultrawide', l:'Ultrawide (3440×1440)', w:3440, h:1440 },
+    { id:'celular',   l:'Celular (1170×2532)', w:1170, h:2532 }
+  ]},
+  reuniao: { l:'Fundo de reunião', campos:[], formatos:[
+    { id:'fhd', l:'Full HD (1920×1080)', w:1920, h:1080 }
+  ]},
+  capa: { l:'Capa de apresentação / documento', campos:['titulo','subtitulo'], formatos:[
+    { id:'slides', l:'Slides 16:9 (1920×1080)', w:1920, h:1080 },
+    { id:'a4',     l:'Documento A4 retrato (2480×3508)', w:2480, h:3508 }
+  ]}
+};
+const gState = { recurso:'banner', formato:'linkedin', variante:'void',
+  frase:'', nome:'', cargo:'', departamento:'', titulo:'', subtitulo:'', foto:null };
+
+function montarEstudio(){
+  $('#g-recurso').innerHTML = Object.entries(GERADORES).map(([k,g]) =>
+    `<option value="${k}">${esc(g.l)}</option>`).join('');
+  $('#g-variantes').innerHTML = Object.entries(VARIANTES).map(([k,v]) =>
+    `<button class="vchip ${k===gState.variante?'on':''}" data-v="${k}" onclick="selVariante('${k}')">
+       <span class="sw" style="background:${v.sw}"></span>${v.l}</button>`).join('');
+  trocarRecurso();
+}
+function trocarRecurso(){
+  gState.recurso = $('#g-recurso').value;
+  const g = GERADORES[gState.recurso];
+  $('#g-formato').innerHTML = g.formatos.map(f=>`<option value="${f.id}">${esc(f.l)}</option>`).join('');
+  gState.formato = g.formatos[0].id;
+  const campo = (id, rotulo, ph) => `<div class="fld"><label>${rotulo}</label>
+    <input id="g-${id}" value="${esc(gState[id]||'')}" placeholder="${esc(ph)}" oninput="gState.${id}=this.value;renderPeca()"></div>`;
+  let html = '';
+  if (g.campos.includes('nome')) html += campo('nome','Nome','ex.: Ana Ribeiro');
+  if (g.campos.includes('cargo')) html += campo('cargo','Cargo','ex.: Eng. de Software');
+  if (g.campos.includes('departamento')) html += campo('departamento','Departamento','ex.: P&D');
+  if (g.campos.includes('frase')) html += campo('frase','Frase (opcional)','ex.: Intelligent systems for human health.');
+  if (g.campos.includes('titulo')) html += campo('titulo','Título','ex.: Relatório de execução');
+  if (g.campos.includes('subtitulo')) html += campo('subtitulo','Subtítulo (opcional)','ex.: Projeto Órion · 2026');
+  if (g.campos.includes('foto')) html += `<div class="fld"><label>Foto (opcional)</label>
+    <input type="file" id="g-foto" accept="image/*" onchange="carregarFoto(this)">
+    <p class="mini">A foto entra num círculo com anel Synapse.</p></div>`;
+  $('#g-campos').innerHTML = html;
+  renderPeca();
+}
+function selVariante(v){
+  gState.variante = v;
+  document.querySelectorAll('.vchip').forEach(c=>c.classList.toggle('on', c.dataset.v===v));
+  renderPeca();
+}
+function carregarFoto(inp){
+  const f = inp.files && inp.files[0];
+  if (!f){ gState.foto = null; renderPeca(); return; }
+  const img = new Image();
+  img.onload = () => { gState.foto = img; renderPeca(); };
+  img.src = URL.createObjectURL(f);
+}
+
+/* ---------- motor de desenho ---------- */
+function corVar(v){
+  return {
+    void:    { fundo:'#050807', texto:'#F5F5F7', sub:'#9AA5A1', logo:'#F5F5F7', grade:'rgba(245,245,247,.045)', escuro:true },
+    cortex:  { fundo:null,      texto:'#F5F5F7', sub:'rgba(245,245,247,.75)', logo:'#F5F5F7', grade:'rgba(245,245,247,.06)', escuro:true },
+    synapse: { fundo:'#CEDC00', texto:'#00352F', sub:'rgba(0,53,47,.75)', logo:'#00352F', grade:'rgba(0,53,47,.10)', escuro:false },
+    aura:    { fundo:'#F5F5F7', texto:'#1D1D1F', sub:'#6E6E73', logo:'#1D1D1F', grade:'rgba(29,29,31,.07)', escuro:false }
+  }[v];
+}
+function desenhaBase(ctx, W, H, v){
+  const c = corVar(v);
+  if (v === 'cortex'){
+    const g = ctx.createLinearGradient(0, 0, W, H*.6);
+    g.addColorStop(0,'#00352F'); g.addColorStop(.62,'#00594F'); g.addColorStop(1,'#0A6F62');
+    ctx.fillStyle = g;
+  } else ctx.fillStyle = c.fundo;
+  ctx.fillRect(0,0,W,H);
+  if (v === 'void'){
+    const rg = ctx.createRadialGradient(W*.72, -H*.15, 0, W*.72, -H*.15, Math.max(W,H)*.9);
+    rg.addColorStop(0,'#081511'); rg.addColorStop(1,'rgba(5,8,7,0)');
+    ctx.fillStyle = rg; ctx.fillRect(0,0,W,H);
+  }
+  // grade técnica
+  const passo = Math.max(90, Math.round(Math.min(W,H)/9));
+  ctx.strokeStyle = c.grade; ctx.lineWidth = Math.max(1, Math.round(W/1600));
+  ctx.beginPath();
+  for (let x=passo; x<W; x+=passo){ ctx.moveTo(x,0); ctx.lineTo(x,H); }
+  for (let y=passo; y<H; y+=passo){ ctx.moveTo(0,y); ctx.lineTo(W,y); }
+  ctx.stroke();
+  // blobs
+  const blob = (cx,cy,r,cor,alpha) => {
+    const g = ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+    g.addColorStop(0,cor); g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.globalAlpha = alpha; ctx.fillStyle = g;
+    ctx.fillRect(cx-r,cy-r,r*2,r*2); ctx.globalAlpha = 1;
+  };
+  if (v==='void'){
+    blob(-W*.08, -H*.3, Math.max(W,H)*.75, '#00594F', .34);
+    blob(W*1.02, H*.45, Math.max(W,H)*.5, '#0B7D6E', .18);
+    blob(W*.5, H*1.15, Math.max(W,H)*.4, '#CEDC00', .06);
+  } else if (v==='cortex'){
+    blob(W*.94, -H*.1, Math.max(W,H)*.45, 'rgba(206,220,0,.9)', .16);
+  } else if (v==='synapse'){
+    blob(W*.1, H*1.05, Math.max(W,H)*.5, '#00352F', .12);
+  } else {
+    blob(-W*.05, -H*.2, Math.max(W,H)*.6, '#00594F', .10);
+    blob(W*1.0, H*1.0, Math.max(W,H)*.45, '#CEDC00', .07);
+  }
+}
+function desenhaSimbolo(ctx, x, y, h, cor, corAcento){
+  // neurônio (mesma geometria do favicon, sem o tile)
+  const u = h/32;
+  ctx.save(); ctx.translate(x,y);
+  ctx.fillStyle = cor;
+  ctx.beginPath(); ctx.arc(11*u,16*u,5*u,0,7); ctx.fill();
+  ctx.beginPath(); ctx.arc(23*u,9.5*u,2.8*u,0,7); ctx.fill();
+  ctx.beginPath(); ctx.arc(23*u,22.5*u,2.8*u,0,7); ctx.fill();
+  ctx.strokeStyle = corAcento; ctx.lineWidth = 1.7*u; ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(15*u,13.8*u); ctx.lineTo(20.6*u,10.6*u);
+  ctx.moveTo(15*u,18.2*u); ctx.lineTo(20.6*u,21.4*u); ctx.stroke();
+  ctx.restore();
+}
+function desenhaLogo(ctx, x, y, h, cor){
+  if (LOGO_IMG){
+    const t = logoTintado(cor);
+    const w = h * (LOGO_IMG.naturalWidth / LOGO_IMG.naturalHeight);
+    ctx.drawImage(t, x, y, w, h);
+    return w;
+  }
+  // fallback vetorial: símbolo + wordmark
+  ctx.save();
+  ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  desenhaSimbolo(ctx, x, y, h, cor, '#CEDC00');
+  ctx.fillStyle = cor;
+  ctx.font = `700 ${h*.62}px Archivo, sans-serif`;
+  ctx.fillText('NeuroDynamics', x + h*1.25, y + h/2 + h*.03);
+  const w = h*1.25 + ctx.measureText('NeuroDynamics').width;
+  ctx.restore();
+  return w;
+}
+function quebraLinhas(ctx, texto, maxW){
+  const palavras = String(texto).split(/\s+/).filter(Boolean);
+  const linhas = []; let atual = '';
+  for (const p of palavras){
+    const teste = atual ? atual+' '+p : p;
+    if (ctx.measureText(teste).width > maxW && atual){ linhas.push(atual); atual = p; }
+    else atual = teste;
+  }
+  if (atual) linhas.push(atual);
+  return linhas;
+}
+function marcasDeCorte(ctx, W, H, cor, m){
+  const s = Math.round(Math.min(W,H)*.02)+8;
+  ctx.strokeStyle = cor; ctx.lineWidth = Math.max(1, Math.round(W/1800));
+  const L = (x1,y1,x2,y2)=>{ ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); };
+  L(m,m,m+s,m); L(m,m,m,m+s);
+  L(W-m,m,W-m-s,m); L(W-m,m,W-m,m+s);
+  L(m,H-m,m+s,H-m); L(m,H-m,m,H-m-s);
+  L(W-m,H-m,W-m-s,H-m); L(W-m,H-m,W-m,H-m-s);
+}
+
+function formatoAtual(){
+  const g = GERADORES[gState.recurso];
+  return g.formatos.find(f=>f.id===$('#g-formato').value) || g.formatos[0];
+}
+async function renderPeca(){
+  await Promise.all([
+    document.fonts.load('700 100px Archivo'), document.fonts.load('600 100px Archivo'),
+    document.fonts.load('500 40px "IBM Plex Mono"'), logoPronto
+  ]).catch(()=>{});
+  const f = formatoAtual();
+  gState.formato = f.id;
+  const cv = $('#g-canvas');
+  cv.width = f.w; cv.height = f.h;
+  $('#g-dim').textContent = `${f.w} × ${f.h} px`;
+  const ctx = cv.getContext('2d');
+  const v = gState.variante, c = corVar(v);
+  const W = f.w, H = f.h, base = Math.min(W,H);
+  desenhaBase(ctx, W, H, v);
+  const mono = pt => `500 ${pt}px "IBM Plex Mono", monospace`;
+  const arch = (peso,pt) => `${peso} ${pt}px Archivo, sans-serif`;
+
+  if (gState.recurso === 'banner'){
+    // área segura: à direita (LinkedIn cobre o canto esquerdo-baixo com o avatar)
+    const lh = Math.round(H*.16);
+    const isYT = f.id==='youtube';
+    const cy = isYT ? H/2 : H*.42;
+    const lw = LOGO_IMG ? lh*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : lh*7;
+    const lx = W/2 - lw/2;
+    desenhaLogo(ctx, lx, cy - lh/2, lh, c.logo);
+    ctx.fillStyle = '#CEDC00';
+    ctx.fillRect(W/2 - Math.round(W*.03), cy + lh*.9, Math.round(W*.06), Math.max(3,Math.round(H*.008)));
+    const frase = (gState.frase||'').trim() || 'HEALTH-TECH R&D · UFMG';
+    ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*(isYT?.018:.055)));
+    ctx.textAlign = 'center';
+    ctx.fillText(frase.toUpperCase(), W/2, cy + lh*1.6 + Math.round(H*.02));
+    ctx.textAlign = 'left';
+    marcasDeCorte(ctx, W, H, v==='synapse'?'rgba(0,53,47,.35)':'rgba(245,245,247,.22)', Math.round(H*.07));
+  }
+
+  else if (gState.recurso === 'entrada'){
+    const cx = W/2;
+    let y = H*.16;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = v==='synapse' ? '#00352F' : '#CEDC00';
+    ctx.font = mono(Math.round(base*.028));
+    ctx.fillText('B O A S - V I N D A S', cx, y);
+    // foto circular
+    const r = base*.16;
+    y += r + H*.055;
+    if (gState.foto){
+      ctx.save();
+      ctx.beginPath(); ctx.arc(cx, y, r, 0, 7); ctx.clip();
+      const im = gState.foto, esc2 = Math.max(2*r/im.width, 2*r/im.height);
+      ctx.drawImage(im, cx - im.width*esc2/2, y - im.height*esc2/2, im.width*esc2, im.height*esc2);
+      ctx.restore();
+      ctx.strokeStyle = '#CEDC00'; ctx.lineWidth = Math.max(4, base*.008);
+      ctx.beginPath(); ctx.arc(cx, y, r, 0, 7); ctx.stroke();
+    } else {
+      ctx.strokeStyle = v==='synapse' ? 'rgba(0,53,47,.4)' : 'rgba(245,245,247,.25)';
+      ctx.setLineDash([base*.012, base*.012]); ctx.lineWidth = Math.max(2, base*.004);
+      ctx.beginPath(); ctx.arc(cx, y, r, 0, 7); ctx.stroke(); ctx.setLineDash([]);
+      desenhaSimbolo(ctx, cx - r*.45, y - r*.45, r*.9, c.texto, '#CEDC00');
+    }
+    y += r + H*.075;
+    const nome = (gState.nome||'').trim() || 'Nome do membro';
+    ctx.fillStyle = c.texto; ctx.font = arch(700, Math.round(base*.075));
+    const linhasNome = quebraLinhas(ctx, nome, W*.84);
+    linhasNome.forEach(l => { ctx.fillText(l, cx, y); y += base*.085; });
+    const cargoTxt = [gState.cargo, gState.departamento].map(s=>(s||'').trim()).filter(Boolean).join(' · ');
+    if (cargoTxt){
+      ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.026));
+      ctx.fillText(cargoTxt.toUpperCase(), cx, y + base*.005);
+      y += base*.05;
+    }
+    ctx.fillStyle = '#CEDC00';
+    ctx.fillRect(cx - base*.03, y + base*.015, base*.06, Math.max(3, base*.006));
+    // rodapé
+    const lh2 = Math.round(base*.045);
+    const lw2 = LOGO_IMG ? lh2*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : lh2*7;
+    desenhaLogo(ctx, cx - lw2/2, H - H*.08 - lh2, lh2, c.logo);
+    ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.02));
+    ctx.fillText('neurodynamics.dev', cx, H - H*.045);
+    ctx.textAlign = 'left';
+  }
+
+  else if (gState.recurso === 'wallpaper' || gState.recurso === 'reuniao'){
+    const reuniao = gState.recurso === 'reuniao';
+    const lh = Math.round(base*(reuniao ? .05 : .07));
+    if (reuniao){
+      // logo discreto no topo-direito; centro fica limpo para a pessoa
+      const lw = LOGO_IMG ? lh*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : lh*7;
+      desenhaLogo(ctx, W - lw - W*.04, H*.07, lh, c.logo);
+      ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.016));
+      ctx.textAlign = 'right';
+      ctx.fillText('NEURODYNAMICS · LABBIO — UFMG', W - W*.04, H*.94);
+      ctx.textAlign = 'left';
+    } else {
+      const lw = LOGO_IMG ? lh*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : lh*7;
+      desenhaLogo(ctx, W/2 - lw/2, H/2 - lh/2, lh, c.logo);
+      ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.014));
+      ctx.textAlign = 'center';
+      ctx.fillText('19°52′S 43°58′W · BELO HORIZONTE', W/2, H*.93);
+      ctx.textAlign = 'left';
+    }
+  }
+
+  else if (gState.recurso === 'capa'){
+    const a4 = f.id==='a4';
+    const mx = W*.09;
+    let y = a4 ? H*.16 : H*.3;
+    ctx.fillStyle = v==='synapse' ? '#00352F' : '#CEDC00';
+    ctx.fillRect(mx, y - base*.012, base*.012, base*.012); // quadrado do eyebrow
+    ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.02));
+    ctx.fillText('NEURODYNAMICS — DOCUMENTO OFICIAL', mx + base*.03, y);
+    y += base*.075;
+    const tit = (gState.titulo||'').trim() || 'Título do documento';
+    ctx.fillStyle = c.texto; ctx.font = arch(600, Math.round(base*.075));
+    quebraLinhas(ctx, tit, W - mx*2).forEach(l => { ctx.fillText(l, mx, y); y += base*.085; });
+    const sub = (gState.subtitulo||'').trim();
+    if (sub){
+      ctx.fillStyle = c.sub; ctx.font = arch(500, Math.round(base*.03));
+      ctx.fillText(sub, mx, y + base*.005);
+    }
+    const lh3 = Math.round(base*.04);
+    desenhaLogo(ctx, mx, H - H*.09 - lh3, lh3, c.logo);
+    ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.016));
+    ctx.textAlign = 'right';
+    ctx.fillText(new Date().getFullYear() + ' · LABBIO — UFMG', W - mx, H - H*.07);
+    ctx.textAlign = 'left';
+    marcasDeCorte(ctx, W, H, v==='synapse'?'rgba(0,53,47,.35)':'rgba(245,245,247,.22)', Math.round(base*.04));
+  }
+}
+function baixarPeca(){
+  const f = formatoAtual();
+  $('#g-canvas').toBlob(b => {
+    if (!b){ toast('Não foi possível gerar o arquivo.'); return; }
+    baixarBlob(b, `nro-${gState.recurso}-${f.id}-${gState.variante}.png`);
+    toast('PNG baixado — pronto para publicar.');
+  }, 'image/png');
+}
+
+/* ============================================================
+   ASSINATURAS — incorporado do repositório "signature"
+   (mesma lógica e mesmo HTML de assinatura; dados do quadro
+   oficial em quadro-assinaturas.xlsx)
+   ============================================================ */
+const SIG_ORG = {
+  saudacao: 'Atenciosamente / regards / saludos,',
+  unidade: ['Laboratório de Bioengenharia — LABBIO','Escola de Engenharia',
+            'Universidade Federal de Minas Gerais'],
+  endereco: ['Av. Pres. Antônio Carlos, 6627 | 31270-901','Belo Horizonte - MG | Brasil'],
+  site: { label:'neurodynamics.com.br', url:'https://neurodynamics.com.br/' },
+  disclaimer: 'This communication may contain information that is proprietary, confidential, or exempt from disclosure. If you are not the intended recipient, please notify the sender immediately and delete this message.'
+};
+let sigEquipe = [];
+const SIG_FONT = 'Helvetica,Arial,sans-serif';
+const SG = {
+  p0:  `margin:0cm;line-height:normal;font-size:11pt;font-family:${SIG_FONT};`,
+  pTop:`margin:12pt 0cm 0cm;line-height:normal;font-size:11pt;font-family:${SIG_FONT};`,
+  gray:`font-size:9pt;font-family:${SIG_FONT};color:#595959;`,
+  dark:`font-size:9pt;font-family:${SIG_FONT};color:#1D1D1F;`,
+  name:`font-family:${SIG_FONT};color:#1D1D1F;`,
+  bTop:   'border-top:1pt solid #1D1D1F;border-right:none;border-bottom:none;border-left:none;',
+  bBottom:'border-bottom:1pt solid #1D1D1F;border-top:none;border-right:none;border-left:none;',
+  bNone:  'border:none;'
+};
+function sigDdi(t){ t=String(t||'').trim(); if(!t) return ''; return t[0]==='+'?t:'+55 '+t; }
+function sigUnidade(){ return SIG_ORG.unidade.map(l=>`<p style="${SG.p0}"><span style="${SG.gray}">${esc(l)}</span></p>`).join(''); }
+function sigEndereco(){ return SIG_ORG.endereco.map(l=>`<p style="${SG.p0}"><span style="${SG.gray}">${esc(l)}</span></p>`).join(''); }
+function sigTel(p){ return p.telefone ? esc(sigDdi(p.telefone)) : '&nbsp;'; }
+function sigContato(p){
+  const siteLink = `<a href="${esc(SIG_ORG.site.url)}" style="color:#467886;"><span style="color:#595959;text-decoration:none;">${esc(SIG_ORG.site.label)}</span></a>`;
+  if (p.email){
+    const mail = `<a href="mailto:${esc(p.email)}" style="color:#467886;"><span style="color:#595959;text-decoration:none;">${esc(p.email)}</span></a>`;
+    return mail + ' | ' + siteLink;
+  }
+  return siteLink;
+}
+function sigEmail(p){
+  return `<div style="font-family:${SIG_FONT};font-size:11pt;color:#222222;"><span style="font-size:11pt;">${esc(SIG_ORG.saudacao)}</span></div>
+<table border="0" cellspacing="0" cellpadding="0" width="614" style="color:#222222;font-family:${SIG_FONT};width:460.7pt;border-collapse:collapse;border:none;"><tbody>
+<tr style="height:14.15pt;">
+<td width="231" rowspan="5" valign="top" style="width:172.9pt;${SG.bTop}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.pTop}"><img src="${esc(LOGO_URL)}" width="219" height="36" alt="NeuroDynamics" style="display:block;border:0;"></p></td>
+<td width="384" style="width:287.8pt;${SG.bTop}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.pTop}"><b><span style="${SG.name}">${esc(p.nome)}</span></b></p></td>
+</tr>
+<tr style="height:14.15pt;"><td width="384" style="width:287.8pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.p0}"><span style="${SG.dark}">${esc(p.cargo)}</span></p><p style="${SG.p0}"><span style="${SG.dark}">&nbsp;</span></p></td></tr>
+<tr style="height:14.15pt;"><td width="384" style="width:287.8pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;">${sigUnidade()}<p style="${SG.p0}"><span style="${SG.gray}">&nbsp;</span></p></td></tr>
+<tr style="height:14.15pt;"><td width="384" style="width:287.8pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;">${sigEndereco()}<p style="${SG.p0}"><span style="${SG.gray}">&nbsp;</span></p></td></tr>
+<tr style="height:14.15pt;"><td width="384" style="width:287.8pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.p0}"><span style="${SG.gray}">${sigTel(p)}</span></p></td></tr>
+<tr style="height:14.15pt;">
+<td width="231" valign="top" style="width:172.9pt;${SG.bBottom}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.p0}"><span style="font-family:${SIG_FONT};">&nbsp;</span></p></td>
+<td width="384" style="width:287.8pt;${SG.bBottom}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.p0}"><span style="${SG.gray}">${sigContato(p)}</span></p></td>
+</tr>
+<tr style="height:14.15pt;"><td colspan="2" width="614" valign="top" style="width:460.7pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.p0}"><i><span style="font-size:8pt;font-family:${SIG_FONT};">${esc(SIG_ORG.disclaimer)}</span></i></p></td></tr>
+</tbody></table>`;
+}
+function sigReply(p){
+  return `<div style="font-family:${SIG_FONT};font-size:11pt;color:#222222;"><span style="font-size:11pt;">${esc(SIG_ORG.saudacao)}</span></div>
+<table border="0" cellspacing="0" cellpadding="0" width="374" style="color:#222222;font-family:${SIG_FONT};width:280.65pt;border-collapse:collapse;border:none;"><tbody>
+<tr style="height:34pt;"><td width="374" valign="top" style="width:280.65pt;${SG.bTop}padding:0cm 5.4pt;height:34pt;"><p style="${SG.pTop}"><img src="${esc(LOGO_URL)}" width="219" height="36" alt="NeuroDynamics" style="display:block;border:0;"></p></td></tr>
+<tr style="height:14.15pt;"><td width="374" style="width:280.65pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.pTop}"><b><span style="${SG.name}">${esc(p.nome)}</span></b></p></td></tr>
+<tr style="height:14.15pt;"><td width="374" style="width:280.65pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.p0}"><span style="${SG.dark}">${esc(p.cargo)}</span></p><p style="${SG.p0}"><span style="${SG.dark}">&nbsp;</span></p></td></tr>
+<tr style="height:14.15pt;"><td width="374" style="width:280.65pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;">${sigUnidade()}<p style="${SG.p0}"><span style="${SG.gray}">&nbsp;</span></p></td></tr>
+<tr style="height:14.15pt;"><td width="374" style="width:280.65pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.p0}"><span style="${SG.gray}">${sigTel(p)}</span></p></td></tr>
+<tr style="height:14.15pt;"><td width="374" style="width:280.65pt;${SG.bBottom}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.p0}"><span style="${SG.gray}">${sigContato(p)}</span></p></td></tr>
+</tbody></table>
+<p style="margin:0cm 0cm 8pt;color:#222222;line-height:15.6933px;font-size:11pt;font-family:${SIG_FONT};"><i><span style="font-size:8pt;line-height:11.4133px;font-family:${SIG_FONT};">${esc(SIG_ORG.disclaimer)}</span></i></p>`;
+}
+async function sigCarregar(){
+  const msgEl = $('#sig-msg'), sel = $('#sig-person');
+  try{
+    if (!window.XLSX) throw new Error('biblioteca XLSX indisponível');
+    const resp = await fetch(SIG_DADOS_URL, {cache:'no-store'});
+    if (!resp.ok) throw new Error('HTTP '+resp.status);
+    const buf = await resp.arrayBuffer();
+    const wb = XLSX.read(new Uint8Array(buf), {type:'array'});
+    const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {defval:''});
+    sigEquipe = rows.map(r=>{
+      const get=(...keys)=>{ for(const k of Object.keys(r)){ if(keys.includes(k.toLowerCase().trim())) return String(r[k]).trim(); } return ''; };
+      return { nome:get('nome','name'), cargo:get('cargo','role','title'),
+               email:get('email','e-mail'), telefone:get('telefone','phone','tel') };
+    }).filter(p=>p.nome);
+    if (!sigEquipe.length) throw new Error('quadro vazio');
+    sel.innerHTML = '<option value="">— Selecione seu nome —</option>' +
+      sigEquipe.map((p,i)=>`<option value="${i}">${esc(p.nome)}</option>`).join('');
+    msgEl.className = 'sig-msg info';
+    msgEl.textContent = 'Selecione seu nome para gerar as assinaturas.';
+  }catch(e){
+    msgEl.className = 'sig-msg err';
+    msgEl.textContent = 'Não foi possível carregar o quadro da equipe ('+e.message+'). Tente recarregar a página.';
+    sel.innerHTML = '<option value="">— Indisponível —</option>';
+  }
+}
+function sigMostrar(){
+  const sel = $('#sig-person');
+  if (sel.value===''){ $('#sig-cards').classList.remove('show'); return; }
+  const p = sigEquipe[sel.value];
+  $('#sig-prev-email').innerHTML = sigEmail(p);
+  $('#sig-prev-reply').innerHTML = sigReply(p);
+  $('#sig-cards').classList.add('show');
+}
+async function sigCopiar(html, btn){
+  const plain = html.replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();
+  let ok = false;
+  try{
+    if (navigator.clipboard && window.ClipboardItem){
+      await navigator.clipboard.write([ new ClipboardItem({
+        'text/html': new Blob([html],{type:'text/html'}),
+        'text/plain': new Blob([plain],{type:'text/plain'})
+      })]);
+      ok = true;
+    }
+  }catch(e){ ok = false; }
+  if (!ok){
+    const src = $('#clipboardSrc');
+    src.innerHTML = html;
+    const range = document.createRange(); range.selectNodeContents(src);
+    const so = window.getSelection(); so.removeAllRanges(); so.addRange(range);
+    try{ ok = document.execCommand('copy'); }catch(e){ ok = false; }
+    so.removeAllRanges(); src.innerHTML = '';
+  }
+  const antes = btn.textContent;
+  btn.textContent = ok ? 'Copiado!' : 'Não consegui copiar — selecione manualmente';
+  setTimeout(()=>{ btn.textContent = antes; }, 2400);
+}
+$('#sig-person').addEventListener('change', sigMostrar);
+$('#sig-copy-email').addEventListener('click', function(){
+  const sel = $('#sig-person'); if (sel.value!=='') sigCopiar(sigEmail(sigEquipe[sel.value]), this);
+});
+$('#sig-copy-reply').addEventListener('click', function(){
+  const sel = $('#sig-person'); if (sel.value!=='') sigCopiar(sigReply(sigEquipe[sel.value]), this);
+});
+
+/* ---------------- boot ---------------- */
+window.addEventListener('scroll', ()=>{ $('#hd').classList.toggle('rolou', window.scrollY > 8); }, { passive:true });
+desenhaCores();
+montarEstudio();
+logoPronto.then(()=>renderPeca());
+sigCarregar();
+</script>
+</body>
+</html>
