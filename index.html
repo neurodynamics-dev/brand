@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Brand guidelines e central de assets da NeuroDynamics: logo, cores, tipografia, elementos visuais e geradores de mídia da equipe.">
 <meta name="theme-color" content="#050807">
-<title>Brand — NeuroDynamics</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2300352F'/%3E%3Ccircle cx='11' cy='16' r='5' fill='%23F5F5F7'/%3E%3Ccircle cx='23' cy='9.5' r='2.8' fill='%23F5F5F7'/%3E%3Ccircle cx='23' cy='22.5' r='2.8' fill='%23F5F5F7'/%3E%3Cpath d='M15 13.8 20.6 10.6M15 18.2 20.6 21.4' stroke='%23CEDC00' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E">
+<title>Brand | NeuroDynamics</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -260,6 +261,8 @@ section{margin:0 0 clamp(80px,10vh,130px);scroll-margin-top:100px}
 .sig-tag{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--axon);font-weight:700}
 .sig-preview{padding:22px 20px;background:#fff;overflow-x:auto;min-height:100px}
 .sig-foot{padding:14px 20px 18px;border-top:1px solid rgba(0,53,47,.08)}
+.sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media (max-width:640px){.sig-grid{grid-template-columns:1fr}}
 .sig-msg{margin-top:12px;font-size:13px;min-height:18px}
 .sig-msg.err{color:var(--pulso)}.sig-msg.info{color:var(--muted)}
 details.gmail{margin-top:18px;border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--card)}
@@ -295,7 +298,7 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
 
 <header id="hd">
   <div class="hd-in">
-    <a class="hd-logo" href="#hero" aria-label="NeuroDynamics Brand — topo">
+    <a class="hd-logo" href="#hero" aria-label="NeuroDynamics Brand, topo">
       <img id="logo-hd" src="" alt="NeuroDynamics">
       <span class="hd-tag">Brand</span>
     </a>
@@ -315,44 +318,43 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
 
 <!-- ================= HERO ================= -->
 <section id="hero">
-  <span class="eyebrow">Brand guidelines · NeuroDynamics</span>
+  <span class="eyebrow">Brand guidelines / NeuroDynamics</span>
   <h1>Uma marca para tecnologia que <em>cuida</em>.</h1>
-  <p class="hero-sub">Este é o sistema visual da NeuroDynamics — a referência de logo, cores,
-    tipografia e elementos usados no site, no SOMA, no portal do membro e em tudo que a
-    equipe publica. Aqui também ficam os geradores de mídia e as assinaturas de e-mail.</p>
+  <p class="hero-sub">Este é o sistema visual da NeuroDynamics: a referência de logo, cores,
+    tipografia e elementos usados no site, nas ferramentas internas e em tudo que a equipe
+    publica. Aqui também ficam os geradores de mídia e as assinaturas de e-mail.</p>
   <div style="display:flex;gap:12px;flex-wrap:wrap">
     <a class="btn solid" href="#estudio">Gerar um asset</a>
     <a class="btn ghost" href="#downloads">Baixar a marca</a>
   </div>
   <div class="hero-meta">
-    <span>Uso · <em>equipe e parceiros autorizados</em></span>
-    <span>Origem · <em>LABBIO — UFMG</em></span>
-    <span>Belo Horizonte · <em>19°52′S 43°58′W</em></span>
-    <span>Versão · <em id="versao">1.0</em></span>
+    <span>Uso: <em>equipe e parceiros autorizados</em></span>
+    <span>Origem: <em>LABBIO, UFMG</em></span>
+    <span>Belo Horizonte: <em>19°52′S 43°58′W</em></span>
+    <span>Versão: <em id="versao">1.1</em></span>
   </div>
 </section>
 
 <!-- ================= LOGO ================= -->
 <section id="logo">
   <div class="sec-head">
-    <span class="eyebrow">01 · Marca</span>
+    <span class="eyebrow">01 / Marca</span>
     <div>
       <h2>O imagotipo é um só.<br>O respeito a ele também.</h2>
-      <p class="sub">Neurônio + palavra: o símbolo conecta duas sinapses ao corpo celular — o
-        <b>soma</b> — e dá nome ao nosso sistema interno. Use os arquivos oficiais; nunca
-        redesenhe, recolora ou distorça.</p>
+      <p class="sub">O símbolo desenha uma onda de sinal em um traço contínuo, dentro do
+        tile verde. Use os arquivos oficiais; nunca redesenhe, recolora ou distorça.</p>
     </div>
   </div>
   <div class="logo-grid">
     <div class="logo-stage escuro">
       <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
       <img class="logo-img" src="" alt="Imagotipo NeuroDynamics em branco sobre fundo escuro">
-      <span class="lb">Fundo escuro — versão branca</span>
+      <span class="lb">Fundo escuro, versão branca</span>
     </div>
     <div class="logo-stage claro">
       <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
       <img class="logo-img" src="" alt="Imagotipo NeuroDynamics em preto sobre fundo claro">
-      <span class="lb">Fundo claro — versão preta</span>
+      <span class="lb">Fundo claro, versão preta</span>
     </div>
   </div>
   <div class="regras">
@@ -374,11 +376,11 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
 <!-- ================= CORES ================= -->
 <section id="cores">
   <div class="sec-head">
-    <span class="eyebrow">02 · Cores</span>
+    <span class="eyebrow">02 / Cores</span>
     <div>
       <h2>Verde profundo, um lampejo de Synapse.</h2>
-      <p class="sub">A base é sóbria — verdes profundos e neutros quase-pretos — e o
-        <b>Synapse</b> aparece pouco, como um disparo: seleção, foco, destaque. As cores
+      <p class="sub">A base é sóbria, feita de verdes profundos e neutros quase-pretos.
+        O <b>Synapse</b> aparece pouco, como um disparo: seleção, foco, destaque. As cores
         auxiliares existem para dados, status e marcos; nunca competem com a identidade.
         Clique em qualquer cartão para copiar o hex.</p>
     </div>
@@ -399,44 +401,44 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
 <!-- ================= TIPOGRAFIA ================= -->
 <section id="tipografia">
   <div class="sec-head">
-    <span class="eyebrow">03 · Tipografia</span>
+    <span class="eyebrow">03 / Tipografia</span>
     <div>
       <h2>Archivo fala. Plex Mono mede.</h2>
-      <p class="sub">Duas vozes: <b>Archivo</b> (500–700) para títulos, botões e navegação;
-        <b>IBM Plex Mono</b> (400–500) para dados, códigos, rótulos e coordenadas. O texto
-        corrido usa a pilha do sistema — rápida e neutra em qualquer dispositivo.</p>
+      <p class="sub">Duas vozes: <b>Archivo</b> (500 a 700) para títulos, botões e navegação;
+        <b>IBM Plex Mono</b> (400 e 500) para dados, códigos, rótulos e coordenadas. O texto
+        corrido usa a pilha do sistema, rápida e neutra em qualquer dispositivo.</p>
     </div>
   </div>
   <div class="type-grid">
     <div class="card spec archivo">
-      <span class="fam">Archivo · 500 / 600 / 700</span>
+      <span class="fam">Archivo 500 / 600 / 700</span>
       <div class="amostra">Intelligent systems for human health.</div>
       <div class="glyphs">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789</div>
-      <p class="uso">Títulos, subtítulos, botões, navegação e números de destaque.
-        Tracking levemente negativo (−0.015em a −0.03em) nos tamanhos grandes.</p>
+      <p class="uso">Títulos, subtítulos, botões, navegação e números de destaque, com
+        tracking levemente negativo (de −0.015em a −0.03em) nos tamanhos grandes.</p>
     </div>
     <div class="card spec plex">
-      <span class="fam">IBM Plex Mono · 400 / 500</span>
-      <div class="amostra">EVT-041 · 19°52′S 43°58′W · SOL26-0001</div>
+      <span class="fam">IBM Plex Mono 400 / 500</span>
+      <div class="amostra">EVT-041 19°52′S 43°58′W SOL26-0001</div>
       <div class="glyphs">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789 {}[]()·—</div>
       <p class="uso">Eyebrows, protocolos, datas, legendas técnicas e rótulos em caixa alta
-        com tracking largo (.14em a .22em).</p>
+        com tracking largo (de .14em a .22em).</p>
     </div>
   </div>
   <div class="card escala" style="margin-top:16px">
     <div class="row"><span class="k">Display / H1</span>
       <span style="font-family:var(--fd);font-weight:600;font-size:clamp(28px,4vw,44px);letter-spacing:-.025em;line-height:1.05">Título de página</span></div>
-    <div class="row"><span class="k">H2 · seção</span>
+    <div class="row"><span class="k">H2, seção</span>
       <span style="font-family:var(--fd);font-weight:600;font-size:clamp(22px,3vw,30px)">Título de seção</span></div>
     <div class="row"><span class="k">Eyebrow</span>
       <span class="eyebrow">Rótulo de contexto</span></div>
     <div class="row"><span class="k">Corpo</span>
       <span style="color:var(--muted)">Texto corrido na pilha do sistema, 14–15&nbsp;px, entrelinha 1.6.</span></div>
-    <div class="row"><span class="k">Mono / dado</span>
-      <span class="mono" style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)">FIG.01 — protótipo · imagery in production</span></div>
+    <div class="row"><span class="k">Mono, dado</span>
+      <span class="mono" style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)">FIG.01 PROTÓTIPO, IMAGERY IN PRODUCTION</span></div>
   </div>
   <p class="nota" style="margin-top:14px">Webfonts:
-    <a style="border-bottom:1px solid var(--line2)" href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Archivo</a> ·
+    <a style="border-bottom:1px solid var(--line2)" href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Archivo</a> e
     <a style="border-bottom:1px solid var(--line2)" href="https://fonts.google.com/specimen/IBM+Plex+Mono" target="_blank" rel="noopener">IBM Plex Mono</a>
     (Google Fonts, licença aberta).</p>
 </section>
@@ -444,10 +446,10 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
 <!-- ================= ELEMENTOS ================= -->
 <section id="elementos">
   <div class="sec-head">
-    <span class="eyebrow">04 · Elementos visuais</span>
+    <span class="eyebrow">04 / Elementos visuais</span>
     <div>
       <h2>O laboratório aparece nos detalhes.</h2>
-      <p class="sub">O sistema vive de poucos gestos, repetidos com disciplina — nas páginas
+      <p class="sub">O sistema vive de poucos gestos, repetidos com disciplina nas páginas
         públicas, no portal e nas peças geradas aqui.</p>
     </div>
   </div>
@@ -465,7 +467,7 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
       <div class="txt"><b>Banda em gradiente</b><p>Cortex → Axon → Soma a 118°, com glow
         Synapse no canto. Reservada a chamadas e destaques.</p></div></div>
     <div class="el"><div class="demo demo-fig demo-grade"><span class="glyph">N</span>
-        <span class="fig">FIG.01 — <em style="font-style:normal;color:var(--muted)">Órion</em> · imagery in production</span>
+        <span class="fig">FIG.01 <em style="font-style:normal;color:var(--muted)">ÓRION</em>, IMAGERY IN PRODUCTION</span>
         <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span></div>
       <div class="txt"><b>Placeholder técnico</b><p>Sem foto? Grade, marcas de corte, letra
         gigante a 4% e legenda FIG. Honesto e no sistema.</p></div></div>
@@ -481,12 +483,12 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
 <!-- ================= ESTÚDIO ================= -->
 <section id="estudio">
   <div class="sec-head">
-    <span class="eyebrow">05 · Estúdio</span>
+    <span class="eyebrow">05 / Estúdio</span>
     <div>
       <h2>Gere a peça. Já sai no padrão.</h2>
-      <p class="sub">Banners de rede social, posts de entrada na equipe, wallpapers, fundos de
-        reunião e capas — escolha o recurso, o formato e o visual, preencha os campos e baixe
-        o PNG em alta resolução.</p>
+      <p class="sub">Banners, posts de entrada e de aviso, avatares, thumbnails, crachás,
+        wallpapers, fundos de reunião e capas. Escolha o recurso, o formato e o visual,
+        preencha os campos e baixe o PNG em alta resolução.</p>
     </div>
   </div>
   <div class="estudio">
@@ -497,7 +499,7 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
       <div id="g-campos"></div>
       <button class="btn solid" style="width:100%;justify-content:center" onclick="baixarPeca()">Baixar PNG</button>
       <p class="mini" style="margin-top:10px;color:var(--dim);font-size:11px">Renderizado no seu
-        navegador, na resolução final — nada é enviado a servidor.</p>
+        navegador, na resolução final. Nada é enviado a servidor.</p>
     </div>
     <div class="palco">
       <div class="quadro"><canvas id="g-canvas" width="1584" height="396"></canvas></div>
@@ -512,21 +514,47 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
 <!-- ================= ASSINATURAS ================= -->
 <section id="assinaturas">
   <div class="sec-head">
-    <span class="eyebrow">06 · Assinaturas de e-mail</span>
+    <span class="eyebrow">06 / Assinaturas de e-mail</span>
     <div>
       <h2>A mesma assinatura, para todo mundo.</h2>
-      <p class="sub">A Central de Assinaturas vive aqui também: selecione seu nome e copie a
-        assinatura pronta para o Gmail — uma para mensagens novas, outra para respostas.
-        Os dados vêm do quadro oficial mantido pelo Depto. de Pessoal
-        (repositório <span class="mono" style="font-size:12px">signature</span>).</p>
+      <p class="sub">Entre com a sua conta e a assinatura sai pronta com os seus dados do
+        cadastro da equipe: uma para mensagens novas, outra para respostas. Dá para ajustar
+        o nome de exibição e incluir os seus pronomes.</p>
     </div>
   </div>
   <div class="sig-panel">
-    <div class="fld" style="max-width:420px;margin-bottom:0">
-      <label for="sig-person">Quem é você?</label>
-      <select id="sig-person"><option value="">— Carregando equipe… —</option></select>
+    <div id="sig-login">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Entre com a sua conta
+        NeuroDynamics, a mesma das ferramentas internas. Os seus dados de cargo e contato
+        vêm do cadastro da equipe.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+        <div class="fld" style="flex:1;min-width:210px;margin-bottom:0"><label>E-mail</label>
+          <input id="sig-email" type="email" autocomplete="email"></div>
+        <div class="fld" style="flex:1;min-width:170px;margin-bottom:0"><label>Senha</label>
+          <input id="sig-senha" type="password" autocomplete="current-password"></div>
+        <button class="btn solid" id="sig-entrar" onclick="sigEntrar()">Entrar</button>
+      </div>
+      <div class="sig-msg err" id="sig-login-erro" role="status"></div>
     </div>
-    <div class="sig-msg info" id="sig-msg" role="status">Carregando os dados da equipe…</div>
+    <div id="sig-editor" hidden>
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+        <span style="font-size:13px;color:var(--muted)">Conectado como
+          <b id="sig-quem" style="color:var(--ink)"></b></span>
+        <button class="btn ghost mini" onclick="sigSair()">Sair</button>
+      </div>
+      <div class="sig-grid">
+        <div class="fld"><label>Nome de exibição</label>
+          <input id="sig-nome" oninput="sigMostrar()"></div>
+        <div class="fld"><label>Pronomes (opcional)</label>
+          <input id="sig-pron" placeholder="ela/dela, ele/dele, elu/delu…" oninput="sigMostrar()"></div>
+        <div class="fld"><label>Cargo</label>
+          <input id="sig-cargo" oninput="sigMostrar()"></div>
+        <div class="fld"><label>Telefone (opcional)</label>
+          <input id="sig-tel" placeholder="(31) 9…" oninput="sigMostrar()"></div>
+        <div class="fld" style="grid-column:1/-1"><label>E-mail exibido</label>
+          <input id="sig-mail" oninput="sigMostrar()"></div>
+      </div>
+      <div class="sig-msg info" id="sig-msg" role="status"></div>
     <div class="sig-cards" id="sig-cards">
       <div class="sig-card">
         <div class="sig-head"><span class="sig-title">Assinatura de e-mail</span><span class="sig-tag">Mensagens novas</span></div>
@@ -538,6 +566,7 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
         <div class="sig-preview" id="sig-prev-reply"></div>
         <div class="sig-foot"><button class="btn claro" style="width:100%;justify-content:center" id="sig-copy-reply">Copiar assinatura</button></div>
       </div>
+    </div>
     </div>
     <details class="gmail">
       <summary>Como configurar no Gmail (2 minutos)</summary>
@@ -556,25 +585,33 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
 <!-- ================= DOWNLOADS ================= -->
 <section id="downloads">
   <div class="sec-head">
-    <span class="eyebrow">07 · Downloads &amp; assets</span>
+    <span class="eyebrow">07 / Downloads e assets</span>
     <div>
       <h2>Tudo oficial, num lugar só.</h2>
-      <p class="sub">Arquivos da marca e atalhos do ecossistema. Em dúvida sobre algum uso,
-        fale com a Comunicação antes de publicar.</p>
+      <p class="sub">Arquivos da marca, templates e atalhos do ecossistema. Em dúvida sobre
+        algum uso, fale com a Comunicação antes de publicar.</p>
     </div>
   </div>
   <div class="dl-grid">
-    <div class="dl"><span class="lb">Logo</span><h3>Imagotipo — preto</h3>
+    <div class="dl"><span class="lb">Logo</span><h3>Imagotipo preto</h3>
       <p>PNG oficial com fundo transparente, para fundos claros e documentos.</p>
       <div class="acts"><a class="btn ghost mini" id="dl-logo-preto" href="#" target="_blank" rel="noopener">Abrir PNG ↗</a></div></div>
-    <div class="dl"><span class="lb">Logo</span><h3>Imagotipo — branco</h3>
+    <div class="dl"><span class="lb">Logo</span><h3>Imagotipo branco</h3>
       <p>Versão branca gerada a partir do arquivo oficial, para fundos escuros e fotos.</p>
       <div class="acts"><button class="btn ghost mini" onclick="baixarLogoBranco()">Baixar PNG</button></div></div>
-    <div class="dl"><span class="lb">Logo</span><h3>Símbolo (favicon)</h3>
-      <p>O neurônio em SVG vetorial, no tile Cortex — favicons, avatares e apps.</p>
-      <div class="acts"><button class="btn ghost mini" onclick="baixarSimboloSVG()">Baixar SVG</button></div></div>
+    <div class="dl"><span class="lb">Logo</span><h3>Símbolo (tile verde)</h3>
+      <p>O símbolo oficial no tile verde, em PNG com fundo transparente. É o mesmo arquivo dos favicons dos sites.</p>
+      <div class="acts"><a class="btn ghost mini" href="assets/simbolo-512.png" download="nro-simbolo-512.png">PNG 512</a>
+        <a class="btn ghost mini" href="favicon.png" download="nro-favicon-256.png">PNG 256</a></div></div>
+    <div class="dl"><span class="lb">Template</span><h3>Documentos e registros</h3>
+      <p>O template oficial NRO-PUB-002: Arial, cabeçalho com departamento, título, código e revisão, e as instruções de controle.</p>
+      <div class="acts"><a class="btn ghost mini" href="assets/NRO-PUB-002-template-documentos-e-registros.docx" download>Baixar DOCX</a></div></div>
+    <div class="dl"><span class="lb">Template</span><h3>Página HTML</h3>
+      <p>Arquivo único com os tokens, as fontes, o fundo e os elementos do sistema, pronto para virar uma nova página da equipe.</p>
+      <div class="acts"><a class="btn ghost mini" href="template.html" target="_blank" rel="noopener">Ver ↗</a>
+        <a class="btn ghost mini" href="template.html" download="nro-template.html">Baixar</a></div></div>
     <div class="dl"><span class="lb">Cores</span><h3>Paleta</h3>
-      <p>Todas as cores com nome, hex, RGB e uso — em JSON e como tokens CSS.</p>
+      <p>Todas as cores com nome, hex, RGB e uso, em JSON e como tokens CSS.</p>
       <div class="acts"><button class="btn ghost mini" onclick="baixarPaletaJSON()">JSON</button>
         <button class="btn ghost mini" onclick="copiarTokensCSS()">Copiar CSS</button></div></div>
     <div class="dl"><span class="lb">Tipografia</span><h3>Fontes</h3>
@@ -593,22 +630,24 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
 
 <footer>
   <div class="ft-in">
-    <span>© <span id="ft-ano">2026</span> NeuroDynamics — uso interno e de parceiros autorizados</span>
-    <span>LABBIO · Escola de Engenharia · UFMG</span>
+    <span>© <span id="ft-ano">2026</span> NeuroDynamics, uso interno e de parceiros autorizados</span>
+    <span>LABBIO, Escola de Engenharia, UFMG</span>
   </div>
 </footer>
 
 <div id="toast"></div>
 <div id="clipboardSrc" style="position:absolute;left:-9999px;top:0" aria-hidden="true"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 /* ============================================================
    CONFIG
    ============================================================ */
 const LOGO_URL = 'https://raw.githubusercontent.com/matheusmarcondes1/nro/refs/heads/main/imagotipo%20preto.png';
-/* Quadro oficial de assinaturas — mantido no repositório "signature". */
-const SIG_DADOS_URL = 'https://raw.githubusercontent.com/neurodynamics-dev/signature/main/signature/quadro-assinaturas.xlsx';
+/* Assinaturas: os dados do membro vêm do banco da equipe (o mesmo
+   das ferramentas internas), com a conta da própria pessoa. */
+const SUPABASE_URL = 'https://rxzmkyjttzzpwtodqkve.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_MJFR-aaQqTS1BthxYJG2kg_5XGhs9wg';
 
 const $ = s => document.querySelector(s);
 const esc = v => v == null ? '' : String(v).replace(/[&<>"']/g, c =>
@@ -635,7 +674,7 @@ const PALETA = [
     { nome:'Névoa',    hex:'#9AA5A1', uso:'Texto secundário sobre escuro.', pct:5 },
     { nome:'Grafite',  hex:'#616C68', uso:'Legendas, rótulos técnicos e bordas visíveis.', pct:3 }
   ]},
-  { grupo:'Auxiliares — dados e status', cores:[
+  { grupo:'Auxiliares para dados e status', cores:[
     { nome:'Soma',     hex:'#0B7D6E', uso:'Terceiro verde: gradientes longos e visualizações.', pct:0 },
     { nome:'Íon',      hex:'#2DD4BF', uso:'Links de destaque, taglines, eventos no calendário.', pct:0 },
     { nome:'Vital',    hex:'#4ADE97', uso:'Sucesso: confirmado, ativo, concluído.', pct:0 },
@@ -709,6 +748,15 @@ document.querySelectorAll('.logo-img').forEach(img=>{
 });
 $('#dl-logo-preto').href = LOGO_URL;
 
+/* símbolo oficial (tile verde), servido deste mesmo repositório */
+let SIMB_IMG = null;
+const simbPronto = new Promise(res => {
+  const i = new Image();
+  i.onload = () => { SIMB_IMG = i; res(true); };
+  i.onerror = () => res(false);
+  i.src = 'favicon.png';
+});
+
 function logoTintado(cor){
   if (!LOGO_IMG) return null;
   const c = document.createElement('canvas');
@@ -722,13 +770,8 @@ function logoTintado(cor){
 async function baixarLogoBranco(){
   await logoPronto;
   const t = logoTintado('#F5F5F7');
-  if (!t){ toast('O arquivo do logo não carregou — tente de novo com internet.'); return; }
+  if (!t){ toast('O arquivo do logo não carregou. Tente de novo com internet.'); return; }
   t.toBlob(b => { baixarBlob(b, 'nro-imagotipo-branco.png'); toast('Logo branco baixado.'); }, 'image/png');
-}
-const SIMBOLO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#00352F"/><circle cx="11" cy="16" r="5" fill="#F5F5F7"/><circle cx="23" cy="9.5" r="2.8" fill="#F5F5F7"/><circle cx="23" cy="22.5" r="2.8" fill="#F5F5F7"/><path d="M15 13.8 20.6 10.6M15 18.2 20.6 21.4" stroke="#CEDC00" stroke-width="1.7" stroke-linecap="round"/></svg>`;
-function baixarSimboloSVG(){
-  baixarBlob(new Blob([SIMBOLO_SVG],{type:'image/svg+xml'}), 'nro-simbolo.svg');
-  toast('Símbolo SVG baixado.');
 }
 
 /* ============================================================
@@ -742,14 +785,29 @@ const VARIANTES = {
 };
 const GERADORES = {
   banner: { l:'Banner / header de rede social', campos:['frase'], formatos:[
-    { id:'linkedin', l:'LinkedIn — capa (1584×396)', w:1584, h:396 },
-    { id:'x',        l:'X / Twitter — header (1500×500)', w:1500, h:500 },
-    { id:'youtube',  l:'YouTube — banner (2560×1440, área segura central)', w:2560, h:1440 }
+    { id:'linkedin',     l:'LinkedIn, capa pessoal (1584×396)', w:1584, h:396 },
+    { id:'linkedin-emp', l:'LinkedIn, página da empresa (1128×191)', w:1128, h:191 },
+    { id:'x',            l:'X / Twitter, header (1500×500)', w:1500, h:500 },
+    { id:'youtube',      l:'YouTube, banner (2560×1440, área segura central)', w:2560, h:1440 }
   ]},
   entrada: { l:'Post de entrada na equipe', campos:['nome','cargo','departamento','foto'], formatos:[
-    { id:'feed',     l:'Instagram — feed (1080×1350)', w:1080, h:1350 },
+    { id:'feed',     l:'Instagram, feed (1080×1350)', w:1080, h:1350 },
     { id:'quadrado', l:'Quadrado (1080×1080)', w:1080, h:1080 },
     { id:'story',    l:'Story (1080×1920)', w:1080, h:1920 }
+  ]},
+  aviso: { l:'Post de aviso ou frase', campos:['titulo','frase'], formatos:[
+    { id:'feed',     l:'Instagram, feed (1080×1350)', w:1080, h:1350 },
+    { id:'quadrado', l:'Quadrado (1080×1080)', w:1080, h:1080 },
+    { id:'story',    l:'Story (1080×1920)', w:1080, h:1920 }
+  ]},
+  avatar: { l:'Foto de perfil com anel', campos:['foto'], formatos:[
+    { id:'quad', l:'Avatar (800×800)', w:800, h:800 }
+  ]},
+  thumb: { l:'Thumbnail de vídeo', campos:['titulo','subtitulo'], formatos:[
+    { id:'yt', l:'YouTube (1280×720)', w:1280, h:720 }
+  ]},
+  cracha: { l:'Crachá de evento', campos:['nome','cargo','foto'], formatos:[
+    { id:'horizontal', l:'Horizontal (1024×640)', w:1024, h:640 }
   ]},
   wallpaper: { l:'Wallpaper', campos:[], formatos:[
     { id:'desktop',   l:'Desktop (2560×1440)', w:2560, h:1440 },
@@ -916,7 +974,7 @@ function formatoAtual(){
 async function renderPeca(){
   await Promise.all([
     document.fonts.load('700 100px Archivo'), document.fonts.load('600 100px Archivo'),
-    document.fonts.load('500 40px "IBM Plex Mono"'), logoPronto
+    document.fonts.load('500 40px "IBM Plex Mono"'), logoPronto, simbPronto
   ]).catch(()=>{});
   const f = formatoAtual();
   gState.formato = f.id;
@@ -970,7 +1028,8 @@ async function renderPeca(){
       ctx.strokeStyle = v==='synapse' ? 'rgba(0,53,47,.4)' : 'rgba(245,245,247,.25)';
       ctx.setLineDash([base*.012, base*.012]); ctx.lineWidth = Math.max(2, base*.004);
       ctx.beginPath(); ctx.arc(cx, y, r, 0, 7); ctx.stroke(); ctx.setLineDash([]);
-      desenhaSimbolo(ctx, cx - r*.45, y - r*.45, r*.9, c.texto, '#CEDC00');
+      if (SIMB_IMG) ctx.drawImage(SIMB_IMG, cx - r*.5, y - r*.5, r, r);
+      else desenhaSimbolo(ctx, cx - r*.45, y - r*.45, r*.9, c.texto, '#CEDC00');
     }
     y += r + H*.075;
     const nome = (gState.nome||'').trim() || 'Nome do membro';
@@ -992,6 +1051,99 @@ async function renderPeca(){
     ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.02));
     ctx.fillText('neurodynamics.dev', cx, H - H*.045);
     ctx.textAlign = 'left';
+  }
+
+  else if (gState.recurso === 'aviso'){
+    const cx = W/2, story = f.id==='story';
+    let y = H*(story ? .32 : .36);
+    ctx.textAlign = 'center';
+    ctx.fillStyle = v==='synapse' ? '#00352F' : '#CEDC00';
+    ctx.font = mono(Math.round(base*.026));
+    ctx.fillText('A V I S O', cx, y - base*.12);
+    const tit = (gState.titulo||'').trim() || 'Título do aviso';
+    ctx.fillStyle = c.texto; ctx.font = arch(700, Math.round(base*.068));
+    quebraLinhas(ctx, tit, W*.84).forEach(l => { ctx.fillText(l, cx, y); y += base*.078; });
+    const fr = (gState.frase||'').trim();
+    if (fr){
+      y += base*.01;
+      ctx.fillStyle = c.sub; ctx.font = arch(500, Math.round(base*.032));
+      quebraLinhas(ctx, fr, W*.78).forEach(l => { ctx.fillText(l, cx, y); y += base*.045; });
+    }
+    ctx.fillStyle = '#CEDC00';
+    ctx.fillRect(cx - base*.03, y + base*.02, base*.06, Math.max(3, base*.006));
+    const lh2 = Math.round(base*.04);
+    const lw2 = LOGO_IMG ? lh2*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : lh2*7;
+    desenhaLogo(ctx, cx - lw2/2, H - H*.07 - lh2, lh2, c.logo);
+    ctx.textAlign = 'left';
+  }
+
+  else if (gState.recurso === 'avatar'){
+    const cx = W/2, cy = H/2, r = Math.min(W,H)*.355;
+    if (gState.foto){
+      ctx.save();
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.clip();
+      const im = gState.foto, k = Math.max(2*r/im.width, 2*r/im.height);
+      ctx.drawImage(im, cx - im.width*k/2, cy - im.height*k/2, im.width*k, im.height*k);
+      ctx.restore();
+    } else if (SIMB_IMG){
+      ctx.drawImage(SIMB_IMG, cx - r*.62, cy - r*.62, r*1.24, r*1.24);
+    }
+    ctx.strokeStyle = '#CEDC00'; ctx.lineWidth = Math.max(6, base*.02);
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.stroke();
+    ctx.strokeStyle = v==='synapse' ? 'rgba(0,53,47,.35)' : 'rgba(245,245,247,.18)';
+    ctx.lineWidth = Math.max(2, base*.005);
+    ctx.beginPath(); ctx.arc(cx, cy, r + Math.max(10, base*.035), 0, 7); ctx.stroke();
+  }
+
+  else if (gState.recurso === 'thumb'){
+    const mx = W*.07;
+    const lh0 = Math.round(base*.075);
+    const lw0 = LOGO_IMG ? lh0*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : lh0*7;
+    desenhaLogo(ctx, mx, H*.09, lh0, c.logo);
+    let y = H*.46;
+    const tit = (gState.titulo||'').trim() || 'Título do vídeo';
+    ctx.fillStyle = c.texto; ctx.font = arch(700, Math.round(base*.115));
+    quebraLinhas(ctx, tit, W*.72).slice(0,3).forEach(l => { ctx.fillText(l, mx, y); y += base*.13; });
+    const sub = (gState.subtitulo||'').trim();
+    if (sub){
+      ctx.fillStyle = v==='synapse' ? '#00352F' : '#CEDC00';
+      ctx.font = mono(Math.round(base*.035));
+      ctx.fillText(sub.toUpperCase(), mx, y + base*.01);
+    }
+    ctx.fillStyle = '#CEDC00';
+    ctx.fillRect(mx, H*.84, W*.09, Math.max(4, base*.01));
+  }
+
+  else if (gState.recurso === 'cracha'){
+    const r = H*.26, ccx = W*.23, ccy = H*.42;
+    if (gState.foto){
+      ctx.save();
+      ctx.beginPath(); ctx.arc(ccx, ccy, r, 0, 7); ctx.clip();
+      const im = gState.foto, k = Math.max(2*r/im.width, 2*r/im.height);
+      ctx.drawImage(im, ccx - im.width*k/2, ccy - im.height*k/2, im.width*k, im.height*k);
+      ctx.restore();
+    } else if (SIMB_IMG){
+      ctx.drawImage(SIMB_IMG, ccx - r*.6, ccy - r*.6, r*1.2, r*1.2);
+    }
+    ctx.strokeStyle = '#CEDC00'; ctx.lineWidth = Math.max(4, base*.012);
+    ctx.beginPath(); ctx.arc(ccx, ccy, r, 0, 7); ctx.stroke();
+    const tx = W*.42;
+    let y = H*.36;
+    const nome = (gState.nome||'').trim() || 'Nome do membro';
+    ctx.fillStyle = c.texto; ctx.font = arch(700, Math.round(base*.085));
+    quebraLinhas(ctx, nome, W*.5).slice(0,2).forEach(l => { ctx.fillText(l, tx, y); y += base*.1; });
+    const cargo = (gState.cargo||'').trim();
+    if (cargo){
+      ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.032));
+      ctx.fillText(cargo.toUpperCase(), tx, y + base*.005);
+    }
+    const lh3 = Math.round(base*.05);
+    desenhaLogo(ctx, tx, H - H*.14 - lh3/2, lh3, c.logo);
+    ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.024));
+    ctx.textAlign = 'right';
+    ctx.fillText('EQUIPE', W - W*.06, H*.14);
+    ctx.textAlign = 'left';
+    marcasDeCorte(ctx, W, H, v==='synapse'?'rgba(0,53,47,.35)':'rgba(245,245,247,.22)', Math.round(base*.045));
   }
 
   else if (gState.recurso === 'wallpaper' || gState.recurso === 'reuniao'){
@@ -1063,7 +1215,7 @@ const SIG_ORG = {
   site: { label:'neurodynamics.com.br', url:'https://neurodynamics.com.br/' },
   disclaimer: 'This communication may contain information that is proprietary, confidential, or exempt from disclosure. If you are not the intended recipient, please notify the sender immediately and delete this message.'
 };
-let sigEquipe = [];
+let sbSig = null;
 const SIG_FONT = 'Helvetica,Arial,sans-serif';
 const SG = {
   p0:  `margin:0cm;line-height:normal;font-size:11pt;font-family:${SIG_FONT};`,
@@ -1092,7 +1244,7 @@ function sigEmail(p){
 <table border="0" cellspacing="0" cellpadding="0" width="614" style="color:#222222;font-family:${SIG_FONT};width:460.7pt;border-collapse:collapse;border:none;"><tbody>
 <tr style="height:14.15pt;">
 <td width="231" rowspan="5" valign="top" style="width:172.9pt;${SG.bTop}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.pTop}"><img src="${esc(LOGO_URL)}" width="219" height="36" alt="NeuroDynamics" style="display:block;border:0;"></p></td>
-<td width="384" style="width:287.8pt;${SG.bTop}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.pTop}"><b><span style="${SG.name}">${esc(p.nome)}</span></b></p></td>
+<td width="384" style="width:287.8pt;${SG.bTop}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.pTop}"><b><span style="${SG.name}">${esc(p.nome)}</span></b>${p.pronomes?` <span style="${SG.gray}">(${esc(p.pronomes)})</span>`:''}</p></td>
 </tr>
 <tr style="height:14.15pt;"><td width="384" style="width:287.8pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.p0}"><span style="${SG.dark}">${esc(p.cargo)}</span></p><p style="${SG.p0}"><span style="${SG.dark}">&nbsp;</span></p></td></tr>
 <tr style="height:14.15pt;"><td width="384" style="width:287.8pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;">${sigUnidade()}<p style="${SG.p0}"><span style="${SG.gray}">&nbsp;</span></p></td></tr>
@@ -1109,7 +1261,7 @@ function sigReply(p){
   return `<div style="font-family:${SIG_FONT};font-size:11pt;color:#222222;"><span style="font-size:11pt;">${esc(SIG_ORG.saudacao)}</span></div>
 <table border="0" cellspacing="0" cellpadding="0" width="374" style="color:#222222;font-family:${SIG_FONT};width:280.65pt;border-collapse:collapse;border:none;"><tbody>
 <tr style="height:34pt;"><td width="374" valign="top" style="width:280.65pt;${SG.bTop}padding:0cm 5.4pt;height:34pt;"><p style="${SG.pTop}"><img src="${esc(LOGO_URL)}" width="219" height="36" alt="NeuroDynamics" style="display:block;border:0;"></p></td></tr>
-<tr style="height:14.15pt;"><td width="374" style="width:280.65pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.pTop}"><b><span style="${SG.name}">${esc(p.nome)}</span></b></p></td></tr>
+<tr style="height:14.15pt;"><td width="374" style="width:280.65pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.pTop}"><b><span style="${SG.name}">${esc(p.nome)}</span></b>${p.pronomes?` <span style="${SG.gray}">(${esc(p.pronomes)})</span>`:''}</p></td></tr>
 <tr style="height:14.15pt;"><td width="374" style="width:280.65pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.p0}"><span style="${SG.dark}">${esc(p.cargo)}</span></p><p style="${SG.p0}"><span style="${SG.dark}">&nbsp;</span></p></td></tr>
 <tr style="height:14.15pt;"><td width="374" style="width:280.65pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;">${sigUnidade()}<p style="${SG.p0}"><span style="${SG.gray}">&nbsp;</span></p></td></tr>
 <tr style="height:14.15pt;"><td width="374" style="width:280.65pt;${SG.bNone}padding:0cm 5.4pt;height:14.15pt;"><p style="${SG.p0}"><span style="${SG.gray}">${sigTel(p)}</span></p></td></tr>
@@ -1117,69 +1269,65 @@ function sigReply(p){
 </tbody></table>
 <p style="margin:0cm 0cm 8pt;color:#222222;line-height:15.6933px;font-size:11pt;font-family:${SIG_FONT};"><i><span style="font-size:8pt;line-height:11.4133px;font-family:${SIG_FONT};">${esc(SIG_ORG.disclaimer)}</span></i></p>`;
 }
-async function sigCarregar(){
-  const msgEl = $('#sig-msg'), sel = $('#sig-person');
-  try{
-    if (!window.XLSX) throw new Error('biblioteca XLSX indisponível');
-    const resp = await fetch(SIG_DADOS_URL, {cache:'no-store'});
-    if (!resp.ok) throw new Error('HTTP '+resp.status);
-    const buf = await resp.arrayBuffer();
-    const wb = XLSX.read(new Uint8Array(buf), {type:'array'});
-    const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {defval:''});
-    sigEquipe = rows.map(r=>{
-      const get=(...keys)=>{ for(const k of Object.keys(r)){ if(keys.includes(k.toLowerCase().trim())) return String(r[k]).trim(); } return ''; };
-      return { nome:get('nome','name'), cargo:get('cargo','role','title'),
-               email:get('email','e-mail'), telefone:get('telefone','phone','tel') };
-    }).filter(p=>p.nome);
-    if (!sigEquipe.length) throw new Error('quadro vazio');
-    sel.innerHTML = '<option value="">— Selecione seu nome —</option>' +
-      sigEquipe.map((p,i)=>`<option value="${i}">${esc(p.nome)}</option>`).join('');
-    msgEl.className = 'sig-msg info';
-    msgEl.textContent = 'Selecione seu nome para gerar as assinaturas.';
-  }catch(e){
-    msgEl.className = 'sig-msg err';
-    msgEl.textContent = 'Não foi possível carregar o quadro da equipe ('+e.message+'). Tente recarregar a página.';
-    sel.innerHTML = '<option value="">— Indisponível —</option>';
+async function sigBoot(){
+  if (!window.supabase) return;
+  sbSig = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const { data:{ session } } = await sbSig.auth.getSession();
+  if (session) sigAbrir();
+}
+async function sigEntrar(){
+  $('#sig-login-erro').textContent = '';
+  $('#sig-entrar').disabled = true;
+  const { error } = await sbSig.auth.signInWithPassword({
+    email: $('#sig-email').value.trim(), password: $('#sig-senha').value });
+  $('#sig-entrar').disabled = false;
+  if (error){ $('#sig-login-erro').textContent = 'E-mail ou senha incorretos. Sem acesso? Fale com o Depto. de Pessoal.'; return; }
+  sigAbrir();
+}
+async function sigSair(){ await sbSig.auth.signOut(); location.reload(); }
+async function sigAbrir(){
+  const { data:{ user } } = await sbSig.auth.getUser();
+  const { data: perfil } = await sbSig.from('perfis')
+    .select('nome,email,registro').eq('id', user.id).single();
+  let mb = null;
+  if (perfil?.registro){
+    const r = await sbSig.from('membros')
+      .select('nome,cargo,email_nro,email_pessoal,telefone').eq('registro', perfil.registro).single();
+    mb = r.data;
   }
+  $('#sig-nome').value  = mb?.nome || perfil?.nome || '';
+  $('#sig-cargo').value = mb?.cargo || '';
+  $('#sig-tel').value   = mb?.telefone || '';
+  $('#sig-mail').value  = mb?.email_nro || perfil?.email || user.email || '';
+  $('#sig-quem').textContent = perfil?.email || user.email || '';
+  $('#sig-login').hidden = true;
+  $('#sig-editor').hidden = false;
+  $('#sig-msg').className = 'sig-msg info';
+  $('#sig-msg').textContent = mb
+    ? 'Dados carregados do seu cadastro. Ajuste o nome de exibição e os pronomes como preferir.'
+    : 'Sua conta ainda não está vinculada ao cadastro da equipe. Preencha os campos manualmente ou fale com o Depto. de Pessoal.';
+  sigMostrar();
+}
+function sigPessoa(){
+  return {
+    nome: $('#sig-nome').value.trim() || 'Nome do membro',
+    pronomes: $('#sig-pron').value.trim(),
+    cargo: $('#sig-cargo').value.trim(),
+    email: $('#sig-mail').value.trim(),
+    telefone: $('#sig-tel').value.trim()
+  };
 }
 function sigMostrar(){
-  const sel = $('#sig-person');
-  if (sel.value===''){ $('#sig-cards').classList.remove('show'); return; }
-  const p = sigEquipe[sel.value];
+  const p = sigPessoa();
   $('#sig-prev-email').innerHTML = sigEmail(p);
   $('#sig-prev-reply').innerHTML = sigReply(p);
   $('#sig-cards').classList.add('show');
 }
-async function sigCopiar(html, btn){
-  const plain = html.replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();
-  let ok = false;
-  try{
-    if (navigator.clipboard && window.ClipboardItem){
-      await navigator.clipboard.write([ new ClipboardItem({
-        'text/html': new Blob([html],{type:'text/html'}),
-        'text/plain': new Blob([plain],{type:'text/plain'})
-      })]);
-      ok = true;
-    }
-  }catch(e){ ok = false; }
-  if (!ok){
-    const src = $('#clipboardSrc');
-    src.innerHTML = html;
-    const range = document.createRange(); range.selectNodeContents(src);
-    const so = window.getSelection(); so.removeAllRanges(); so.addRange(range);
-    try{ ok = document.execCommand('copy'); }catch(e){ ok = false; }
-    so.removeAllRanges(); src.innerHTML = '';
-  }
-  const antes = btn.textContent;
-  btn.textContent = ok ? 'Copiado!' : 'Não consegui copiar — selecione manualmente';
-  setTimeout(()=>{ btn.textContent = antes; }, 2400);
-}
-$('#sig-person').addEventListener('change', sigMostrar);
-$('#sig-copy-email').addEventListener('click', function(){
-  const sel = $('#sig-person'); if (sel.value!=='') sigCopiar(sigEmail(sigEquipe[sel.value]), this);
-});
-$('#sig-copy-reply').addEventListener('click', function(){
-  const sel = $('#sig-person'); if (sel.value!=='') sigCopiar(sigReply(sigEquipe[sel.value]), this);
+$('#sig-copy-email').addEventListener('click', function(){ sigCopiar(sigEmail(sigPessoa()), this); });
+$('#sig-copy-reply').addEventListener('click', function(){ sigCopiar(sigReply(sigPessoa()), this); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !$('#sig-login').hidden && document.activeElement &&
+      ['sig-email','sig-senha'].includes(document.activeElement.id)) sigEntrar();
 });
 
 /* ---------------- boot ---------------- */
@@ -1187,7 +1335,7 @@ window.addEventListener('scroll', ()=>{ $('#hd').classList.toggle('rolou', windo
 desenhaCores();
 montarEstudio();
 logoPronto.then(()=>renderPeca());
-sigCarregar();
+sigBoot();
 </script>
 </body>
 </html>

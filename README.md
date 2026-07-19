@@ -21,27 +21,32 @@ linguagem visual do site institucional.
 - **Estúdio (geradores de mídia)** — tudo renderizado em canvas, no
   navegador, com download em PNG na resolução final e 4 visuais
   selecionáveis (Void, Cortex, Synapse, Aura):
-  - banner/header de redes sociais (LinkedIn, X, YouTube);
+  - banner/header de redes sociais (LinkedIn pessoal e empresa, X, YouTube);
   - post de entrada na equipe (feed, quadrado e story, com foto);
+  - post de aviso ou frase (feed, quadrado e story);
+  - foto de perfil com anel Synapse (com upload de foto);
+  - thumbnail de vídeo (YouTube) e crachá de evento;
   - wallpaper (desktop, ultrawide e celular);
   - fundo de reunião (1920×1080, centro limpo);
   - capa de apresentação/documento (16:9 e A4).
-- **Assinaturas de e-mail** — a Central de Assinaturas incorporada: lê o
-  quadro oficial `quadro-assinaturas.xlsx` direto do repositório
-  [`signature`](https://github.com/neurodynamics-dev/signature) (via
-  raw.githubusercontent.com) e gera as duas assinaturas do Gmail com o
-  mesmo HTML da ferramenta original.
-- **Downloads** — logo preto/branco, símbolo SVG, paleta e links de
-  fontes e do ecossistema.
+- **Assinaturas de e-mail** — a pessoa entra com a própria conta
+  (mesmo login das ferramentas internas), os dados de cargo e contato
+  vêm do cadastro da equipe no banco, e dá para ajustar o **nome de
+  exibição** e incluir **pronomes**. O HTML gerado é o mesmo da
+  ferramenta original do repositório `signature`.
+- **Downloads e templates** — logo preto/branco, símbolo oficial em
+  PNG (o mesmo dos favicons), paleta, o template de documentos
+  NRO-PUB-002 (`assets/`), um `template.html` de página no padrão da
+  marca e os links de fontes e do ecossistema.
 
 ## Como editar
 
 - **Cores e nomes:** bloco `PALETA` no `<script>` de `index.html`.
 - **Geradores:** blocos `GERADORES` (formatos/campos) e `VARIANTES`
   (visuais); o desenho fica nas funções `desenhaBase`/`renderPeca`.
-- **Assinaturas:** os dados vêm do repositório `signature` — edite o
-  `quadro-assinaturas.xlsx` lá (colunas: nome, cargo, email, telefone).
-  O bloco `SIG_ORG` daqui espelha a configuração da ferramenta original.
+- **Assinaturas:** os dados vêm do banco (tabelas `perfis` e
+  `membros`), com a conta da própria pessoa. O bloco `SIG_ORG` espelha
+  a configuração institucional da ferramenta original.
 - **Versão:** atualize o marcador `#versao` no hero quando houver mudança
   relevante nas guidelines.
 
@@ -55,6 +60,5 @@ linguagem visual do site institucional.
 
 - A página é pública (como o site institucional); os geradores rodam
   inteiramente no navegador — nada é enviado a servidor.
-- A seção de assinaturas expõe os mesmos dados já públicos no repositório
-  `signature` (nome, cargo, e-mail institucional, telefone). Se o quadro
-  precisar deixar de ser público, mova o xlsx e ajuste `SIG_DADOS_URL`.
+- A seção de assinaturas exige login: cada pessoa vê apenas os
+  próprios dados, lidos com a permissão da própria conta.
