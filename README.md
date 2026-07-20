@@ -34,10 +34,11 @@ linguagem visual do site institucional.
   vêm do cadastro da equipe no banco, e dá para ajustar o **nome de
   exibição** e incluir **pronomes**. O HTML gerado é o mesmo da
   ferramenta original do repositório `signature`.
-- **Downloads e templates** — logo preto/branco, símbolo oficial em
-  PNG (o mesmo dos favicons), paleta, o template de documentos
-  NRO-PUB-002 (`assets/`), um `template.html` de página no padrão da
-  marca e os links de fontes e do ecossistema.
+- **Downloads e templates** — logos e símbolo oficiais via Brandfetch
+  (fonte única da marca), paleta, o template de documentos NRO-PUB-002
+  (`assets/`), os templates Overleaf de artigo e pôster (em
+  desenvolvimento), um `template.html` de página no padrão da marca e
+  os links de fontes e do ecossistema.
 
 ## Como editar
 

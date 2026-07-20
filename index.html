@@ -277,6 +277,8 @@ details.gmail .k{color:var(--synapse);font-weight:600}
 .dl{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:22px;
   display:flex;flex-direction:column;gap:8px}
 .dl .lb{font-family:var(--fm);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.dl .lb b{color:var(--syn);font-weight:500}
+.dl .soon{opacity:.5;pointer-events:none;user-select:none}
 .dl h3{font-size:16px;font-weight:600}
 .dl p{font-size:12.5px;color:var(--muted);flex:1}
 .dl .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
@@ -595,22 +597,22 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
     </div>
   </div>
   <div class="dl-grid">
-    <div class="dl"><span class="lb">Logo</span><h3>Imagotipo preto</h3>
-      <p>PNG oficial com fundo transparente, para fundos claros e documentos.</p>
-      <div class="acts"><a class="btn ghost mini" id="dl-logo-preto" href="#" target="_blank" rel="noopener">Abrir PNG ↗</a></div></div>
-    <div class="dl"><span class="lb">Logo</span><h3>Imagotipo branco</h3>
-      <p>Versão branca gerada a partir do arquivo oficial, para fundos escuros e fotos.</p>
-      <div class="acts"><button class="btn ghost mini" onclick="baixarLogoBranco()">Baixar PNG</button></div></div>
-    <div class="dl"><span class="lb">Logo</span><h3>Símbolo (tile verde)</h3>
-      <p>O símbolo oficial no tile verde, em PNG com fundo transparente. É o mesmo arquivo dos favicons dos sites.</p>
-      <div class="acts"><a class="btn ghost mini" href="assets/simbolo-512.png" download="nro-simbolo-512.png">PNG 512</a>
-        <a class="btn ghost mini" href="favicon.png" download="nro-favicon-256.png">PNG 256</a></div></div>
+    <div class="dl"><span class="lb">Logo</span><h3>Logos e símbolo</h3>
+      <p>Imagotipo nas versões preta e branca e o símbolo oficial, em vários formatos e sempre
+        atualizados. O Brandfetch é a fonte única para baixar a marca.</p>
+      <div class="acts"><a class="btn ghost mini" href="https://brandfetch.com/neurodynamics.dev" target="_blank" rel="noopener">Abrir no Brandfetch ↗</a></div></div>
     <div class="dl"><span class="lb">Template</span><h3>Documentos e registros</h3>
       <p>O template oficial NRO-PUB-002: Arial, cabeçalho com departamento, título, código e revisão, e as instruções de controle.</p>
       <div class="acts"><a class="btn ghost mini" href="assets/NRO-PUB-002-template-documentos-e-registros.docx" download>Baixar DOCX</a></div></div>
+    <div class="dl"><span class="lb">Template · <b>em desenvolvimento</b></span><h3>Artigo científico</h3>
+      <p>Template LaTeX no Overleaf para artigos e relatórios técnicos da equipe, com a tipografia e o cabeçalho no padrão da marca.</p>
+      <div class="acts"><span class="btn ghost mini soon">Disponível em breve</span></div></div>
+    <div class="dl"><span class="lb">Template · <b>em desenvolvimento</b></span><h3>Pôster acadêmico</h3>
+      <p>Template LaTeX no Overleaf para pôsteres de congresso e da Semana do Conhecimento, na paleta e na grade da NeuroDynamics.</p>
+      <div class="acts"><span class="btn ghost mini soon">Disponível em breve</span></div></div>
     <div class="dl"><span class="lb">Template</span><h3>Página HTML</h3>
       <p>Arquivo único com os tokens, as fontes, o fundo e os elementos do sistema, pronto para virar uma nova página da equipe.</p>
-      <div class="acts"><a class="btn ghost mini" href="template.html" target="_blank" rel="noopener">Ver ↗</a>
+      <div class="acts"><a class="btn ghost mini" href="template" target="_blank" rel="noopener">Ver ↗</a>
         <a class="btn ghost mini" href="template.html" download="nro-template.html">Baixar</a></div></div>
     <div class="dl"><span class="lb">Cores</span><h3>Paleta</h3>
       <p>Todas as cores com nome, hex, RGB e uso, em JSON e como tokens CSS.</p>
@@ -748,8 +750,6 @@ document.querySelectorAll('.logo-img').forEach(img=>{
     s.textContent='NeuroDynamics'; s.style.color='inherit'; img.replaceWith(s); };
   img.src = LOGO_URL;
 });
-$('#dl-logo-preto').href = LOGO_URL;
-
 /* símbolo oficial (tile verde), servido deste mesmo repositório */
 let SIMB_IMG = null;
 const simbPronto = new Promise(res => {
@@ -769,13 +769,6 @@ function logoTintado(cor){
   x.fillStyle = cor; x.fillRect(0,0,c.width,c.height);
   return c;
 }
-async function baixarLogoBranco(){
-  await logoPronto;
-  const t = logoTintado('#F5F5F7');
-  if (!t){ toast('O arquivo do logo não carregou. Tente de novo com internet.'); return; }
-  t.toBlob(b => { baixarBlob(b, 'nro-imagotipo-branco.png'); toast('Logo branco baixado.'); }, 'image/png');
-}
-
 /* ============================================================
    ESTÚDIO — geradores de mídia em canvas
    ============================================================ */
