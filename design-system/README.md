@@ -16,7 +16,7 @@ design-system/
 ├── neuro.css           folha consumível: base + componentes
 ├── build.mjs           sincroniza tokens e artes nos previews; gera o manifesto
 ├── _ds_manifest.json   índice dos cards (gerado)
-├── marca/              artes oficiais + LEIAME.md  ← precisa dos arquivos
+├── marca/              artes de preview, derivadas de assets/
 └── previews/           14 cards, um HTML autocontido cada
 ```
 
@@ -46,18 +46,16 @@ cd brand
 git checkout claude/design-system-setup-6c5ysl
 ```
 
-**2. Coloque as artes da marca**
-
-Os quatro arquivos vão em `design-system/marca/` — veja
-[`marca/LEIAME.md`](marca/LEIAME.md) para os nomes e formatos. Depois:
+**2. Confira que está tudo em sincronia**
 
 ```bash
 cd design-system
-node build.mjs
+node build.mjs --check
 ```
 
-Sem eles o sistema sincroniza do mesmo jeito; só o card do imagotipo fica com
-placeholders no lugar das imagens.
+As artes da marca já estão embutidas — versões de preview derivadas dos PNGs
+de `assets/`, descritas em [`marca/LEIAME.md`](marca/LEIAME.md). Só é preciso
+mexer nelas quando a marca mudar.
 
 **3. Autorize e envie**
 

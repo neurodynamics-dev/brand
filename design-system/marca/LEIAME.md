@@ -1,44 +1,60 @@
 # Artes da marca
 
-Esta pasta guarda os arquivos que o preview `previews/05-marca.html` embute
-como data URI. Ela existe porque cada card do Claude Design renderiza isolado:
-um `<img src="../assets/logo.png">` não resolveria, então a arte precisa estar
-dentro do HTML.
+Cópias de preview das artes oficiais, no tamanho e formato que os cards do
+Claude Design usam. Elas existem porque cada card renderiza isolado: um
+`<img src="../../assets/logo.png">` não resolveria, então a arte entra
+embutida como data URI dentro do HTML.
 
-## O que colocar aqui
+**Fonte da verdade continua sendo `assets/` no repositório** (e o
+[Brandfetch](https://brandfetch.com/neurodynamics.dev) para quem é de fora).
+O que está aqui é derivado.
 
-Quatro arquivos, com estes nomes exatos:
+## O que tem
 
-| Nome            | O que é                                              |
-| --------------- | ---------------------------------------------------- |
-| `imagotipo`     | marca horizontal completa (símbolo + logotipo), versão preta |
-| `simbolo`       | o traço sozinho, em gradiente verde, sem fundo       |
-| `icone-escuro`  | traço claro sobre quadrado escuro — ícone de app padrão |
-| `icone-verde`   | traço branco sobre quadrado verde                    |
+| Arquivo | Derivado de | Tamanho |
+| --- | --- | --- |
+| `imagotipo.webp` | `imagotipo preto.png` | 600×102 · 9KB |
+| `imagotipo-branco.webp` | `imagotipo branco.png` | 600×102 · 8KB |
+| `simbolo.webp` | `NRO ICON (COLORED TRANSPARENT BACKGOUND).png` | 288×256 · 15KB |
+| `icone-escuro.webp` | `NRO ICON MONOCHROMATIC.png` | 288×288 · 4KB |
+| `icone-verde.webp` | `NRO SQUARE ICON (COLORED TRANSPARENT BACKGOUND).png` | 288×288 · 14KB |
 
-Extensões aceitas, nesta ordem de preferência: **`.svg`**, `.png`, `.webp`.
+Os 2,3MB de PNG viram 51KB de WebP — e o card do imagotipo fecha em 84KB.
 
-O SVG é preferido por dois motivos: escala sem perda em qualquer tamanho do
-preview e pesa muito menos dentro do data URI (um PNG de 512px vira ~75KB de
-base64 em cada arquivo que o usa).
+Três decisões por trás dessa tabela:
 
-A versão branca do imagotipo não é um arquivo separado — ela é gerada a partir
-da preta com `filter:brightness(0) invert(1)`, como já acontece em `index.html`.
+- **As variantes transparentes.** Entre `OVER DARK`, `OVER WHITE` e
+  `TRANSPARENT BACKGOUND`, a transparente é a que compõe sobre qualquer
+  superfície. As outras trazem o fundo embutido e apareceriam como um
+  retângulo branco ou preto no meio do card. A exceção é a `MONOCHROMATIC`,
+  cujo fundo escuro faz parte do ícone.
+- **WebP, não PNG.** As artes têm gradiente, que o PNG comprime mal. O ícone
+  escuro sai de 363KB em PNG para 4KB em WebP, com a mesma imagem. Se um dia
+  existir SVG, ele passa na frente dos dois.
+- **Recorte na caixa do conteúdo.** Os PNGs de 1500px têm muita margem
+  transparente em volta; sem recortar, a marca apareceria pequena e
+  descentralizada dentro do card.
 
-## Depois de colocar os arquivos
+## Quando a marca mudar
+
+Troque os PNGs em `assets/` e regenere:
 
 ```bash
+npm i playwright-core     # única dependência, não versionada
+node gerar-artes.mjs
 node ../build.mjs
 ```
 
-O script embute as artes em `05-marca.html`, remove o aviso de "arte pendente"
-e atualiza o manifesto. Enquanto faltar algum arquivo, o preview mostra
-placeholders tracejados no lugar das artes — ele continua válido e sincronizável,
-só sem as imagens.
+O `gerar-artes.mjs` recorta, reduz e reencoda; o `build.mjs` embute o
+resultado nos previews. Qualquer outra ferramenta (ImageMagick, sharp,
+Squoosh) serve, desde que o resultado bata com a tabela acima.
 
-## Fonte da verdade
+Se algum arquivo faltar, o `build.mjs` avisa e o card do imagotipo mostra
+placeholders tracejados no lugar — o resto do sistema continua sincronizável.
 
-O repositório não é a fonte canônica da marca: o **Brandfetch** é
-(<https://brandfetch.com/neurodynamics.dev>). Os arquivos aqui são uma cópia de
-trabalho para a documentação renderizar sozinha. Se a marca mudar no Brandfetch,
-troque os arquivos aqui e rode o build de novo.
+## Sobre a versão branca
+
+`imagotipo branco.png` é um arquivo próprio, não um filtro. O quadrado é
+branco e o traço é vazado, então sobre o Void o traço aparece escuro e sobre
+a banda verde aparece verde. Não gere uma versão a partir da outra com
+`brightness(0) invert(1)`: o resultado inverte também o vazado.

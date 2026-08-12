@@ -50,15 +50,17 @@ const tokensCompactos = blocoRaiz[0]
    Coloque os arquivos oficiais em design-system/marca/ com estes
    nomes. Formatos aceitos: .svg (preferido), .png ou .webp.
 
-     imagotipo        marca horizontal completa, versão preta
-     simbolo          traço sozinho, gradiente verde, sem fundo
-     icone-escuro     traço claro sobre quadrado escuro
-     icone-verde      traço branco sobre quadrado verde
+     imagotipo         marca horizontal completa, versão preta
+     imagotipo-branco  a mesma marca, versão branca
+     simbolo           traço sozinho, gradiente verde, sem fundo
+     icone-escuro      traço claro sobre quadrado escuro
+     icone-verde       traço branco sobre quadrado verde
 
-   O SVG é preferido: escala sem perda e pesa muito menos que o
-   PNG dentro do data URI.
+   Prefira SVG quando existir. Partindo de PNG, o WebP é o melhor
+   destino: as artes têm gradiente, que o PNG comprime mal — o ícone
+   escuro sai de 363KB em PNG para 4KB em WebP, com a mesma imagem.
    ============================================================ */
-const ARTES = ['imagotipo', 'simbolo', 'icone-escuro', 'icone-verde'];
+const ARTES = ['imagotipo', 'imagotipo-branco', 'simbolo', 'icone-escuro', 'icone-verde'];
 const MIMES = { '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp' };
 const dirMarca = join(raiz, 'marca');
 

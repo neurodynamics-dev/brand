@@ -7,7 +7,7 @@
       "group": "Fundamentos",
       "viewport": {
         "width": 1180,
-        "height": 1240
+        "height": 2240
       }
     },
     {
@@ -17,7 +17,7 @@
       "group": "Fundamentos",
       "viewport": {
         "width": 1180,
-        "height": 1180
+        "height": 1320
       }
     },
     {
@@ -27,7 +27,7 @@
       "group": "Fundamentos",
       "viewport": {
         "width": 1180,
-        "height": 1060
+        "height": 1260
       }
     },
     {
@@ -37,7 +37,7 @@
       "group": "Fundamentos",
       "viewport": {
         "width": 1180,
-        "height": 820
+        "height": 940
       }
     },
     {
@@ -47,7 +47,7 @@
       "group": "Marca",
       "viewport": {
         "width": 1180,
-        "height": 1240
+        "height": 1800
       }
     },
     {
@@ -57,7 +57,7 @@
       "group": "Componentes",
       "viewport": {
         "width": 1180,
-        "height": 820
+        "height": 1100
       }
     },
     {
@@ -67,7 +67,7 @@
       "group": "Componentes",
       "viewport": {
         "width": 1180,
-        "height": 900
+        "height": 1220
       }
     },
     {
@@ -77,7 +77,7 @@
       "group": "Componentes",
       "viewport": {
         "width": 1180,
-        "height": 920
+        "height": 1020
       }
     },
     {
@@ -87,7 +87,7 @@
       "group": "Componentes",
       "viewport": {
         "width": 1180,
-        "height": 880
+        "height": 1460
       }
     },
     {
@@ -97,7 +97,7 @@
       "group": "Componentes",
       "viewport": {
         "width": 1180,
-        "height": 880
+        "height": 1080
       }
     },
     {
@@ -107,7 +107,7 @@
       "group": "Componentes",
       "viewport": {
         "width": 1180,
-        "height": 900
+        "height": 1440
       }
     },
     {
@@ -117,7 +117,7 @@
       "group": "Componentes",
       "viewport": {
         "width": 1180,
-        "height": 880
+        "height": 1640
       }
     },
     {
@@ -127,7 +127,7 @@
       "group": "Marca",
       "viewport": {
         "width": 1180,
-        "height": 880
+        "height": 1400
       }
     },
     {
@@ -137,7 +137,7 @@
       "group": "Marca",
       "viewport": {
         "width": 1180,
-        "height": 900
+        "height": 1580
       }
     }
   ]
