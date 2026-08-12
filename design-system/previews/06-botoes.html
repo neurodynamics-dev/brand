@@ -1,0 +1,204 @@
+<!-- @dsCard group="Componentes" name="Botões" subtitle="Solid, claro, ghost · dois tamanhos e todos os estados" width="1180" height="1100" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Botões · NeuroDynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* @tokens:start · gerado de tokens.css — rode `node build.mjs` */
+:root{
+  --cortex:#00352F;
+  --axon:#00594F;
+  --synapse:#CEDC00;
+  --void:#050807;
+  --painel:#0B1210;
+  --blackout:#1D1D1F;
+  --ink:#F5F5F7;
+  --aura:#F8F7FF;
+  --nevoa:#9AA5A1;
+  --grafite:#616C68;
+  --soma:#0B7D6E;
+  --ion:#2DD4BF;
+  --vital:#4ADE97;
+  --mielina:#F5C36A;
+  --pulso:#F1806F;
+  --plasma:#7FA7F2;
+  --dendrito:#A78BFA;
+  --bg:var(--void);
+  --muted:var(--nevoa);
+  --dim:var(--grafite);
+  --line:rgba(245,245,247,.08);
+  --line2:rgba(245,245,247,.16);
+  --card:rgba(255,255,255,.03);
+  --glass:rgba(7,12,10,.62);
+  --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --fs-display:clamp(40px,6.8vw,88px);
+  --fs-h1:clamp(36px,6vw,72px);
+  --fs-h2:clamp(26px,3.8vw,42px);
+  --fs-h3:16px;
+  --fs-body:15px;
+  --fs-sm:13.5px;
+  --fs-xs:12.5px;
+  --fs-label:11px;
+  --fs-micro:10px;
+  --r:18px;
+  --r-sm:11px;
+  --r-md:14px;
+  --r-lg:20px;
+  --r-xl:24px;
+  --r-pill:999px;
+  --s1:4px;
+  --s2:8px;
+  --s3:12px;
+  --s4:16px;
+  --s5:20px;
+  --s6:24px;
+  --s7:32px;
+  --s8:40px;
+  --s9:56px;
+  --s10:80px;
+  --gap:16px;
+  --sec:clamp(80px,10vh,130px);
+  --max:1240px;
+  --measure:640px;
+  --t-fast:.15s;
+  --t:.25s
+}
+/* @tokens:end */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);font-size:var(--fs-body);
+  line-height:1.65;-webkit-font-smoothing:antialiased;padding:34px}
+h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
+button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:none}
+::selection{background:var(--synapse);color:var(--cortex)}
+.ds-t{font-size:19px;font-weight:600;margin-bottom:4px}
+.ds-d{color:var(--muted);font-size:var(--fs-sm);max-width:var(--measure);margin-bottom:28px}
+.ds-g{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin:32px 0 13px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:44px;
+  padding:0 20px;border-radius:var(--r-sm);font-family:var(--fd);font-weight:600;font-size:14px;
+  transition:transform var(--t-fast),box-shadow var(--t-fast),background var(--t-fast),
+  border-color var(--t-fast);white-space:nowrap}
+.btn.solid{background:var(--synapse);color:var(--cortex)}
+.btn.solid:hover{transform:translateY(-1px);box-shadow:0 8px 26px rgba(206,220,0,.22)}
+.btn.claro{background:var(--ink);color:#0A0F0E}
+.btn.claro:hover{transform:translateY(-1px);box-shadow:0 8px 26px rgba(245,245,247,.14)}
+.btn.ghost{border:1px solid var(--line2);background:rgba(255,255,255,.03)}
+.btn.ghost:hover{background:rgba(255,255,255,.07);border-color:var(--dim)}
+.btn.mini{height:34px;padding:0 13px;font-size:12px;border-radius:9px}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.btn:focus-visible{outline:2px solid var(--synapse);outline-offset:2px}
+
+/* estados forçados, só para documentação */
+.f-hover.solid{transform:translateY(-1px);box-shadow:0 8px 26px rgba(206,220,0,.22)}
+.f-hover.claro{transform:translateY(-1px);box-shadow:0 8px 26px rgba(245,245,247,.14)}
+.f-hover.ghost{background:rgba(255,255,255,.07);border-color:var(--dim)}
+.f-focus{outline:2px solid var(--synapse);outline-offset:2px}
+
+.tabela{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+.tabela th{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);text-align:left;font-weight:500;padding:10px 14px;border-bottom:1px solid var(--line2)}
+.tabela td{padding:15px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tabela td:first-child{font-family:var(--fm);font-size:11px;color:var(--muted);
+  letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+
+.linha{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.bloco{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:24px}
+.par{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:860px){.par{grid-template-columns:1fr}}
+.sobre-banda{background:linear-gradient(118deg,var(--cortex) 0%,var(--axon) 62%,#0A6F62 100%);
+  border-radius:var(--r);padding:24px;border:1px solid rgba(206,220,0,.18)}
+.cap{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:13px;display:block}
+
+.regras{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.regra{border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;background:var(--card)}
+.regra b{font-family:var(--fd);font-size:13.5px;display:block;margin-bottom:4px}
+.regra p{font-size:12.5px;color:var(--muted)}
+.regra.nao b{color:var(--pulso)}
+@media (max-width:820px){.regras{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<h1 class="ds-t">Botões</h1>
+<p class="ds-d">Três variantes e uma regra: só um botão <b>solid</b> por tela. Ele é o
+  Synapse disparando — se houver dois, nenhum é a ação principal.</p>
+
+<div class="ds-g">Variantes e estados</div>
+<div class="bloco">
+  <table class="tabela">
+    <thead><tr><th>Variante</th><th>Padrão</th><th>Hover</th><th>Foco</th><th>Desativado</th></tr></thead>
+    <tbody>
+      <tr><td>Solid</td>
+        <td><button class="btn solid">Gerar asset</button></td>
+        <td><button class="btn solid f-hover">Gerar asset</button></td>
+        <td><button class="btn solid f-focus">Gerar asset</button></td>
+        <td><button class="btn solid" disabled>Gerar asset</button></td></tr>
+      <tr><td>Claro</td>
+        <td><button class="btn claro">Baixar</button></td>
+        <td><button class="btn claro f-hover">Baixar</button></td>
+        <td><button class="btn claro f-focus">Baixar</button></td>
+        <td><button class="btn claro" disabled>Baixar</button></td></tr>
+      <tr><td>Ghost</td>
+        <td><button class="btn ghost">Cancelar</button></td>
+        <td><button class="btn ghost f-hover">Cancelar</button></td>
+        <td><button class="btn ghost f-focus">Cancelar</button></td>
+        <td><button class="btn ghost" disabled>Cancelar</button></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="ds-g">Tamanhos</div>
+<div class="bloco">
+  <div class="linha">
+    <button class="btn solid">Padrão · 44px</button>
+    <button class="btn ghost">Padrão · 44px</button>
+    <button class="btn solid mini">Mini · 34px</button>
+    <button class="btn ghost mini">Mini · 34px</button>
+  </div>
+  <p style="font-size:12.5px;color:var(--muted);margin-top:14px">
+    O mini serve para ações dentro de cartões, tabelas e barras de ferramenta.
+    Em formulário e chamada principal, use sempre o padrão.</p>
+</div>
+
+<div class="ds-g">Com ícone e em contexto</div>
+<div class="par">
+  <div class="bloco">
+    <span class="cap">Sobre superfície escura</span>
+    <div class="linha">
+      <button class="btn solid">Gerar asset <span aria-hidden="true">→</span></button>
+      <button class="btn ghost"><span aria-hidden="true">↓</span> Baixar PNG</button>
+    </div>
+  </div>
+  <div class="sobre-banda">
+    <span class="cap" style="color:rgba(245,245,247,.65)">Sobre a banda verde</span>
+    <div class="linha">
+      <button class="btn solid">Ação principal</button>
+      <button class="btn ghost" style="border-color:rgba(245,245,247,.3)">Saiba mais</button>
+    </div>
+  </div>
+</div>
+
+<div class="ds-g">Regras</div>
+<div class="regras">
+  <div class="regra"><b>Um solid por tela</b>
+    <p>O Synapse marca a ação principal. Dois botões amarelos competindo é o
+      erro mais comum — o segundo vira ghost.</p></div>
+  <div class="regra"><b>Verbo no rótulo</b>
+    <p>"Gerar asset", "Baixar PNG", "Entrar". Nada de "OK" e "Enviar" soltos —
+      o rótulo diz o que vai acontecer.</p></div>
+  <div class="regra nao"><b>Não use claro sobre a banda</b>
+    <p>Ink sobre o gradiente verde perde o contorno. Sobre a banda vale solid
+      ou ghost com borda clara.</p></div>
+</div>
+
+</body>
+</html>

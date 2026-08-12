@@ -1,0 +1,231 @@
+<!-- @dsCard group="Fundamentos" name="Cores" subtitle="Primárias, neutros, auxiliares e contraste" width="1180" height="2240" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cores · NeuroDynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* @tokens:start · gerado de tokens.css — rode `node build.mjs` */
+:root{
+  --cortex:#00352F;
+  --axon:#00594F;
+  --synapse:#CEDC00;
+  --void:#050807;
+  --painel:#0B1210;
+  --blackout:#1D1D1F;
+  --ink:#F5F5F7;
+  --aura:#F8F7FF;
+  --nevoa:#9AA5A1;
+  --grafite:#616C68;
+  --soma:#0B7D6E;
+  --ion:#2DD4BF;
+  --vital:#4ADE97;
+  --mielina:#F5C36A;
+  --pulso:#F1806F;
+  --plasma:#7FA7F2;
+  --dendrito:#A78BFA;
+  --bg:var(--void);
+  --muted:var(--nevoa);
+  --dim:var(--grafite);
+  --line:rgba(245,245,247,.08);
+  --line2:rgba(245,245,247,.16);
+  --card:rgba(255,255,255,.03);
+  --glass:rgba(7,12,10,.62);
+  --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --fs-display:clamp(40px,6.8vw,88px);
+  --fs-h1:clamp(36px,6vw,72px);
+  --fs-h2:clamp(26px,3.8vw,42px);
+  --fs-h3:16px;
+  --fs-body:15px;
+  --fs-sm:13.5px;
+  --fs-xs:12.5px;
+  --fs-label:11px;
+  --fs-micro:10px;
+  --r:18px;
+  --r-sm:11px;
+  --r-md:14px;
+  --r-lg:20px;
+  --r-xl:24px;
+  --r-pill:999px;
+  --s1:4px;
+  --s2:8px;
+  --s3:12px;
+  --s4:16px;
+  --s5:20px;
+  --s6:24px;
+  --s7:32px;
+  --s8:40px;
+  --s9:56px;
+  --s10:80px;
+  --gap:16px;
+  --sec:clamp(80px,10vh,130px);
+  --max:1240px;
+  --measure:640px;
+  --t-fast:.15s;
+  --t:.25s
+}
+/* @tokens:end */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);font-size:var(--fs-body);
+  line-height:1.65;-webkit-font-smoothing:antialiased;padding:34px}
+h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
+::selection{background:var(--synapse);color:var(--cortex)}
+.ds-t{font-size:19px;font-weight:600;margin-bottom:4px}
+.ds-d{color:var(--muted);font-size:var(--fs-sm);max-width:var(--measure);margin-bottom:28px}
+.ds-g{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin:32px 0 13px}
+
+.cores{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:12px}
+.cor{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;
+  background:var(--card);text-align:left}
+.cor .sw{display:block;height:86px;position:relative}
+.cor .sw .pct{position:absolute;right:10px;top:8px;font-family:var(--fm);font-size:10px;opacity:.75}
+.cor .info{display:block;padding:12px 14px}
+.cor .nm{font-family:var(--fd);font-weight:600;font-size:14px;display:block}
+.cor .hx{font-family:var(--fm);font-size:11.5px;color:var(--muted);margin-top:2px;display:block}
+.cor .uso{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.45;display:block}
+
+.prop-bar{display:flex;height:34px;border-radius:10px;overflow:hidden;
+  border:1px solid var(--line2);margin:10px 0 8px}
+.prop-bar div{height:100%}
+
+.ct{width:100%;border-collapse:collapse;font-size:var(--fs-sm);margin-top:4px}
+.ct th{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);text-align:left;font-weight:500;padding:9px 12px;border-bottom:1px solid var(--line2)}
+.ct td{padding:11px 12px;border-bottom:1px solid var(--line)}
+.ct .r{font-family:var(--fm);text-align:right;color:var(--muted)}
+.ct .am{font-weight:600}
+.ct .am.sobre{display:inline-block;padding:3px 10px;border-radius:5px}
+.lv{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--line2);border-radius:var(--r-pill);padding:2px 9px}
+.lv.ok{color:var(--vital);border-color:rgba(74,222,151,.35)}
+.lv.md{color:var(--mielina);border-color:rgba(245,195,106,.35)}
+
+.regras{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.regra{border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;background:var(--card)}
+.regra b{font-family:var(--fd);font-size:13.5px;display:block;margin-bottom:4px}
+.regra p{font-size:12.5px;color:var(--muted)}
+.regra.nao b{color:var(--pulso)}
+@media (max-width:820px){.regras{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<h1 class="ds-t">Cores</h1>
+<p class="ds-d">A paleta é nomeada pelo sistema neural. O verde carrega a marca, o
+  Synapse dispara em doses pequenas e os auxiliares só aparecem em dados e status.</p>
+
+<div class="ds-g">Primárias</div>
+<div class="cores">
+  <div class="cor"><span class="sw" style="background:#00352F"><span class="pct" style="color:#F5F5F7">10%</span></span>
+    <span class="info"><span class="nm">Cortex</span><span class="hx">#00352F · rgb(0, 53, 47)</span>
+    <span class="uso">Verde profundo institucional: bandas, fundos de marca, favicon.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#00594F"><span class="pct" style="color:#F5F5F7">8%</span></span>
+    <span class="info"><span class="nm">Axon</span><span class="hx">#00594F · rgb(0, 89, 79)</span>
+    <span class="uso">Verde estrutural: gradientes, botões e superfícies de destaque.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#CEDC00"><span class="pct" style="color:#1D1D1F">4%</span></span>
+    <span class="info"><span class="nm">Synapse</span><span class="hx">#CEDC00 · rgb(206, 220, 0)</span>
+    <span class="uso">O disparo da marca: seleção, foco, acentos. Em doses pequenas.</span></span></div>
+</div>
+
+<div class="ds-g">Profundos e neutros</div>
+<div class="cores">
+  <div class="cor"><span class="sw" style="background:#050807"><span class="pct" style="color:#F5F5F7">34%</span></span>
+    <span class="info"><span class="nm">Void</span><span class="hx">#050807 · rgb(5, 8, 7)</span>
+    <span class="uso">O fundo de tudo nas interfaces escuras.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#0B1210"><span class="pct" style="color:#F5F5F7">12%</span></span>
+    <span class="info"><span class="nm">Painel</span><span class="hx">#0B1210 · rgb(11, 18, 16)</span>
+    <span class="uso">Cartões e superfícies elevadas sobre o Void.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#1D1D1F"><span class="pct" style="color:#F5F5F7">4%</span></span>
+    <span class="info"><span class="nm">Blackout</span><span class="hx">#1D1D1F · rgb(29, 29, 31)</span>
+    <span class="uso">Texto sobre fundos claros; assinaturas e impressos.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#F5F5F7"><span class="pct" style="color:#1D1D1F">14%</span></span>
+    <span class="info"><span class="nm">Ink</span><span class="hx">#F5F5F7 · rgb(245, 245, 247)</span>
+    <span class="uso">Texto e marca em branco sobre fundos escuros.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#F8F7FF"><span class="pct" style="color:#1D1D1F">6%</span></span>
+    <span class="info"><span class="nm">Aura</span><span class="hx">#F8F7FF · rgb(248, 247, 255)</span>
+    <span class="uso">Fundos claros de documentos e cartões de assinatura.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#9AA5A1"><span class="pct" style="color:#1D1D1F">5%</span></span>
+    <span class="info"><span class="nm">Névoa</span><span class="hx">#9AA5A1 · rgb(154, 165, 161)</span>
+    <span class="uso">Texto secundário sobre escuro.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#616C68"><span class="pct" style="color:#F5F5F7">3%</span></span>
+    <span class="info"><span class="nm">Grafite</span><span class="hx">#616C68 · rgb(97, 108, 104)</span>
+    <span class="uso">Legendas, rótulos técnicos e bordas visíveis.</span></span></div>
+</div>
+
+<div class="ds-g">Auxiliares para dados e status</div>
+<div class="cores">
+  <div class="cor"><span class="sw" style="background:#0B7D6E"></span>
+    <span class="info"><span class="nm">Soma</span><span class="hx">#0B7D6E · rgb(11, 125, 110)</span>
+    <span class="uso">Terceiro verde: gradientes longos e visualizações.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#2DD4BF"></span>
+    <span class="info"><span class="nm">Íon</span><span class="hx">#2DD4BF · rgb(45, 212, 191)</span>
+    <span class="uso">Links de destaque, taglines, eventos no calendário.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#4ADE97"></span>
+    <span class="info"><span class="nm">Vital</span><span class="hx">#4ADE97 · rgb(74, 222, 151)</span>
+    <span class="uso">Sucesso: confirmado, ativo, concluído.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#F5C36A"></span>
+    <span class="info"><span class="nm">Mielina</span><span class="hx">#F5C36A · rgb(245, 195, 106)</span>
+    <span class="uso">Atenção: prazos, pendências, em análise.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#F1806F"></span>
+    <span class="info"><span class="nm">Pulso</span><span class="hx">#F1806F · rgb(241, 128, 111)</span>
+    <span class="uso">Erro e urgência: falhas, recusas, avisos críticos.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#7FA7F2"></span>
+    <span class="info"><span class="nm">Plasma</span><span class="hx">#7FA7F2 · rgb(127, 167, 242)</span>
+    <span class="uso">Informação neutra; férias no calendário.</span></span></div>
+  <div class="cor"><span class="sw" style="background:#A78BFA"></span>
+    <span class="info"><span class="nm">Dendrito</span><span class="hx">#A78BFA · rgb(167, 139, 250)</span>
+    <span class="uso">Processo seletivo e pesquisa nas visualizações.</span></span></div>
+</div>
+
+<div class="ds-g">Proporção de uso</div>
+<div class="prop-bar">
+  <div style="width:34%;background:#050807" title="Void 34%"></div>
+  <div style="width:14%;background:#F5F5F7" title="Ink 14%"></div>
+  <div style="width:12%;background:#0B1210" title="Painel 12%"></div>
+  <div style="width:10%;background:#00352F" title="Cortex 10%"></div>
+  <div style="width:8%;background:#00594F" title="Axon 8%"></div>
+  <div style="width:6%;background:#F8F7FF" title="Aura 6%"></div>
+  <div style="width:5%;background:#9AA5A1" title="Névoa 5%"></div>
+  <div style="width:4%;background:#1D1D1F" title="Blackout 4%"></div>
+  <div style="width:4%;background:#CEDC00" title="Synapse 4%"></div>
+  <div style="width:3%;background:#616C68" title="Grafite 3%"></div>
+</div>
+<p style="font-size:12.5px;color:var(--muted)">Um layout equilibrado fica perto desta divisão.
+  Se o Synapse passar de ~5% da tela, ele deixa de ser acento.</p>
+
+<div class="ds-g">Contraste (WCAG 2.1)</div>
+<table class="ct">
+  <thead><tr><th>Combinação</th><th>Amostra</th><th style="text-align:right">Razão</th><th>Nível</th></tr></thead>
+  <tbody>
+    <tr><td>Ink sobre Void</td><td class="am" style="color:#F5F5F7">Texto principal</td><td class="r">18,47:1</td><td><span class="lv ok">AAA</span></td></tr>
+    <tr><td>Névoa sobre Void</td><td class="am" style="color:#9AA5A1">Texto secundário</td><td class="r">7,92:1</td><td><span class="lv ok">AAA</span></td></tr>
+    <tr><td>Grafite sobre Void</td><td class="am" style="color:#616C68">Rótulo técnico</td><td class="r">3,69:1</td><td><span class="lv md">Só ≥18,5px</span></td></tr>
+    <tr><td>Synapse sobre Void</td><td class="am" style="color:#CEDC00">Acento</td><td class="r">13,27:1</td><td><span class="lv ok">AAA</span></td></tr>
+    <tr><td>Synapse sobre Cortex</td><td><span class="am sobre" style="color:#CEDC00;background:#00352F">Botão sólido</span></td><td class="r">8,94:1</td><td><span class="lv ok">AAA</span></td></tr>
+    <tr><td>Synapse sobre Axon</td><td><span class="am sobre" style="color:#CEDC00;background:#00594F">Sobre a banda</span></td><td class="r">5,45:1</td><td><span class="lv ok">AA</span></td></tr>
+    <tr><td>Blackout sobre Aura</td><td><span class="am sobre" style="color:#1D1D1F;background:#F8F7FF">Documento</span></td><td class="r">15,82:1</td><td><span class="lv ok">AAA</span></td></tr>
+    <tr><td>Grafite sobre Aura</td><td><span class="am sobre" style="color:#616C68;background:#F8F7FF">Legenda clara</span></td><td class="r">5,12:1</td><td><span class="lv ok">AA</span></td></tr>
+  </tbody>
+</table>
+
+<div class="regras">
+  <div class="regra"><b>Grafite não é cor de texto</b>
+    <p>3,69:1 sobre o Void reprova em AA para corpo. Use só em rótulo caixa alta,
+      legenda e borda — ou suba para Névoa.</p></div>
+  <div class="regra"><b>Status nunca sozinho</b>
+    <p>Vital, Mielina e Pulso sempre acompanhados de texto ou ícone. Cor não é
+      a única portadora do significado.</p></div>
+  <div class="regra nao"><b>Não invente tons</b>
+    <p>Nada de clarear ou escurecer a paleta para criar variações. Precisa de
+      outro nível? Use opacidade sobre o Void.</p></div>
+</div>
+
+</body>
+</html>
