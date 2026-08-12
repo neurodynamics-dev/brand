@@ -43,12 +43,14 @@ linguagem visual do site institucional.
 ## Design system (Claude Design)
 
 A pasta [`design-system/`](design-system/) traz a mesma linguagem visual
-organizada como biblioteca de componentes para o **Claude Design**: 14 cards
-em três grupos (Fundamentos, Marca, Componentes), tokens em arquivo único e
-um `build.mjs` que mantém tudo em sincronia. Com ela sincronizada, as
-interfaces que o Claude gera para a equipe já saem na marca.
+organizada como biblioteca de componentes: 14 cards em três grupos
+(Fundamentos, Marca, Componentes), tokens em arquivo único e um `build.mjs`
+que mantém tudo em sincronia.
 
-O passo a passo do setup está em [`design-system/README.md`](design-system/README.md).
+A ideia é sincronizar com o **Claude Design** para que as interfaces geradas
+já saiam na marca. Só que a ferramenta trabalha em cima de bibliotecas React,
+e este repositório é CSS e HTML — o que isso muda, e quais são as saídas,
+está explicado em [`design-system/README.md`](design-system/README.md).
 
 ## Como editar
 

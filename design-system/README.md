@@ -1,12 +1,11 @@
 # Design System — NeuroDynamics
 
-Biblioteca de componentes da marca, pronta para sincronizar com o
-**Claude Design** (claude.ai/design). É a mesma linguagem visual de
-`brand.neurodynamics.dev`, extraída do `index.html` e organizada em cards
-que o Claude consulta quando gera qualquer interface para a equipe.
+Biblioteca de componentes da marca: a linguagem visual de
+`brand.neurodynamics.dev` extraída do `index.html` e organizada em cards.
 
-Não substitui a página de brand: ela continua sendo a referência pública e a
-central de assets. Isto aqui é a versão que a ferramenta lê.
+Não substitui a página de brand — ela continua sendo a referência pública e a
+central de assets. Isto aqui é a versão em pedaços, para ser consultada por
+ferramenta e por gente que está construindo alguma coisa.
 
 ## O que tem dentro
 
@@ -14,13 +13,11 @@ central de assets. Isto aqui é a versão que a ferramenta lê.
 design-system/
 ├── tokens.css          fonte única dos tokens (cor, tipo, espaço, forma)
 ├── neuro.css           folha consumível: base + componentes
-├── build.mjs           sincroniza tokens e artes nos previews; gera o manifesto
-├── _ds_manifest.json   índice dos cards (gerado)
+├── build.mjs           sincroniza tokens e artes nos previews; gera o índice
+├── cards.json          índice dos cards (gerado)
 ├── marca/              artes de preview, derivadas de assets/
 └── previews/           14 cards, um HTML autocontido cada
 ```
-
-Os 14 cards, em três grupos:
 
 | Grupo | Cards |
 | --- | --- |
@@ -29,70 +26,106 @@ Os 14 cards, em três grupos:
 | **Componentes** | Botões · Cartões · Formulários · Status e etiquetas · Navegação · Dados · Feedback |
 
 Cada preview mostra os estados reais do componente (repouso, hover, foco,
-erro, desativado) e fecha com as regras de uso — inclusive as proibições, que
-é o que o modelo mais precisa para não inventar variações.
+erro, desativado) e fecha com as regras de uso, inclusive as proibições.
 
-## Setup: sincronizar com o Claude Design
+## Como isso chega no Claude Design
 
-O envio precisa de um **terminal interativo**: a autorização do Claude Design
-(`/design-login`) não roda em sessão da web nem em CI. Então o push é feito da
-sua máquina, uma vez só — depois é `/design-sync` sempre que mudar algo.
+> **Leia esta seção antes de tentar sincronizar.** Uma versão anterior deste
+> README dizia que bastava rodar `/design-sync` e ele leria esta pasta. Isso
+> está errado, e a diferença é grande.
 
-**1. Traga o branch para a sua máquina**
+### O que o Claude Design faz
 
-```bash
-git clone https://github.com/neurodynamics-dev/brand.git
-cd brand
-git checkout claude/design-system-setup-6c5ysl
-```
+Em claude.ai/design você conversa com um agente e ele constrói interface de
+verdade — telas, fluxos, protótipos — renderizada ao vivo a partir de código
+React. Sem design system sincronizado, ele usa componentes genéricos. Com um
+sincronizado, ele constrói **com os seus componentes**, e o que sai já é da
+marca e mapeia no código que a equipe manda para produção.
 
-**2. Confira que está tudo em sincronia**
+### O que o `/design-sync` espera encontrar
 
-```bash
-cd design-system
-node build.mjs --check
-```
+A skill trabalha em cima de **bibliotecas React**. Ela detecta uma de duas
+formas no repositório:
 
-As artes da marca já estão embutidas — versões de preview derivadas dos PNGs
-de `assets/`, descritas em [`marca/LEIAME.md`](marca/LEIAME.md). Só é preciso
-mexer nelas quando a marca mudar.
+- **Storybook** — acha um `.storybook/main.*` e usa as stories como previews.
+- **Pacote** — acha um `package.json`, roda o build, e lê os componentes a
+  partir dos `.d.ts` exportados pelo `dist/`.
 
-**3. Autorize e envie**
-
-```bash
-claude                 # na raiz do repositório
-```
-
-Dentro da sessão:
+A partir daí um conversor gera uma pasta `ds-bundle/` e é **ela** que sobe:
 
 ```
-/design-login          # autoriza o acesso aos projetos de design
-/design-sync           # lê design-system/ e envia para o projeto
+ds-bundle/
+├── _ds_bundle.js                        componentes compilados em window.<Global>.*
+├── styles.css                           a raiz do CSS (ver nota abaixo)
+├── components/<grupo>/<Nome>/
+│   ├── <Nome>.html                      o card de preview (primeira linha: @dsCard)
+│   ├── <Nome>.jsx                       stub de re-export
+│   ├── <Nome>.d.ts                      o contrato de API que o agente lê
+│   └── <Nome>.prompt.md                 como compor o componente
+├── _vendor/  _preview/  fonts/  tokens/  guidelines/
+├── README.md                            com o cabeçalho de convenções
+└── _ds_sync.json                        hashes de conteúdo, para o próximo sync
 ```
 
-O `/design-sync` mostra o plano — quais caminhos serão escritos e de qual pasta
-— e espera sua aprovação antes de gravar. Se você ainda não tem um projeto de
-design, ele oferece criar um; o tipo *design system* é definido na criação e
-não pode ser mudado depois, então crie por ali mesmo.
+Uma regra fácil de perder: **o que o agente recebe ao renderizar um design é
+só o fecho de `@import` do `styles.css`** (mais o bundle JS). CSS que não é
+alcançável a partir dele não existe para o design final.
 
-> Se o comando `/design-sync` não existir na sua versão do Claude Code, peça na
-> própria sessão: *"sincronize a pasta design-system/ com o meu projeto de
-> design system no Claude Design"*. A ferramenta por trás é a mesma.
+### Onde a NeuroDynamics não encaixa
 
-**4. Confira**
+Este repositório **não tem `package.json`, não tem `dist/` e não tem um único
+arquivo React**. É um site estático de arquivo único, e o design system que
+está aqui é CSS + HTML. Nenhuma das duas formas que a skill detecta se aplica,
+então o conversor não tem por onde começar — não há componente compilado para
+colocar em `_ds_bundle.js`.
 
-Abra claude.ai/design, entre no projeto e veja os 14 cards distribuídos em
-Fundamentos, Marca e Componentes. A partir daí, toda interface que o Claude
-gerar para a NeuroDynamics sai já na marca.
+Isso não é um beco. A própria skill prevê dois caminhos para esse caso:
+produzir o layout "por qualquer meio que o repositório permita", e um modo
+documentado de **design system só de tokens**, que sobe `styles.css` com um
+bundle de corpo vazio.
+
+### As duas saídas
+
+**A. Sincronizar como sistema de tokens e CSS** — montar a `ds-bundle/` à mão:
+`styles.css` importando `tokens.css` + `neuro.css`, os 14 cards em
+`components/<grupo>/<Nome>/<Nome>.html`, e um `README.md` com o cabeçalho de
+convenções ensinando o vocabulário (`.btn.solid`, `.card`, `.band`,
+`var(--synapse)`…). O agente então escreve o HTML/JSX dele **estilizado com a
+nossa marca**, mas não importa componente nosso — porque não existe componente
+nosso para importar. É o caminho curto, e entrega a maior parte do valor: cor,
+tipografia, espaçamento e as regras chegam.
+
+**B. Construir uma biblioteca React de verdade** — transformar o `neuro.css` e
+os componentes em um pacote npm com componentes React, aí o caminho oficial
+funciona inteiro e o agente passa a montar telas com `<Botao>`, `<Card>`,
+`<Banda>`. É bem mais trabalho e cria um projeto novo para manter, mas é o
+único jeito de o agente compor com peças nossas em vez de imitá-las.
+
+Nada disso foi executado ainda — o A está descrito, não testado.
+
+### A autorização
+
+O envio precisa de autorização que **esta sessão web não consegue fazer**. A
+mensagem da ferramenta aponta dois caminhos:
+
+- **Terminal interativo** — rode `claude` na sua máquina, dentro do repositório,
+  e use `/design-login` antes do `/design-sync`.
+- **A partir do claude.ai/code** — use o botão **"Send to Claude Code Web"** do
+  Claude Design, que semeia o projeto direto no workspace.
+
+Vale saber antes de começar: numa importação de verdade a skill avisa que o
+processo pode levar **horas** e consumir bastante token, porque ela verifica o
+render de cada componente. No nosso caso (caminho A, sem componentes React)
+isso é muito menor.
 
 ## Como editar
 
 **Mudou um token?** Edite `tokens.css` e rode `node build.mjs`. O bloco de
 tokens é reescrito nos 14 previews de uma vez.
 
-**Mudou um componente?** Edite o preview correspondente em `previews/` e, se o
-componente também vive em `neuro.css`, atualize os dois. O preview é a
-documentação; o `neuro.css` é o que os apps importam.
+**Mudou um componente?** Edite o preview em `previews/` e, se o componente
+também vive em `neuro.css`, atualize os dois. O preview é a documentação; o
+`neuro.css` é o que os apps importam.
 
 **Novo card?** Crie o HTML em `previews/` com o marcador `@dsCard` na primeira
 linha e os marcadores de token no `<style>`:
@@ -105,20 +138,25 @@ linha e os marcadores de token no `<style>`:
 /* @tokens:end */
 ```
 
-Rode `node build.mjs` e o card entra no manifesto sozinho. O `--check` serve
-para CI ou pre-commit: sai com código 1 se algum preview estiver fora de sincronia.
+Rode `node build.mjs` e o card entra no índice sozinho. O `--check` sai com
+código 1 se algum preview estiver fora de sincronia — serve para CI ou
+pre-commit:
 
 ```bash
 node build.mjs --check
 ```
 
+Do marcador `@dsCard`, o atributo que o Claude Design lê com certeza é o
+`group`. Os outros (`name`, `subtitle`, `width`, `height`) alimentam o nosso
+`cards.json` e são um palpite razoável sobre o resto do formato — se o envio
+reclamar, são eles os suspeitos.
+
 ## Por que os previews são autocontidos
 
-Cada card renderiza isolado no Claude Design — sem acesso aos outros arquivos
-do projeto. Por isso o bloco de tokens aparece repetido em todo preview e as
-artes da marca entram como data URI, em vez de `<link>` e `<img src>`. É
-duplicação deliberada, e o `build.mjs` existe justamente para que essa
-duplicação nunca saia do lugar.
+Cada card renderiza isolado — sem acesso aos outros arquivos do projeto. Por
+isso o bloco de tokens aparece repetido em todo preview e as artes da marca
+entram como data URI, em vez de `<link>` e `<img src>`. É duplicação
+deliberada, e o `build.mjs` existe justamente para que ela nunca saia do lugar.
 
 As fontes (Archivo e IBM Plex Mono) vêm do Google Fonts por `<link>`. Se o
 ambiente de renderização bloquear a requisição, a pilha de fallback assume e o

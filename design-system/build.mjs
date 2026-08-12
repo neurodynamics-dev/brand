@@ -13,7 +13,7 @@
         trecho entre @tokens:start / @tokens:end de cada preview;
      2. lê os arquivos de marca/ e embute como data URI no trecho
         entre @arte:start / @arte:end (hoje só 05-marca.html);
-     3. regrava _ds_manifest.json a partir dos marcadores @dsCard.
+     3. regrava cards.json a partir dos marcadores @dsCard.
 
    Uso:  node build.mjs          (grava)
          node build.mjs --check  (só confere; sai 1 se divergir)
@@ -148,19 +148,21 @@ for (const nome of arquivos) {
 }
 
 /* ============================================================
-   4. manifesto
+   4. índice de cards
    ------------------------------------------------------------
-   O app do Claude Design recompila este arquivo a partir dos
-   marcadores @dsCard no self-check; mantemos uma cópia versionada
-   para servir de índice local e de diff legível no PR.
+   Índice nosso, para leitura local e diff legível no PR. NÃO é
+   o `_ds_sync.json` do Claude Design — aquele é um arquivo de
+   hashes de conteúdo, gerado no envio, com outro propósito. O
+   índice de cards de lá é recompilado no servidor a partir dos
+   marcadores @dsCard, não deste arquivo.
    ============================================================ */
 const manifesto = JSON.stringify({ cards }, null, 2) + '\n';
-const caminhoManifesto = join(raiz, '_ds_manifest.json');
+const caminhoManifesto = join(raiz, 'cards.json');
 const atual = existsSync(caminhoManifesto) ? readFileSync(caminhoManifesto, 'utf8') : '';
 if (atual !== manifesto) {
   divergentes++;
-  if (soConfere) console.error('✗ _ds_manifest.json desatualizado.');
-  else { writeFileSync(caminhoManifesto, manifesto); nota('_ds_manifest.json atualizado'); }
+  if (soConfere) console.error('✗ cards.json desatualizado.');
+  else { writeFileSync(caminhoManifesto, manifesto); nota('cards.json atualizado'); }
 }
 
 /* ============================================================
