@@ -1,0 +1,225 @@
+<!-- @dsCard group="Componentes" name="Feedback" subtitle="Toast, carregamento, estado vazio e diálogo" width="1180" height="880" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Feedback · NeuroDynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* @tokens:start · gerado de tokens.css — rode `node build.mjs` */
+:root{
+  --cortex:#00352F;
+  --axon:#00594F;
+  --synapse:#CEDC00;
+  --void:#050807;
+  --painel:#0B1210;
+  --blackout:#1D1D1F;
+  --ink:#F5F5F7;
+  --aura:#F8F7FF;
+  --nevoa:#9AA5A1;
+  --grafite:#616C68;
+  --soma:#0B7D6E;
+  --ion:#2DD4BF;
+  --vital:#4ADE97;
+  --mielina:#F5C36A;
+  --pulso:#F1806F;
+  --plasma:#7FA7F2;
+  --dendrito:#A78BFA;
+  --bg:var(--void);
+  --muted:var(--nevoa);
+  --dim:var(--grafite);
+  --line:rgba(245,245,247,.08);
+  --line2:rgba(245,245,247,.16);
+  --card:rgba(255,255,255,.03);
+  --glass:rgba(7,12,10,.62);
+  --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --fs-display:clamp(40px,6.8vw,88px);
+  --fs-h1:clamp(36px,6vw,72px);
+  --fs-h2:clamp(26px,3.8vw,42px);
+  --fs-h3:16px;
+  --fs-body:15px;
+  --fs-sm:13.5px;
+  --fs-xs:12.5px;
+  --fs-label:11px;
+  --fs-micro:10px;
+  --r:18px;
+  --r-sm:11px;
+  --r-md:14px;
+  --r-lg:20px;
+  --r-xl:24px;
+  --r-pill:999px;
+  --s1:4px;
+  --s2:8px;
+  --s3:12px;
+  --s4:16px;
+  --s5:20px;
+  --s6:24px;
+  --s7:32px;
+  --s8:40px;
+  --s9:56px;
+  --s10:80px;
+  --gap:16px;
+  --sec:clamp(80px,10vh,130px);
+  --max:1240px;
+  --measure:640px;
+  --t-fast:.15s;
+  --t:.25s
+}
+/* @tokens:end */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);font-size:var(--fs-body);
+  line-height:1.65;-webkit-font-smoothing:antialiased;padding:34px}
+h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
+button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:none}
+::selection{background:var(--synapse);color:var(--cortex)}
+.ds-t{font-size:19px;font-weight:600;margin-bottom:4px}
+.ds-d{color:var(--muted);font-size:var(--fs-sm);max-width:var(--measure);margin-bottom:28px}
+.ds-g{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin:32px 0 13px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:44px;
+  padding:0 20px;border-radius:var(--r-sm);font-family:var(--fd);font-weight:600;font-size:14px;
+  transition:all var(--t-fast);white-space:nowrap}
+.btn.solid{background:var(--synapse);color:var(--cortex)}
+.btn.ghost{border:1px solid var(--line2);background:rgba(255,255,255,.03)}
+.btn.mini{height:34px;padding:0 13px;font-size:12px;border-radius:9px}
+.btn.perigo{background:var(--pulso);color:#2A0E09}
+
+.bloco{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:24px}
+.cap{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:13px;display:block}
+.par{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:860px){.par{grid-template-columns:1fr}}
+
+/* toast */
+.toast-palco{display:flex;flex-direction:column;gap:9px;align-items:center;
+  padding:24px;border:1px solid var(--line);border-radius:var(--r);
+  background:radial-gradient(120% 90% at 72% -12%, #081511 0%, var(--void) 58%)}
+.toast{background:#151B19;border:1px solid var(--line2);color:var(--ink);border-radius:12px;
+  padding:12px 20px;font-size:13.5px;box-shadow:0 12px 40px rgba(0,0,0,.5);
+  display:inline-flex;align-items:center;gap:11px}
+.toast .dt{width:7px;height:7px;border-radius:50%;flex:none}
+.toast.ok .dt{background:var(--vital)}
+.toast.erro .dt{background:var(--pulso)}
+.toast.info .dt{background:var(--plasma)}
+.toast .acao{font-family:var(--fd);font-weight:600;font-size:12.5px;color:var(--synapse);margin-left:6px}
+
+/* carregamento */
+.skel{border-radius:7px;background:linear-gradient(90deg,
+  rgba(255,255,255,.04) 25%,rgba(255,255,255,.08) 37%,rgba(255,255,255,.04) 63%);
+  background-size:400% 100%;animation:brilho 1.4s ease infinite}
+@keyframes brilho{0%{background-position:100% 50%}100%{background-position:0 50%}}
+@media (prefers-reduced-motion:reduce){.skel{animation:none}.spin{animation:none}}
+.skel-linhas{display:flex;flex-direction:column;gap:9px}
+.spin{width:22px;height:22px;border-radius:50%;border:2px solid var(--line2);
+  border-top-color:var(--synapse);animation:gira .8s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+.carregando{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--muted)}
+.progresso{height:6px;border-radius:4px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:14px}
+.progresso .fill{height:100%;width:62%;border-radius:4px;
+  background:linear-gradient(90deg,var(--axon),var(--synapse))}
+
+/* estado vazio */
+.vazio{border:1px dashed var(--line2);border-radius:var(--r);padding:40px 26px;text-align:center;
+  background:rgba(255,255,255,.015)}
+.vazio .glyph{font-family:var(--fd);font-weight:700;font-size:44px;color:rgba(245,245,247,.09);
+  line-height:1;margin-bottom:12px;user-select:none}
+.vazio h3{font-size:16px;font-weight:600;margin-bottom:5px}
+.vazio p{font-size:13px;color:var(--muted);max-width:360px;margin:0 auto 18px}
+
+/* diálogo */
+.dlg-palco{position:relative;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  background:radial-gradient(120% 90% at 72% -12%, #081511 0%, var(--void) 58%);
+  padding:30px;display:flex;align-items:center;justify-content:center;min-height:260px}
+.dlg-palco::before{content:'';position:absolute;inset:0;background:rgba(5,8,7,.55);
+  backdrop-filter:blur(3px)}
+.dlg{position:relative;width:min(420px,100%);background:var(--painel);border:1px solid var(--line2);
+  border-radius:var(--r-lg);padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.dlg h3{font-size:17px;font-weight:600;margin-bottom:7px}
+.dlg p{font-size:13.5px;color:var(--muted);margin-bottom:22px}
+.dlg .acts{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+
+.regras{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.regra{border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;background:var(--card)}
+.regra b{font-family:var(--fd);font-size:13.5px;display:block;margin-bottom:4px}
+.regra p{font-size:12.5px;color:var(--muted)}
+.regra.nao b{color:var(--pulso)}
+@media (max-width:820px){.regras{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<h1 class="ds-t">Feedback</h1>
+<p class="ds-d">Confirmação passageira vai no toast, no rodapé da tela. O que exige decisão
+  vira diálogo. O que ainda não existe ganha estado vazio com uma saída clara.</p>
+
+<div class="ds-g">Toast · 4,2s e sai sozinho</div>
+<div class="toast-palco">
+  <div class="toast ok"><span class="dt"></span>#CEDC00 copiado.</div>
+  <div class="toast info"><span class="dt"></span>Gerando em 1584 × 396…</div>
+  <div class="toast erro"><span class="dt"></span>Não foi possível copiar.
+    <button class="acao">Tentar de novo</button></div>
+</div>
+
+<div class="ds-g">Carregamento</div>
+<div class="par">
+  <div class="bloco">
+    <span class="cap">Esqueleto</span>
+    <div class="skel-linhas">
+      <div class="skel" style="height:15px;width:42%"></div>
+      <div class="skel" style="height:11px;width:100%"></div>
+      <div class="skel" style="height:11px;width:88%"></div>
+      <div class="skel" style="height:11px;width:64%"></div>
+    </div>
+    <div class="skel" style="height:96px;margin-top:16px"></div>
+  </div>
+  <div class="bloco">
+    <span class="cap">Indicador e progresso</span>
+    <div class="carregando"><span class="spin"></span>Renderizando a peça em resolução final…</div>
+    <div class="progresso"><div class="fill"></div></div>
+    <p style="font-size:12px;color:var(--dim);margin-top:10px">
+      Use o esqueleto quando souber a forma do conteúdo; o giro, quando não souber.</p>
+  </div>
+</div>
+
+<div class="ds-g">Estado vazio</div>
+<div class="vazio">
+  <div class="glyph" aria-hidden="true">FIG.</div>
+  <h3>Nenhuma peça gerada ainda</h3>
+  <p>Escolha um formato à esquerda, ajuste os campos e a pré-visualização aparece aqui.</p>
+  <button class="btn solid">Gerar a primeira peça</button>
+</div>
+
+<div class="ds-g">Diálogo</div>
+<div class="dlg-palco">
+  <div class="dlg" role="dialog" aria-labelledby="dlg-t">
+    <h3 id="dlg-t">Descartar esta peça?</h3>
+    <p>Os ajustes de formato, cor e texto serão perdidos. Isso não afeta as peças
+      que você já baixou.</p>
+    <div class="acts">
+      <button class="btn ghost">Continuar editando</button>
+      <button class="btn perigo">Descartar</button>
+    </div>
+  </div>
+</div>
+
+<div class="ds-g">Regras</div>
+<div class="regras">
+  <div class="regra"><b>Toast não carrega decisão</b>
+    <p>Ele some em 4,2s. Se a pessoa precisa escolher, o lugar é o diálogo —
+      que só sai com uma resposta.</p></div>
+  <div class="regra"><b>Estado vazio tem saída</b>
+    <p>Sempre com um botão que resolve o vazio. Tela vazia sem próximo passo
+      é um beco.</p></div>
+  <div class="regra nao"><b>Não anime sem checar</b>
+    <p>Esqueleto e giro respeitam <code style="font-family:var(--fm);font-size:11.5px">prefers-reduced-motion</code>
+      e param quando pedido.</p></div>
+</div>
+
+</body>
+</html>

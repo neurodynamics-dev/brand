@@ -1,0 +1,293 @@
+<!-- @dsCard group="Marca" name="Imagotipo" subtitle="Lockup, símbolo, ícones, respiro e usos proibidos" width="1180" height="1240" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Imagotipo · NeuroDynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* @tokens:start · gerado de tokens.css — rode `node build.mjs` */
+:root{
+  --cortex:#00352F;
+  --axon:#00594F;
+  --synapse:#CEDC00;
+  --void:#050807;
+  --painel:#0B1210;
+  --blackout:#1D1D1F;
+  --ink:#F5F5F7;
+  --aura:#F8F7FF;
+  --nevoa:#9AA5A1;
+  --grafite:#616C68;
+  --soma:#0B7D6E;
+  --ion:#2DD4BF;
+  --vital:#4ADE97;
+  --mielina:#F5C36A;
+  --pulso:#F1806F;
+  --plasma:#7FA7F2;
+  --dendrito:#A78BFA;
+  --bg:var(--void);
+  --muted:var(--nevoa);
+  --dim:var(--grafite);
+  --line:rgba(245,245,247,.08);
+  --line2:rgba(245,245,247,.16);
+  --card:rgba(255,255,255,.03);
+  --glass:rgba(7,12,10,.62);
+  --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --fs-display:clamp(40px,6.8vw,88px);
+  --fs-h1:clamp(36px,6vw,72px);
+  --fs-h2:clamp(26px,3.8vw,42px);
+  --fs-h3:16px;
+  --fs-body:15px;
+  --fs-sm:13.5px;
+  --fs-xs:12.5px;
+  --fs-label:11px;
+  --fs-micro:10px;
+  --r:18px;
+  --r-sm:11px;
+  --r-md:14px;
+  --r-lg:20px;
+  --r-xl:24px;
+  --r-pill:999px;
+  --s1:4px;
+  --s2:8px;
+  --s3:12px;
+  --s4:16px;
+  --s5:20px;
+  --s6:24px;
+  --s7:32px;
+  --s8:40px;
+  --s9:56px;
+  --s10:80px;
+  --gap:16px;
+  --sec:clamp(80px,10vh,130px);
+  --max:1240px;
+  --measure:640px;
+  --t-fast:.15s;
+  --t:.25s
+}
+/* @tokens:end */
+
+/* As artes ficam embutidas como data URI para o preview renderizar
+   isolado, sem rede. Não edite este bloco à mão: coloque os arquivos
+   oficiais em design-system/marca/ e rode `node build.mjs`.
+   A fonte da verdade dos arquivos é o Brandfetch. */
+/* @arte:start · gerado de marca/ — rode `node build.mjs` */
+:root{
+  --imagotipo:none;
+  --simbolo:none;
+  --icone-escuro:none;
+  --icone-verde:none;
+}
+/* @arte:end */
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);font-size:var(--fs-body);
+  line-height:1.65;-webkit-font-smoothing:antialiased;padding:34px}
+h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
+::selection{background:var(--synapse);color:var(--cortex)}
+.ds-t{font-size:19px;font-weight:600;margin-bottom:4px}
+.ds-d{color:var(--muted);font-size:var(--fs-sm);max-width:var(--measure);margin-bottom:28px}
+.ds-g{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin:32px 0 13px}
+
+/* ---- artes ------------------------------------------------ */
+.art{display:block;background-position:center;background-repeat:no-repeat;background-size:contain}
+.imagotipo{background-image:var(--imagotipo);aspect-ratio:1563/265}
+.simbolo{background-image:var(--simbolo);aspect-ratio:1}
+.icone-escuro{background-image:var(--icone-escuro);aspect-ratio:1}
+.icone-verde{background-image:var(--icone-verde);aspect-ratio:1}
+.branco{filter:brightness(0) invert(1)}
+
+/* placeholder enquanto os arquivos oficiais não estão em marca/ */
+.arte-pendente .art{border:1px dashed rgba(206,220,0,.45);border-radius:6px;
+  background-color:rgba(206,220,0,.05);position:relative}
+.arte-pendente .art::after{content:'arte pendente';position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;font-family:var(--fm);
+  font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--synapse);opacity:.8}
+.aviso{display:none;border:1px solid rgba(206,220,0,.3);background:rgba(206,220,0,.06);
+  border-radius:var(--r-md);padding:14px 18px;margin-bottom:24px;font-size:13px;color:var(--muted)}
+.arte-pendente .aviso{display:block}
+.aviso b{color:var(--synapse);font-family:var(--fd)}
+.aviso code{font-family:var(--fm);font-size:12px;color:var(--ink)}
+
+/* ---- palcos ----------------------------------------------- */
+.logo-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:860px){.logo-grid{grid-template-columns:1fr}}
+.stage{border:1px solid var(--line);border-radius:var(--r);min-height:210px;display:flex;
+  align-items:center;justify-content:center;position:relative;overflow:hidden;padding:38px}
+.stage.escuro{background:radial-gradient(120% 90% at 72% -12%, #081511 0%, var(--void) 58%)}
+.stage.claro{background:var(--ink)}
+.stage.verde{background:linear-gradient(118deg,var(--cortex) 0%,var(--axon) 62%,#0A6F62 100%)}
+.stage .imagotipo{width:min(270px,74%)}
+.stage .lb{position:absolute;left:14px;bottom:12px;font-family:var(--fm);font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.stage.claro .lb{color:#8A8A90}
+.crop{position:absolute;width:14px;height:14px;color:rgba(245,245,247,.25)}
+.stage.claro .crop{color:rgba(29,29,31,.3)}
+.crop.tl{top:10px;left:10px;border-top:1px solid;border-left:1px solid}
+.crop.tr{top:10px;right:10px;border-top:1px solid;border-right:1px solid}
+.crop.bl{bottom:10px;left:10px;border-bottom:1px solid;border-left:1px solid}
+.crop.br{bottom:10px;right:10px;border-bottom:1px solid;border-right:1px solid}
+
+/* ---- respiro ---------------------------------------------- */
+.respiro{position:relative;padding:46px;border:1px dashed rgba(206,220,0,.4);
+  border-radius:10px;background:rgba(206,220,0,.05)}
+.respiro .imagotipo{width:210px}
+.respiro .x{position:absolute;font-family:var(--fm);font-size:11px;color:var(--synapse);letter-spacing:.12em}
+.respiro .x.t{top:15px;left:50%;transform:translateX(-50%)}
+.respiro .x.l{left:16px;top:50%;transform:translateY(-50%)}
+.respiro .x.r{right:16px;top:50%;transform:translateY(-50%)}
+.respiro .x.b{bottom:15px;left:50%;transform:translateX(-50%)}
+
+/* ---- variantes do símbolo --------------------------------- */
+.var-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:820px){.var-grid{grid-template-columns:1fr}}
+.var{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--card)}
+.var .vis{height:170px;display:flex;align-items:center;justify-content:center;padding:24px}
+.var .vis.sobre-claro{background:var(--ink)}
+.var .vis.sobre-escuro{background:var(--painel)}
+.var .art{width:104px}
+.var .txt{padding:15px 17px;border-top:1px solid var(--line)}
+.var .txt b{font-family:var(--fd);font-size:13.5px;display:block;margin-bottom:3px}
+.var .txt p{font-size:12px;color:var(--muted)}
+
+/* ---- tamanhos --------------------------------------------- */
+.min-row{display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap;
+  border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:26px}
+.min{text-align:center}
+.min .art{margin-bottom:9px}
+.min span{font-family:var(--fm);font-size:10px;color:var(--muted);letter-spacing:.1em;display:block}
+.min.ruim span{color:var(--pulso)}
+
+/* ---- usos proibidos --------------------------------------- */
+.nao-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:900px){.nao-grid{grid-template-columns:repeat(2,1fr)}}
+.nao-item{border:1px solid rgba(241,128,111,.28);border-radius:var(--r-md);overflow:hidden;background:var(--card)}
+.nao-item .vis{height:100px;display:flex;align-items:center;justify-content:center;
+  background:var(--painel);position:relative;overflow:hidden}
+.nao-item .vis .imagotipo{width:148px}
+.nao-item .cap{padding:11px 14px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+.nao-item .cap b{color:var(--pulso);font-family:var(--fd);font-size:12.5px;display:block}
+.v-esticado .imagotipo{transform:scaleX(1.5)}
+.v-girado .imagotipo{transform:rotate(-13deg)}
+.v-cor .imagotipo{filter:brightness(0) saturate(100%) invert(36%) sepia(92%)
+  saturate(3000%) hue-rotate(300deg) brightness(95%)}
+.v-fundo{background:repeating-linear-gradient(45deg,#3a3a3a 0 9px,#727272 9px 18px)}
+
+.regras{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.regra{border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;background:var(--card)}
+.regra b{font-family:var(--fd);font-size:13.5px;display:block;margin-bottom:4px}
+.regra p{font-size:12.5px;color:var(--muted)}
+.regra code{font-family:var(--fm);font-size:11.5px;color:var(--synapse)}
+.regra.nao b{color:var(--pulso)}
+@media (max-width:820px){.regras{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="arte-pendente">
+
+<h1 class="ds-t">Imagotipo</h1>
+<p class="ds-d">Símbolo e logotipo formam uma unidade e nunca são recompostos. A fonte
+  oficial dos arquivos é o Brandfetch — não recrie a marca a partir de captura de tela
+  nem redigite o nome em Archivo.</p>
+
+<div class="aviso"><b>Artes pendentes.</b> Coloque os arquivos oficiais em
+  <code>design-system/marca/</code> (<code>imagotipo</code>, <code>simbolo</code>,
+  <code>icone-escuro</code>, <code>icone-verde</code> — em <code>.svg</code>,
+  <code>.png</code> ou <code>.webp</code>) e rode <code>node build.mjs</code>.</div>
+
+<div class="logo-grid">
+  <div class="stage escuro">
+    <span class="crop tl"></span><span class="crop tr"></span>
+    <span class="crop bl"></span><span class="crop br"></span>
+    <span class="art imagotipo branco" role="img" aria-label="NeuroDynamics"></span>
+    <span class="lb">Versão branca · sobre Void</span>
+  </div>
+  <div class="stage claro">
+    <span class="crop tl"></span><span class="crop tr"></span>
+    <span class="crop bl"></span><span class="crop br"></span>
+    <span class="art imagotipo" role="img" aria-label="NeuroDynamics"></span>
+    <span class="lb">Versão preta · sobre Ink</span>
+  </div>
+</div>
+
+<div class="logo-grid" style="margin-top:16px">
+  <div class="stage verde">
+    <span class="art imagotipo branco" role="img" aria-label="NeuroDynamics"></span>
+    <span class="lb">Sobre a banda · sempre em branco</span>
+  </div>
+  <div class="stage escuro">
+    <div class="respiro">
+      <span class="x t">x</span><span class="x l">x</span>
+      <span class="x r">x</span><span class="x b">x</span>
+      <span class="art imagotipo branco" role="img" aria-label="NeuroDynamics"></span>
+    </div>
+    <span class="lb">Respiro: x = altura do símbolo</span>
+  </div>
+</div>
+
+<div class="ds-g">Variantes do símbolo</div>
+<div class="var-grid">
+  <div class="var">
+    <div class="vis sobre-claro"><span class="art simbolo" role="img" aria-label="Símbolo em gradiente verde"></span></div>
+    <div class="txt"><b>Símbolo</b>
+      <p>O traço sozinho, em gradiente verde, sem fundo. Para uso sobre superfícies
+        claras e dentro de documentos.</p></div>
+  </div>
+  <div class="var">
+    <div class="vis sobre-escuro"><span class="art icone-escuro" role="img" aria-label="Ícone escuro"></span></div>
+    <div class="txt"><b>Ícone escuro</b>
+      <p>Traço claro sobre quadrado escuro. É o ícone padrão de app, favicon e
+        avatar nas interfaces da equipe.</p></div>
+  </div>
+  <div class="var">
+    <div class="vis sobre-claro"><span class="art icone-verde" role="img" aria-label="Ícone verde"></span></div>
+    <div class="txt"><b>Ícone verde</b>
+      <p>Traço branco sobre quadrado verde. Para contextos claros onde o ícone
+        escuro sumiria ou pesaria demais.</p></div>
+  </div>
+</div>
+
+<div class="ds-g">Tamanho mínimo</div>
+<div class="min-row">
+  <div class="min"><span class="art imagotipo branco" style="width:236px"></span><span>40px de altura</span></div>
+  <div class="min"><span class="art imagotipo branco" style="width:148px"></span><span>25px</span></div>
+  <div class="min"><span class="art imagotipo branco" style="width:100px"></span><span>17px · mínimo</span></div>
+  <div class="min ruim"><span class="art imagotipo branco" style="width:64px"></span><span>11px · use o símbolo</span></div>
+  <div style="flex:1;min-width:230px;font-size:12.5px;color:var(--muted);padding-bottom:4px">
+    O imagotipo completo não desce de <b style="color:var(--ink)">17px de altura</b> em tela
+    nem de <b style="color:var(--ink)">12mm de largura</b> em impresso. Abaixo disso o traço
+    fecha e o nome perde legibilidade — troque pelo símbolo ou pelo ícone.
+  </div>
+</div>
+
+<div class="ds-g">Usos proibidos</div>
+<div class="nao-grid">
+  <div class="nao-item"><div class="vis v-esticado"><span class="art imagotipo branco"></span></div>
+    <div class="cap"><b>Não distorça</b>Só escala proporcional.</div></div>
+  <div class="nao-item"><div class="vis v-girado"><span class="art imagotipo branco"></span></div>
+    <div class="cap"><b>Não gire</b>A marca fica sempre na horizontal.</div></div>
+  <div class="nao-item"><div class="vis v-cor"><span class="art imagotipo"></span></div>
+    <div class="cap"><b>Não recolora</b>Branco, preto ou o gradiente oficial.</div></div>
+  <div class="nao-item"><div class="vis v-fundo"><span class="art imagotipo branco"></span></div>
+    <div class="cap"><b>Não use sobre ruído</b>O fundo precisa de contraste limpo.</div></div>
+</div>
+
+<div class="regras">
+  <div class="regra"><b>Respiro de 1x</b>
+    <p>A margem livre ao redor da marca é a altura do símbolo, em todos os lados.
+      Nada entra nessa área — nem texto, nem borda, nem foto.</p></div>
+  <div class="regra"><b>Branco sobre escuro</b>
+    <p>Sobre Void, Cortex, Axon ou foto escura, o imagotipo é sempre branco
+      (<code>brightness(0) invert(1)</code>).</p></div>
+  <div class="regra nao"><b>Não misture as variantes</b>
+    <p>O gradiente verde é do símbolo solto. Dentro do imagotipo horizontal, o
+      traço é sólido — branco ou preto.</p></div>
+</div>
+
+</body>
+</html>

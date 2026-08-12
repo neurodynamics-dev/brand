@@ -1,0 +1,171 @@
+<!-- @dsCard group="Fundamentos" name="Espaço e forma" subtitle="Escala de 4px, raios, grade e container" width="1180" height="1060" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Espaço e forma · NeuroDynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* @tokens:start · gerado de tokens.css — rode `node build.mjs` */
+:root{
+  --cortex:#00352F;
+  --axon:#00594F;
+  --synapse:#CEDC00;
+  --void:#050807;
+  --painel:#0B1210;
+  --blackout:#1D1D1F;
+  --ink:#F5F5F7;
+  --aura:#F8F7FF;
+  --nevoa:#9AA5A1;
+  --grafite:#616C68;
+  --soma:#0B7D6E;
+  --ion:#2DD4BF;
+  --vital:#4ADE97;
+  --mielina:#F5C36A;
+  --pulso:#F1806F;
+  --plasma:#7FA7F2;
+  --dendrito:#A78BFA;
+  --bg:var(--void);
+  --muted:var(--nevoa);
+  --dim:var(--grafite);
+  --line:rgba(245,245,247,.08);
+  --line2:rgba(245,245,247,.16);
+  --card:rgba(255,255,255,.03);
+  --glass:rgba(7,12,10,.62);
+  --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --fs-display:clamp(40px,6.8vw,88px);
+  --fs-h1:clamp(36px,6vw,72px);
+  --fs-h2:clamp(26px,3.8vw,42px);
+  --fs-h3:16px;
+  --fs-body:15px;
+  --fs-sm:13.5px;
+  --fs-xs:12.5px;
+  --fs-label:11px;
+  --fs-micro:10px;
+  --r:18px;
+  --r-sm:11px;
+  --r-md:14px;
+  --r-lg:20px;
+  --r-xl:24px;
+  --r-pill:999px;
+  --s1:4px;
+  --s2:8px;
+  --s3:12px;
+  --s4:16px;
+  --s5:20px;
+  --s6:24px;
+  --s7:32px;
+  --s8:40px;
+  --s9:56px;
+  --s10:80px;
+  --gap:16px;
+  --sec:clamp(80px,10vh,130px);
+  --max:1240px;
+  --measure:640px;
+  --t-fast:.15s;
+  --t:.25s
+}
+/* @tokens:end */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);font-size:var(--fs-body);
+  line-height:1.65;-webkit-font-smoothing:antialiased;padding:34px}
+h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
+::selection{background:var(--synapse);color:var(--cortex)}
+.ds-t{font-size:19px;font-weight:600;margin-bottom:4px}
+.ds-d{color:var(--muted);font-size:var(--fs-sm);max-width:var(--measure);margin-bottom:28px}
+.ds-g{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin:32px 0 13px}
+
+.esp .row{display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:center;
+  padding:9px 4px;border-top:1px solid var(--line)}
+.esp .row:last-child{border-bottom:1px solid var(--line)}
+.esp .k{font-family:var(--fm);font-size:11px;color:var(--muted)}
+.esp .bar{height:16px;background:linear-gradient(90deg,var(--axon),var(--soma));
+  border-radius:3px;border:1px solid rgba(206,220,0,.18)}
+
+.raios{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+@media (max-width:900px){.raios{grid-template-columns:repeat(3,1fr)}}
+.raio{text-align:center}
+.raio .box{height:84px;background:var(--card);border:1px solid var(--line2);margin-bottom:9px}
+.raio .k{font-family:var(--fm);font-size:10.5px;color:var(--muted);display:block}
+.raio .v{font-family:var(--fm);font-size:10px;color:var(--dim);display:block}
+
+.demo-grade{position:relative;height:230px;border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;background:var(--painel);
+  background-image:linear-gradient(rgba(245,245,247,.05) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(245,245,247,.05) 1px,transparent 1px);
+  background-size:36px 36px;display:flex;align-items:center;justify-content:center}
+.demo-grade .cols{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;
+  width:calc(100% - 52px);height:calc(100% - 52px)}
+.demo-grade .cols i{background:rgba(206,220,0,.10);border:1px solid rgba(206,220,0,.22);border-radius:4px}
+.demo-grade .lb{position:absolute;left:14px;bottom:10px;font-family:var(--fm);font-size:9.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+.medidas{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+@media (max-width:820px){.medidas{grid-template-columns:1fr}}
+.medida{border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;background:var(--card)}
+.medida b{font-family:var(--fd);font-size:13.5px;display:block;margin-bottom:4px}
+.medida code{font-family:var(--fm);font-size:11.5px;color:var(--synapse)}
+.medida p{font-size:12.5px;color:var(--muted);margin-top:5px}
+</style>
+</head>
+<body>
+
+<h1 class="ds-t">Espaço e forma</h1>
+<p class="ds-d">Tudo se apoia numa base de 4px. O raio muda conforme o tamanho do
+  objeto: quanto maior a superfície, mais arredondada ela é.</p>
+
+<div class="ds-g">Escala de espaçamento</div>
+<div class="esp">
+  <div class="row"><span class="k">--s1 · 4px</span><div class="bar" style="width:4px"></div></div>
+  <div class="row"><span class="k">--s2 · 8px</span><div class="bar" style="width:8px"></div></div>
+  <div class="row"><span class="k">--s3 · 12px</span><div class="bar" style="width:12px"></div></div>
+  <div class="row"><span class="k">--s4 · 16px</span><div class="bar" style="width:16px"></div></div>
+  <div class="row"><span class="k">--s5 · 20px</span><div class="bar" style="width:20px"></div></div>
+  <div class="row"><span class="k">--s6 · 24px</span><div class="bar" style="width:24px"></div></div>
+  <div class="row"><span class="k">--s7 · 32px</span><div class="bar" style="width:32px"></div></div>
+  <div class="row"><span class="k">--s8 · 40px</span><div class="bar" style="width:40px"></div></div>
+  <div class="row"><span class="k">--s9 · 56px</span><div class="bar" style="width:56px"></div></div>
+  <div class="row"><span class="k">--s10 · 80px</span><div class="bar" style="width:80px"></div></div>
+</div>
+
+<div class="ds-g">Raios</div>
+<div class="raios">
+  <div class="raio"><div class="box" style="border-radius:9px"></div>
+    <span class="k">botão mini</span><span class="v">9px</span></div>
+  <div class="raio"><div class="box" style="border-radius:var(--r-sm)"></div>
+    <span class="k">--r-sm</span><span class="v">11px · botão, campo</span></div>
+  <div class="raio"><div class="box" style="border-radius:var(--r-md)"></div>
+    <span class="k">--r-md</span><span class="v">14px · cartão menor</span></div>
+  <div class="raio"><div class="box" style="border-radius:var(--r)"></div>
+    <span class="k">--r</span><span class="v">18px · base</span></div>
+  <div class="raio"><div class="box" style="border-radius:var(--r-lg)"></div>
+    <span class="k">--r-lg</span><span class="v">20px · painel</span></div>
+  <div class="raio"><div class="box" style="border-radius:var(--r-xl)"></div>
+    <span class="k">--r-xl</span><span class="v">24px · banda</span></div>
+</div>
+
+<div class="ds-g">Grade e container</div>
+<div class="demo-grade">
+  <div class="cols">
+    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+  <span class="lb">12 colunas · gap 16px · grade de fundo 130px</span>
+</div>
+
+<div class="medidas">
+  <div class="medida"><b>Container</b><code>--max: 1240px</code>
+    <p>Largura máxima do conteúdo, com 26px de respiro lateral.</p></div>
+  <div class="medida"><b>Medida de texto</b><code>--measure: 640px</code>
+    <p>Limite de linha para texto corrido e parágrafos de abertura.</p></div>
+  <div class="medida"><b>Ritmo de seção</b><code>--sec: clamp(80px,10vh,130px)</code>
+    <p>Distância entre seções. É o que dá o ar da marca — não reduza.</p></div>
+</div>
+
+</body>
+</html>

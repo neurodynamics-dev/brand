@@ -1,0 +1,224 @@
+<!-- @dsCard group="Componentes" name="Formulários" subtitle="Campos, seleção, foco, erro e o painel de controle" width="1180" height="920" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Formulários · NeuroDynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* @tokens:start · gerado de tokens.css — rode `node build.mjs` */
+:root{
+  --cortex:#00352F;
+  --axon:#00594F;
+  --synapse:#CEDC00;
+  --void:#050807;
+  --painel:#0B1210;
+  --blackout:#1D1D1F;
+  --ink:#F5F5F7;
+  --aura:#F8F7FF;
+  --nevoa:#9AA5A1;
+  --grafite:#616C68;
+  --soma:#0B7D6E;
+  --ion:#2DD4BF;
+  --vital:#4ADE97;
+  --mielina:#F5C36A;
+  --pulso:#F1806F;
+  --plasma:#7FA7F2;
+  --dendrito:#A78BFA;
+  --bg:var(--void);
+  --muted:var(--nevoa);
+  --dim:var(--grafite);
+  --line:rgba(245,245,247,.08);
+  --line2:rgba(245,245,247,.16);
+  --card:rgba(255,255,255,.03);
+  --glass:rgba(7,12,10,.62);
+  --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --fs-display:clamp(40px,6.8vw,88px);
+  --fs-h1:clamp(36px,6vw,72px);
+  --fs-h2:clamp(26px,3.8vw,42px);
+  --fs-h3:16px;
+  --fs-body:15px;
+  --fs-sm:13.5px;
+  --fs-xs:12.5px;
+  --fs-label:11px;
+  --fs-micro:10px;
+  --r:18px;
+  --r-sm:11px;
+  --r-md:14px;
+  --r-lg:20px;
+  --r-xl:24px;
+  --r-pill:999px;
+  --s1:4px;
+  --s2:8px;
+  --s3:12px;
+  --s4:16px;
+  --s5:20px;
+  --s6:24px;
+  --s7:32px;
+  --s8:40px;
+  --s9:56px;
+  --s10:80px;
+  --gap:16px;
+  --sec:clamp(80px,10vh,130px);
+  --max:1240px;
+  --measure:640px;
+  --t-fast:.15s;
+  --t:.25s
+}
+/* @tokens:end */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);font-size:var(--fs-body);
+  line-height:1.65;-webkit-font-smoothing:antialiased;padding:34px}
+h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
+button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:none}
+::selection{background:var(--synapse);color:var(--cortex)}
+.ds-t{font-size:19px;font-weight:600;margin-bottom:4px}
+.ds-d{color:var(--muted);font-size:var(--fs-sm);max-width:var(--measure);margin-bottom:28px}
+.ds-g{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin:32px 0 13px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:44px;
+  padding:0 20px;border-radius:var(--r-sm);font-family:var(--fd);font-weight:600;font-size:14px;
+  transition:all var(--t-fast)}
+.btn.solid{background:var(--synapse);color:var(--cortex)}
+.btn.ghost{border:1px solid var(--line2);background:rgba(255,255,255,.03)}
+
+/* campos */
+.fld{margin-bottom:var(--s4)}
+.fld label{display:block;font-size:10.5px;font-weight:700;letter-spacing:.08em;
+  color:var(--muted);margin-bottom:7px;text-transform:uppercase}
+.fld input,.fld select,.fld textarea{width:100%;background:rgba(255,255,255,.05);
+  border:1px solid var(--line2);border-radius:var(--r-sm);padding:10px 12px;color:var(--ink);
+  font-family:inherit;font-size:var(--fs-body);transition:border-color var(--t-fast),
+  background var(--t-fast);outline:none}
+.fld select option{background:var(--painel);color:var(--ink)}
+.fld input:focus,.fld select:focus,.fld textarea:focus{
+  border-color:var(--synapse);background:rgba(206,220,0,.04)}
+.fld input::placeholder,.fld textarea::placeholder{color:var(--dim)}
+.fld .mini{font-size:11px;color:var(--dim);margin-top:5px}
+.fld.erro input,.fld.erro select{border-color:var(--pulso)}
+.fld.erro .mini{color:var(--pulso)}
+.fld.ok input{border-color:rgba(74,222,151,.5)}
+.fld.ok .mini{color:var(--vital)}
+.fld input[disabled]{opacity:.4;pointer-events:none}
+/* estado de foco forçado, só para documentação */
+.f-focus input{border-color:var(--synapse);background:rgba(206,220,0,.04)}
+
+/* chips de escolha */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:8px 13px;border-radius:18px;font-size:12.5px;font-weight:500;
+  background:rgba(255,255,255,.04);border:1px solid var(--line2);color:var(--muted);
+  transition:all var(--t-fast)}
+.chip:hover{border-color:var(--dim);color:var(--ink)}
+.chip.on{background:var(--synapse);border-color:var(--synapse);color:var(--cortex);font-weight:600}
+
+/* chips de variante visual */
+.vchips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vchip{border:1px solid var(--line2);border-radius:12px;padding:9px 12px;display:flex;
+  align-items:center;gap:10px;font-size:12.5px;font-weight:500;color:var(--muted);
+  transition:all var(--t-fast);text-align:left}
+.vchip:hover{border-color:var(--dim);color:var(--ink)}
+.vchip.on{border-color:var(--synapse);color:var(--ink);background:rgba(206,220,0,.05)}
+.vchip .sw{width:26px;height:26px;border-radius:8px;flex:none;border:1px solid var(--line2)}
+
+.painel{background:var(--painel);border:1px solid var(--line2);border-radius:var(--r-lg);padding:24px}
+.par{display:grid;grid-template-columns:340px 1fr;gap:18px;align-items:start}
+@media (max-width:900px){.par{grid-template-columns:1fr}}
+.bloco{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:24px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media (max-width:640px){.grid-2{grid-template-columns:1fr}}
+.cap{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:13px;display:block}
+
+.regras{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.regra{border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;background:var(--card)}
+.regra b{font-family:var(--fd);font-size:13.5px;display:block;margin-bottom:4px}
+.regra p{font-size:12.5px;color:var(--muted)}
+.regra.nao b{color:var(--pulso)}
+@media (max-width:820px){.regras{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<h1 class="ds-t">Formulários</h1>
+<p class="ds-d">O campo é discreto até receber o foco — aí o Synapse aparece na borda e um
+  véu de 4% entra no fundo. É o mesmo gesto do acento da marca, aplicado à interação.</p>
+
+<div class="par">
+  <div class="painel">
+    <span class="cap">Painel de controle</span>
+    <div class="fld"><label for="f1">Nome de exibição</label>
+      <input id="f1" type="text" value="Ana Ribeiro"></div>
+    <div class="fld"><label for="f2">Formato</label>
+      <select id="f2"><option>LinkedIn · pessoal (1584×396)</option>
+        <option>LinkedIn · empresa (1128×191)</option><option>X (1500×500)</option></select>
+      <p class="mini">A resolução final do download acompanha o formato.</p></div>
+    <div class="fld"><label>Visual</label>
+      <div class="vchips">
+        <button class="vchip on"><span class="sw" style="background:#050807"></span>Void</button>
+        <button class="vchip"><span class="sw" style="background:#00352F"></span>Cortex</button>
+        <button class="vchip"><span class="sw" style="background:#CEDC00"></span>Synapse</button>
+        <button class="vchip"><span class="sw" style="background:#F8F7FF"></span>Aura</button>
+      </div></div>
+    <div class="fld" style="margin-bottom:0"><label>Inclui</label>
+      <div class="chips">
+        <button class="chip on">Logo</button><button class="chip on">Tagline</button>
+        <button class="chip">Foto</button><button class="chip">QR</button>
+      </div></div>
+  </div>
+
+  <div class="bloco">
+    <span class="cap">Estados do campo</span>
+    <div class="grid-2">
+      <div class="fld"><label for="e1">Padrão</label>
+        <input id="e1" type="text" placeholder="ana@neurodynamics.dev"></div>
+      <div class="fld f-focus"><label for="e2">Foco</label>
+        <input id="e2" type="text" value="ana@neurodynamics.dev"></div>
+      <div class="fld ok"><label for="e3">Validado</label>
+        <input id="e3" type="text" value="ana@neurodynamics.dev">
+        <p class="mini">Conta encontrada no cadastro da equipe.</p></div>
+      <div class="fld erro"><label for="e4">Erro</label>
+        <input id="e4" type="text" value="ana@gmail.com">
+        <p class="mini">Use o e-mail institucional (@neurodynamics.dev).</p></div>
+      <div class="fld"><label for="e5">Desativado</label>
+        <input id="e5" type="text" value="Pesquisadora" disabled>
+        <p class="mini">Vem do cadastro; não é editável aqui.</p></div>
+      <div class="fld"><label for="e6">Com ajuda</label>
+        <input id="e6" type="text" placeholder="ela/dela">
+        <p class="mini">Opcional. Aparece ao lado do nome na assinatura.</p></div>
+    </div>
+    <div class="fld" style="margin-bottom:0"><label for="e7">Texto longo</label>
+      <textarea id="e7" rows="3" placeholder="Escreva a frase que vai no post."></textarea></div>
+  </div>
+</div>
+
+<div class="ds-g">Ações do formulário</div>
+<div class="bloco">
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+    <button class="btn solid">Gerar assinatura</button>
+    <button class="btn ghost">Limpar</button>
+    <span style="font-size:12.5px;color:var(--dim);margin-left:auto">
+      A ação principal fica à esquerda, na ordem de leitura.</span>
+  </div>
+</div>
+
+<div class="ds-g">Regras</div>
+<div class="regras">
+  <div class="regra"><b>Rótulo sempre visível</b>
+    <p>Caixa alta, 10,5px, peso 700. Placeholder é exemplo de conteúdo, nunca
+      substituto do rótulo.</p></div>
+  <div class="regra"><b>Erro explica o conserto</b>
+    <p>Não basta ficar vermelho: a mensagem diz o que fazer. E a borda em Pulso
+      vem acompanhada de texto.</p></div>
+  <div class="regra nao"><b>Não use campo sem borda</b>
+    <p>Só o fundo a 5% não delimita o campo em telas claras nem para quem tem
+      baixa visão. A borda de 16% é obrigatória.</p></div>
+</div>
+
+</body>
+</html>

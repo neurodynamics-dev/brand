@@ -1,0 +1,144 @@
+{
+  "cards": [
+    {
+      "name": "Cores",
+      "path": "previews/01-cores.html",
+      "subtitle": "Primárias, neutros, auxiliares e contraste",
+      "group": "Fundamentos",
+      "viewport": {
+        "width": 1180,
+        "height": 1240
+      }
+    },
+    {
+      "name": "Tipografia",
+      "path": "previews/02-tipografia.html",
+      "subtitle": "Archivo, IBM Plex Mono e a escala",
+      "group": "Fundamentos",
+      "viewport": {
+        "width": 1180,
+        "height": 1180
+      }
+    },
+    {
+      "name": "Espaço e forma",
+      "path": "previews/03-espaco-e-forma.html",
+      "subtitle": "Escala de 4px, raios, grade e container",
+      "group": "Fundamentos",
+      "viewport": {
+        "width": 1180,
+        "height": 1060
+      }
+    },
+    {
+      "name": "Superfícies",
+      "path": "previews/04-superficies.html",
+      "subtitle": "Cartão, painel, vidro e a ordem de elevação",
+      "group": "Fundamentos",
+      "viewport": {
+        "width": 1180,
+        "height": 820
+      }
+    },
+    {
+      "name": "Imagotipo",
+      "path": "previews/05-marca.html",
+      "subtitle": "Lockup, símbolo, ícones, respiro e usos proibidos",
+      "group": "Marca",
+      "viewport": {
+        "width": 1180,
+        "height": 1240
+      }
+    },
+    {
+      "name": "Botões",
+      "path": "previews/06-botoes.html",
+      "subtitle": "Solid, claro, ghost · dois tamanhos e todos os estados",
+      "group": "Componentes",
+      "viewport": {
+        "width": 1180,
+        "height": 820
+      }
+    },
+    {
+      "name": "Cartões",
+      "path": "previews/07-cartoes.html",
+      "subtitle": "Conteúdo, regra, download e cabeçalho de seção",
+      "group": "Componentes",
+      "viewport": {
+        "width": 1180,
+        "height": 900
+      }
+    },
+    {
+      "name": "Formulários",
+      "path": "previews/08-formularios.html",
+      "subtitle": "Campos, seleção, foco, erro e o painel de controle",
+      "group": "Componentes",
+      "viewport": {
+        "width": 1180,
+        "height": 920
+      }
+    },
+    {
+      "name": "Status e etiquetas",
+      "path": "previews/09-status.html",
+      "subtitle": "Pills, tags, chips e as cores auxiliares em uso",
+      "group": "Componentes",
+      "viewport": {
+        "width": 1180,
+        "height": 880
+      }
+    },
+    {
+      "name": "Navegação",
+      "path": "previews/10-navegacao.html",
+      "subtitle": "Cabeçalho de vidro, âncoras, abas e rodapé",
+      "group": "Componentes",
+      "viewport": {
+        "width": 1180,
+        "height": 880
+      }
+    },
+    {
+      "name": "Dados",
+      "path": "previews/11-dados.html",
+      "subtitle": "Tabela, lista de especificação, métricas e barra de proporção",
+      "group": "Componentes",
+      "viewport": {
+        "width": 1180,
+        "height": 900
+      }
+    },
+    {
+      "name": "Feedback",
+      "path": "previews/12-feedback.html",
+      "subtitle": "Toast, carregamento, estado vazio e diálogo",
+      "group": "Componentes",
+      "viewport": {
+        "width": 1180,
+        "height": 880
+      }
+    },
+    {
+      "name": "Fundo e textura",
+      "path": "previews/13-fundo.html",
+      "subtitle": "Grade técnica, blobs, vidro e placeholder FIG.",
+      "group": "Marca",
+      "viewport": {
+        "width": 1180,
+        "height": 880
+      }
+    },
+    {
+      "name": "Banda e hero",
+      "path": "previews/14-banda-e-hero.html",
+      "subtitle": "Abertura de página, chamada principal e eyebrow",
+      "group": "Marca",
+      "viewport": {
+        "width": 1180,
+        "height": 900
+      }
+    }
+  ]
+}
