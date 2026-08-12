@@ -1,0 +1,224 @@
+<!-- @dsCard group="Componentes" name="Status e etiquetas" subtitle="Pills, tags, chips e as cores auxiliares em uso" width="1180" height="1460" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Status e etiquetas · NeuroDynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../styles.css">
+<style>
+/* @tokens:start · gerado de tokens.css — rode `node build.mjs` */
+:root{
+  --cortex:#00352F;
+  --axon:#00594F;
+  --synapse:#CEDC00;
+  --void:#050807;
+  --painel:#0B1210;
+  --blackout:#1D1D1F;
+  --ink:#F5F5F7;
+  --aura:#F8F7FF;
+  --nevoa:#9AA5A1;
+  --grafite:#616C68;
+  --soma:#0B7D6E;
+  --ion:#2DD4BF;
+  --vital:#4ADE97;
+  --mielina:#F5C36A;
+  --pulso:#F1806F;
+  --plasma:#7FA7F2;
+  --dendrito:#A78BFA;
+  --bg:var(--void);
+  --muted:var(--nevoa);
+  --dim:var(--grafite);
+  --line:rgba(245,245,247,.08);
+  --line2:rgba(245,245,247,.16);
+  --card:rgba(255,255,255,.03);
+  --glass:rgba(7,12,10,.62);
+  --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --fs-display:clamp(40px,6.8vw,88px);
+  --fs-h1:clamp(36px,6vw,72px);
+  --fs-h2:clamp(26px,3.8vw,42px);
+  --fs-h3:16px;
+  --fs-body:15px;
+  --fs-sm:13.5px;
+  --fs-xs:12.5px;
+  --fs-label:11px;
+  --fs-micro:10px;
+  --r:18px;
+  --r-sm:11px;
+  --r-md:14px;
+  --r-lg:20px;
+  --r-xl:24px;
+  --r-pill:999px;
+  --s1:4px;
+  --s2:8px;
+  --s3:12px;
+  --s4:16px;
+  --s5:20px;
+  --s6:24px;
+  --s7:32px;
+  --s8:40px;
+  --s9:56px;
+  --s10:80px;
+  --gap:16px;
+  --sec:clamp(80px,10vh,130px);
+  --max:1240px;
+  --measure:640px;
+  --t-fast:.15s;
+  --t:.25s
+}
+/* @tokens:end */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);font-size:var(--fs-body);
+  line-height:1.65;-webkit-font-smoothing:antialiased;padding:34px}
+h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
+button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:none}
+::selection{background:var(--synapse);color:var(--cortex)}
+.ds-t{font-size:19px;font-weight:600;margin-bottom:4px}
+.ds-d{color:var(--muted);font-size:var(--fs-sm);max-width:var(--measure);margin-bottom:28px}
+.ds-g{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin:32px 0 13px}
+
+.pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line2);
+  border-radius:var(--r-pill);padding:3px 10px;color:var(--muted)}
+.pill .dt{width:7px;height:7px;border-radius:50%;flex:none}
+.st-vital{color:var(--vital);border-color:rgba(74,222,151,.35)}
+.st-vital .dt{background:var(--vital)}
+.st-mielina{color:var(--mielina);border-color:rgba(245,195,106,.35)}
+.st-mielina .dt{background:var(--mielina)}
+.st-pulso{color:var(--pulso);border-color:rgba(241,128,111,.35)}
+.st-pulso .dt{background:var(--pulso)}
+.st-plasma{color:var(--plasma);border-color:rgba(127,167,242,.35)}
+.st-plasma .dt{background:var(--plasma)}
+.st-ion{color:var(--ion);border-color:rgba(45,212,191,.35)}
+.st-ion .dt{background:var(--ion)}
+.st-dendrito{color:var(--dendrito);border-color:rgba(167,139,250,.35)}
+.st-dendrito .dt{background:var(--dendrito)}
+
+.tag{font-family:var(--fm);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--synapse);border:1px solid rgba(206,220,0,.35);border-radius:var(--r-pill);padding:3px 9px}
+.chip{padding:8px 13px;border-radius:18px;font-size:12.5px;font-weight:500;
+  background:rgba(255,255,255,.04);border:1px solid var(--line2);color:var(--muted);
+  transition:all var(--t-fast)}
+.chip.on{background:var(--synapse);border-color:var(--synapse);color:var(--cortex);font-weight:600}
+
+.bloco{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:24px}
+.linha{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.cap{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:13px;display:block}
+.par{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:860px){.par{grid-template-columns:1fr}}
+
+.tabela{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+.tabela th{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);text-align:left;font-weight:500;padding:10px 12px;border-bottom:1px solid var(--line2)}
+.tabela td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tabela td.uso{color:var(--muted);font-size:12.5px}
+.tabela .tk{font-family:var(--fm);font-size:11.5px;color:var(--muted)}
+
+/* alertas */
+.alerta{display:flex;gap:13px;padding:15px 18px;border-radius:var(--r-md);
+  border:1px solid var(--line2);background:var(--card);align-items:flex-start}
+.alerta .ic{width:22px;height:22px;border-radius:50%;flex:none;display:flex;
+  align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-top:1px}
+.alerta b{font-family:var(--fd);font-size:13.5px;display:block;margin-bottom:2px}
+.alerta p{font-size:12.5px;color:var(--muted)}
+.a-vital{border-color:rgba(74,222,151,.3);background:rgba(74,222,151,.06)}
+.a-vital .ic{background:rgba(74,222,151,.16);color:var(--vital)}
+.a-mielina{border-color:rgba(245,195,106,.3);background:rgba(245,195,106,.06)}
+.a-mielina .ic{background:rgba(245,195,106,.16);color:var(--mielina)}
+.a-pulso{border-color:rgba(241,128,111,.3);background:rgba(241,128,111,.06)}
+.a-pulso .ic{background:rgba(241,128,111,.16);color:var(--pulso)}
+.a-plasma{border-color:rgba(127,167,242,.3);background:rgba(127,167,242,.06)}
+.a-plasma .ic{background:rgba(127,167,242,.16);color:var(--plasma)}
+.stack{display:flex;flex-direction:column;gap:10px}
+
+.regras{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.regra{border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;background:var(--card)}
+.regra b{font-family:var(--fd);font-size:13.5px;display:block;margin-bottom:4px}
+.regra p{font-size:12.5px;color:var(--muted)}
+.regra.nao b{color:var(--pulso)}
+@media (max-width:820px){.regras{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<h1 class="ds-t">Status e etiquetas</h1>
+<p class="ds-d">As cores auxiliares só existem aqui e nas visualizações de dados. Cada uma
+  tem um significado fixo — não troque Vital por Íon porque ficou mais bonito.</p>
+
+<div class="ds-g">Significado fixo</div>
+<div class="bloco">
+  <table class="tabela">
+    <thead><tr><th>Pill</th><th>Token</th><th>Significa</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill st-vital"><span class="dt"></span>Concluído</span></td>
+        <td class="tk">--vital</td><td class="uso">Sucesso: confirmado, ativo, concluído.</td></tr>
+      <tr><td><span class="pill st-mielina"><span class="dt"></span>Em análise</span></td>
+        <td class="tk">--mielina</td><td class="uso">Atenção: prazos, pendências, em análise.</td></tr>
+      <tr><td><span class="pill st-pulso"><span class="dt"></span>Falhou</span></td>
+        <td class="tk">--pulso</td><td class="uso">Erro e urgência: falhas, recusas, avisos críticos.</td></tr>
+      <tr><td><span class="pill st-plasma"><span class="dt"></span>Férias</span></td>
+        <td class="tk">--plasma</td><td class="uso">Informação neutra; férias no calendário.</td></tr>
+      <tr><td><span class="pill st-ion"><span class="dt"></span>Evento</span></td>
+        <td class="tk">--ion</td><td class="uso">Links de destaque, taglines, eventos.</td></tr>
+      <tr><td><span class="pill st-dendrito"><span class="dt"></span>Seleção</span></td>
+        <td class="tk">--dendrito</td><td class="uso">Processo seletivo e pesquisa nas visualizações.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="ds-g">Etiquetas e escolhas</div>
+<div class="par">
+  <div class="bloco">
+    <span class="cap">Tag · marca o contexto</span>
+    <div class="linha">
+      <span class="tag">Brand</span><span class="tag">Estúdio</span>
+      <span class="tag">Assinaturas</span><span class="tag">NRO-PUB-002</span>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:14px">Sempre em Synapse,
+      no cabeçalho ou junto ao título. É rótulo, não status.</p>
+  </div>
+  <div class="bloco">
+    <span class="cap">Chip · escolha do usuário</span>
+    <div class="linha">
+      <button class="chip on">Feed</button><button class="chip">Quadrado</button>
+      <button class="chip">Story</button><button class="chip">Thumbnail</button>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:14px">O chip selecionado
+      inverte para Synapse sólido com texto em Cortex. Um por grupo.</p>
+  </div>
+</div>
+
+<div class="ds-g">Alertas</div>
+<div class="stack">
+  <div class="alerta a-vital"><span class="ic" aria-hidden="true">✓</span>
+    <div><b>Assinatura gerada</b><p>Copie o HTML e cole no Gmail em Configurações › Assinatura.</p></div></div>
+  <div class="alerta a-mielina"><span class="ic" aria-hidden="true">!</span>
+    <div><b>Foto em baixa resolução</b><p>A imagem tem 320px. Para o formato escolhido, use pelo menos 800px.</p></div></div>
+  <div class="alerta a-pulso"><span class="ic" aria-hidden="true">×</span>
+    <div><b>Não foi possível entrar</b><p>Use o e-mail institucional (@neurodynamics.dev) e tente de novo.</p></div></div>
+  <div class="alerta a-plasma"><span class="ic" aria-hidden="true">i</span>
+    <div><b>Tudo roda no navegador</b><p>Nenhuma imagem é enviada para servidor — a geração é local.</p></div></div>
+</div>
+
+<div class="ds-g">Regras</div>
+<div class="regras">
+  <div class="regra"><b>Cor nunca sozinha</b>
+    <p>Todo status carrega texto, e o alerta carrega também um ícone. Quem não
+      distingue as cores precisa ler o mesmo significado.</p></div>
+  <div class="regra"><b>Fundo a 6%, borda a 30%</b>
+    <p>O alerta tinge de leve. Bloco inteiro na cor de status vira ruído e rouba
+      o lugar da ação principal.</p></div>
+  <div class="regra nao"><b>Não use Synapse como status</b>
+    <p>O amarelo da marca é acento e ação, não estado. Sucesso é Vital,
+      atenção é Mielina.</p></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!-- @dsCard group="Componentes" name="Cartões" subtitle="Conteúdo, regra, download e cabeçalho de seção" width="1180" height="1220" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cartões · NeuroDynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../styles.css">
+<style>
+/* @tokens:start · gerado de tokens.css — rode `node build.mjs` */
+:root{
+  --cortex:#00352F;
+  --axon:#00594F;
+  --synapse:#CEDC00;
+  --void:#050807;
+  --painel:#0B1210;
+  --blackout:#1D1D1F;
+  --ink:#F5F5F7;
+  --aura:#F8F7FF;
+  --nevoa:#9AA5A1;
+  --grafite:#616C68;
+  --soma:#0B7D6E;
+  --ion:#2DD4BF;
+  --vital:#4ADE97;
+  --mielina:#F5C36A;
+  --pulso:#F1806F;
+  --plasma:#7FA7F2;
+  --dendrito:#A78BFA;
+  --bg:var(--void);
+  --muted:var(--nevoa);
+  --dim:var(--grafite);
+  --line:rgba(245,245,247,.08);
+  --line2:rgba(245,245,247,.16);
+  --card:rgba(255,255,255,.03);
+  --glass:rgba(7,12,10,.62);
+  --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --fs-display:clamp(40px,6.8vw,88px);
+  --fs-h1:clamp(36px,6vw,72px);
+  --fs-h2:clamp(26px,3.8vw,42px);
+  --fs-h3:16px;
+  --fs-body:15px;
+  --fs-sm:13.5px;
+  --fs-xs:12.5px;
+  --fs-label:11px;
+  --fs-micro:10px;
+  --r:18px;
+  --r-sm:11px;
+  --r-md:14px;
+  --r-lg:20px;
+  --r-xl:24px;
+  --r-pill:999px;
+  --s1:4px;
+  --s2:8px;
+  --s3:12px;
+  --s4:16px;
+  --s5:20px;
+  --s6:24px;
+  --s7:32px;
+  --s8:40px;
+  --s9:56px;
+  --s10:80px;
+  --gap:16px;
+  --sec:clamp(80px,10vh,130px);
+  --max:1240px;
+  --measure:640px;
+  --t-fast:.15s;
+  --t:.25s
+}
+/* @tokens:end */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);font-size:var(--fs-body);
+  line-height:1.65;-webkit-font-smoothing:antialiased;padding:34px}
+h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
+button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:none}
+::selection{background:var(--synapse);color:var(--cortex)}
+.ds-t{font-size:19px;font-weight:600;margin-bottom:4px}
+.ds-d{color:var(--muted);font-size:var(--fs-sm);max-width:var(--measure);margin-bottom:28px}
+.ds-g{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin:32px 0 13px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:44px;
+  padding:0 20px;border-radius:var(--r-sm);font-family:var(--fd);font-weight:600;font-size:14px;
+  transition:all var(--t-fast);white-space:nowrap}
+.btn.solid{background:var(--synapse);color:var(--cortex)}
+.btn.ghost{border:1px solid var(--line2);background:rgba(255,255,255,.03)}
+.btn.ghost:hover{background:rgba(255,255,255,.07);border-color:var(--dim)}
+.btn.mini{height:34px;padding:0 13px;font-size:12px;border-radius:9px}
+
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--fm);
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.eyebrow::before{content:'';width:7px;height:7px;background:var(--synapse);flex-shrink:0}
+
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:900px){.grid-3{grid-template-columns:1fr}}
+
+/* cartão de conteúdo */
+.card{border:1px solid var(--line);border-radius:var(--r);background:var(--card);
+  backdrop-filter:blur(6px);padding:24px}
+.card h3{font-size:16px;font-weight:600;margin-bottom:6px}
+.card p{font-size:13.5px;color:var(--muted)}
+
+/* cartão de regra */
+.regra{border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;background:var(--card)}
+.regra b{font-family:var(--fd);font-size:13.5px;display:block;margin-bottom:4px}
+.regra p{font-size:12.5px;color:var(--muted)}
+.regra.nao b{color:var(--pulso)}
+
+/* cartão de download */
+.dl{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:22px;
+  display:flex;flex-direction:column;gap:8px}
+.dl .lb{font-family:var(--fm);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.dl h3{font-size:16px;font-weight:600}
+.dl p{font-size:12.5px;color:var(--muted);flex:1}
+.dl .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.dl.soon{opacity:.5;pointer-events:none}
+
+/* cabeçalho de seção */
+.sec-head{display:grid;grid-template-columns:220px 1fr;gap:26px;align-items:start}
+.sec-head h2{font-size:clamp(24px,3vw,34px);font-weight:600;line-height:1.08;max-width:680px}
+.sec-head .sub{color:var(--muted);max-width:620px;margin-top:12px;font-size:15px}
+@media (max-width:820px){.sec-head{grid-template-columns:1fr;gap:14px}}
+
+/* cartão claro */
+.claro{background:var(--aura);color:var(--blackout);border-radius:16px;
+  border:1px solid rgba(0,0,0,.06);overflow:hidden}
+.claro .head{padding:14px 20px 12px;border-bottom:1px solid rgba(0,53,47,.10);
+  display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.claro .titulo{font-weight:700;font-size:14.5px;color:var(--cortex);font-family:var(--fd)}
+.claro .rot{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--axon);font-weight:700}
+.claro .corpo{padding:18px 20px;font-size:13.5px;color:#3D4442}
+
+.par{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:860px){.par{grid-template-columns:1fr}}
+.cap{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:11px;display:block}
+</style>
+</head>
+<body>
+
+<h1 class="ds-t">Cartões</h1>
+<p class="ds-d">Quatro formatos cobrem tudo: conteúdo, regra, download e superfície clara.
+  Todos partem da mesma borda de 1px e mudam só no raio e no peso do fundo.</p>
+
+<div class="ds-g">Cartão de conteúdo · raio 18px</div>
+<div class="grid-3">
+  <div class="card"><h3>Cartão de conteúdo</h3>
+    <p>Use para agrupar informação. Borda de 1px, canto de 18px, fundo de vidro a 3%.</p></div>
+  <div class="card"><h3>Um por ideia</h3>
+    <p>Se o cartão precisa de subtítulo, lista e dois botões, ele virou seção.</p></div>
+  <div class="card"><h3>Texto em Névoa</h3>
+    <p>Título em Ink e Archivo; corpo em Névoa e fonte de sistema, a 13,5px.</p></div>
+</div>
+
+<div class="ds-g">Cartão de regra · raio 14px</div>
+<div class="grid-3">
+  <div class="regra"><b>Faça assim</b>
+    <p>Regra afirmativa: diz o que fazer, curto, sem rodeio.</p></div>
+  <div class="regra"><b>Respeite o respiro</b>
+    <p>O par borda + fundo já separa. Não precisa de sombra.</p></div>
+  <div class="regra nao"><b>Não faça assim</b>
+    <p>A proibição vem em Pulso, no título. Só o título muda de cor.</p></div>
+</div>
+
+<div class="ds-g">Cartão de download</div>
+<div class="grid-3">
+  <div class="dl"><span class="lb">PNG · SVG</span><h3>Logos e símbolo</h3>
+    <p>Imagotipo nas versões branca e preta, símbolo e ícones de app.</p>
+    <div class="acts"><button class="btn ghost mini">Abrir no Brandfetch ↗</button></div></div>
+  <div class="dl"><span class="lb">JSON · CSS</span><h3>Paleta</h3>
+    <p>As 17 cores nomeadas, com uso e valor, prontas para importar.</p>
+    <div class="acts"><button class="btn ghost mini">Baixar JSON</button>
+      <button class="btn ghost mini">Copiar tokens</button></div></div>
+  <div class="dl soon"><span class="lb">Overleaf</span><h3>Templates de artigo</h3>
+    <p>Modelos de artigo e pôster no padrão da marca.</p>
+    <div class="acts"><button class="btn ghost mini">Em desenvolvimento</button></div></div>
+</div>
+
+<div class="ds-g">Cabeçalho de seção</div>
+<div class="card" style="padding:30px">
+  <div class="sec-head">
+    <span class="eyebrow">03 / Elementos</span>
+    <div><h2>A grade é o que segura tudo no lugar.</h2>
+      <p class="sub">Coluna estreita à esquerda com o eyebrow, conteúdo à direita.
+        Em telas abaixo de 820px as duas colunas viram uma só.</p></div>
+  </div>
+</div>
+
+<div class="ds-g">Superfície clara · documentos e assinaturas</div>
+<div class="par">
+  <div class="claro">
+    <div class="head"><span class="titulo">Assinatura de e-mail</span><span class="rot">Pré-visualização</span></div>
+    <div class="corpo">Cartões claros usam Aura no fundo, Blackout no texto e Cortex nos
+      títulos. É o único contexto em que a marca sai do escuro.</div>
+  </div>
+  <div class="card" style="display:flex;align-items:center">
+    <p style="font-size:13px;color:var(--muted)">Superfície clara existe para o que sai da
+      tela: assinatura de e-mail, documento, impresso e anexo. Na interface, o padrão
+      continua sendo o escuro.</p>
+  </div>
+</div>
+
+</body>
+</html>

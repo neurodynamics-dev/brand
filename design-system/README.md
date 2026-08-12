@@ -13,11 +13,16 @@ ferramenta e por gente que está construindo alguma coisa.
 design-system/
 ├── tokens.css          fonte única dos tokens (cor, tipo, espaço, forma)
 ├── neuro.css           folha consumível: base + componentes
+├── conventions.md      cabeçalho de convenções (vai no prompt do agente)
 ├── build.mjs           sincroniza tokens e artes nos previews; gera o índice
+├── bundle.mjs          monta a ds-bundle/ para o Claude Design
+├── validate.mjs        confere o contrato da ds-bundle/
 ├── cards.json          índice dos cards (gerado)
 ├── marca/              artes de preview, derivadas de assets/
 └── previews/           14 cards, um HTML autocontido cada
 ```
+
+E, na raiz do repositório, a `ds-bundle/` gerada — é ela que sobe.
 
 | Grupo | Cards |
 | --- | --- |
@@ -101,7 +106,53 @@ funciona inteiro e o agente passa a montar telas com `<Botao>`, `<Card>`,
 `<Banda>`. É bem mais trabalho e cria um projeto novo para manter, mas é o
 único jeito de o agente compor com peças nossas em vez de imitá-las.
 
-Nada disso foi executado ainda — o A está descrito, não testado.
+**O caminho A já está pronto neste repositório** — ver a próxima seção. O B
+continua em aberto, e um não fecha a porta do outro.
+
+### O que já está montado (caminho A)
+
+`node bundle.mjs` gera a pasta `ds-bundle/` na raiz do repositório, no layout que
+o Claude Design consome — ela está versionada, então dá para enviar sem rodar nada:
+
+```
+ds-bundle/                     41 arquivos · 294KB
+├── styles.css                 a raiz: @import tokens + _ds_bundle.css
+├── tokens/tokens.css          os 58 tokens
+├── _ds_bundle.css             o neuro.css
+├── _ds_bundle.js              corpo vazio, com o cabeçalho @ds-bundle
+├── components/<Grupo>/<Nome>/
+│   ├── <Nome>.html            o card, com @dsCard na primeira linha
+│   └── <Nome>.prompt.md       como compor, com exemplo — é o que o agente lê
+├── guidelines/                convenções e acessibilidade
+├── marca/                     as artes
+├── README.md                  cabeçalho de convenções + índice
+└── _ds_needs_recompile        sentinela que dispara o self-check do app
+```
+
+O `README.md` do bundle começa com o **cabeçalho de convenções**
+(`conventions.md` aqui na pasta), que é o artefato de maior alavancagem: ele vai
+inline no prompt do agente e enumera o vocabulário — as classes, os tokens e as
+quatro regras que o sistema cobra. Todo nome citado nele foi conferido contra o
+`neuro.css` e o `tokens.css`.
+
+Para conferir antes de subir:
+
+```bash
+node build.mjs && node bundle.mjs   # gera
+node validate.mjs                    # confere o contrato
+```
+
+O `validate.mjs` checa que o fecho de `@import` do `styles.css` resolve, que o
+`_ds_bundle.js` tem o cabeçalho na primeira linha, e que todo card tem `@dsCard`,
+link resolvendo e resumo no `.prompt.md`. Com `playwright-core` instalado ele
+ainda faz a prova que importa: abre uma página que **só** linka o `styles.css` —
+exatamente o que um design do agente recebe — e confirma que tokens, botão,
+cartão, status, banda e acento chegam.
+
+Uma nota para quando o envio acontecer: o `_ds_needs_recompile` leva
+`{"by":"neurodynamics-brand-bundle"}`. Esse campo é só um carimbo de procedência.
+Se o self-check do app se recusar a rodar por não reconhecer o valor, troque para
+`{"by":"design-sync-cli"}` e reenvie só esse arquivo.
 
 ### A autorização
 
@@ -109,14 +160,22 @@ O envio precisa de autorização que **esta sessão web não consegue fazer**. A
 mensagem da ferramenta aponta dois caminhos:
 
 - **Terminal interativo** — rode `claude` na sua máquina, dentro do repositório,
-  e use `/design-login` antes do `/design-sync`.
+  e use `/design-login`.
 - **A partir do claude.ai/code** — use o botão **"Send to Claude Code Web"** do
   Claude Design, que semeia o projeto direto no workspace.
 
-Vale saber antes de começar: numa importação de verdade a skill avisa que o
-processo pode levar **horas** e consumir bastante token, porque ela verifica o
-render de cada componente. No nosso caso (caminho A, sem componentes React)
-isso é muito menor.
+**Não rode `/design-sync` depois de entrar.** Ele iria procurar Storybook ou
+`package.json`, não achar nenhum dos dois, e tentar construir uma biblioteca que
+não existe. A `ds-bundle/` já está pronta — o que você quer é só enviá-la. Peça
+na sessão, com estas palavras:
+
+> Crie um projeto de design system no Claude Design chamado `NeuroDynamics` e
+> envie a pasta `ds-bundle/` deste repositório para a raiz dele. Ela já está
+> montada e validada; não rode o conversor.
+
+O envio em si são três passos que o Claude faz por você: pedir sua aprovação do
+plano, gravar os 41 arquivos, e regravar o `_ds_needs_recompile` no fim — é essa
+sentinela que dispara o self-check do app e faz os cards aparecerem.
 
 ## Como editar
 

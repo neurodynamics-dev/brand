@@ -1,0 +1,225 @@
+<!-- @dsCard group="Componentes" name="Navegação" subtitle="Cabeçalho de vidro, âncoras, abas e rodapé" width="1180" height="1080" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Navegação · NeuroDynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../styles.css">
+<style>
+/* @tokens:start · gerado de tokens.css — rode `node build.mjs` */
+:root{
+  --cortex:#00352F;
+  --axon:#00594F;
+  --synapse:#CEDC00;
+  --void:#050807;
+  --painel:#0B1210;
+  --blackout:#1D1D1F;
+  --ink:#F5F5F7;
+  --aura:#F8F7FF;
+  --nevoa:#9AA5A1;
+  --grafite:#616C68;
+  --soma:#0B7D6E;
+  --ion:#2DD4BF;
+  --vital:#4ADE97;
+  --mielina:#F5C36A;
+  --pulso:#F1806F;
+  --plasma:#7FA7F2;
+  --dendrito:#A78BFA;
+  --bg:var(--void);
+  --muted:var(--nevoa);
+  --dim:var(--grafite);
+  --line:rgba(245,245,247,.08);
+  --line2:rgba(245,245,247,.16);
+  --card:rgba(255,255,255,.03);
+  --glass:rgba(7,12,10,.62);
+  --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --fs-display:clamp(40px,6.8vw,88px);
+  --fs-h1:clamp(36px,6vw,72px);
+  --fs-h2:clamp(26px,3.8vw,42px);
+  --fs-h3:16px;
+  --fs-body:15px;
+  --fs-sm:13.5px;
+  --fs-xs:12.5px;
+  --fs-label:11px;
+  --fs-micro:10px;
+  --r:18px;
+  --r-sm:11px;
+  --r-md:14px;
+  --r-lg:20px;
+  --r-xl:24px;
+  --r-pill:999px;
+  --s1:4px;
+  --s2:8px;
+  --s3:12px;
+  --s4:16px;
+  --s5:20px;
+  --s6:24px;
+  --s7:32px;
+  --s8:40px;
+  --s9:56px;
+  --s10:80px;
+  --gap:16px;
+  --sec:clamp(80px,10vh,130px);
+  --max:1240px;
+  --measure:640px;
+  --t-fast:.15s;
+  --t:.25s
+}
+/* @tokens:end */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);font-size:var(--fs-body);
+  line-height:1.65;-webkit-font-smoothing:antialiased;padding:34px}
+h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:none}
+::selection{background:var(--synapse);color:var(--cortex)}
+.ds-t{font-size:19px;font-weight:600;margin-bottom:4px}
+.ds-d{color:var(--muted);font-size:var(--fs-sm);max-width:var(--measure);margin-bottom:28px}
+.ds-g{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);margin:32px 0 13px}
+
+/* palco que simula a página rolando por trás do vidro */
+.palco{position:relative;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  background:radial-gradient(120% 90% at 72% -12%, #081511 0%, var(--void) 58%);padding:22px}
+.palco::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(245,245,247,.045) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(245,245,247,.045) 1px,transparent 1px);
+  background-size:44px 44px}
+.palco .conteudo{position:relative;z-index:1;padding:26px 6px 6px;color:var(--muted);font-size:13px}
+.palco .conteudo h3{color:var(--ink);font-size:20px;margin-bottom:6px}
+
+/* cabeçalho */
+.hd{position:relative;z-index:2;border:1px solid var(--line);border-radius:16px;
+  background:var(--glass);backdrop-filter:blur(18px) saturate(1.5)}
+.hd.rolou{border-color:var(--line2);box-shadow:0 18px 50px rgba(0,0,0,.45);background:rgba(7,12,10,.8)}
+.hd-in{display:flex;align-items:center;gap:16px;padding:0 10px 0 20px;height:58px}
+.hd-logo{display:flex;align-items:center;gap:10px;flex-shrink:0;margin-right:auto}
+.logotype{font-family:var(--fd);font-weight:700;font-size:16.5px;letter-spacing:-.02em;white-space:nowrap}
+.hd-tag{font-family:var(--fm);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--synapse);border:1px solid rgba(206,220,0,.35);border-radius:var(--r-pill);padding:3px 9px}
+.hd-nav{display:flex;gap:22px;font-size:13.5px;color:var(--muted)}
+.hd-nav a{transition:color var(--t-fast);position:relative;padding:2px 0}
+.hd-nav a:hover{color:var(--ink)}
+.hd-nav a.on{color:var(--ink)}
+.hd-nav a.on::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.5px;
+  background:var(--synapse);border-radius:2px}
+.hd .btn{margin-left:6px}
+@media (max-width:900px){.hd-nav{display:none}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:44px;
+  padding:0 20px;border-radius:var(--r-sm);font-family:var(--fd);font-weight:600;font-size:14px;
+  transition:all var(--t-fast);white-space:nowrap}
+.btn.solid{background:var(--synapse);color:var(--cortex)}
+.btn.ghost{border:1px solid var(--line2);background:rgba(255,255,255,.03)}
+.btn.mini{height:34px;padding:0 13px;font-size:12px;border-radius:9px}
+
+/* abas */
+.abas{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.aba{padding:10px 16px;font-size:13.5px;color:var(--muted);position:relative;
+  transition:color var(--t-fast);border-radius:9px 9px 0 0}
+.aba:hover{color:var(--ink);background:rgba(255,255,255,.03)}
+.aba.on{color:var(--ink);font-weight:600}
+.aba.on::after{content:'';position:absolute;left:12px;right:12px;bottom:-1px;height:2px;
+  background:var(--synapse);border-radius:2px}
+
+/* trilha */
+.trilha{display:flex;align-items:center;gap:9px;font-family:var(--fm);font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.trilha a:hover{color:var(--ink)}
+.trilha .sep{opacity:.5}
+.trilha .atual{color:var(--muted)}
+
+/* âncora lateral */
+.anc{display:flex;flex-direction:column;gap:2px}
+.anc a{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dim);padding:7px 0 7px 14px;border-left:1px solid var(--line);transition:all var(--t-fast)}
+.anc a:hover{color:var(--muted);border-color:var(--line2)}
+.anc a.on{color:var(--synapse);border-color:var(--synapse)}
+
+/* rodapé */
+.ft{border-top:1px solid var(--line);padding:26px 4px 4px;display:flex;
+  justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:var(--fm);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+
+.bloco{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:24px}
+.par{display:grid;grid-template-columns:1fr 260px;gap:16px}
+@media (max-width:860px){.par{grid-template-columns:1fr}}
+.cap{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:13px;display:block}
+</style>
+</head>
+<body>
+
+<h1 class="ds-t">Navegação</h1>
+<p class="ds-d">O cabeçalho flutua sobre o conteúdo e não encosta no topo: 14px de folga,
+  cantos de 16px e vidro por trás. Ao rolar, ele ganha borda e sombra.</p>
+
+<div class="ds-g">Cabeçalho · repouso e rolado</div>
+<div class="palco">
+  <header class="hd">
+    <div class="hd-in">
+      <span class="hd-logo"><span class="logotype">NeuroDynamics</span><span class="hd-tag">Brand</span></span>
+      <nav class="hd-nav">
+        <a href="#" class="on">Marca</a><a href="#">Cores</a><a href="#">Tipografia</a>
+        <a href="#">Elementos</a><a href="#">Estúdio</a>
+      </nav>
+      <button class="btn solid mini">Entrar</button>
+    </div>
+  </header>
+  <div class="conteudo"><h3>Em repouso</h3>
+    Borda a 8% e vidro a 62%. A grade do fundo atravessa o cabeçalho — é isso que
+    dá a sensação de vidro.</div>
+</div>
+
+<div class="palco" style="margin-top:16px">
+  <header class="hd rolou">
+    <div class="hd-in">
+      <span class="hd-logo"><span class="logotype">NeuroDynamics</span><span class="hd-tag">Brand</span></span>
+      <nav class="hd-nav">
+        <a href="#">Marca</a><a href="#" class="on">Cores</a><a href="#">Tipografia</a>
+        <a href="#">Elementos</a><a href="#">Estúdio</a>
+      </nav>
+      <button class="btn solid mini">Entrar</button>
+    </div>
+  </header>
+  <div class="conteudo"><h3>Rolado</h3>
+    A classe <code style="font-family:var(--fm);font-size:12px;color:var(--synapse)">.rolou</code>
+    entra depois de 20px de rolagem: fundo mais opaco, borda a 16% e sombra funda.</div>
+</div>
+
+<div class="ds-g">Abas, trilha e âncoras</div>
+<div class="par">
+  <div class="bloco">
+    <span class="cap">Abas</span>
+    <div class="abas">
+      <button class="aba on">Feed</button><button class="aba">Story</button>
+      <button class="aba">Thumbnail</button><button class="aba">Wallpaper</button>
+    </div>
+    <span class="cap" style="margin-top:6px">Trilha</span>
+    <nav class="trilha"><a href="#">Brand</a><span class="sep">/</span>
+      <a href="#">Elementos</a><span class="sep">/</span><span class="atual">Navegação</span></nav>
+  </div>
+  <div class="bloco">
+    <span class="cap">Âncoras da página</span>
+    <nav class="anc">
+      <a href="#">01 Marca</a><a href="#" class="on">02 Cores</a>
+      <a href="#">03 Tipografia</a><a href="#">04 Elementos</a>
+    </nav>
+  </div>
+</div>
+
+<div class="ds-g">Rodapé</div>
+<div class="bloco" style="padding-top:6px">
+  <div class="ft"><span>© 2026 NeuroDynamics</span>
+    <span>LABBIO, Escola de Engenharia, UFMG</span>
+    <span>brand.neurodynamics.dev</span></div>
+</div>
+
+</body>
+</html>

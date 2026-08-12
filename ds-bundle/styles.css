@@ -1,0 +1,5 @@
+/* NeuroDynamics · raiz do CSS
+   Os designs renderizados recebem SÓ o fecho de @import deste
+   arquivo — qualquer CSS que precise chegar neles entra aqui. */
+@import "./tokens/tokens.css";
+@import "./_ds_bundle.css";
