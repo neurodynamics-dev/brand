@@ -322,3 +322,49 @@ h1.title{font-size:var(--fs-h1);font-weight:600;line-height:1.02;letter-spacing:
 .claro h1,.claro h2,.claro h3{color:var(--cortex)}
 .claro .rot{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--axon);font-weight:700}
+
+/* ---------- quadro kanban --------------------------------- */
+/* Colunas que rolam na horizontal no desktop e viram uma pilha
+   no celular. O cartão é a unidade de trabalho: código, título,
+   quem responde e quando vence — nada além disso. */
+.kanban{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(258px,1fr);
+  gap:var(--s3);overflow-x:auto;padding-bottom:var(--s3);align-items:start}
+.kb-col{background:rgba(255,255,255,.02);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:var(--s3);min-height:180px;
+  transition:border-color var(--t-fast),background var(--t-fast)}
+.kb-col.sobre{border-color:var(--synapse);background:rgba(206,220,0,.05)}
+.kb-col header{display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--fm);font-size:var(--fs-micro);letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);padding:2px 4px var(--s3)}
+.kb-col header .n{color:var(--muted)}
+.kb-itens{display:flex;flex-direction:column;gap:var(--s2);min-height:40px}
+.kb-card{background:var(--painel);border:1px solid var(--line2);border-radius:var(--r-sm);
+  padding:11px 12px;cursor:pointer;
+  transition:border-color var(--t-fast),transform var(--t-fast),box-shadow var(--t-fast)}
+.kb-card:hover{border-color:var(--dim);transform:translateY(-1px)}
+.kb-card.mov{opacity:.45}
+.kb-card.sinalizada{border-left:2px solid var(--mielina)}
+.kb-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.kb-top .cod{font-family:var(--fm);font-size:10px;letter-spacing:.06em;color:var(--synapse)}
+.kb-top .pri{width:7px;height:7px;border-radius:50%;flex:none}
+.kb-tit{font-size:var(--fs-sm);line-height:1.4;color:var(--ink)}
+.kb-flag{font-size:var(--fs-xs);color:var(--mielina);margin-top:6px;line-height:1.45}
+.kb-pe{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}
+.kb-sem{font-size:11px;color:var(--dim);font-style:italic}
+.kb-meta{display:flex;gap:9px;font-family:var(--fm);font-size:10.5px;color:var(--dim)}
+.kb-meta .atrasado{color:var(--pulso);font-weight:500}
+.kb-vazio{font-size:var(--fs-xs);color:var(--dim);text-align:center;padding:14px 0}
+.kb-add{width:100%;margin-top:var(--s2);padding:8px;border-radius:var(--r-sm);
+  border:1px dashed var(--line2);font-size:var(--fs-xs);color:var(--dim);
+  transition:color var(--t-fast),border-color var(--t-fast)}
+.kb-add:hover{color:var(--ink);border-color:var(--dim)}
+@media (max-width:760px){.kanban{grid-auto-flow:row;grid-auto-columns:auto}}
+
+/* resumo do quadro: o que precisa de olho agora */
+.atv-resumo{display:flex;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s4)}
+.res-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);
+  font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--line2);border-radius:var(--r-pill);padding:5px 12px;color:var(--muted)}
+.res-pill.bad{color:var(--pulso);border-color:rgba(241,128,111,.35)}
+.res-pill.warn{color:var(--mielina);border-color:rgba(245,195,106,.35)}
+button.res-pill:hover{background:rgba(255,255,255,.05)}
