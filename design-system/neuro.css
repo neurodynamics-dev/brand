@@ -24,6 +24,17 @@ body{
 h1,h2,h3,h4{font-family:var(--fd);letter-spacing:-.015em}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:none}
+/* Todo controle nasce vestido. Sem isto, um <input> ou <select> solto —
+   fora de um .fld — cai no widget branco do sistema e some no escuro. */
+input,select,textarea{font-family:inherit;font-size:var(--fs-sm);color:var(--ink);
+  background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:var(--r-sm);
+  padding:9px 11px;outline:none;transition:border-color var(--t-fast),background var(--t-fast)}
+input:focus,select:focus,textarea:focus{border-color:var(--synapse);background:rgba(206,220,0,.04)}
+input::placeholder,textarea::placeholder{color:var(--dim)}
+select option{background:var(--painel);color:var(--ink)}
+input[type=checkbox],input[type=radio]{accent-color:var(--synapse);padding:0;
+  width:16px;height:16px;background:none;border:none}
+textarea{resize:vertical;line-height:1.6;width:100%}
 ::selection{background:var(--synapse);color:var(--cortex)}
 :focus-visible{outline:2px solid var(--synapse);outline-offset:2px;border-radius:4px}
 
