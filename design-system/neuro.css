@@ -24,6 +24,17 @@ body{
 h1,h2,h3,h4{font-family:var(--fd);letter-spacing:-.015em}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:none}
+/* Todo controle nasce vestido. Sem isto, um <input> ou <select> solto —
+   fora de um .fld — cai no widget branco do sistema e some no escuro. */
+input,select,textarea{font-family:inherit;font-size:var(--fs-sm);color:var(--ink);
+  background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:var(--r-sm);
+  padding:9px 11px;outline:none;transition:border-color var(--t-fast),background var(--t-fast)}
+input:focus,select:focus,textarea:focus{border-color:var(--synapse);background:rgba(206,220,0,.04)}
+input::placeholder,textarea::placeholder{color:var(--dim)}
+select option{background:var(--painel);color:var(--ink)}
+input[type=checkbox],input[type=radio]{accent-color:var(--synapse);padding:0;
+  width:16px;height:16px;background:none;border:none}
+textarea{resize:vertical;line-height:1.6;width:100%}
 ::selection{background:var(--synapse);color:var(--cortex)}
 :focus-visible{outline:2px solid var(--synapse);outline-offset:2px;border-radius:4px}
 
@@ -148,6 +159,20 @@ h1.title{font-size:var(--fs-h1);font-weight:600;line-height:1.02;letter-spacing:
 .hd-nav a:hover{color:var(--ink)}
 @media (max-width:1080px){.hd-nav{display:none}}
 
+/* ---------- abas de página -------------------------------- */
+/* A resposta da marca para profundidade dentro de uma tela: o
+   cabeçalho diz onde você está, as abas dizem o que há aqui. */
+.abas{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:18px;
+  overflow-x:auto;scrollbar-width:none}
+.abas::-webkit-scrollbar{display:none}
+.aba{padding:10px 16px;font-size:13.5px;color:var(--muted);position:relative;
+  white-space:nowrap;border-radius:var(--r-sm) var(--r-sm) 0 0;
+  transition:color var(--t-fast),background var(--t-fast)}
+.aba:hover{color:var(--ink);background:rgba(255,255,255,.03)}
+.aba.on{color:var(--ink);font-weight:600}
+.aba.on::after{content:'';position:absolute;left:12px;right:12px;bottom:-1px;height:2px;
+  background:var(--synapse)}
+
 /* ---------- banda de destaque ----------------------------- */
 .band{background:linear-gradient(118deg,var(--cortex) 0%,var(--axon) 62%,#0A6F62 100%);
   border-radius:var(--r-xl);padding:clamp(34px,5vw,56px);position:relative;
@@ -180,11 +205,121 @@ h1.title{font-size:var(--fs-h1);font-weight:600;line-height:1.02;letter-spacing:
   text-transform:uppercase;color:var(--dim)}
 @media (max-width:640px){.escala .row{grid-template-columns:1fr;gap:4px}}
 
+/* ---------- tabela de trabalho ---------------------------- */
+/* A `.tabela` acima é de leitura. Esta é a de trabalho: muitas
+   linhas, rolagem, linha que abre um registro. Use `.trabalho`
+   sempre dentro de um `.wrap`, que é quem rola. */
+.wrap{overflow:auto;max-height:70vh;border-radius:var(--r-md)}
+.tabela.trabalho{font-size:var(--fs-xs)}
+.tabela.trabalho th{position:sticky;top:0;z-index:1;background:var(--painel);
+  padding:9px 12px}
+.tabela.trabalho td{padding:9px 12px;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis}
+.tabela.trabalho.fixa{table-layout:fixed;width:100%}
+.tabela.trabalho tr.click{cursor:pointer}
+.tabela.trabalho tr.click:hover td{background:rgba(255,255,255,.04)}
+.tabela.trabalho tr.click:focus-visible{outline:2px solid var(--synapse);outline-offset:-2px}
+.tabela.trabalho .reg{font-family:var(--fm);font-size:11px;color:var(--dim)}
+.tabela.trabalho .nome{font-weight:600;color:var(--ink)}
+
+/* ---------- barra de filtros ------------------------------ */
+.filtros{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:flex-end;margin-bottom:var(--s4)}
+.filtros .fld{margin-bottom:0;min-width:170px}
+.filtros .fld.cresce{flex:1;min-width:220px}
+@media (max-width:640px){.filtros .fld,.filtros .fld.cresce{min-width:100%}}
+
+/* ---------- galeria de tiles ------------------------------ */
+/* "Escolha uma ferramenta": relatórios, operações, geradores. */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:var(--gap)}
+.tile{border:1px solid var(--line);border-radius:var(--r);background:var(--card);
+  padding:22px;text-align:left;cursor:pointer;display:flex;flex-direction:column;
+  transition:border-color var(--t-fast),background var(--t-fast),transform var(--t-fast)}
+.tile:hover{border-color:var(--line2);background:rgba(255,255,255,.05);transform:translateY(-2px)}
+.tile .sq{width:38px;height:38px;border-radius:var(--r-sm);display:grid;place-items:center;
+  background:rgba(206,220,0,.1);color:var(--synapse);margin-bottom:14px}
+.tile .tt{font-family:var(--fd);font-weight:600;font-size:var(--fs-h3);margin-bottom:5px}
+.tile .td{font-size:var(--fs-xs);color:var(--muted);line-height:1.55}
+
+/* ---------- métricas -------------------------------------- */
+.metricas{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:900px){.metricas{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.metricas{grid-template-columns:1fr}}
+.metrica{border:1px solid var(--line);border-radius:var(--r-md);background:var(--card);padding:18px 20px}
+.metrica .rot{font-family:var(--fm);font-size:var(--fs-micro);letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);display:block;margin-bottom:9px}
+.metrica .val{font-family:var(--fd);font-weight:600;font-size:30px;letter-spacing:-.02em;line-height:1}
+.metrica .var{font-family:var(--fm);font-size:11px;margin-top:7px;display:block}
+.metrica .var.sobe{color:var(--vital)}
+.metrica .var.desce{color:var(--pulso)}
+.metrica .var.neutro{color:var(--dim)}
+
+/* ---------- barras ---------------------------------------- */
+.prop-bar{display:flex;height:34px;border-radius:10px;overflow:hidden;
+  border:1px solid var(--line2);margin-bottom:10px}
+.prop-bar div{height:100%}
+.legenda{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--fm);font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.legenda span{display:inline-flex;align-items:center;gap:7px}
+.legenda i{width:9px;height:9px;border-radius:2px;display:block}
+.barras{display:flex;flex-direction:column;gap:11px}
+.barra{display:grid;grid-template-columns:130px 1fr 52px;gap:14px;align-items:center}
+.barra .k{font-size:var(--fs-xs);color:var(--muted)}
+.barra .trilho{display:block;height:9px;border-radius:5px;background:rgba(255,255,255,.05);overflow:hidden}
+.barra .fill{display:block;height:100%;border-radius:5px;background:var(--soma)}
+.barra .n{font-family:var(--fm);font-size:11.5px;color:var(--muted);text-align:right}
+@media (max-width:640px){.barra{grid-template-columns:96px 1fr 44px;gap:10px}}
+
 /* ---------- toast ----------------------------------------- */
 .nd-toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:99;
   display:flex;flex-direction:column;gap:8px;align-items:center;width:max-content;max-width:92vw}
 .toast{background:#151B19;border:1px solid var(--line2);color:var(--ink);
-  border-radius:12px;padding:12px 20px;font-size:var(--fs-sm);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+  border-radius:12px;padding:12px 20px;font-size:var(--fs-sm);box-shadow:0 12px 40px rgba(0,0,0,.5);
+  display:inline-flex;align-items:center;gap:11px}
+.toast .dt{width:7px;height:7px;border-radius:50%;flex:none}
+.toast.ok .dt{background:var(--vital)}
+.toast.erro .dt{background:var(--pulso)}
+.toast.info .dt{background:var(--plasma)}
+.toast .acao{font-family:var(--fd);font-weight:600;font-size:var(--fs-xs);color:var(--synapse);margin-left:6px}
+
+/* ---------- carregamento ---------------------------------- */
+/* Esqueleto quando se sabe a forma do conteúdo; giro quando não. */
+.skel{border-radius:7px;background:linear-gradient(90deg,
+  rgba(255,255,255,.04) 25%,rgba(255,255,255,.08) 37%,rgba(255,255,255,.04) 63%);
+  background-size:400% 100%;animation:nd-brilho 1.4s ease infinite}
+@keyframes nd-brilho{0%{background-position:100% 50%}100%{background-position:0 50%}}
+.skel-linhas{display:flex;flex-direction:column;gap:9px}
+.spin{width:22px;height:22px;border-radius:50%;border:2px solid var(--line2);
+  border-top-color:var(--synapse);animation:nd-gira .8s linear infinite}
+@keyframes nd-gira{to{transform:rotate(360deg)}}
+.carregando{display:flex;align-items:center;gap:12px;font-size:var(--fs-sm);color:var(--muted)}
+.progresso{height:6px;border-radius:4px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:14px}
+.progresso .fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--axon),var(--synapse))}
+@media (prefers-reduced-motion:reduce){.skel,.spin{animation:none}}
+
+/* ---------- estado vazio ---------------------------------- */
+.vazio{border:1px dashed var(--line2);border-radius:var(--r);padding:40px 26px;text-align:center;
+  background:rgba(255,255,255,.015)}
+.vazio .glyph{font-family:var(--fd);font-weight:700;font-size:44px;color:rgba(245,245,247,.09);
+  line-height:1;margin-bottom:12px;user-select:none}
+.vazio h3{font-size:var(--fs-h3);font-weight:600;margin-bottom:5px}
+.vazio p{font-size:var(--fs-xs);color:var(--muted);max-width:360px;margin:0 auto 18px}
+
+/* ---------- diálogo --------------------------------------- */
+.veu{position:fixed;inset:0;z-index:80;background:rgba(5,8,7,.55);
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  opacity:0;pointer-events:none;transition:opacity var(--t)}
+.veu.open{opacity:1;pointer-events:auto}
+.dlg{position:fixed;z-index:81;top:50%;left:50%;transform:translate(-50%,-48%) scale(.98);
+  width:min(420px,calc(100vw - 32px));max-height:86vh;overflow:auto;
+  background:var(--painel);border:1px solid var(--line2);border-radius:var(--r-lg);
+  padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.6);
+  opacity:0;pointer-events:none;transition:opacity var(--t),transform var(--t)}
+.dlg.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.dlg.largo{width:min(860px,calc(100vw - 32px))}
+.dlg h3{font-size:17px;font-weight:600;margin-bottom:7px}
+.dlg p{font-size:var(--fs-sm);color:var(--muted);margin-bottom:22px}
+.dlg .acts{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){.veu,.dlg{transition:none}}
 
 /* ---------- rodapé ---------------------------------------- */
 .nd-footer{border-top:1px solid var(--line);margin-top:var(--sec)}
@@ -198,3 +333,73 @@ h1.title{font-size:var(--fs-h1);font-weight:600;line-height:1.02;letter-spacing:
 .claro h1,.claro h2,.claro h3{color:var(--cortex)}
 .claro .rot{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--axon);font-weight:700}
+
+/* ---------- quadro kanban --------------------------------- */
+/* Colunas que rolam na horizontal no desktop e viram uma pilha
+   no celular. O cartão é a unidade de trabalho: código, título,
+   quem responde e quando vence — nada além disso. */
+.kanban{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(258px,1fr);
+  gap:var(--s3);overflow-x:auto;padding-bottom:var(--s3);align-items:start}
+.kb-col{background:rgba(255,255,255,.02);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:var(--s3);min-height:180px;
+  transition:border-color var(--t-fast),background var(--t-fast)}
+.kb-col.sobre{border-color:var(--synapse);background:rgba(206,220,0,.05)}
+.kb-col header{display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--fm);font-size:var(--fs-micro);letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);padding:2px 4px var(--s3)}
+.kb-col header .n{color:var(--muted)}
+.kb-itens{display:flex;flex-direction:column;gap:var(--s2);min-height:40px}
+.kb-card{background:var(--painel);border:1px solid var(--line2);border-radius:var(--r-sm);
+  padding:11px 12px;cursor:pointer;
+  transition:border-color var(--t-fast),transform var(--t-fast),box-shadow var(--t-fast)}
+.kb-card:hover{border-color:var(--dim);transform:translateY(-1px)}
+.kb-card.mov{opacity:.45}
+.kb-card.sinalizada{border-left:2px solid var(--mielina)}
+.kb-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.kb-top .cod{font-family:var(--fm);font-size:10px;letter-spacing:.06em;color:var(--synapse)}
+.kb-top .pri{width:7px;height:7px;border-radius:50%;flex:none}
+.kb-top .org{font-family:var(--fm);font-size:9px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--dim);border:1px solid var(--line2);border-radius:5px;padding:1px 5px;margin-left:7px}
+
+/* editor de pills (grupos na ficha): parece um campo, é uma lista */
+/* lista de caixas de seleção em coluna (grupos, status, locais) */
+.multi{display:flex;flex-direction:column;gap:7px;max-height:210px;overflow-y:auto;
+  border:1px solid var(--line2);border-radius:11px;padding:11px 13px;background:rgba(255,255,255,.03)}
+/* o caixa-alta é do RÓTULO do campo, não do que está dentro dele: nome de
+   grupo, de sistema e de pessoa são dado, e dado se lê como foi escrito */
+.multi .check{margin:0;text-transform:none;letter-spacing:normal;font-weight:400}
+
+.pills-ed{display:flex;flex-wrap:wrap;align-items:center;gap:7px;min-height:42px;
+  background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:11px;
+  padding:7px 9px;cursor:text;transition:border-color .15s,background .15s}
+.pills-ed:focus-within{border-color:var(--syn);background:rgba(255,255,255,.07)}
+.pills-ed input{flex:1 1 130px;min-width:130px;border:none;background:none;padding:2px 2px;
+  border-radius:0;font-size:14px;color:var(--ink)}
+.pills-ed input:focus-visible{outline:none}
+.pill-ed{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--ink);
+  background:rgba(206,220,0,.10);border:1px solid rgba(206,220,0,.30);
+  border-radius:8px;padding:3px 4px 3px 9px;line-height:1.4}
+.pill-ed button{border:none;background:none;color:var(--dim);cursor:pointer;font-size:15px;
+  line-height:1;padding:0 4px;border-radius:5px;transition:color .15s,background .15s}
+.pill-ed button:hover{color:var(--bad);background:rgba(241,128,111,.14)}
+.kb-tit{font-size:var(--fs-sm);line-height:1.4;color:var(--ink)}
+.kb-flag{font-size:var(--fs-xs);color:var(--mielina);margin-top:6px;line-height:1.45}
+.kb-pe{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}
+.kb-sem{font-size:11px;color:var(--dim);font-style:italic}
+.kb-meta{display:flex;gap:9px;font-family:var(--fm);font-size:10.5px;color:var(--dim)}
+.kb-meta .atrasado{color:var(--pulso);font-weight:500}
+.kb-vazio{font-size:var(--fs-xs);color:var(--dim);text-align:center;padding:14px 0}
+.kb-add{width:100%;margin-top:var(--s2);padding:8px;border-radius:var(--r-sm);
+  border:1px dashed var(--line2);font-size:var(--fs-xs);color:var(--dim);
+  transition:color var(--t-fast),border-color var(--t-fast)}
+.kb-add:hover{color:var(--ink);border-color:var(--dim)}
+@media (max-width:760px){.kanban{grid-auto-flow:row;grid-auto-columns:auto}}
+
+/* resumo do quadro: o que precisa de olho agora */
+.atv-resumo{display:flex;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s4)}
+.res-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);
+  font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--line2);border-radius:var(--r-pill);padding:5px 12px;color:var(--muted)}
+.res-pill.bad{color:var(--pulso);border-color:rgba(241,128,111,.35)}
+.res-pill.warn{color:var(--mielina);border-color:rgba(245,195,106,.35)}
+button.res-pill:hover{background:rgba(255,255,255,.05)}

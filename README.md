@@ -43,7 +43,7 @@ linguagem visual do site institucional.
 ## Design system (Claude Design)
 
 A pasta [`design-system/`](design-system/) traz a mesma linguagem visual
-organizada como biblioteca de componentes para o **Claude Design**: 14 cards
+organizada como biblioteca de componentes para o **Claude Design**: 15 cards
 em três grupos (Fundamentos, Marca, Componentes), tokens em arquivo único e
 um `build.mjs` que mantém tudo em sincronia. Com ela sincronizada, as
 interfaces que o Claude gera para a equipe já saem na marca.

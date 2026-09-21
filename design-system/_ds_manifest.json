@@ -139,6 +139,26 @@
         "width": 1180,
         "height": 1580
       }
+    },
+    {
+      "name": "Telas de trabalho",
+      "path": "previews/15-telas-de-trabalho.html",
+      "subtitle": "Tabela densa, barra de filtros e galeria de ferramentas",
+      "group": "Componentes",
+      "viewport": {
+        "width": 1180,
+        "height": 1560
+      }
+    },
+    {
+      "name": "Quadro e atribuição",
+      "path": "previews/16-quadro-e-atribuicao.html",
+      "subtitle": "Cartão de kanban, selo de origem e editor de pills",
+      "group": "Componentes",
+      "viewport": {
+        "width": 1180,
+        "height": 1320
+      }
     }
   ]
 }
