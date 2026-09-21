@@ -358,6 +358,30 @@ h1.title{font-size:var(--fs-h1);font-weight:600;line-height:1.02;letter-spacing:
 .kb-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .kb-top .cod{font-family:var(--fm);font-size:10px;letter-spacing:.06em;color:var(--synapse)}
 .kb-top .pri{width:7px;height:7px;border-radius:50%;flex:none}
+.kb-top .org{font-family:var(--fm);font-size:9px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--dim);border:1px solid var(--line2);border-radius:5px;padding:1px 5px;margin-left:7px}
+
+/* editor de pills (grupos na ficha): parece um campo, é uma lista */
+/* lista de caixas de seleção em coluna (grupos, status, locais) */
+.multi{display:flex;flex-direction:column;gap:7px;max-height:210px;overflow-y:auto;
+  border:1px solid var(--line2);border-radius:11px;padding:11px 13px;background:rgba(255,255,255,.03)}
+/* o caixa-alta é do RÓTULO do campo, não do que está dentro dele: nome de
+   grupo, de sistema e de pessoa são dado, e dado se lê como foi escrito */
+.multi .check{margin:0;text-transform:none;letter-spacing:normal;font-weight:400}
+
+.pills-ed{display:flex;flex-wrap:wrap;align-items:center;gap:7px;min-height:42px;
+  background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:11px;
+  padding:7px 9px;cursor:text;transition:border-color .15s,background .15s}
+.pills-ed:focus-within{border-color:var(--syn);background:rgba(255,255,255,.07)}
+.pills-ed input{flex:1 1 130px;min-width:130px;border:none;background:none;padding:2px 2px;
+  border-radius:0;font-size:14px;color:var(--ink)}
+.pills-ed input:focus-visible{outline:none}
+.pill-ed{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--ink);
+  background:rgba(206,220,0,.10);border:1px solid rgba(206,220,0,.30);
+  border-radius:8px;padding:3px 4px 3px 9px;line-height:1.4}
+.pill-ed button{border:none;background:none;color:var(--dim);cursor:pointer;font-size:15px;
+  line-height:1;padding:0 4px;border-radius:5px;transition:color .15s,background .15s}
+.pill-ed button:hover{color:var(--bad);background:rgba(241,128,111,.14)}
 .kb-tit{font-size:var(--fs-sm);line-height:1.4;color:var(--ink)}
 .kb-flag{font-size:var(--fs-xs);color:var(--mielina);margin-top:6px;line-height:1.45}
 .kb-pe{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}

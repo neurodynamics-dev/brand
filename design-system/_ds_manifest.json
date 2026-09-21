@@ -149,6 +149,16 @@
         "width": 1180,
         "height": 1560
       }
+    },
+    {
+      "name": "Quadro e atribuição",
+      "path": "previews/16-quadro-e-atribuicao.html",
+      "subtitle": "Cartão de kanban, selo de origem e editor de pills",
+      "group": "Componentes",
+      "viewport": {
+        "width": 1180,
+        "height": 1320
+      }
     }
   ]
 }
