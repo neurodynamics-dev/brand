@@ -1,4 +1,4 @@
-<!-- @dsCard group="Componentes" name="Quadro e atribuição" subtitle="Cartão de kanban, selo de origem e editor de pills" width="1180" height="1320" -->
+<!-- @dsCard group="Componentes" name="Quadro e atribuição" subtitle="Cartão com relevo, brilho de prioridade, selo de origem e editor de pills" width="1180" height="1460" -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -109,39 +109,47 @@ input,select{font-family:inherit;font-size:var(--fs-body);color:var(--ink)}
 code{font-family:var(--fm);font-size:.92em;color:var(--ion)}
 
 /* ---- cartão de quadro ---- */
-.kb-card{background:var(--painel);border:1px solid var(--line2);border-radius:var(--r-sm);
-  padding:11px 12px;cursor:pointer;
-  transition:border-color var(--t-fast),transform var(--t-fast),box-shadow var(--t-fast)}
-.kb-card:hover{border-color:var(--dim);transform:translateY(-1px)}
-.kb-card.mov{opacity:.45}
-.kb-card.sinalizada{border-left:2px solid var(--mielina)}
-.kb-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.kb-card{position:relative;flex:none;cursor:grab;
+  background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+  border:1px solid var(--line2);border-radius:var(--r-sm);padding:12px 13px 11px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),
+             0 1px 1px rgba(0,0,0,.45),
+             0 5px 12px -6px rgba(0,0,0,.6);
+  transform-style:preserve-3d;
+  transition:transform .17s cubic-bezier(.2,.8,.3,1),box-shadow .17s,border-color .17s}
+/* o brilho no topo: prioridade, ou âmbar quando sinalizado */
+.kb-card::before{content:'';position:absolute;left:13px;right:13px;top:-1px;height:2px;
+  border-radius:0 0 3px 3px;background:var(--pri,transparent);
+  box-shadow:0 0 10px 1px var(--pri,transparent),0 0 3px 0 var(--pri,transparent);
+  opacity:.85;transition:opacity .17s}
+.kb-card:hover{transform:translateY(-3px);border-color:var(--dim);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),
+             0 2px 3px rgba(0,0,0,.45),
+             0 14px 26px -10px rgba(0,0,0,.75)}
+.kb-card:hover::before{opacity:1}
+.kb-card:active{cursor:grabbing;transform:translateY(-1px) scale(.995)}
+.kb-card.fixo{cursor:pointer}
+/* na mão: inclinado, maior e bem acima da mesa */
+.kb-card.mov{cursor:grabbing;opacity:.92;
+  transform:rotate(-2.2deg) scale(1.035) translateY(-4px);
+  border-color:var(--syn);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),
+             0 3px 5px rgba(0,0,0,.4),
+             0 26px 46px -14px rgba(0,0,0,.85)}
+.kb-card.sinalizada{border-color:rgba(245,195,106,.32)}
+
+.kb-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:7px}
+.kb-ids{display:flex;align-items:center;min-width:0}
 .kb-top .cod{font-family:var(--fm);font-size:10px;letter-spacing:.06em;color:var(--synapse)}
 .kb-top .pri{width:7px;height:7px;border-radius:50%;flex:none}
 .kb-top .org{font-family:var(--fm);font-size:9px;letter-spacing:.07em;text-transform:uppercase;
   color:var(--dim);border:1px solid var(--line2);border-radius:5px;padding:1px 5px;margin-left:7px}
-
-/* editor de pills (grupos na ficha): parece um campo, é uma lista */
-.pills-ed{display:flex;flex-wrap:wrap;align-items:center;gap:7px;min-height:42px;
-  background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:11px;
-  padding:7px 9px;cursor:text;transition:border-color .15s,background .15s}
-.pills-ed:focus-within{border-color:var(--syn);background:rgba(255,255,255,.07)}
-.pills-ed input{flex:1 1 130px;min-width:130px;border:none;background:none;padding:2px 2px;
-  border-radius:0;font-size:14px;color:var(--ink)}
-.pills-ed input:focus-visible{outline:none}
-.pill-ed{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--ink);
-  background:rgba(206,220,0,.10);border:1px solid rgba(206,220,0,.30);
-  border-radius:8px;padding:3px 4px 3px 9px;line-height:1.4}
-.pill-ed button{border:none;background:none;color:var(--dim);cursor:pointer;font-size:15px;
-  line-height:1;padding:0 4px;border-radius:5px;transition:color .15s,background .15s}
-.pill-ed button:hover{color:var(--bad);background:rgba(241,128,111,.14)}
-.kb-tit{font-size:var(--fs-sm);line-height:1.4;color:var(--ink)}
-.kb-flag{font-size:var(--fs-xs);color:var(--mielina);margin-top:6px;line-height:1.45}
-.kb-pe{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}
+.kb-tit{font-size:13.5px;line-height:1.42;color:var(--ink)}
+.kb-flag{font-size:12px;color:var(--mielina);margin-top:7px;line-height:1.45}
+.kb-pe{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:11px}
 .kb-sem{font-size:11px;color:var(--dim);font-style:italic}
 .kb-meta{display:flex;gap:9px;font-family:var(--fm);font-size:10.5px;color:var(--dim)}
 .kb-meta .atrasado{color:var(--pulso);font-weight:500}
-.kb-vazio{font-size:var(--fs-xs);color:var(--dim);text-align:center;padding:14px 0}
 
 /* ---- editor de pills ---- */
 .pills-ed{display:flex;flex-wrap:wrap;align-items:center;gap:7px;min-height:42px;
@@ -198,9 +206,9 @@ que é como se atribui pessoa a grupo sem digitar vírgula.</p>
 <div class="ds-g">Cartão do quadro</div>
 <div class="bloco" style="display:flex;gap:18px;flex-wrap:wrap;max-width:840px">
 
-  <article class="kb-card" style="width:250px">
+  <article class="kb-card" style="width:250px;--pri:var(--mielina)">
     <div class="kb-top">
-      <span style="display:flex;align-items:center;min-width:0"><span class="cod">ORT-14</span></span>
+      <span class="kb-ids"><span class="cod">ORT-14</span></span>
       <span class="pri" style="background:var(--mielina)" title="Prioridade alta"></span>
     </div>
     <div class="kb-tit">Calibrar o encoder da bancada 2</div>
@@ -210,9 +218,9 @@ que é como se atribui pessoa a grupo sem digitar vírgula.</p>
     </div>
   </article>
 
-  <article class="kb-card sinalizada" style="width:250px">
+  <article class="kb-card sinalizada mov" style="width:250px;--pri:var(--mielina)">
     <div class="kb-top">
-      <span style="display:flex;align-items:center;min-width:0"><span class="cod">DEP-7</span>
+      <span class="kb-ids"><span class="cod">DEP-7</span>
         <span class="org" title="Nasceu de uma solicitação">solicitação</span></span>
       <span class="pri" style="background:var(--pulso)" title="Prioridade urgente"></span>
     </div>
@@ -224,9 +232,9 @@ que é como se atribui pessoa a grupo sem digitar vírgula.</p>
     </div>
   </article>
 
-  <article class="kb-card" style="width:250px">
+  <article class="kb-card" style="width:250px;--pri:var(--plasma)">
     <div class="kb-top">
-      <span style="display:flex;align-items:center;min-width:0"><span class="cod">DEP-8</span>
+      <span class="kb-ids"><span class="cod">DEP-8</span>
         <span class="org" title="Nasceu de um apontamento">apontamento</span></span>
       <span class="pri" style="background:var(--plasma)" title="Prioridade média"></span>
     </div>
@@ -272,9 +280,20 @@ que é como se atribui pessoa a grupo sem digitar vírgula.</p>
     <div class="row"><span class="k">Prioridade</span>
       <span class="v">Um ponto de 7px, nunca um rótulo. Quatro cores, do <code>--grafite</code>
       ao <code>--pulso</code>. O <code>title</code> diz qual é, para quem não distingue cor.</span></div>
+    <div class="row"><span class="k">O brilho no topo</span>
+      <span class="v">Duas linhas de luz em <code>--pri</code>, a cor da prioridade — ou
+      <code>--mielina</code> quando o cartão está sinalizado. Sinalizado é "olhe para mim",
+      que é o que um brilho quer dizer. O ponto de prioridade continua ali, então nada se
+      perde na troca. <b>Não</b> é barra lateral: barra colorida na lateral empurra o texto
+      e some quando os cartões ficam estreitos.</span></div>
+    <div class="row"><span class="k">Profundidade</span>
+      <span class="v">Três camadas de sombra e uma aresta iluminada por dentro. O cartão tem
+      relevo porque é para ser <b>pego com a mão</b> — a sombra é a única pista de que dá
+      para arrastar. Ao pegar, ele inclina <code>-2,2°</code>, cresce 3,5% e sobe. Esta é a
+      exceção ao "sem sombra" da marca, e o motivo é esse: tile estático não se arrasta.</span></div>
     <div class="row"><span class="k">Sinalizado</span>
-      <span class="v"><code>.sinalizada</code> põe uma borda esquerda em <code>--mielina</code>
-      e o motivo em <code>.kb-flag</code>. Sinalizar sem escrever o motivo não é sinalizar.</span></div>
+      <span class="v">O motivo em <code>.kb-flag</code>, em <code>--mielina</code>.
+      Sinalizar sem escrever o motivo não é sinalizar.</span></div>
     <div class="row"><span class="k">Editor de pills</span>
       <span class="v">Para conjunto pequeno e de nome conhecido — grupos, etiquetas. O
       <code>datalist</code> não é enfeite: é o que faz duas grafias do mesmo nome virarem uma.</span></div>
@@ -286,6 +305,12 @@ que é como se atribui pessoa a grupo sem digitar vírgula.</p>
   <div class="proibido">
     <div class="nao"><b>Sem prioridade escrita no cartão</b>
       <p>"Alta" em texto rouba a linha do título. O ponto resolve, e a cor já é a escala.</p></div>
+    <div class="nao"><b>Sem barra colorida na lateral</b>
+      <p>Come a largura do cartão, que numa coluna de 230px já é pouca, e desaparece quando
+      a coluna estreita. O sinal vai no topo, onde o olho entra.</p></div>
+    <div class="nao"><b>Sem rolagem horizontal no quadro</b>
+      <p>As cinco colunas cabem na janela e cada uma rola por dentro. Barra horizontal é
+      cromo do sistema operacional no meio da interface.</p></div>
     <div class="nao"><b>Sem pill sem ×</b>
       <p>Se dá para adicionar, tem de dar para tirar no mesmo lugar. Pill só de leitura é
       <code>.chip</code>, não <code>.pill-ed</code>.</p></div>
