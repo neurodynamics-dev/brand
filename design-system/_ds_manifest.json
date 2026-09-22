@@ -159,6 +159,16 @@
         "width": 1180,
         "height": 1460
       }
+    },
+    {
+      "name": "Menu lateral",
+      "path": "previews/17-menu-lateral.html",
+      "subtitle": "Navegação dos apps: aberto com subitens, trilho com voo e gaveta no celular",
+      "group": "Componentes",
+      "viewport": {
+        "width": 1180,
+        "height": 3280
+      }
     }
   ]
 }
