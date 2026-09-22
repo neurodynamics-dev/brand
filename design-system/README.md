@@ -17,16 +17,16 @@ design-system/
 ├── build.mjs           sincroniza tokens e artes nos previews; gera o manifesto
 ├── _ds_manifest.json   índice dos cards (gerado)
 ├── marca/              artes de preview, derivadas de assets/
-└── previews/           15 cards, um HTML autocontido cada
+└── previews/           17 cards, um HTML autocontido cada
 ```
 
-Os 15 cards, em três grupos:
+Os 17 cards, em três grupos:
 
 | Grupo | Cards |
 | --- | --- |
 | **Fundamentos** | Cores · Tipografia · Espaço e forma · Superfícies |
 | **Marca** | Imagotipo · Fundo e textura · Banda e hero |
-| **Componentes** | Botões · Cartões · Formulários · Status e etiquetas · Navegação · Dados · Feedback · Telas de trabalho |
+| **Componentes** | Botões · Cartões · Formulários · Status e etiquetas · Navegação · Dados · Feedback · Telas de trabalho · Quadro e atribuição · Menu lateral |
 
 Cada preview mostra os estados reais do componente (repouso, hover, foco,
 erro, desativado) e fecha com as regras de uso — inclusive as proibições, que
@@ -81,14 +81,14 @@ não pode ser mudado depois, então crie por ali mesmo.
 
 **4. Confira**
 
-Abra claude.ai/design, entre no projeto e veja os 15 cards distribuídos em
+Abra claude.ai/design, entre no projeto e veja os 17 cards distribuídos em
 Fundamentos, Marca e Componentes. A partir daí, toda interface que o Claude
 gerar para a NeuroDynamics sai já na marca.
 
 ## Como editar
 
 **Mudou um token?** Edite `tokens.css` e rode `node build.mjs`. O bloco de
-tokens é reescrito nos 15 previews de uma vez.
+tokens é reescrito nos 17 previews de uma vez.
 
 **Mudou um componente?** Edite o preview correspondente em `previews/` e, se o
 componente também vive em `neuro.css`, atualize os dois. O preview é a
