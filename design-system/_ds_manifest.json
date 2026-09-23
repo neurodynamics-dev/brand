@@ -167,7 +167,17 @@
       "group": "Componentes",
       "viewport": {
         "width": 1180,
-        "height": 3280
+        "height": 3500
+      }
+    },
+    {
+      "name": "Tema claro",
+      "path": "previews/18-tema-claro.html",
+      "subtitle": "Os mesmos tokens em papel: lado a lado, o que troca, o que fica e como ligar",
+      "group": "Fundamentos",
+      "viewport": {
+        "width": 1180,
+        "height": 2790
       }
     }
   ]
