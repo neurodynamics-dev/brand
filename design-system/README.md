@@ -12,19 +12,19 @@ central de assets. Isto aqui é a versão que a ferramenta lê.
 
 ```
 design-system/
-├── tokens.css          fonte única dos tokens (cor, tipo, espaço, forma)
+├── tokens.css          fonte única dos tokens (cor, tipo, espaço, forma) — os dois temas
 ├── neuro.css           folha consumível: base + componentes
-├── build.mjs           sincroniza tokens e artes nos previews; gera o manifesto
+├── build.mjs           sincroniza tokens, ilha escura e artes; gera o manifesto
 ├── _ds_manifest.json   índice dos cards (gerado)
 ├── marca/              artes de preview, derivadas de assets/
-└── previews/           17 cards, um HTML autocontido cada
+└── previews/           18 cards, um HTML autocontido cada
 ```
 
-Os 17 cards, em três grupos:
+Os 18 cards, em três grupos:
 
 | Grupo | Cards |
 | --- | --- |
-| **Fundamentos** | Cores · Tipografia · Espaço e forma · Superfícies |
+| **Fundamentos** | Cores · Tipografia · Espaço e forma · Superfícies · Tema claro |
 | **Marca** | Imagotipo · Fundo e textura · Banda e hero |
 | **Componentes** | Botões · Cartões · Formulários · Status e etiquetas · Navegação · Dados · Feedback · Telas de trabalho · Quadro e atribuição · Menu lateral |
 
@@ -81,14 +81,16 @@ não pode ser mudado depois, então crie por ali mesmo.
 
 **4. Confira**
 
-Abra claude.ai/design, entre no projeto e veja os 17 cards distribuídos em
+Abra claude.ai/design, entre no projeto e veja os 18 cards distribuídos em
 Fundamentos, Marca e Componentes. A partir daí, toda interface que o Claude
 gerar para a NeuroDynamics sai já na marca.
 
 ## Como editar
 
-**Mudou um token?** Edite `tokens.css` e rode `node build.mjs`. O bloco de
-tokens é reescrito nos 17 previews de uma vez.
+**Mudou um token?** Edite `tokens.css` e rode `node build.mjs`. Os blocos de
+tokens — o escuro e o claro — são reescritos nos 18 previews de uma vez, e a
+ilha escura de `neuro.css` (a banda, que no claro continua escura) é gerada de
+novo a partir deles.
 
 **Mudou um componente?** Edite o preview correspondente em `previews/` e, se o
 componente também vive em `neuro.css`, atualize os dois. O preview é a
@@ -124,6 +126,33 @@ As fontes (Archivo e IBM Plex Mono) vêm do Google Fonts por `<link>`. Se o
 ambiente de renderização bloquear a requisição, a pilha de fallback assume e o
 layout continua íntegro — só a fonte muda.
 
+## Tema claro
+
+O escuro é o da marca e o padrão; o claro é escolha de cada pessoa e troca os
+**mesmos nomes** de token — os componentes não sabem o tema, só leem tokens.
+
+```html
+<html data-tema="claro">
+```
+
+- **Antes de pintar.** Um `<script>` curto no `<head>` lê a escolha
+  (`localStorage`, chave `nd.tema`) e põe o atributo antes do primeiro quadro,
+  para a página não piscar do escuro para o claro. O seletor mora na linha da
+  conta do menu lateral.
+- **Transparência por trio.** `rgba(var(--tom),.05)`, não
+  `rgba(255,255,255,.05)`: o trio troca com o tema e a receita fica. Sombra e
+  véu escalam por `--sombra-k` e `--veu-k`.
+- **Synapse.** O botão sólido continua Synapse nos dois temas. Como texto, no
+  claro, é `--synapse-tx` (oliva, 5,71:1 no papel); como borda, linha de
+  estado ou controle marcado, `--synapse-borda`.
+- **Num trecho.** `data-tema="claro"` num elemento vale só para ele (com um
+  fundo, `var(--bg)` ou `var(--painel)`) — é o que o card Tema claro usa para
+  pôr os dois lado a lado.
+- **Exceções** ficam no fim de `neuro.css`, em “tema claro”. A da banda de
+  destaque é gerada pelo `build.mjs` entre os marcadores `@ilha:start` /
+  `@ilha:end`: cada token do bloco claro volta, dentro dela, ao valor do
+  escuro.
+
 ## Acessibilidade
 
 Os contrastes da paleta foram calculados (WCAG 2.1) e estão na tabela do card
@@ -131,3 +160,6 @@ de Cores. O resultado que muda o dia a dia: **Grafite (`#616C68`) rende 3,69:1
 sobre o Void e reprova em AA para texto corrido** — serve para rótulo caixa
 alta, legenda e borda, e nada além disso. Para texto secundário, use Névoa
 (7,92:1).
+
+No tema claro todo texto lê a 4,5:1 ou mais sobre o papel (`#F2F5F1`) e mais
+ainda sobre o cartão branco; a tabela, token a token, está no card Tema claro.

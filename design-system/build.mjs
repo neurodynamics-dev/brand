@@ -9,11 +9,16 @@
    mantém essas cópias iguais às fontes.
 
    O que faz:
-     1. lê o :root{...} de tokens.css, compacta e reescreve o
-        trecho entre @tokens:start / @tokens:end de cada preview;
-     2. lê os arquivos de marca/ e embute como data URI no trecho
-        entre @arte:start / @arte:end (hoje só 05-marca.html);
-     3. regrava _ds_manifest.json a partir dos marcadores @dsCard.
+     1. lê os dois blocos de tokens.css — o :root{...} (escuro, o
+        padrão) e o [data-tema="claro"]{...} —, compacta e
+        reescreve o trecho entre @tokens:start / @tokens:end de cada
+        preview;
+     2. gera a ilha escura — a banda de destaque, que no claro
+        continua escura — no trecho entre @ilha:start / @ilha:end de
+        neuro.css e dos previews que a mostram;
+     3. lê os arquivos de marca/ e embute como data URI no trecho
+        entre @arte:start / @arte:end dos cards que mostram as artes;
+     4. regrava _ds_manifest.json a partir dos marcadores @dsCard.
 
    Uso:  node build.mjs          (grava)
          node build.mjs --check  (só confere; sai 1 se divergir)
@@ -35,17 +40,50 @@ const erro = (m) => { console.error(`✗ ${m}`); process.exit(1); };
 const fonteTokens = readFileSync(join(raiz, 'tokens.css'), 'utf8');
 const blocoRaiz = fonteTokens.match(/:root\s*\{[\s\S]*?\n\}/);
 if (!blocoRaiz) erro('tokens.css: bloco :root{...} não encontrado.');
+const blocoClaro = fonteTokens.match(/^\[data-tema="claro"\]\s*\{[\s\S]*?\n\}/m);
+if (!blocoClaro) erro('tokens.css: bloco [data-tema="claro"]{...} não encontrado.');
 
-const tokensCompactos = blocoRaiz[0]
+const compacta = bloco => bloco
   .replace(/\/\*[\s\S]*?\*\//g, '')   // comentários
   .replace(/\s*\n\s*/g, '')           // quebras e indentação
   .replace(/;\s*\}/, '}')             // ponto e vírgula final
-  .replace(/;\s*(?=--)/g, ';\n  ')    // uma declaração por linha
-  .replace(/:root\{/, ':root{\n  ')
+  .replace(/;\s*(?=[\w-]+:)/g, ';\n  ') // uma declaração por linha
+  .replace(/^([^{]+)\{/, '$1{\n  ')
   .replace(/\}$/, '\n}');
+const tokensCompactos = compacta(blocoRaiz[0]) + '\n' + compacta(blocoClaro[0]);
+
+/* a ilha escura: dentro da banda, cada token que o bloco claro troca
+   volta ao valor do :root. Gerada daqui — escrita à mão, ficava para
+   trás a cada token de tema novo. */
+const declaracoes = bloco => {
+  const limpo = bloco.replace(/\/\*[\s\S]*?\*\//g, '');
+  return limpo.slice(limpo.indexOf('{') + 1, limpo.lastIndexOf('}')).split(';')
+    .map(d => d.trim()).filter(Boolean)
+    .map(d => [d.slice(0, d.indexOf(':')).trim(), d.slice(d.indexOf(':') + 1).trim()]);
+};
+const escuro = new Map(declaracoes(blocoRaiz[0]));
+const ilha = declaracoes(blocoClaro[0]).map(([k]) => {
+  if (!escuro.has(k)) erro(`tokens.css: ${k} está no bloco claro e não no :root.`);
+  return `${k}:${escuro.get(k)}`;
+});
+const blocoIlha = '[data-tema="claro"] .band{\n  color:var(--ink);\n  ' + ilha.join(';\n  ') + '\n}';
+const mIlha = /(\/\* @ilha:start[^*]*\*\/)[\s\S]*?(\/\* @ilha:end \*\/)/;
+
+/* neuro.css leva a ilha sempre */
+{
+  const caminho = join(raiz, 'neuro.css');
+  const original = readFileSync(caminho, 'utf8');
+  if (!mIlha.test(original)) erro('neuro.css: marcadores @ilha:start/@ilha:end ausentes.');
+  const css = original.replace(mIlha, `$1\n${blocoIlha}\n$2`);
+  if (css !== original) {
+    divergentes++;
+    if (soConfere) console.error('✗ neuro.css: ilha escura desatualizada.');
+    else { writeFileSync(caminho, css); nota('neuro.css atualizado (ilha escura)'); }
+  }
+}
 
 /* ============================================================
-   2. artes da marca
+   3. artes da marca
    ------------------------------------------------------------
    Coloque os arquivos oficiais em design-system/marca/ com estes
    nomes. Formatos aceitos: .svg (preferido), .png ou .webp.
@@ -92,7 +130,7 @@ const blocoArte =
   '\n}';
 
 /* ============================================================
-   3. propaga e coleta os cards
+   4. propaga e coleta os cards
    ============================================================ */
 const dirPreviews = join(raiz, 'previews');
 const arquivos = readdirSync(dirPreviews).filter(f => f.endsWith('.html')).sort();
@@ -109,8 +147,9 @@ for (const nome of arquivos) {
 
   if (!mTokens.test(html)) erro(`${nome}: marcadores @tokens:start/@tokens:end ausentes.`);
   html = html.replace(mTokens, `$1\n${tokensCompactos}\n$2`);
+  if (mIlha.test(html)) html = html.replace(mIlha, `$1\n${blocoIlha}\n$2`);
 
-  /* o bloco de arte é opcional — só 05-marca.html usa hoje */
+  /* o bloco de arte é opcional — só os cards que mostram as artes */
   if (mArte.test(html)) {
     html = html.replace(mArte, `$1\n${blocoArte}\n$2`);
     /* a classe some quando todas as artes estão presentes */
@@ -148,7 +187,7 @@ for (const nome of arquivos) {
 }
 
 /* ============================================================
-   4. manifesto
+   5. manifesto
    ------------------------------------------------------------
    O app do Claude Design recompila este arquivo a partir dos
    marcadores @dsCard no self-check; mantemos uma cópia versionada

@@ -31,10 +31,32 @@
   --bg:var(--void);
   --muted:var(--nevoa);
   --dim:var(--grafite);
-  --line:rgba(245,245,247,.08);
-  --line2:rgba(245,245,247,.16);
-  --card:rgba(255,255,255,.03);
+  --line:rgba(var(--ink-rgb),.08);
+  --line2:rgba(var(--ink-rgb),.16);
+  --card:rgba(var(--tom),.03);
   --glass:rgba(7,12,10,.62);
+  color-scheme:dark;
+  --tom:255,255,255;
+  --ink-rgb:245,245,247;
+  --synapse-rgb:206,220,0;
+  --ion-rgb:45,212,191;
+  --vital-rgb:74,222,151;
+  --mielina-rgb:245,195,106;
+  --pulso-rgb:241,128,111;
+  --plasma-rgb:127,167,242;
+  --dendrito-rgb:167,139,250;
+  --fundo-rgb:6,10,9;
+  --painel-rgb:11,18,16;
+  --sombra-rgb:0,0,0;
+  --sombra-k:1;
+  --veu-rgb:4,7,6;
+  --veu-k:1;
+  --synapse-tx:var(--synapse);
+  --synapse-borda:var(--synapse);
+  --foco:var(--synapse);
+  --campo:rgba(255,255,255,.05);
+  --bg-topo:#081511;
+  --toast:#151B19;
   --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
   --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
@@ -69,6 +91,45 @@
   --measure:640px;
   --t-fast:.15s;
   --t:.25s
+}
+[data-tema="claro"]{
+  color-scheme:light;
+  --bg:#F2F5F1;
+  --painel:#FFFFFF;
+  --ink:#0F1714;
+  --muted:#48554F;
+  --dim:#66726D;
+  --ion:#0A776B;
+  --vital:#12804F;
+  --mielina:#9A5B00;
+  --pulso:#C2412D;
+  --plasma:#2D5BC4;
+  --dendrito:#6D4AC8;
+  --card:rgba(255,255,255,.74);
+  --glass:rgba(255,255,255,.72);
+  --tom:15,23,20;
+  --ink-rgb:15,23,20;
+  --line:rgba(var(--ink-rgb),.08);
+  --line2:rgba(var(--ink-rgb),.16);
+  --synapse-rgb:124,135,0;
+  --ion-rgb:10,119,107;
+  --vital-rgb:18,128,79;
+  --mielina-rgb:154,91,0;
+  --pulso-rgb:194,65,45;
+  --plasma-rgb:45,91,196;
+  --dendrito-rgb:109,74,200;
+  --fundo-rgb:250,252,249;
+  --painel-rgb:255,255,255;
+  --sombra-rgb:24,40,34;
+  --sombra-k:.26;
+  --veu-rgb:22,34,30;
+  --veu-k:.5;
+  --synapse-tx:#5B6600;
+  --synapse-borda:#7C8700;
+  --foco:#5B6600;
+  --campo:#FFFFFF;
+  --bg-topo:#E2EEE8;
+  --toast:#FFFFFF
 }
 /* @tokens:end */
 
