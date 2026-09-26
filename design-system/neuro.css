@@ -582,6 +582,8 @@ h1.title{font-size:var(--fs-h1);font-weight:600;line-height:1.02;letter-spacing:
              0 3px 5px rgba(0,0,0,.4),
              0 26px 46px -14px rgba(0,0,0,.85)}
 .kb-card.sinalizada{border-color:rgba(245,195,106,.32)}
+/* concluída: o brilho sai, fica o ponto de prioridade */
+.kb-card.concluida::before{display:none}
 
 .kb-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:7px}
 .kb-ids{display:flex;align-items:center;min-width:0}
