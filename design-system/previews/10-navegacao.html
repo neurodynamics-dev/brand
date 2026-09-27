@@ -118,7 +118,23 @@ button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:n
 .btn.ghost{border:1px solid var(--line2);background:rgba(255,255,255,.03)}
 .btn.mini{height:34px;padding:0 13px;font-size:12px;border-radius:9px}
 
-/* abas */
+/* seletor de nível 1: as seções de uma tela */
+.nav1{display:flex;flex-wrap:wrap;gap:2px;padding:4px;border:1px solid var(--line);
+  border-radius:13px;width:fit-content;max-width:100%;background:rgba(255,255,255,.03);margin-bottom:12px}
+.nav1 a,.nav1 button{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);
+  padding:6px 13px;border-radius:9px;white-space:nowrap;transition:color var(--t-fast),background var(--t-fast)}
+.nav1 a:hover,.nav1 button:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+.nav1 .on{color:var(--ink);background:rgba(255,255,255,.09);font-weight:600}
+.nav1 .n{font-family:var(--fm);font-size:10px;line-height:16px;color:var(--dim);
+  border:1px solid var(--line2);border-radius:999px;padding:0 6px}
+.nav1 .n.sua{color:var(--cortex);background:var(--synapse);border-color:var(--synapse)}
+/* filtro: controle segmentado */
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.03)}
+.seg button{padding:6px 12px;font-size:11.5px;font-weight:600;color:var(--dim)}
+.seg button:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+.seg button.on{background:var(--synapse);color:var(--cortex)}
+
+/* abas: o nível 2 */
 .abas{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:18px}
 .aba{padding:10px 16px;font-size:13.5px;color:var(--muted);position:relative;
   transition:color var(--t-fast);border-radius:9px 9px 0 0}
@@ -191,6 +207,24 @@ button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:n
   <div class="conteudo"><h3>Rolado</h3>
     A classe <code style="font-family:var(--fm);font-size:12px;color:var(--synapse)">.rolou</code>
     entra depois de 20px de rolagem: fundo mais opaco, borda a 16% e sombra funda.</div>
+</div>
+
+<div class="ds-g">Seletores dentro de uma tela</div>
+<div class="bloco">
+  <span class="cap">Nível 1 · as seções da tela (.nav1)</span>
+  <nav class="nav1"><a href="#" class="on">Para você <span class="n sua">2</span></a><a href="#">Todos</a>
+    <a href="#">Meus certificados</a><a href="#">Configurações</a></nav>
+  <span class="cap" style="margin-top:10px">Nível 2 · os recortes de uma seção (.abas)</span>
+  <div class="abas"><button class="aba on">Treinamentos</button><button class="aba">Geral</button>
+    <button class="aba">README de conteúdo</button></div>
+  <span class="cap" style="margin-top:6px">Filtro · não muda a seção (.seg)</span>
+  <div class="seg"><button class="on">Todos</button><button>Publicados</button><button>Com rascunho</button><button>Arquivados</button></div>
+  <div class="escala" style="margin-top:16px;font-size:12.5px;color:var(--muted);line-height:1.6">
+    Uma regra, em todo app: o <b>primeiro</b> seletor de uma tela é sempre o <code>.nav1</code>
+    (as seções de um espaço ou de um objeto, cada uma com endereço). Um seletor <b>dentro</b> de
+    uma seção é sempre <code>.abas</code>. Filtro e escolha, que não trocam de seção, são
+    <code>.seg</code>. Nunca o contrário: aba sublinhada no primeiro nível e pílula no segundo
+    é o erro que esta regra existe para evitar.</div>
 </div>
 
 <div class="ds-g">Abas, trilha e âncoras</div>
