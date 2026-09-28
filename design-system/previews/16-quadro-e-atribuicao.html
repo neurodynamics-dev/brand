@@ -137,6 +137,7 @@ code{font-family:var(--fm);font-size:.92em;color:var(--ion)}
              0 3px 5px rgba(0,0,0,.4),
              0 26px 46px -14px rgba(0,0,0,.85)}
 .kb-card.sinalizada{border-color:rgba(245,195,106,.32)}
+.kb-card.concluida::before{display:none}
 
 .kb-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:7px}
 .kb-ids{display:flex;align-items:center;min-width:0}
@@ -245,6 +246,18 @@ que é como se atribui pessoa a grupo sem digitar vírgula.</p>
     </div>
   </article>
 
+  <article class="kb-card concluida" style="width:250px;--pri:var(--mielina)">
+    <div class="kb-top">
+      <span class="kb-ids"><span class="cod">ORT-11</span></span>
+      <span class="pri" style="background:var(--mielina)" title="Prioridade alta"></span>
+    </div>
+    <div class="kb-tit">Montar o suporte do sensor (concluída)</div>
+    <div class="kb-pe">
+      <span class="av" style="width:22px;height:22px;font-size:9px">CM</span>
+      <span class="kb-meta"><span>18/09</span></span>
+    </div>
+  </article>
+
 </div>
 
 <div class="ds-g">Editor de pills</div>
@@ -285,7 +298,8 @@ que é como se atribui pessoa a grupo sem digitar vírgula.</p>
       <code>--mielina</code> quando o cartão está sinalizado. Sinalizado é "olhe para mim",
       que é o que um brilho quer dizer. O ponto de prioridade continua ali, então nada se
       perde na troca. <b>Não</b> é barra lateral: barra colorida na lateral empurra o texto
-      e some quando os cartões ficam estreitos.</span></div>
+      e some quando os cartões ficam estreitos. Na coluna <b>Concluída</b> o brilho sai
+      (<code>.kb-card.concluida</code>) e fica só o ponto: trabalho entregue não pede atenção.</span></div>
     <div class="row"><span class="k">Profundidade</span>
       <span class="v">Três camadas de sombra e uma aresta iluminada por dentro. O cartão tem
       relevo porque é para ser <b>pego com a mão</b> — a sombra é a única pista de que dá

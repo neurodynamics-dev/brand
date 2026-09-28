@@ -169,6 +169,16 @@
         "width": 1180,
         "height": 3280
       }
+    },
+    {
+      "name": "Calendário",
+      "path": "previews/18-calendario.html",
+      "subtitle": "A barra e o mês que a Agenda e o Studio dividem",
+      "group": "Componentes",
+      "viewport": {
+        "width": 1180,
+        "height": 980
+      }
     }
   ]
 }
