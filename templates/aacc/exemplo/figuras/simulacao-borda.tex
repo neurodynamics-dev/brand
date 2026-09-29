@@ -1,0 +1,23 @@
+% A borda de subida da corrente: simulação sem e com a compensação, e a
+% medição na placa montada (exemplo fictício).
+\begin{tikzpicture}
+  \begin{axis}[
+      width=0.86\linewidth, height=58mm,
+      xlabel={Tempo (\si{\micro\second})},
+      ylabel={Corrente (\% da programada)},
+      xmin=0, xmax=8, ymin=0, ymax=125,
+      grid=major, grid style={nro-fundo},
+      tick label style={font=\scriptsize}, label style={font=\footnotesize},
+      legend pos=south east, legend cell align=left,
+      legend style={font=\scriptsize, draw=nro-linha, fill=white, fill opacity=0.9, text opacity=1}]
+    \addplot[domain=0:8, samples=161, thick, nro-pulso-texto]
+      {100*(1-exp(-0.48*1.35*x)*(cos(deg(1.35*sqrt(1-0.48^2)*x)) + 0.48/sqrt(1-0.48^2)*sin(deg(1.35*sqrt(1-0.48^2)*x))))};
+    \addlegendentry{simulada, sem $C_c$ (sobressinal de 18\,\%)}
+    \addplot[domain=0:8, samples=161, very thick, nro-axon]
+      {100*(1-exp(-0.74*1.35*x)*(cos(deg(1.35*sqrt(1-0.74^2)*x)) + 0.74/sqrt(1-0.74^2)*sin(deg(1.35*sqrt(1-0.74^2)*x))))};
+    \addlegendentry{simulada, $C_c = 22$\,pF (3\,\%)}
+    \addplot[only marks, mark=*, mark size=1.4pt, nro-tinta]
+      coordinates {(0.5,13.8) (1,40.2) (1.5,66.6) (2,83.5) (2.5,95.7) (3,100.8) (4,101.9) (5,101.4) (6,99.2) (7,99.8) (8,98.9)};
+    \addlegendentry{medida na placa, $C_c = 22$\,pF}
+  \end{axis}
+\end{tikzpicture}

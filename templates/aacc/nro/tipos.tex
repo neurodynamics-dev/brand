@@ -1,0 +1,271 @@
+%% ============================================================
+%% nro/tipos.tex — os tipos de atividade
+%%
+%% Mantido pela DIRETORIA. Cada atividade do relatório é de um tipo, e o
+%% tipo diz três coisas:
+%%   figuras  quantas figuras (com legenda) a atividade precisa ter, no
+%%            mínimo — o relatório MOSTRA o que foi feito;
+%%   ficha    os campos da \fichatecnica; os marcados com * são
+%%            obrigatórios (vazios, viram pendência);
+%%   roteiro  o que quem avalia procura na atividade — aparece no
+%%            rascunho, logo abaixo da ficha, e é a régua do barema.
+%%
+%% A chave (pcb, simulacao…) é a que o membro escreve em tipo = …; ela
+%% não muda. O resto pode (e deve) ser melhorado com o tempo.
+%% ============================================================
+
+\definirtipo{pcb}{
+  nome    = Eletrônica e placa de circuito impresso,
+  figuras = 2,
+  ficha   = {
+    ferramenta*  = Ferramenta (EDA) e versão,
+    revisao*     = Revisão da placa,
+    camadas*     = Camadas e espessura,
+    dimensoes*   = Dimensões,
+    componentes  = Componentes (quantidade),
+    alimentacao* = Alimentação e isolação,
+    fabricacao*  = Fabricação e montagem,
+    normas       = Normas consideradas,
+    arquivos*    = Onde estão os arquivos,
+  },
+  roteiro = {
+    \item Os requisitos elétricos (tensões, correntes, sinais, frequências) e de segurança do usuário, com a origem de cada um (a USRS, a norma, o protocolo).
+    \item O diagrama de blocos e o esquemático comentado, bloco a bloco: o que cada bloco faz e por que foi feito assim.
+    \item A escolha dos componentes críticos, com os critérios e as alternativas descartadas.
+    \item Os cálculos de projeto: divisores, filtros, ganhos, dissipação, correntes de pico, margens.
+    \item O layout: camadas, planos de terra, roteamento dos sinais sensíveis e da potência, isolação e distâncias, as regras de projeto (DRC e ERC).
+    \item A fabricação, a montagem e a primeira energização: o que foi medido, com que instrumento, e os defeitos encontrados.
+    \item A revisão seguinte: o que mudou e por quê.
+  },
+}
+
+\definirtipo{mecanico}{
+  nome    = Projeto mecânico,
+  figuras = 2,
+  ficha   = {
+    ferramenta*    = Ferramenta CAD/CAE e versão,
+    materiais*     = Materiais,
+    fabricacao*    = Processo de fabricação,
+    pecas          = Peças e montagem,
+    carregamentos* = Cargas e condições de uso,
+    normas         = Normas consideradas,
+    desenhos       = Desenhos técnicos (códigos),
+    arquivos*      = Onde estão os arquivos,
+  },
+  roteiro = {
+    \item Os requisitos e as restrições --- cargas, ergonomia, massa, espaço, custo, fabricação --- e de onde veio cada um.
+    \item As alternativas de concepção e o critério de escolha (matriz de decisão, protótipo rápido).
+    \item O modelo CAD: vistas, vista explodida e os detalhes que importam.
+    \item O memorial de cálculo: dimensionamento, tensões, fatores de segurança, tolerâncias e ajustes.
+    \item A análise por elementos finitos, se houve: malha, condições de contorno, convergência e validação.
+    \item A fabricação e a montagem: processo, parâmetros, problemas e correções.
+    \item O teste do protótipo e as revisões do projeto.
+  },
+}
+
+\definirtipo{simulacao}{
+  nome    = Simulação computacional,
+  figuras = 2,
+  ficha   = {
+    ferramenta*    = Software e versão,
+    fenomeno*      = O que foi simulado,
+    modelo*        = Modelo (físico e numérico),
+    parametros*    = Parâmetros e condições de contorno,
+    discretizacao  = Malha, passo ou discretização,
+    validacao*     = Como foi validada,
+    arquivos*      = Onde estão os arquivos,
+  },
+  roteiro = {
+    \item A pergunta que a simulação responde e a decisão de projeto que ela apoia.
+    \item O modelo: as equações, as hipóteses simplificadoras e o que ficou de fora.
+    \item Os parâmetros e as condições de contorno, com a fonte de cada valor (datasheet, medição, literatura).
+    \item A discretização e o estudo de convergência (malha, passo de tempo, tolerâncias).
+    \item A validação: a comparação com a solução analítica, com a medição ou com a literatura, e o erro.
+    \item Os resultados, com unidades e incertezas, e a interpretação.
+    \item As limitações: o que a simulação não permite concluir.
+  },
+}
+
+\definirtipo{software}{
+  nome    = Firmware e software,
+  figuras = 1,
+  ficha   = {
+    linguagens*    = Linguagens,
+    plataforma*    = {Plataforma (MCU, sistema, framework)},
+    repositorio*   = Repositório,
+    contribuicoes* = {Contribuições (commits, PRs, revisões)},
+    testes*        = Testes,
+    licenca        = Licença,
+  },
+  roteiro = {
+    \item Os requisitos: o que o software precisa fazer e com que restrições de tempo, memória, consumo e segurança.
+    \item A arquitetura: módulos, interfaces e fluxo de dados (um diagrama), e as decisões registradas (ADR).
+    \item Os trechos que importam, explicados --- não o código inteiro. Uma listagem com legenda conta como figura.
+    \item Os testes: unitários, de integração, em bancada; o que é crítico está coberto?
+    \item A revisão de código e a integração (os PRs, os commits, quem revisou).
+    \item As métricas: latência, taxa de amostragem, consumo, memória, falhas.
+  },
+}
+
+\definirtipo{ensaio}{
+  nome    = Ensaio experimental e validação,
+  figuras = 1,
+  ficha   = {
+    protocolo*   = Protocolo ou plano de ensaio,
+    instrumentos* = Instrumentos (e calibração),
+    local*       = Local,
+    amostra      = Amostras ou participantes,
+    etica        = {Aprovação ética (CAAE), se houve pessoas},
+    relatorio*   = Relatório de execução (NRO-PRO-003),
+  },
+  roteiro = {
+    \item O objetivo do ensaio e o critério de aceite (a hipótese ou o requisito verificado).
+    \item A montagem experimental (foto ou diagrama) e os instrumentos, com a resolução e a incerteza.
+    \item O procedimento: o que foi controlado, o que foi repetido, quantas vezes.
+    \item Os resultados em tabela e gráfico, com unidades e incertezas; a análise estatística, se couber.
+    \item A conclusão: o critério de aceite foi atendido? O que o ensaio mudou no projeto.
+    \item Com pessoas: a aprovação ética (CEP/CAAE), o consentimento e a supervisão profissional.
+  },
+}
+
+\definirtipo{clinico}{
+  nome    = Atividade com usuários e equipe de saúde,
+  figuras = 0,
+  ficha   = {
+    local*      = Local,
+    publico*    = Público atendido,
+    sessoes*    = Sessões (quantidade e duração),
+    supervisao* = Supervisão profissional,
+    etica*      = Aprovação ética e consentimento,
+  },
+  roteiro = {
+    \item Quem são os usuários, do que eles precisavam e como a equipe chegou até eles.
+    \item O protocolo das sessões: o que foi feito, por quem e com que supervisão profissional.
+    \item O seu papel técnico nas sessões: configuração, ajuste, coleta de dados, segurança.
+    \item Os dados coletados e o que eles mostraram --- sem identificar ninguém (LGPD).
+    \item O retorno dos usuários e o que ele mudou no projeto.
+  },
+}
+
+\definirtipo{pesquisa}{
+  nome    = Pesquisa e produção científica,
+  figuras = 0,
+  ficha   = {
+    pergunta* = Pergunta de pesquisa,
+    metodo*   = Método,
+    bases     = Bases e fontes consultadas,
+    produto*  = {Produto (artigo, resumo, relatório)},
+    situacao* = {Situação (submetido, aceito, publicado; DOI)},
+  },
+  roteiro = {
+    \item A pergunta e por que ela importa para o projeto ou para a área.
+    \item O método: a busca (bases, termos, critérios de inclusão), o experimento ou a análise.
+    \item Os resultados e a sua parte neles.
+    \item O produto: onde foi submetido ou publicado, a ordem dos autores e a situação.
+  },
+}
+
+\definirtipo{extensao}{
+  nome    = Extensão e interação com a comunidade,
+  figuras = 0,
+  ficha   = {
+    publico*  = Público externo,
+    parceiro  = Instituição parceira,
+    local*    = Local,
+    alcance*  = {Alcance (pessoas, encontros)},
+    produto*  = O que foi entregue à comunidade,
+  },
+  roteiro = {
+    \item A comunidade externa envolvida e a demanda dela.
+    \item O que foi feito com ela, e não só para ela: a escuta, a troca, a devolutiva.
+    \item O seu papel no planejamento e na execução.
+    \item O alcance: quantas pessoas, quantos encontros, que registros.
+    \item O impacto na comunidade e o que a comunidade devolveu ao projeto e à sua formação.
+  },
+}
+
+\definirtipo{ensino}{
+  nome    = Ensino e formação de membros,
+  figuras = 0,
+  ficha   = {
+    formato*       = {Formato (treinamento, tutoria, monitoria)},
+    treinamentos   = Treinamentos no SOMA (códigos),
+    publico*       = Público,
+    cargahoraria*  = Carga horária ministrada,
+    participantes* = Participantes,
+    material*      = Material produzido,
+  },
+  roteiro = {
+    \item O que foi ensinado e por que a equipe precisava disso.
+    \item O material que você produziu (módulos, apostila, vídeos, exercícios) e como ele foi revisado.
+    \item Quantas pessoas, quantas horas, e como o aprendizado foi verificado.
+    \item O que mudou na equipe depois: o erro que deixou de acontecer, a entrega que ficou possível.
+  },
+}
+
+\definirtipo{evento}{
+  nome    = {Evento, competição ou visita técnica},
+  figuras = 0,
+  ficha   = {
+    evento*     = Evento,
+    local*      = Local,
+    datas*      = Datas,
+    funcao*     = Função,
+    resultado   = {Resultado (colocação, prêmio)},
+    declaracao* = Declaração de participação (NRO-DIR-006),
+  },
+  roteiro = {
+    \item O que é o evento e por que a equipe foi.
+    \item A preparação: o que você fez antes (o sistema, a apresentação, a logística).
+    \item A sua atuação durante o evento.
+    \item O resultado e o que a equipe trouxe de volta: contatos, aprendizados, mudanças no projeto.
+  },
+}
+
+\definirtipo{gestao}{
+  nome    = Gestão e liderança,
+  figuras = 0,
+  ficha   = {
+    cargo*       = Cargo,
+    time*        = Equipe liderada,
+    rituais*     = {Rituais e ferramentas (sprints, OKRs)},
+    documentos   = Documentos de autoria (códigos),
+    indicadores* = Indicadores acompanhados,
+  },
+  roteiro = {
+    \item As responsabilidades do cargo e o tamanho do time.
+    \item O planejamento: os objetivos (OKRs), a priorização, as sprints, e como foi acompanhado.
+    \item As decisões difíceis que você tomou, com os porquês.
+    \item Os documentos e os processos que você criou ou mudou (com os códigos NRO).
+    \item Os indicadores: entregas no prazo, pessoas formadas, riscos tratados.
+    \item O que você faria diferente.
+  },
+}
+
+\definirtipo{comunicacao}{
+  nome    = {Comunicação, marca e relações institucionais},
+  figuras = 1,
+  ficha   = {
+    canais*   = Canais e públicos,
+    pecas*    = Peças e campanhas (códigos POST),
+    parceiros = Parceiros e instituições,
+    metricas* = {Métricas (alcance, engajamento, resultado)},
+  },
+  roteiro = {
+    \item O objetivo de comunicação ou de relacionamento, e o público.
+    \item O que você produziu ou negociou, com exemplos (as peças, os ofícios, as parcerias).
+    \item O processo: planejamento, aprovação, publicação.
+    \item Os resultados, com números.
+  },
+}
+
+\definirtipo{outro}{
+  nome    = Outra atividade,
+  figuras = 0,
+  ficha   = {},
+  roteiro = {
+    \item O que foi feito, com que objetivo, e por que isso é formação no seu curso.
+    \item Como o trabalho foi feito, e com quem.
+    \item O resultado, e como ele pode ser conferido.
+  },
+}

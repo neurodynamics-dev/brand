@@ -1,0 +1,71 @@
+%% ============================================================
+%% nro/modalidades.tex — as modalidades de aproveitamento
+%%
+%% Mantido pela DIRETORIA. É o cardápio que o membro vê: cada atividade
+%% do relatório pede horas numa destas modalidades (e pode indicar uma
+%% alternativa). A norma de cada colegiado tem o seu quadro de AACC;
+%% por isso o membro informa, no próprio relatório, o CÓDIGO da
+%% atividade no curso dele e o DISPOSITIVO da norma (artigo, inciso)
+%% para cada modalidade que pedir — \modalidade{EXT}{codigo=…, dispositivo=…}.
+%%
+%% A chave (EXT, PES…) é curta e fica igual para sempre: é ela que os
+%% relatórios citam. O nome e o texto podem mudar.
+%%
+%% A ordem aqui é a ordem dos quadros.
+%% ============================================================
+
+\definirmodalidade{EXT}{
+  nome       = Extensão universitária,
+  descricao  = {Trabalho com e para a comunidade externa à UFMG --- pacientes, atletas, escolas, instituições parceiras ---, com interação e retorno, no âmbito da ação de extensão da equipe registrada no SIEX.},
+  evidencias = {Registro na ação do SIEX; declaração do coordenador da ação; registros das sessões, oficinas e eventos abertos.},
+}
+\definirmodalidade{PES}{
+  nome       = Iniciação à pesquisa e ao desenvolvimento tecnológico,
+  descricao  = {Pesquisa ou desenvolvimento tecnológico orientado: revisão da literatura, modelagem, projeto, protótipo, ensaio e análise, com método explícito e resultado documentado.},
+  evidencias = {Relatórios técnicos e de teste controlados (NRO-PRO); arquivos de projeto; repositórios; publicações.},
+}
+\definirmodalidade{COMP}{
+  nome       = Equipe de competição e projeto tecnológico estudantil,
+  descricao  = {Projeto, construção e validação de um sistema para competição ou desafio tecnológico, com metas, prazos, regulamento e avaliação externa.},
+  evidencias = {Documentos de projeto; declarações de participação (NRO-DIR-006); resultados oficiais da competição.},
+}
+\definirmodalidade{VPC}{
+  nome       = Vivência profissional complementar,
+  descricao  = {Atuação com responsabilidade real num ambiente de engenharia: requisitos, documentação controlada, revisão por pares, prazos, riscos, equipe multidisciplinar.},
+  evidencias = {Atividades atribuídas e concluídas no SOMA; documentos de autoria; apontamentos semanais.},
+}
+\definirmodalidade{EVT}{
+  nome       = {Participação em eventos, competições e visitas técnicas},
+  descricao  = {Congressos, feiras, seminários, competições e visitas técnicas, como competidor, apresentador ou participante.},
+  evidencias = {Declaração de participação emitida pelo SOMA (NRO-DIR-006) ou certificado do evento.},
+}
+\definirmodalidade{PRD}{
+  nome       = Produção técnico-científica,
+  descricao  = {Artigo, resumo, pôster, relatório técnico publicado, registro de software ou pedido de patente.},
+  evidencias = {O trabalho publicado ou submetido (DOI, anais, protocolo); a lista de autores.},
+}
+\definirmodalidade{ORG}{
+  nome       = Organização de eventos,
+  descricao  = {Organização de evento acadêmico, técnico ou de divulgação: programação, convites, logística, comunicação e execução.},
+  evidencias = {Programação; registro do evento no SOMA; atas e listas de presença.},
+}
+\definirmodalidade{ENS}{
+  nome       = {Ensino e formação (monitoria, tutoria, treinamentos)},
+  descricao  = {Formação de outros estudantes: treinamentos ministrados, material didático, tutoria de trainees, monitoria.},
+  evidencias = {Treinamentos de autoria no SOMA (NRO-TRE); material produzido; lista de participantes.},
+}
+\definirmodalidade{GES}{
+  nome       = {Gestão, liderança e representação},
+  descricao  = {Cargo de liderança --- supervisão de projeto, gerência de departamento, diretoria --- com responsabilidade por pessoas, planejamento e resultado.},
+  evidencias = {Cargo no quadro de pessoal; OKRs e quadros de atividades; documentos e procedimentos de autoria.},
+}
+\definirmodalidade{CUR}{
+  nome       = Cursos e treinamentos de formação complementar,
+  descricao  = {Cursos e treinamentos concluídos, com carga horária e certificado, inclusive os da própria equipe.},
+  evidencias = {Certificados (CERT-… no SOMA, ou do curso externo).},
+}
+\definirmodalidade{OUT}{
+  nome       = {Outra atividade, a critério do Colegiado},
+  descricao  = {Atividade de formação que não cabe nas anteriores; o relatório explica por que ela é formação no curso.},
+  evidencias = {As que a atividade tiver.},
+}

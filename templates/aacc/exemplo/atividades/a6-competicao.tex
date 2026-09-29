@@ -1,0 +1,67 @@
+%% EXEMPLO FICTÍCIO — Atividade 6: evento, competição ou visita técnica
+\begin{atividade}{Competição internacional de ciclismo com estimulação elétrica funcional}{
+  tipo         = evento,
+  modalidade   = EVT,
+  alternativa  = COMP,
+  horas        = 60,
+  inicio       = 2024-10,
+  fim          = 2024-10,
+  projeto      = {NEBULA, estimulação elétrica funcional para ciclismo},
+  papel        = {Técnica responsável pelo estimulador},
+  supervisor   = {Rafael Fictício, supervisor do projeto NEBULA},
+  registros    = {EXT-901; NRO-DIR-006-901},
+  competencias = {IV, V, VI},
+}
+
+\begin{contexto}
+A competição reúne equipes de vários países em provas com tecnologias assistivas; na prova de ciclismo
+com estimulação elétrica funcional, o atleta pedala uma distância fixa, e o sistema é avaliado também
+por uma banca técnica. Para o NEBULA, é o teste mais duro que existe: o sistema tem de funcionar longe
+do laboratório, depois de uma viagem, sob o regulamento de outra instituição.
+\end{contexto}
+
+\begin{contribuicao}
+Fui a técnica responsável pelo estimulador: montei o checklist de preparação, levei uma placa reserva
+configurada, fiz o plano de carga das baterias, operei o estimulador nas provas e apresentei a parte
+eletrônica do sistema à banca técnica, em inglês.
+\end{contribuicao}
+
+\begin{desenvolvimento}
+\fichatecnica{
+  evento     = {Competição internacional de tecnologias assistivas, prova de ciclismo com FES},
+  local      = {Europa},
+  datas      = {Quatro dias em outubro de 2024},
+  funcao     = {Técnica responsável pelo estimulador},
+  resultado  = {4.º lugar entre 9 equipes},
+  declaracao = {\texttt{NRO-DIR-006-901}},
+}
+
+\textbf{A preparação} (20 horas, em setembro). O checklist de preparação cobriu a placa reserva, os
+eletrodos, os cabos e o transporte das baterias de lítio, que as companhias aéreas só aceitam abaixo de
+\SI{100}{\watt\hour} por unidade e com a documentação do fabricante --- as nossas têm
+\SI{29}{\watt\hour}. Simulei, com o atleta e a fisioterapeuta, duas provas completas no LABBIO.
+
+\textbf{A competição} (quatro dias de cerca de dez horas). Conferência dos equipamentos na chegada,
+treinos livres, a apresentação à banca técnica e as provas. Em cada prova, eu conferia a impedância dos
+eletrodos, carregava o perfil de estímulo e acompanhava a telemetria.
+\end{desenvolvimento}
+
+\begin{resultados}
+A equipe terminou em 4.º lugar entre 9. O estimulador funcionou em todas as provas; um eletrodo descolou
+na segunda, e o limite de corrente por hardware desligou o canal como devia --- o atleta completou a
+prova com três canais. Da conversa com as outras equipes, trouxemos a ideia do controle da cadência em
+malha fechada, que virou requisito do NEBULA para 2025.
+\end{resultados}
+
+\begin{evidencias}
+\evidencia{Declaração}{NRO-DIR-006-901}{A declaração de participação, com a função e as horas}{auth.neurodynamics.dev (código verificador)}
+\evidencia{Registro}{EXT-901}{O registro do evento no SOMA, aprovado por duas pessoas}{SOMA › Serviços › Eventos}
+\evidencia{Resultado}{Classificação oficial}{A colocação da equipe na prova}{Site da competição}
+\end{evidencias}
+
+\begin{aprendizados}
+Operar um sistema meu diante de uma banca de outro país ensinou mais sobre preparação do que qualquer
+teste de bancada: o checklist salvou a segunda prova. E ver sistemas de outras equipes mostrou o que o
+nosso ainda não fazia.
+\end{aprendizados}
+\end{atividade}

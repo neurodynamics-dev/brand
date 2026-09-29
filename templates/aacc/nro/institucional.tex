@@ -1,0 +1,158 @@
+%% ============================================================
+%% nro/institucional.tex — a Parte I: a equipe, para o Colegiado
+%%
+%% Mantido pela DIRETORIA; o membro não mexe aqui. É o mesmo texto em
+%% todos os relatórios, e é ele que responde, antes de a pergunta ser
+%% feita, ao "mas a equipe não é registrada como nada".
+%%
+%% Os dados (o professor, o SIEX) vêm de nro/equipe.tex, pelo \campo.
+%% A lista da repercussão espelha a imprensa do site institucional
+%% (SOMA › Studio › Configurações › Imprensa do site): quando entrar
+%% matéria nova lá, entra aqui também.
+%% ============================================================
+
+\section{Quem somos}
+
+A \NRO{} é uma Instituição de Ciência e Tecnologia, vinculada ao Laboratório de Engenharia Biomédica
+e ao Laboratório de Bioengenharia da Escola de Engenharia da Universidade Federal de Minas Gerais
+(UFMG), voltada ao desenvolvimento, integração e aplicação de soluções em engenharia biomédica que
+conectam saúde, tecnologia e sistemas complexos.
+
+Os projetos da equipe vão do levantamento de requisitos à validação com os usuários: tecnologias
+assistivas e de reabilitação, desenvolvidas por estudantes de diferentes cursos da UFMG, em equipe
+multidisciplinar e com supervisão docente, e testadas com as pessoas para quem foram feitas. É
+trabalho de engenharia com usuário real, prazo real e consequência real.
+
+A participação é voluntária e não remunerada. Ninguém recebe bolsa ou salário da equipe, o que
+afasta, de saída, o risco de a mesma atividade ser paga e aproveitada ao mesmo tempo.
+
+\section{O vínculo com a UFMG}
+
+\subsection{Os laboratórios}
+A equipe trabalha no \campo{equipe/laboratorios}. O acesso e o uso do laboratório seguem a Política
+de Acesso ao LABBIO (\texttt{NRO-PES-015}) e o termo de sigilo que cada membro assina
+(\texttt{NRO-PES-016}); a presença de cada pessoa no laboratório é registrada no SOMA, o sistema de
+gestão da equipe, por check-in.
+
+\subsection{O professor responsável}
+O professor responsável pela equipe é \campo{equipe/professor}, do \campo{equipe/departamentoprofessor}.
+É quem acompanha as atividades, avalia os relatórios de aproveitamento pelo barema da Parte~V,
+atribui a nota e responde por essa avaliação perante o Colegiado.
+
+\subsection{A ação de extensão}
+As atividades da equipe compõem a ação de extensão \enquote{\campo{equipe/siextitulo}}, registrada no
+SIEX/UFMG sob o n\textordmasculine~\campo{equipe/siexnumero} e coordenada \pelocoordenador\
+\campo{equipe/siexcoordenador} (vigência: \campo{equipe/siexvigencia}). A extensão é o eixo do
+trabalho: as tecnologias são desenvolvidas com os seus usuários --- pessoas com deficiência, atletas,
+profissionais de saúde --- e voltam para eles.
+
+A situação de cada estudante na equipe registrada no SIEX é informada na Parte~II. Quando o registro
+individual falta, a participação é comprovada pela declaração de vínculo emitida pelo SOMA e pelas
+evidências de cada atividade.
+
+\subsection{A repercussão}
+O trabalho da equipe foi noticiado pela própria UFMG e pela imprensa:
+\begin{itemize}
+  \item UFMG (2024): \href{https://www3.ufmg.br/comunicacao/noticias/atleta-paraplegico-que-treina-na-ufmg-vai-as-olimpiadas-bionicas-na-suica}{\emph{Atleta paraplégico que treina na UFMG vai às Olimpíadas Biônicas na Suíça}};
+  \item Globo Esporte (2024): \href{https://ge.globo.com/mg/noticia/2024/10/21/tecnologia-desenvolvida-pela-ufmg-leva-atleta-paraplegico-a-competicao-internacional.ghtml}{\emph{Tecnologia desenvolvida pela UFMG leva atleta paraplégico a competição internacional}};
+  \item Record (2024): \href{https://noticias.r7.com/minas-gerais/balanco-geral-mg/video/triciclo-feito-por-alunos-da-ufmg-faz-jovem-tetraplegico-pedalar-01112024/}{\emph{Triciclo feito por alunos da UFMG faz jovem tetraplégico pedalar}};
+  \item reportagens em vídeo do \href{https://www.youtube.com/watch?v=AdOeBTOeMu0}{Jornal Nacional (2026)}, da
+    \href{https://www.youtube.com/watch?v=Fi6vx_Yf8EY}{CNN (2022)} e da \href{https://www.youtube.com/watch?v=pytrfROeAVU}{Record (2025)}.
+\end{itemize}
+
+\section{Como a equipe se organiza}
+
+A equipe tem estatuto (\texttt{NRO-DIR-001}) e cinco departamentos --- Pessoal, Marketing, Relações
+Institucionais, Clínico e Pesquisa e Desenvolvimento ---, cada um com um gerente, sob uma Diretoria. Os
+projetos ficam no departamento de Pesquisa e Desenvolvimento, e cada projeto tem um supervisor: o
+organograma é definido de propósito, para que cada membro tenha a liderança imediata por perto.
+
+Entra-se na equipe por processo seletivo público, com edital, dinâmica em grupo, entrevista individual
+e um período trainee que termina com a apresentação de um desafio multidisciplinar. A permanência
+segue políticas escritas: a de progressão funcional (\texttt{NRO-PES-013}), a de coparticipação em
+atividades da vida acadêmica (\texttt{NRO-PES-012}) e os procedimentos de admissão e de desligamento
+(\texttt{NRO-PES-006} e \texttt{NRO-PES-007}).
+
+O trabalho é organizado em ciclos curtos, no estilo Scrum --- abertura de sprint, acompanhamento
+diário e fechamento ---, com objetivos e resultados-chave (OKRs) por semestre e o quadro de atividades
+de cada grupo no SOMA.
+
+\section{Engenharia com método e com registro}
+
+Os projetos seguem um processo de desenvolvimento documentado, inspirado no controle de projeto de
+dispositivos médicos. Cada projeto tem, no controle de documentos e registros da equipe:
+\begin{itemize}
+  \item o termo de abertura (\texttt{NRO-PRO-001}) e a especificação de requisitos do usuário e do
+    sistema (USRS, \texttt{NRO-PRO-004});
+  \item a matriz de gerenciamento de riscos (\texttt{NRO-PRO-006}) e o plano de validação (\texttt{NRO-PRO-005});
+  \item os registros de decisão de arquitetura (\texttt{NRO-PRO-013}) e de projeto (\texttt{NRO-PRO-014});
+  \item os relatórios de execução de testes (\texttt{NRO-PRO-003}) e o histórico do projeto (DHF, \texttt{NRO-PRO-009}).
+\end{itemize}
+Todo documento tem código, revisão e registro de alterações, conforme o controle de documentos e
+registros (\texttt{NRO-PUB-001}) e o modelo da equipe (\texttt{NRO-PUB-002}), que este relatório segue.
+Nenhuma versão vale antes de ser revisada por outra pessoa que não o autor.
+
+\section{O que o SOMA registra, e como conferir}
+
+O SOMA registra o que cada pessoa faz na equipe, com data e autoria. É dele que vêm as evidências
+deste relatório:
+
+\begingroup\small\renewcommand\arraystretch{1.35}%
+\noindent\begin{tabularx}{\linewidth}{|>{\columncolor{nro-fundo}\raggedright\arraybackslash}p{46mm}|Y|L{44mm}|}\hline
+  \rowcolor{nro-fundo}\rotulo{Registro} & \rotulo{O que mostra} & \rotulo{Como conferir} \\ \hline
+  Declaração de vínculo (\texttt{NRO-DIR-004}) & O cargo e o período na equipe; os treinamentos concluídos e os eventos de que a pessoa participou & Por qualquer pessoa, em \campo{equipe/validacao}, com o código verificador \\ \hline
+  Declaração de participação em evento (\texttt{NRO-DIR-006}) & O evento, a função e as horas; o registro é aprovado por duas pessoas & Por qualquer pessoa, em \campo{equipe/validacao} \\ \hline
+  Certificado de treinamento (\texttt{CERT-…}) & O treinamento, a revisão, a carga horária e a nota na verificação de conhecimento & No SOMA, a pedido do Colegiado \\ \hline
+  Atividade no quadro (ex.: \texttt{NBL-14}) & O responsável, o prazo e o histórico de cada movimento & No SOMA, a pedido \\ \hline
+  Arquivo controlado (\texttt{NRO-XXX-YYY-Z}) & O autor, o revisor e cada revisão, com o parecer & No SOMA, a pedido \\ \hline
+  Presença no laboratório & Os check-ins no LABBIO, dia a dia & No SOMA, a pedido \\ \hline
+  Apontamento semanal & A assiduidade e as entregas, avaliadas pelo líder de cada grupo & No SOMA, a pedido \\ \hline
+\end{tabularx}\par\endgroup
+
+\section{O padrão que a equipe exige}
+
+Este relatório é longo de propósito. A equipe só encaminha ao Colegiado o relatório que atinge o padrão
+deste modelo, e o padrão é o de quem trabalhou de fato:
+\begin{itemize}
+  \item cada atividade mostra o que foi feito, como, com que resultado e com que evidência --- e o
+    que o estudante fez, separado do que a equipe fez;
+  \item as atividades técnicas mostram o trabalho: o esquemático e o layout da placa, o modelo e o
+    desenho da peça, o modelo e o resultado da simulação;
+  \item o que não tem evidência não se pede; as horas pedidas têm base nos registros, e a média
+    semanal é calculada e mostrada (Parte~IV);
+  \item a direção da equipe confere o relatório com os registros do SOMA e ouve os supervisores antes
+    de assinar; o professor responsável atribui a nota pelo barema da Parte~V.
+\end{itemize}
+Participação sem entrega não gera relatório. O modelo marca como pendência tudo o que falta, e nenhum
+parecer é dado a relatório com pendência: o que chega ao Colegiado já passou por essa régua.
+
+\section{As modalidades de aproveitamento}
+
+Cada curso tem o seu quadro de atividades complementares, e o mesmo trabalho pode caber em mais de uma
+modalidade. Por isso, cada atividade deste relatório indica a modalidade pedida e, quando cabe, uma
+alternativa; o estudante informa, para cada modalidade, o código da atividade no seu curso e o
+dispositivo da norma (Quadro~1). A decisão é do Colegiado, que pode aprovar as horas em outra
+modalidade, no todo ou em parte (Parte~V). As modalidades que a equipe usa:
+
+\quadromodalidades
+
+\section{Os fundamentos}
+
+O aproveitamento é pedido nos termos da \campo{equipe/norma}, que disciplina o aproveitamento das
+atividades acadêmicas curriculares complementares e a sua valoração em créditos nos cursos de
+graduação da Escola de Engenharia.
+
+As Diretrizes Curriculares Nacionais dos cursos de Engenharia (Resolução CNE/CES n\textordmasculine~2,
+de 24 de abril de 2019) definem as competências gerais do egresso --- a matriz da Parte~IV mostra quais
+delas cada atividade desenvolveu --- e recomendam que os cursos estimulem atividades como a iniciação
+científica, as competições acadêmicas, os projetos de extensão, o trabalho em equipe e o
+desenvolvimento de protótipos. As Diretrizes para a Extensão na Educação Superior (Resolução CNE/CES
+n\textordmasculine~7, de 18 de dezembro de 2018) determinam que as atividades de extensão componham ao
+menos 10\% da carga horária curricular dos cursos de graduação.
+
+\begin{nota}
+  \textbf{O que este relatório pede ao Colegiado.} Não se pede que o Colegiado reconheça a equipe como
+  órgão da UFMG. Pede-se que avalie atividades concretas --- supervisionadas por docente da UFMG,
+  realizadas em laboratórios da Escola de Engenharia, documentadas e verificáveis --- pelo que elas são:
+  formação em engenharia.
+\end{nota}

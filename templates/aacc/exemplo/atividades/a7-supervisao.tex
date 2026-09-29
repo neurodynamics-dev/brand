@@ -1,0 +1,81 @@
+%% EXEMPLO FICTÍCIO — Atividade 7: gestão e liderança
+\begin{atividade}{Supervisão do subsistema eletrônico do NEBULA}{
+  tipo         = gestao,
+  modalidade   = GES,
+  alternativa  = VPC,
+  horas        = 60,
+  inicio       = 2025-01,
+  fim          = 2025-12,
+  projeto      = {NEBULA, estimulação elétrica funcional para ciclismo},
+  papel        = {Supervisora do subsistema},
+  supervisor   = {Rafael Fictício, supervisor do projeto NEBULA},
+  registros    = {OKRs 2025/1 e 2025/2 do NEBULA; NRO-PRO-013-903; NBL-150 a NBL-189},
+  competencias = {IV, VI, VIII},
+}
+
+\begin{contexto}
+Em janeiro de 2025, pela política de progressão funcional (\texttt{NRO-PES-013}), assumi a supervisão
+do subsistema eletrônico do NEBULA. O momento: a revisão B funcionava, mas a errata tinha sete itens e
+o controle da cadência em malha fechada, trazido da competição, disputava o mesmo semestre. O time
+eram duas pessoas da equipe e dois trainees recém-chegados.
+\end{contexto}
+
+\begin{contribuicao}
+Planejei os dois semestres, conduzi as sprints, decidi as prioridades, instituí a revisão de projeto por
+duas pessoas para qualquer mudança de placa, acompanhei a formação dos dois trainees e preparei a minha
+sucessão.
+\end{contribuicao}
+
+\begin{desenvolvimento}
+\fichatecnica{
+  cargo       = {Supervisora do subsistema eletrônico, de jan. a dez./2025},
+  time        = {4 pessoas: 2 membros e 2 trainees},
+  rituais     = {Sprints de duas semanas; acompanhamento diário assíncrono; revisão mensal com o supervisor do projeto; OKRs semestrais},
+  documentos  = {\texttt{NRO-PRO-013-903} (a decisão da revisão C); checklist de energização; plano de transição},
+  indicadores = {Cartões concluídos no prazo; revisões aprovadas; pessoas formadas; ocorrências de segurança},
+}
+
+\textbf{O planejamento.} O objetivo de 2025/1 foi \enquote{liberar a revisão C, validada, até
+setembro}, com três resultados-chave: a errata inteira resolvida, a placa aprovada na bancada e a
+documentação revisada. O controle em malha fechada ficou para 2026: fazê-lo junto com a revisão C
+atrasaria as duas, e registrei a decisão, com as alternativas, em \texttt{NRO-PRO-013-903}.
+
+\textbf{O acompanhamento.} Cada sprint começava com os cartões do quadro distribuídos e terminava com a
+demonstração do que ficou pronto. Toda mudança de placa passou a ter dois revisores antes de ir para
+fabricação --- a lição do footprint espelhado da revisão B.
+
+\textbf{A sucessão.} De setembro em diante, trabalhei em par com quem me sucedeu: ele conduziu as
+sprints, eu revisei. O plano de transição lista o estado de cada frente, os arquivos e os contatos.
+\end{desenvolvimento}
+
+\begin{resultados}
+\begin{table}[htbp]
+  \centering\small
+  \caption{Os indicadores da supervisão em 2025.}
+  \label{tab:ex-indicadores}
+  \begin{tabular}{|l|c|}\hline
+    \rowcolor{nro-fundo}\rotulo{Indicador} & \rotulo{Resultado} \\ \hline
+    Cartões concluídos no prazo & 31 de 36 (86\,\%) \\ \hline
+    Revisão C liberada & 22/9/2025 (a meta era 15/9) \\ \hline
+    Trainees efetivados no subsistema & 2 de 2 \\ \hline
+    Ocorrências de segurança elétrica & nenhuma \\ \hline
+  \end{tabular}
+  \fonte{OKRs e quadro de atividades do NEBULA no SOMA.}
+\end{table}
+A revisão C saiu com uma semana de atraso, porque um componente importado demorou; a errata foi
+resolvida por inteiro, e nenhuma placa voltou da revisão de projeto com erro de footprint.
+\end{resultados}
+
+\begin{evidencias}
+\evidencia{Registro}{OKRs 2025/1 e 2025/2 do NEBULA}{Os objetivos, os resultados-chave e o fechamento de cada semestre}{SOMA › OKRs}
+\evidencia{Arquivo controlado}{NRO-PRO-013-903}{A decisão de adiar o controle em malha fechada, com as alternativas}{SOMA › Arquivos}
+\evidencia{Atividade}{NBL-150 a NBL-189}{Os cartões do subsistema em 2025, com o histórico de cada um}{SOMA › Atividades › NEBULA}
+\evidencia{Registro}{Apontamentos semanais de 2025}{A avaliação de assiduidade e entregas do time}{SOMA › Equipe (a pedido)}
+\end{evidencias}
+
+\begin{aprendizados}
+Liderar ensinou que decidir o que não fazer é a parte difícil: adiar a malha fechada foi a decisão mais
+importante do ano. O curso não tem uma disciplina sobre isso; tem a Engenharia Econômica, que ajudou a
+pesar as alternativas, e o hábito de documentar que a equipe me deu desde o trainee.
+\end{aprendizados}
+\end{atividade}

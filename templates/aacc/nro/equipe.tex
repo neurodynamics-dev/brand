@@ -1,0 +1,66 @@
+%% ============================================================
+%% nro/equipe.tex — o que todo relatório sabe da equipe
+%%
+%% Mantido pela DIRETORIA. O membro não mexe aqui: se o professor que o
+%% avalia não é o da equipe, ou se a norma do colegiado dele é outra,
+%% ele repete \equipe{…} no preâmbulo do relatório só com o que muda.
+%%
+%% Antes de publicar o template, a Diretoria preenche o que está vazio
+%% abaixo. Campo vazio vira pendência em todos os relatórios — de
+%% propósito: sem o professor responsável e sem o registro no SIEX, o
+%% relatório não se sustenta diante do Colegiado.
+%% ============================================================
+
+%% A série no controle de arquivos (NRO-PUB-001). É um template de
+%% registros: cada relatório é um PN, que o membro cria em Arquivos,
+%% no SOMA, e sobe lá como revisão para o grupo revisor aprovar.
+%% O código é uma PROPOSTA: confira em Arquivos que o SN 020 do Pessoal
+%% está livre, crie a série com a estrutura "Template → registros" e,
+%% se o número mudar, troque-o aqui.
+\serie{
+  codigo  = NRO-PES-020,
+  titulo  = Relatório de atividades para aproveitamento de AACC,
+  emissor = Departamento de Pessoal,
+  revisao = A,
+}
+
+\equipe{
+  nome         = NeuroDynamics PD\&I,
+  sigla        = NRO,
+  %% como a frase o escreve: "realizadas no …"
+  laboratorios = {Laboratório de Engenharia Biomédica e no Laboratório de Bioengenharia (LABBIO) da Escola de Engenharia da UFMG},
+  site         = neurodynamics.dev,
+  validacao    = auth.neurodynamics.dev,
+
+  %% o professor responsável pela equipe: quem avalia e dá a nota.
+  %% Com o título, como deve aparecer na assinatura (Prof. Dr. …,
+  %% Profa. Dra. …); o artigo (o ou a) faz o texto dizer "do" ou "da".
+  professor             = {},
+  artigoprofessor       = o,
+  departamentoprofessor = {},   % ex.: Departamento de Engenharia Mecânica
+  emailprofessor        = {},
+
+  %% quem dirige a equipe e assina o parecer da equipe
+  dirigente      = {},
+  cargodirigente = {},          % ex.: Diretor-geral
+
+  %% a ação de extensão, como está no SIEX/UFMG
+  siextitulo        = {},
+  siexnumero        = {},
+  siexcoordenador   = {},        % com o título: Prof. Dr. …
+  artigocoordenador = o,
+  siexvigencia      = {},        % ex.: 2025 a 2027
+
+  %% a norma que rege o aproveitamento; o membro de outra unidade troca
+  %% no próprio relatório
+  norma = {Resolução da Congregação da Escola de Engenharia da UFMG n\textordmasculine~02/2019, de 31 de maio de 2019},
+
+  %% as contas: 1 crédito = 15 horas na UFMG; e a média semanal a partir
+  %% da qual o relatório precisa justificar as horas
+  horasporcredito = 15,
+  mediamaxima     = 20,
+}
+
+\documento{
+  cidade = Belo Horizonte,
+}

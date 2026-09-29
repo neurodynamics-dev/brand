@@ -1,0 +1,126 @@
+%% EXEMPLO FICTÍCIO — Atividade 3: projeto mecânico
+\begin{atividade}{Invólucro isolado do estimulador, em impressão 3D}{
+  tipo         = mecanico,
+  modalidade   = PES,
+  alternativa  = VPC,
+  horas        = 35,
+  inicio       = 2024-06,
+  fim          = 2024-08,
+  projeto      = {NEBULA, estimulação elétrica funcional para ciclismo},
+  papel        = Responsável,
+  supervisor   = {Rafael Fictício, supervisor do projeto NEBULA},
+  registros    = {NBL-127; NRO-PRO-014-902; NRO-PRO-003-902},
+  competencias = {I, III, IV},
+  disciplinas  = {Desenho Técnico; Fenômenos de Transporte; Materiais Elétricos},
+}
+
+\begin{contexto}
+A placa da revisão A viajava numa caixa plástica improvisada: abrir a tampa expunha a alta tensão,
+não havia ventilação, e a caixa, presa ao quadro da bicicleta com abraçadeiras de nylon, soltou-se duas
+vezes com a vibração da pedalada. Com a placa nova (Atividade~1), o invólucro passou a ser parte do
+projeto, com requisitos próprios, registrados no design record: nenhuma parte de alta tensão acessível
+sem ferramenta; temperatura interna de no máximo \SI{60}{\celsius} com \SI{35}{\celsius} de ambiente;
+massa de até \SI{400}{\gram} com a placa e a bateria; fixação num tubo de \SI{35}{\milli\meter},
+removível em menos de um minuto; acesso aos conectores e ao botão de parada; e fabricação na impressora
+do LABBIO.
+\end{contexto}
+
+\begin{contribuicao}
+Concebi o invólucro, comparei as alternativas, fiz o modelo e os desenhos, calculei a temperatura
+interna e a abraçadeira, imprimi as peças, montei o conjunto e fiz os ensaios térmico e de vibração. A
+fiação do botão de parada foi feita por Lucas Fictício.
+\end{contribuicao}
+
+\begin{desenvolvimento}
+\fichatecnica{
+  ferramenta    = {FreeCAD 0.21 (modelo e desenhos) e PrusaSlicer 2.7 (fatiamento)},
+  materiais     = {PETG (base, tampa e abraçadeira); TPU 95A (calço); insertos de latão M3},
+  fabricacao    = {Impressão 3D por extrusão (FDM) no LABBIO: camada de 0,2\,mm, 4 perímetros, 30\,\% de preenchimento},
+  pecas         = {Base, tampa, abraçadeira e calço; 4 parafusos M3},
+  carregamentos = {Massa de até 0,38\,kg sob vibração de até 5\,g; 2,1\,W dissipados dentro},
+  desenhos      = {Anexos do design record \texttt{NRO-PRO-014-902}},
+  arquivos      = {Drive da equipe, pasta NEBULA/mecânica/involucro-rev1},
+}
+
+\textbf{As alternativas.} Comparei três soluções numa matriz de decisão com pesos definidos com o
+supervisor --- isolação (30\,\%), desempenho térmico (20\,\%), custo (20\,\%), encaixe na placa
+(15\,\%) e prazo (15\,\%): uma caixa comercial de ABS usinada (nota 3,4 de 5), uma caixa de alumínio
+usinada (3,1: boa para o calor, mas condutora e cara) e uma peça impressa em PETG (4,3). O PETG
+ganhou pela isolação, pelo encaixe sob medida e pela temperatura de transição vítrea, perto de
+\SI{80}{\celsius}, bem acima da do PLA.
+
+\textbf{O modelo.} A base recebe a placa sobre quatro colunas com insertos de latão; a tampa tem
+ranhuras em labirinto, que deixam o ar passar sem deixar um caminho reto até a alta tensão, e o furo
+do botão de parada; a abraçadeira, com calço de TPU, prende o conjunto ao tubo
+(Figura~\ref{fig:ex-involucro}). As paredes têm \SI{2,4}{\milli\meter}, múltiplas da largura de
+extrusão, e as folgas de encaixe, \SI{0,3}{\milli\meter}.
+
+\begin{figure}[htbp]
+  \centering
+  \input{exemplo/figuras/involucro}
+  \caption{Vista explodida do invólucro: a base com a abraçadeira, a placa e a tampa.}
+  \fonte{Elaborado pela autora.}
+  \label{fig:ex-involucro}
+\end{figure}
+
+\textbf{A temperatura.} A placa dissipa \SI{2,1}{\watt} dentro do invólucro. Em convecção natural,
+com $h \approx \SI{6}{\watt\per\square\meter\per\kelvin}$ e a área externa de
+$A = \SI{0,034}{\square\meter}$, a elevação de temperatura estimada é
+\begin{equation}
+  \Delta T = \frac{P}{h A} = \frac{\SI{2,1}{\watt}}{\SI{6}{\watt\per\square\meter\per\kelvin} \times \SI{0,034}{\square\meter}} \approx \SI{10}{\kelvin},
+  \label{eq:ex-termico}
+\end{equation}
+o que dá \SI{45}{\celsius} com \SI{35}{\celsius} de ambiente, dentro do requisito.
+
+\textbf{A abraçadeira.} Tomei a massa de \SI{0,38}{\kilo\gram} sob 5\,g de vibração
+($F = m a \approx \SI{19}{\newton}$) e dimensionei para $F = \SI{50}{\newton}$. O braço da abraçadeira
+é uma viga em balanço de $L = \SI{30}{\milli\meter}$ e seção $b \times h$, com a tensão máxima
+\begin{equation}
+  \sigma = \frac{M c}{I} = \frac{F L \cdot h/2}{b h^3/12} = \frac{6 F L}{b h^2}.
+  \label{eq:ex-viga}
+\end{equation}
+Com $b = \SI{12}{\milli\meter}$ e $h = \SI{5}{\milli\meter}$, a primeira versão dava
+$\sigma = \SI{30}{\mega\pascal}$ --- fator de segurança 1,0 contra os \SI{30}{\mega\pascal} que
+estimei para o PETG impresso na direção entre camadas (60\,\% dos \SI{50}{\mega\pascal} do material).
+Aumentei para $h = \SI{8}{\milli\meter}$: $\sigma = \SI{11,7}{\mega\pascal}$ e fator 2,6.
+\end{desenvolvimento}
+
+\begin{resultados}
+O conjunto com a placa e a bateria pesou \SI{352}{\gram}. No ensaio térmico, em estimulação contínua
+na amplitude máxima, a primeira impressão, sem ranhuras, passou de \SI{49}{\celsius} com
+\SI{26}{\celsius} de ambiente; com as ranhuras em labirinto, a temperatura estabilizou em
+\SI{38}{\celsius}, uma elevação de \SI{12,5}{\kelvin}, perto dos \SI{10}{\kelvin} estimados em
+\eqref{eq:ex-termico} (Figura~\ref{fig:ex-termico}). Extrapolada para \SI{35}{\celsius} de ambiente,
+fica em \SI{48}{\celsius}, abaixo dos \SI{60}{\celsius} do requisito.
+
+\begin{figure}[htbp]
+  \centering
+  \input{exemplo/figuras/termico}
+  \caption{Temperatura do ar dentro do invólucro em estimulação contínua na amplitude máxima, a
+    \SI{26}{\celsius} de ambiente.}
+  \fonte{Relatório de execução \texttt{NRO-PRO-003-902}.}
+  \label{fig:ex-termico}
+\end{figure}
+
+No ensaio de vibração --- três horas na bicicleta, na bancada de rolo ---, nada se soltou, e a
+remoção do conjunto levou \SI{40}{\second}. Dois problemas apareceram: os cantos da primeira base
+empenaram na impressão, resolvido com borda de adesão e a impressora fechada; e o encaixe da tampa
+ficou apertado demais, resolvido ao passar a folga de \num{0,2} para \SI{0,3}{\milli\meter}.
+\end{resultados}
+
+\begin{evidencias}
+\evidencia{Arquivo de projeto}{involucro-rev1 (FreeCAD e STL)}{O modelo, os desenhos e os arquivos de impressão}{Drive da equipe (acesso a pedido)}
+\evidencia{Arquivo controlado}{NRO-PRO-014-902}{O design record do invólucro, com a matriz de decisão e os cálculos}{SOMA › Arquivos}
+\evidencia{Arquivo controlado}{NRO-PRO-003-902}{O relatório dos ensaios térmico e de vibração}{SOMA › Arquivos}
+\evidencia{Atividade}{NBL-127}{O cartão do invólucro, atribuído a mim e concluído}{SOMA › Atividades › NEBULA}
+\end{evidencias}
+
+\begin{aprendizados}
+Uma estudante de Engenharia Elétrica projetando uma peça mecânica: usei o Desenho Técnico mais do
+que esperava, e a conta de convecção de Fenômenos de Transporte decidiu as ranhuras. O que aprendi fora
+da sala: a peça impressa não é o material do catálogo --- a anisotropia entre camadas mudou o
+dimensionamento ---, e um requisito de segurança (nenhuma parte de alta tensão acessível) vira
+geometria, não só texto. Da próxima vez, eu imprimiria um corpo de prova para medir a resistência entre
+camadas, em vez de estimá-la.
+\end{aprendizados}
+\end{atividade}

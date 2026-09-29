@@ -1,0 +1,21 @@
+% A fonte de corrente de um canal (exemplo fictício): o amplificador
+% operacional força sobre R_S a tensão do DAC; a corrente na carga é V_DAC/R_S.
+\begin{circuitikz}[font=\footnotesize, line width=0.5pt]
+  \draw (0,0) node[op amp, yscale=-1] (oa) {};
+  \node at ([xshift=-1.5mm]oa.center) {\scriptsize U1};
+  % a referência na entrada não inversora (em cima)
+  \draw (oa.+) to[short, -o] ++(-1.4,0) node[left] {$V_\mathrm{DAC}$ (0 a 1\,V)};
+  % a saída, o resistor de gate e o MOSFET
+  \draw (oa.out) to[R, l=$R_G$, -*] ++(2.4,0) coordinate (g);
+  \draw (g) node[nigfete, anchor=G] (q) {};
+  \node[right, font=\scriptsize] at (q.east) {Q1 (250\,V)};
+  \draw (q.D) -- ++(0,0.5) to[R, l_=$Z_\mathrm{carga}$] ++(0,2.1) node[above] {$V_\mathrm{HV} = 120$\,V};
+  % o resistor de medição e a realimentação, por baixo
+  \draw (q.S) -- ++(0,-1.9) coordinate (s) to[R, l_={$R_S = 10\,\Omega$}, *-] ++(0,-2) node[ground] {};
+  \coordinate (r0) at ([xshift=-9mm]oa.-);
+  \draw (s) -- (s -| r0) |- (oa.-);
+  \draw (s) -- ++(1.4,0) node[right, align=left, font=\scriptsize] {ao comparador\\do limite (110\,mA)};
+  % a compensação, entre a saída e a entrada inversora
+  \draw ([xshift=-4mm]oa.-) node[circ] {} -- ++(0,-0.9) coordinate (c1);
+  \draw (c1) to[C, l_=$C_c$] (c1 -| oa.out) -- (oa.out);
+\end{circuitikz}

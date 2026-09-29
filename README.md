@@ -36,9 +36,28 @@ linguagem visual do site institucional.
   ferramenta original do repositório `signature`.
 - **Downloads e templates** — logos e símbolo oficiais via Brandfetch
   (fonte única da marca), paleta, o template de documentos NRO-PUB-002
-  (`assets/`), os templates Overleaf de artigo e pôster (em
-  desenvolvimento), um `template.html` de página no padrão da marca e
-  os links de fontes e do ecossistema.
+  (`assets/`), o **relatório de AACC** em LaTeX (abre no Overleaf, com
+  o exemplo em PDF — ver abaixo), os templates Overleaf de artigo e
+  pôster (em desenvolvimento), um `template.html` de página no padrão
+  da marca e os links de fontes e do ecossistema.
+
+## Relatório de AACC (LaTeX)
+
+A pasta [`templates/aacc/`](templates/aacc/) é o template com que um
+membro ou egresso pede ao colegiado o aproveitamento de horas de
+Atividades Acadêmicas Curriculares Complementares, no modelo NRO-PUB-002:
+a classe `nro-aacc.cls`, o relatório que o membro edita, um modelo por
+tipo de atividade (placa, peça, simulação, software, ensaio…), as regras
+da equipe em `nro/` e um exemplo fictício completo. O que falta vira
+pendência na capa; os quadros do pedido, as horas e os créditos se montam
+sozinhos. O passo a passo — do SOMA ao Colegiado — e o que a Diretoria
+precisa preencher antes de publicar estão no
+[`LEIAME.md`](templates/aacc/LEIAME.md).
+
+O site serve `assets/template-relatorio-aacc.zip` (o botão *Abrir no
+Overleaf* aponta para ele) e `assets/exemplo-relatorio-aacc.pdf`. Mudou o
+template? Rode `templates/aacc/empacotar.sh`, que compila tudo e gera os
+dois de novo.
 
 ## Design system (Claude Design)
 

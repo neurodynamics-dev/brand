@@ -1,0 +1,216 @@
+%% ============================================================
+%% RELATÓRIO DE ATIVIDADES PARA APROVEITAMENTO DE AACC
+%% NeuroDynamics PD&I · template da série NRO-PES-020
+%%
+%% Leia o LEIAME.md antes (cinco minutos) e o exemplo
+%% (exemplo-relatorio-aacc.pdf): ele mostra o nível que a equipe espera.
+%%
+%% O caminho:
+%%   1. os seus dados (1, abaixo) e as modalidades em que você pede
+%%      horas (2);
+%%   2. a Parte II: o resumo da sua participação, a trajetória, os
+%%      afastamentos e a formação recebida;
+%%   3. a Parte III: UMA ATIVIDADE POR ARQUIVO, em atividades/. Copie o
+%%      modelo do tipo certo de modelos/ (pcb.tex, simulacao.tex,
+%%      mecanico.tex, software.tex…) e escreva;
+%%   4. a Parte IV: a memória das horas, a relação com o curso e a
+%%      autoavaliação; e os PDFs dos anexos, em anexos/;
+%%   5. troque "rascunho" por "final" na linha do \documentclass. Se a
+%%      capa disser NÃO ENCAMINHE, ainda falta coisa — a lista está logo
+%%      depois dos quadros do pedido;
+%%   6. suba o PDF em Arquivos, no SOMA, como revisão do seu PN, e siga:
+%%      direção da equipe → professor responsável → Colegiado.
+%%
+%% Cada caixa amarela (PREENCHER) é uma pendência. Ela some quando você
+%% troca o \preencher{…} pelo seu texto. A Parte I é da equipe: não mexa
+%% nos arquivos de nro/ nem na classe nro-aacc.cls.
+%% ============================================================
+\documentclass[rascunho]{nro-aacc}   % rascunho → final, quando terminar
+
+%% ------------------------------------------------------------
+%% 1. VOCÊ
+%% ------------------------------------------------------------
+\estudante{
+  nome      = {},   % o nome completo, como no registro acadêmico
+  matricula = {},
+  curso     = {},   % ex.: Engenharia Elétrica
+  colegiado = {},   % ex.: Colegiado do Curso de Graduação em Engenharia Elétrica
+  email     = {},
+  ingresso  = {},   % ex.: 2021/1
+  periodo   = {},   % ex.: 8º
+}
+
+\membro{
+  registro     = {},   % o seu registro no SOMA
+  situacao     = {},   % ativo, ou egresso
+  inicio       = {},   % a entrada na equipe: AAAA-MM
+  fim          = {},   % a saída (só egresso): AAAA-MM
+  cargo        = {},   % o cargo atual, ou o último
+  departamento = {},
+  projetos     = {},   % ex.: NEBULA; ÓRION
+  supervisor   = {},   % o supervisor imediato: nome e cargo
+  dedicacao    = {},   % horas por semana, em média, no período todo
+  siex         = {},   % sim, se você consta da equipe da ação no SIEX; não, se não
+  vinculo      = {},   % a declaração de vínculo: NRO-DIR-004-<registro>
+  verificador  = {},   % o código verificador dela (SOMA › Serviços › Declaração de vínculo)
+}
+
+\documento{
+  pn   = {},   % o PN que o SOMA deu ao seu relatório (Arquivos › NRO-PES-020 › novo PN)
+  data = {},   % AAAA-MM-DD; em branco, vale a data de hoje
+}
+
+%% Se o professor que avalia você não é o da equipe, ou se a norma do
+%% seu colegiado é outra, troque aqui só o que muda:
+% \equipe{professor = {Profa. Dra. …}, artigoprofessor = a, departamentoprofessor = {Departamento de …}}
+% \equipe{norma = {Resolução n\textordmasculine~…/…, do Colegiado de …}}
+
+%% ------------------------------------------------------------
+%% 2. COMO VOCÊ PEDE O APROVEITAMENTO
+%% Abra o quadro de AACC do seu curso e a norma do seu colegiado. Para
+%% cada modalidade em que for pedir horas, informe o código da atividade
+%% no seu curso e o dispositivo da norma (o artigo, o inciso). As
+%% modalidades (a lista completa, com o que cada uma é, está na Parte I):
+%%   EXT  extensão universitária
+%%   PES  iniciação à pesquisa e ao desenvolvimento tecnológico
+%%   COMP equipe de competição e projeto tecnológico estudantil
+%%   VPC  vivência profissional complementar
+%%   EVT  participação em eventos, competições e visitas técnicas
+%%   PRD  produção técnico-científica
+%%   ORG  organização de eventos
+%%   ENS  ensino e formação (monitoria, tutoria, treinamentos)
+%%   GES  gestão, liderança e representação
+%%   CUR  cursos e treinamentos de formação complementar
+%%   OUT  outra atividade, a critério do Colegiado
+%% O limite (opcional) é o máximo de horas que a norma aceita na
+%% modalidade: o Quadro 1 avisa se você passar dele.
+%% Só as modalidades que as suas atividades usam aparecem nos quadros.
+%% ------------------------------------------------------------
+\modalidade{EXT}{codigo = {}, dispositivo = {}, limite = {}}
+\modalidade{PES}{codigo = {}, dispositivo = {}, limite = {}}
+% \modalidade{COMP}{codigo = {}, dispositivo = {}, limite = {}}
+% \modalidade{VPC}{codigo = {}, dispositivo = {}, limite = {}}
+% \modalidade{EVT}{codigo = {}, dispositivo = {}, limite = {}}
+
+%% as suas referências (datasheets, normas, artigos), em referencias.bib
+\addbibresource{referencias.bib}
+
+\begin{document}
+
+\capa            % a capa, o requerimento e os quadros se montam sozinhos
+\requerimento
+\quadrospedido
+\sumario
+
+\parteinstitucional   % Parte I — escrita pela equipe
+
+%% ============================================================
+%% PARTE II — VOCÊ NA EQUIPE
+%% ============================================================
+\parte[Quem é o estudante, como ele chegou à equipe e o que fez nela, em linhas gerais. As
+  atividades, uma a uma, estão na Parte~III.]{O estudante na equipe}
+
+\identificacao
+
+\section{Resumo da participação}
+\preencher[Parte II · Resumo]{Em dois ou três parágrafos: o que você fez na equipe, em que projetos, com
+  que responsabilidade, e como isso se liga ao seu curso. É o que o Colegiado lê primeiro: seja concreto
+  (o que você entregou), não genérico (o que a equipe faz).}
+
+\section{Trajetória na equipe}
+\instrucao{Do processo seletivo até hoje, em ordem: a entrada, o trainee, os projetos, as mudanças de
+  cargo, os marcos de entrega. Um marco por linha.}
+\begin{trajetoria}
+  % \marco{2023-03}{Aprovação no processo seletivo (edital de 2023/1) e período trainee.}
+  % \marco{2023-06}{Entrada no projeto NEBULA, no subsistema eletrônico.}
+\end{trajetoria}
+
+\section{Afastamentos e interrupções}
+\instrucao{Declare todo afastamento, pausa ou período sem atividade (NRO-PES-002). Os meses afastados
+  saem da conta da média semanal. Omitir afastamento é declaração falsa.}
+\begin{afastamentos}
+  % \afastamento{2024-07}{2024-08}{Intercâmbio acadêmico, afastamento aprovado pelo Depto. de Pessoal.}
+  % ou, se não houve nenhum:
+  % \semafastamentos
+\end{afastamentos}
+
+\section{Formação recebida na equipe}
+\instrucao{Os treinamentos concluídos no SOMA (Treinamentos › Meus certificados). Eles também saem na
+  segunda folha da declaração de vínculo.}
+\begin{treinamentos}
+  % \treinamento{NRO-TRE-003}{Segurança elétrica em bancada}{4}{2023-05-10}{CERT-XXXX-XXXX}
+\end{treinamentos}
+
+%% ============================================================
+%% PARTE III — AS ATIVIDADES
+%% Uma atividade por arquivo. Para cada uma: copie o modelo do tipo certo
+%% de modelos/ para atividades/, e inclua o arquivo aqui.
+%% Os tipos: pcb, mecanico, simulacao, software, ensaio, clinico,
+%% pesquisa, extensao, ensino, evento, gestao, comunicacao, outro.
+%% ============================================================
+\parteatividades
+
+\input{atividades/atividade-01}
+% \input{atividades/atividade-02}
+% \input{atividades/atividade-03}
+
+%% ============================================================
+%% PARTE IV — A SÍNTESE
+%% ============================================================
+\parte[O conjunto: as horas e a base delas, as competências desenvolvidas, a relação com o curso e a
+  autoavaliação pelo mesmo barema que o professor usa.]{Síntese}
+
+\section{As horas pedidas}
+\quadrohoras
+
+\subsection{Memória de cálculo}
+\preencher[Parte IV · Memória de cálculo]{Explique como as horas de cada atividade foram apuradas: os
+  registros usados (apontamentos semanais, check-ins no laboratório, cartões do quadro, relatórios) e a
+  conta feita. Horas sem base não se pedem. Se a média semanal passou do limite, justifique aqui.}
+
+\section{As competências desenvolvidas}
+\matrizcompetencias
+
+\section{A relação com o curso}
+\quadrodisciplinas
+\preencher[Parte IV · Relação com o curso]{Mostre, não afirme: que conteúdos das disciplinas do quadro
+  você aplicou, em que atividade, e o que a equipe ensinou que o curso não ensina. Use o projeto
+  pedagógico do seu curso, se ajudar.}
+
+\section{Autoavaliação}
+\instrucao{Dê a sua nota (de 0 a 10) em cada critério do barema --- o mesmo que o professor usa na
+  Parte~V --- e justifique cada uma abaixo. Autoavaliação inflada pesa contra.}
+\autoavaliacao{
+  aderencia    = {},
+  profundidade = {},
+  contribuicao = {},
+  evidencias   = {},
+  resultados   = {},
+  comunicacao  = {},
+}
+\preencher[Parte IV · Justificativa da autoavaliação]{Uma frase por critério: por que essa nota, e o
+  que faltou para a nota máxima.}
+
+\section{Considerações finais}
+\preencher[Parte IV · Considerações finais]{O que a equipe mudou na sua formação, e o que você deixou
+  para ela: os documentos, os treinamentos, as pessoas que você formou, o que o seu sucessor encontra
+  pronto.}
+
+\referencias
+
+%% ============================================================
+%% PARTE V — A DECLARAÇÃO E OS PARECERES (monta-se sozinha)
+%% ============================================================
+\pareceres
+
+%% ============================================================
+%% ANEXOS
+%% O A se monta sozinho. Os PDFs vão em anexos/, com estes nomes.
+%% ============================================================
+\anexoevidencias
+\anexo{Declaração de vínculo emitida pelo SOMA}{anexos/declaracao-vinculo.pdf}
+% \anexo{Declarações de participação em eventos}{anexos/declaracoes-eventos.pdf}
+% \anexo{Certificados de treinamento}{anexos/certificados.pdf}
+% \anexo{Desenhos técnicos e esquemáticos}{anexos/documentos-tecnicos.pdf}
+
+\end{document}

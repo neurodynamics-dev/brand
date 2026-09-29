@@ -1,0 +1,60 @@
+%% ============================================================
+%% MODELO DE ATIVIDADE · EVENTO, COMPETIÇÃO OU VISITA TÉCNICA
+%%
+%% Copie este arquivo para atividades/ (atividade-02.tex, por exemplo),
+%% inclua-o no relatorio-aacc.tex com \input{atividades/atividade-02}
+%% e escreva. Cada \preencher{…} é uma pendência: troque-o pelo seu
+%% texto. Cada \figuraprovisoria também: troque-a pela figura de verdade.
+%%
+%% Uma atividade é UMA entrega sua, com começo, meio e fim. "Participei
+%% do projeto X por dois anos" não é uma atividade: são várias. Divida.
+%% ============================================================
+\begin{atividade}{Participação no evento E, como F}{
+  tipo         = evento,
+  modalidade   = {},   % a chave da modalidade pedida: EXT, PES, COMP, VPC, EVT, PRD, ORG, ENS, GES, CUR, OUT
+  alternativa  = {},   % a modalidade alternativa, se o Colegiado não aceitar a primeira
+  horas        = {},   % as horas desta atividade, com base nos registros (Parte IV)
+  inicio       = {},   % AAAA-MM
+  fim          = {},   % AAAA-MM, ou: em andamento
+  projeto      = {},
+  papel        = {},   % Responsável, Corresponsável ou Colaborador(a)
+  supervisor   = {},   % quem confirma: nome e cargo (o supervisor do projeto, o gerente)
+  registros    = {},   % os códigos no SOMA, com ponto e vírgula: NBL-14; NRO-PRO-003-7
+  competencias = {},   % as competências das DCN que ela desenvolveu (I a VIII): I, III, V
+  disciplinas  = {},   % as disciplinas do seu curso ligadas a ela: ELE075 Eletrônica; ELE067 Circuitos
+}
+
+\begin{contexto}
+\preencher{O evento, o que ele é, e por que a equipe foi.}
+\end{contexto}
+
+\begin{contribuicao}
+\preencher{A sua função: competir, apresentar, operar o sistema, organizar a viagem.}
+\end{contribuicao}
+
+\begin{desenvolvimento}
+\fichatecnica{
+  evento     = {},   % Evento
+  local      = {},   % Local
+  datas      = {},   % Datas
+  funcao     = {},   % Função
+  resultado  = {},   % Resultado (colocação, prêmio) — opcional
+  declaracao = {},   % Declaração de participação (NRO-DIR-006)
+}
+
+\preencher{A preparação (o que você fez antes) e a atuação durante o evento.}
+\end{desenvolvimento}
+
+\begin{resultados}
+\preencher{O resultado (a colocação, o prêmio, a avaliação dos juízes) e o que a equipe trouxe de volta.}
+\end{resultados}
+
+\begin{evidencias}
+% Uma linha por evidência: \evidencia{tipo}{identificador}{o que mostra}{onde conferir}
+% \evidencia{Declaração}{NRO-DIR-006-<n>}{A declaração de participação, com as horas}{auth.neurodynamics.dev}
+\end{evidencias}
+
+\begin{aprendizados}
+\preencher{O que o evento ensinou: a comparação com as outras equipes, os contatos, a pressão do prazo.}
+\end{aprendizados}
+\end{atividade}

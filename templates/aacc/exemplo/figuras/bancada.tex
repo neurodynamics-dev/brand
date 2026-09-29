@@ -1,0 +1,18 @@
+% A montagem dos ensaios de bancada (exemplo fictício).
+\begin{tikzpicture}[
+    bloco/.style={draw=nro-tinta, line width=0.5pt, fill=white, rounded corners=1.2pt,
+      minimum height=12mm, text width=31mm, align=center, font=\footnotesize, inner sep=2pt},
+    seta/.style={-{Stealth[length=1.8mm]}, line width=0.55pt, draw=nro-tinta},
+    x=1mm, y=1mm]
+  \node[bloco, fill=nro-synapse!18] (est) at (0,20) {Estimulador\\{\scriptsize placa rev.\,B no invólucro}};
+  \node[bloco] (carga) at (52,20) {Carga de teste\\{\scriptsize 500\,$\Omega$, 1\,k$\Omega$ e 1,5\,k$\Omega$ (0,1\,\%)}};
+  \node[bloco] (osc) at (104,20) {Osciloscópio\\{\scriptsize 100\,MHz, 4 canais}};
+  \node[bloco] (note) at (0,0) {Notebook\\{\scriptsize registro dos parâmetros}};
+  \node[bloco] (cam) at (52,0) {Câmera térmica\\{\scriptsize estágio de saída}};
+  \node[bloco] (mult) at (104,0) {Multímetro de 6\,½ dígitos\\{\scriptsize calibração de $R_S$}};
+  \draw[seta] (est) -- node[above, font=\scriptsize] {canal 1 a 4} (carga);
+  \draw[seta] (carga) -- node[above, font=\scriptsize, align=center] {sonda de\\corrente} (osc);
+  \draw[seta] (note) -- node[left, font=\scriptsize] {USB} (est);
+  \draw[seta, densely dashed] (cam) -- (est.south east);
+  \draw[seta, densely dashed] (mult) -- (carga.south east);
+\end{tikzpicture}
