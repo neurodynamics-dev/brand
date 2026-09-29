@@ -1,0 +1,23 @@
+% Temperatura do ar dentro do invólucro em estimulação contínua na
+% amplitude máxima, a 26 °C de ambiente (exemplo fictício).
+\begin{tikzpicture}
+  \begin{axis}[
+      width=0.86\linewidth, height=58mm,
+      xlabel={Tempo (min)}, ylabel={Temperatura interna (\si{\celsius})},
+      xmin=0, xmax=60, ymin=20, ymax=65,
+      grid=major, grid style={nro-fundo},
+      tick label style={font=\scriptsize}, label style={font=\footnotesize},
+      legend pos=north west, legend cell align=left,
+      legend style={font=\scriptsize, draw=nro-linha, fill=white, fill opacity=0.9, text opacity=1}]
+    \addplot[only marks, mark=square*, mark size=1.4pt, nro-pulso-texto]
+      coordinates {(0,25.8) (5,33.2) (10,38.1) (15,41.9) (20,44.3) (25,45.6) (30,46.8) (35,48.3) (40,48.4) (45,48.8) (50,49.7) (55,49.5) (60,49.9)};
+    \addlegendentry{sem ranhuras (1.ª impressão)}
+    \addplot[only marks, mark=*, mark size=1.5pt, nro-axon]
+      coordinates {(0,26.1) (5,29.9) (10,32.6) (15,34.6) (20,35.7) (25,36.7) (30,36.7) (35,37.4) (40,38.1) (45,38.1) (50,38.5) (55,37.9) (60,38.3)};
+    \addlegendentry{com ranhuras em labirinto}
+    \addplot[domain=0:60, samples=61, nro-axon, thin] {26+12.5*(1-exp(-x/14))};
+    \addlegendentry{ajuste: $\Delta T_\infty = 12{,}5$\,K, $\tau = 14$\,min}
+    \addplot[domain=0:60, nro-cinza, densely dashed] {60};
+    \addlegendentry{limite de projeto (60\,°C)}
+  \end{axis}
+\end{tikzpicture}

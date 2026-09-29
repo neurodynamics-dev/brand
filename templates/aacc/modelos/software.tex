@@ -1,0 +1,75 @@
+%% ============================================================
+%% MODELO DE ATIVIDADE · FIRMWARE E SOFTWARE
+%%
+%% Copie este arquivo para atividades/ (atividade-02.tex, por exemplo),
+%% inclua-o no relatorio-aacc.tex com \input{atividades/atividade-02}
+%% e escreva. Cada \preencher{…} é uma pendência: troque-o pelo seu
+%% texto. Cada \figuraprovisoria também: troque-a pela figura de verdade.
+%%
+%% Uma atividade é UMA entrega sua, com começo, meio e fim. "Participei
+%% do projeto X por dois anos" não é uma atividade: são várias. Divida.
+%% ============================================================
+\begin{atividade}{Módulo M do firmware: requisitos, arquitetura e testes}{
+  tipo         = software,
+  modalidade   = {},   % a chave da modalidade pedida: EXT, PES, COMP, VPC, EVT, PRD, ORG, ENS, GES, CUR, OUT
+  alternativa  = {},   % a modalidade alternativa, se o Colegiado não aceitar a primeira
+  horas        = {},   % as horas desta atividade, com base nos registros (Parte IV)
+  inicio       = {},   % AAAA-MM
+  fim          = {},   % AAAA-MM, ou: em andamento
+  projeto      = {},
+  papel        = {},   % Responsável, Corresponsável ou Colaborador(a)
+  supervisor   = {},   % quem confirma: nome e cargo (o supervisor do projeto, o gerente)
+  registros    = {},   % os códigos no SOMA, com ponto e vírgula: NBL-14; NRO-PRO-003-7
+  competencias = {},   % as competências das DCN que ela desenvolveu (I a VIII): I, III, V
+  disciplinas  = {},   % as disciplinas do seu curso ligadas a ela: ELE075 Eletrônica; ELE067 Circuitos
+}
+
+\begin{contexto}
+\preencher{Que sistema, que problema, e com que requisitos (tempo real, memória, consumo, segurança).}
+\end{contexto}
+
+\begin{contribuicao}
+\preencher{Os módulos que você escreveu, os PRs que abriu e revisou (com os números), as decisões que tomou.}
+\end{contribuicao}
+
+\begin{desenvolvimento}
+\fichatecnica{
+  linguagens    = {},   % Linguagens
+  plataforma    = {},   % Plataforma (MCU, sistema, framework)
+  repositorio   = {},   % Repositório
+  contribuicoes = {},   % Contribuições (commits, PRs, revisões)
+  testes        = {},   % Testes
+  licenca       = {},   % Licença — opcional
+}
+
+\preencher{A arquitetura: os módulos, as interfaces e o fluxo de dados. As decisões registradas (ADR, NRO-PRO-013). Os trechos que importam, explicados --- não o código inteiro. Os testes.}
+
+\begin{figure}[htbp]
+  \centering
+  \figuraprovisoria{A arquitetura: os módulos e o fluxo de dados (ou uma listagem com legenda, que também conta).}
+  % \includegraphics[width=0.9\linewidth]{figuras/arquitetura.pdf}
+  \caption{Arquitetura do firmware do módulo M.}
+  \fonte{Elaborado pelo autor.}
+  \label{fig:arquitetura}
+\end{figure}
+
+% Um trecho de código que importa, com legenda (conta como figura):
+% \begin{lstlisting}[language=C, caption={Rotina de interrupção do conversor A/D.}, label={lst:isr}]
+% void ADC_IRQHandler(void) { ... }
+% \end{lstlisting}
+\end{desenvolvimento}
+
+\begin{resultados}
+\preencher{As métricas: latência, taxa de amostragem, consumo, memória, falhas. Os testes que passam e o que foi para a versão em uso.}
+\end{resultados}
+
+\begin{evidencias}
+% Uma linha por evidência: \evidencia{tipo}{identificador}{o que mostra}{onde conferir}
+% \evidencia{Repositório}{github.com/neurodynamics-dev/<repo>, PR \#<n>}{O pull request do módulo, com a revisão}{GitHub (acesso a pedido)}
+% \evidencia{Arquivo controlado}{NRO-PRO-013-<PN>}{O registro da decisão de arquitetura}{SOMA › Arquivos}
+\end{evidencias}
+
+\begin{aprendizados}
+\preencher{O que a programação de um sistema real ensinou que as disciplinas de programação e de sistemas embarcados não ensinaram.}
+\end{aprendizados}
+\end{atividade}

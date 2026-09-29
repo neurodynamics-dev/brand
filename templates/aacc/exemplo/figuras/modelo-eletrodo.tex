@@ -1,0 +1,12 @@
+% O modelo da carga (exemplo fictício): a fonte de corrente sobre o
+% conjunto eletrodo e pele, no modelo de Randles.
+\begin{circuitikz}[font=\footnotesize, line width=0.5pt, scale=0.85, transform shape]
+  \draw (0,0) to[I, l=$i(t)$] (0,3) to[R, l=$R_s$, -*] (3,3) coordinate (a);
+  \draw (a) -- (3,3.9) to[R, l=$R_p$] (6.2,3.9) -- (6.2,3) coordinate (b);
+  \draw (a) -- (3,2.1) to[C, l_=$C_p$] (6.2,2.1) -- (b);
+  \draw (b) to[short, *-] (7.6,3) -- (7.6,0) -- (0,0);
+  \draw (7.6,0) node[ground] {};
+  \draw[nro-cinza, densely dashed, rounded corners=2pt] (1.3,1.5) rectangle (6.9,4.8);
+  \node[nro-cinza, font=\scriptsize, anchor=south] at (4.1,4.8) {eletrodo e pele (modelo de Randles)};
+  \draw[-{Stealth[length=1.6mm]}, nro-axon] (8.4,0.3) -- node[right, text=nro-axon] {$v_e(t)$} (8.4,2.9);
+\end{circuitikz}

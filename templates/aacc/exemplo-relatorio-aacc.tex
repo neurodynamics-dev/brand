@@ -1,0 +1,204 @@
+%% ============================================================
+%% EXEMPLO FICTÍCIO — o nível que a equipe espera
+%%
+%% Tudo aqui é inventado: a pessoa, o professor, os códigos, os números,
+%% os resultados. O exemplo existe para mostrar como fica um relatório
+%% completo, sem pendência: cada atividade com a ficha, o desenvolvimento
+%% técnico com figuras e equações, os resultados medidos, as evidências.
+%% Não copie o texto; copie o padrão.
+%%
+%% As figuras foram desenhadas em TikZ só para o exemplo caber no
+%% repositório; no seu relatório, exporte do KiCad, do CAD, do simulador,
+%% e use \includegraphics.
+%% ============================================================
+\documentclass[final,exemplo]{nro-aacc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{circuitikz}
+\usetikzlibrary{arrows.meta}
+
+\estudante{
+  nome      = Ana Clara Exemplo,
+  matricula = 2021000000,
+  curso     = Engenharia Elétrica,
+  colegiado = Colegiado do Curso de Graduação em Engenharia Elétrica,
+  email     = ana.exemplo@ufmg.br,
+  ingresso  = 2021/1,
+  periodo   = 10º,
+}
+\membro{
+  registro     = 999,
+  situacao     = egresso,
+  inicio       = 2023-03,
+  fim          = 2025-12,
+  cargo        = {Supervisora do subsistema eletrônico do NEBULA},
+  departamento = {Pesquisa e Desenvolvimento},
+  projetos     = NEBULA,
+  supervisor   = {Rafael Fictício, supervisor do projeto NEBULA},
+  dedicacao    = 10,
+  siex         = não,
+  vinculo      = NRO-DIR-004-999,
+  verificador  = EXEM-PLOF-ICTI,
+}
+\documento{
+  pn   = 999,
+  data = 2026-02-10,
+}
+%% no exemplo, também a equipe é fictícia
+\equipe{
+  professor             = {Prof. Dr. João Modelo},
+  departamentoprofessor = {Departamento de Engenharia Mecânica},
+  dirigente             = {Beatriz Amostra},
+  cargodirigente        = {Diretora-geral},
+  siextitulo            = {Tecnologias assistivas para a reabilitação e o esporte adaptado (exemplo)},
+  siexnumero            = {000000},
+  siexcoordenador       = {Prof. Dr. João Modelo},
+  siexvigencia          = {2024 a 2026},
+}
+
+%% o pedido: os códigos e os dispositivos também são de exemplo
+\modalidade{COMP}{codigo = {ELE-AC-04 (exemplo)}, dispositivo = {art. X, inciso Y (exemplo)}, limite = 180}
+\modalidade{PES}{codigo = {ELE-AC-01 (exemplo)}, dispositivo = {art. X, inciso Y (exemplo)}}
+\modalidade{EXT}{codigo = {ELE-AC-02 (exemplo)}, dispositivo = {art. X, inciso Y (exemplo)}}
+\modalidade{ENS}{codigo = {ELE-AC-06 (exemplo)}, dispositivo = {art. X, inciso Y (exemplo)}}
+\modalidade{EVT}{codigo = {ELE-AC-03 (exemplo)}, dispositivo = {art. X, inciso Y (exemplo)}}
+\modalidade{GES}{codigo = {ELE-AC-07 (exemplo)}, dispositivo = {art. X, inciso Y (exemplo)}}
+
+\addbibresource{exemplo/referencias-exemplo.bib}
+
+\begin{document}
+
+\capa
+\requerimento
+\quadrospedido
+\sumario
+
+\parteinstitucional
+
+%% ============================================================
+\parte[Quem é a estudante, como ela chegou à equipe e o que fez nela, em linhas gerais. As atividades,
+  uma a uma, estão na Parte~III.]{A estudante na equipe}
+
+\identificacao
+
+\section{Resumo da participação}
+Participei da NeuroDynamics por quase três anos, de março de 2023 a dezembro de 2025, sempre no
+subsistema eletrônico do NEBULA, o estimulador elétrico funcional que leva uma pessoa com lesão medular
+a pedalar. Fui a responsável pela revisão B da placa de potência, do esquemático à placa montada e
+testada, e pela simulação que definiu a tensão de alimentação dela; projetei o invólucro isolado;
+conduzi os ensaios de bancada e a parte técnica das sessões de validação com o atleta-piloto; operei o
+estimulador numa competição internacional; escrevi o treinamento de segurança elétrica que os trainees
+fazem hoje; e, em 2025, supervisionei o subsistema até a liberação da revisão C.
+
+É trabalho de Engenharia Elétrica do começo ao fim --- eletrônica analógica e de potência,
+compatibilidade eletromagnética, instrumentação, controle ---, com um usuário real, com as normas de
+equipamento eletromédico como referência e com a documentação que um produto exige. Peço 440 horas,
+e só as que têm evidência.
+
+\section{Trajetória na equipe}
+\begin{trajetoria}
+  \marco{2023-03}{Aprovação no processo seletivo de 2023/1 (dinâmica em grupo e entrevista) e início do período trainee.}
+  \marco{2023-06}{Apresentação do desafio trainee e entrada no NEBULA, no subsistema eletrônico.}
+  \marco{2023-12}{Afastamento temporário de dois meses, aprovado pelo Depto. de Pessoal (estágio de férias).}
+  \marco{2024-03}{Responsável pela revisão B da placa de potência (Atividades 1 a 3).}
+  \marco{2024-10}{Técnica do estimulador na competição internacional (Atividade 6).}
+  \marco{2025-01}{Progressão a supervisora do subsistema eletrônico (Atividade 7).}
+  \marco{2025-03}{Autora e instrutora do treinamento de segurança elétrica (Atividade 5).}
+  \marco{2025-12}{Desligamento a pedido, pela conclusão do curso, com a transição do subsistema ao sucessor.}
+\end{trajetoria}
+
+\section{Afastamentos e interrupções}
+\begin{afastamentos}
+  \afastamento{2023-12}{2024-01}{afastamento temporário aprovado pelo Depto. de Pessoal (\texttt{NRO-PES-002-990}), para um estágio de férias.}
+\end{afastamentos}
+
+\section{Formação recebida na equipe}
+\begin{treinamentos}
+  \treinamento{NRO-TRE-901}{Integração à NeuroDynamics}{3}{2023-04-02}{CERT-EXEM-0001}
+  \treinamento{NRO-TRE-902}{Controle de documentos e registros}{2}{2023-05-20}{CERT-EXEM-0002}
+  \treinamento{NRO-TRE-903}{Segurança elétrica em bancada (versão de 2022)}{2}{2023-05-10}{CERT-EXEM-0003}
+  \treinamento{NRO-TRE-904}{Boas práticas de projeto de placas}{6}{2023-09-15}{CERT-EXEM-0004}
+\end{treinamentos}
+
+%% ============================================================
+\parteatividades
+
+\input{exemplo/atividades/a1-placa}
+\input{exemplo/atividades/a2-simulacao}
+\input{exemplo/atividades/a3-involucro}
+\input{exemplo/atividades/a4-ensaios}
+\input{exemplo/atividades/a5-treinamento}
+\input{exemplo/atividades/a6-competicao}
+\input{exemplo/atividades/a7-supervisao}
+
+%% ============================================================
+\parte[O conjunto: as horas e a base delas, as competências desenvolvidas, a relação com o curso e a
+  autoavaliação pelo mesmo barema que o professor usa.]{Síntese}
+
+\section{As horas pedidas}
+\quadrohoras
+
+\subsection{Memória de cálculo}
+Mantive uma planilha semanal de horas durante todo o período, conferida com os check-ins no LABBIO e
+com as estimativas dos cartões de cada atividade no SOMA. Nos 32 meses de participação, descontado o
+afastamento, somei cerca de 1.300 horas --- em média, perto das dez horas semanais declaradas.
+
+Peço 440 horas: só as que se ligam diretamente às sete atividades descritas e que têm evidência. Para
+cada atividade, somei as horas dos cartões dela (os códigos estão na ficha de cada uma) e conferi, nos
+dias de bancada, com os check-ins. Ficaram de fora o período trainee, as reuniões gerais, o trabalho
+em outros subsistemas e toda hora sem cartão. A Atividade~6 conta 20 horas de preparação e quatro dias
+de dez horas de competição, como diz a declaração \texttt{NRO-DIR-006-901}.
+
+\section{As competências desenvolvidas}
+\matrizcompetencias
+
+\section{A relação com o curso}
+\quadrodisciplinas
+
+As atividades aplicaram, com um usuário real, o núcleo do curso de Engenharia Elétrica: a fonte de
+corrente com amplificador operacional e o dimensionamento da dissipação (Atividade~1), o transitório de
+primeira ordem e a margem de fase (Atividade~2), a incerteza de medição (Atividade~4). E ensinaram o que
+o curso não ensina: projetar para a segurança de uma pessoa ligada ao circuito, ler uma norma de
+equipamento eletromédico \parencite{iec60601-1,iec60601-2-10}, documentar para que outra pessoa continue
+o trabalho, trabalhar com uma profissional de saúde e liderar um time com prazo.
+
+\section{Autoavaliação}
+\autoavaliacao{
+  aderencia    = 9,
+  profundidade = 8,
+  contribuicao = 9,
+  evidencias   = 9,
+  resultados   = 8,
+  comunicacao  = 8,
+}
+\begin{itemize}
+  \item \textbf{Aderência (9):} as sete atividades são de engenharia elétrica, e a relação com as
+    disciplinas está mostrada em cada uma; a do invólucro é mais mecânica que elétrica.
+  \item \textbf{Profundidade (8):} há cálculo, simulação validada e decisões justificadas; faltou medir a
+    resistência do PETG entre camadas, que estimei.
+  \item \textbf{Contribuição (9):} cada atividade separa o que foi meu do que foi da equipe e nomeia
+    quem fez o resto.
+  \item \textbf{Evidências (9):} todas as atividades têm registros no SOMA; parte dos arquivos de
+    projeto fica em repositórios com acesso a pedido.
+  \item \textbf{Resultados (8):} os resultados são medidos e comparados com os requisitos; o indicador
+    das sessões tem só um usuário.
+  \item \textbf{Comunicação (8):} o texto é direto; algumas figuras são esquemáticas, não os desenhos
+    completos.
+\end{itemize}
+
+\section{Considerações finais}
+A equipe me deu o que o curso não podia dar: a responsabilidade por um sistema que uma pessoa usa. O
+que deixei para ela: a revisão B e a revisão C da placa, o invólucro, o treinamento de segurança que os
+trainees fazem, o checklist que fica na bancada, os registros de decisão que explicam o porquê de cada
+escolha e um sucessor que conduziu o subsistema por três meses antes da minha saída.
+
+\referencias
+
+%% ============================================================
+\pareceres
+
+\anexoevidencias
+\anexo{Declaração de vínculo emitida pelo SOMA}{anexos/declaracao-vinculo.pdf}
+\anexo{Declaração de participação na competição}{anexos/declaracao-participacao.pdf}
+
+\end{document}

@@ -1,0 +1,15 @@
+# o que a compilação gera (o PDF do exemplo vai para ../../assets pelo empacotar.sh)
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.toc
+*.synctex.gz
+*.xdv
+/relatorio-aacc.pdf
+/exemplo-relatorio-aacc.pdf

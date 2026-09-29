@@ -1,0 +1,79 @@
+%% EXEMPLO FICTÍCIO — Atividade 5: ensino e formação de membros
+\begin{atividade}{Treinamento de segurança elétrica em bancada, para os trainees de 2025/1}{
+  tipo         = ensino,
+  modalidade   = ENS,
+  alternativa  = VPC,
+  horas        = 20,
+  inicio       = 2025-03,
+  fim          = 2025-04,
+  projeto      = {Formação de membros, com o Depto. de Pessoal},
+  papel        = {Autora e instrutora},
+  supervisor   = {Mariana Fictícia, gerente do Depto. de Pessoal},
+  registros    = {NRO-TRE-905; PES-58},
+  competencias = {V, VI, VII},
+  disciplinas  = {Laboratório de Eletrônica; Instalações Elétricas},
+}
+
+\begin{contexto}
+Com a revisão B, a bancada do NEBULA passou a ter \SI{120}{\volt} contínuos numa placa aberta. O
+treinamento de segurança que a equipe tinha era um texto, de 2022, sobre a rede elétrica; não tratava
+de tensão contínua, de capacitores carregados nem de fontes com limite de corrente. Em 2024, um membro
+levou um choque leve do boost da revisão A --- sem consequência, mas registrado como ocorrência. Com
+catorze trainees chegando em 2025/1, a equipe precisava de um treinamento prático, com verificação.
+\end{contexto}
+
+\begin{contribuicao}
+Escrevi os três módulos no SOMA, as dez questões da verificação de conhecimento e o checklist de
+energização; gravei dois vídeos curtos; e dei as duas sessões práticas de uma hora e meia. O supervisor
+do projeto revisou o conteúdo técnico, e a gerente do Depto. de Pessoal atribuiu o treinamento aos
+trainees como obrigatório.
+\end{contribuicao}
+
+\begin{desenvolvimento}
+\fichatecnica{
+  formato       = {Treinamento no SOMA (três módulos, com verificação) e duas sessões práticas},
+  treinamentos  = {\texttt{NRO-TRE-905} Rev.~A e Rev.~B},
+  publico       = {Os 14 trainees de 2025/1 e 3 membros do NEBULA},
+  cargahoraria  = {3\,h (duas sessões de 1,5\,h)},
+  participantes = {17},
+  material      = {3 módulos, 2 vídeos, 10 questões e o checklist de energização de placas de alta tensão},
+}
+
+O treinamento foi escrito para quem nunca pôs a mão numa bancada de alta tensão
+(Tabela~\ref{tab:ex-modulos}). Cada módulo termina com questões, e a aprovação pede 70\,\% --- a nota
+mínima padrão do SOMA. A sessão prática só começa depois da aprovação.
+
+\begin{table}[htbp]
+  \centering\small
+  \caption{Os módulos do treinamento \texttt{NRO-TRE-905}.}
+  \label{tab:ex-modulos}
+  \begin{tabular}{|c|p{47mm}|p{85mm}|}\hline
+    \rowcolor{nro-fundo}\rotulo{Módulo} & \rotulo{Tema} & \rotulo{O que ensina} \\ \hline
+    1 & Por que 120\,V contínuos importam & A corrente no corpo e os seus efeitos; por que a tensão contínua prende; a energia guardada nos capacitores. \\ \hline
+    2 & O procedimento de bancada & A fonte com limite de corrente; a descarga dos capacitores antes de tocar; uma mão só na bancada; o que fazer num acidente. \\ \hline
+    3 & A prática & A energização da placa revisão B com o checklist, passo a passo, com a instrutora ao lado. \\ \hline
+  \end{tabular}
+  \fonte{Elaborado pela autora.}
+\end{table}
+\end{desenvolvimento}
+
+\begin{resultados}
+Os dezessete participantes concluíram o treinamento, com nota média de 87\,\% na verificação (a menor
+foi 70\,\%). Duas questões tiveram mais de metade de erros e, lendo as respostas, vi que o problema era
+a redação, não o conteúdo: reescrevi-as na revisão B do treinamento, publicada em abril de 2025. Desde
+então, nenhuma ocorrência de segurança elétrica foi registrada na equipe, e o checklist passou a ficar
+impresso na bancada.
+\end{resultados}
+
+\begin{evidencias}
+\evidencia{Treinamento}{NRO-TRE-905 Rev. B}{O treinamento de minha autoria, publicado no SOMA}{SOMA › Treinamentos}
+\evidencia{Relatório}{Acompanhamento do NRO-TRE-905}{Quem concluiu, quando e com que nota}{SOMA › Treinamentos (a pedido)}
+\evidencia{Atividade}{PES-58}{O cartão do treinamento no quadro do Depto. de Pessoal, concluído}{SOMA › Atividades}
+\end{evidencias}
+
+\begin{aprendizados}
+Ensinar me obrigou a saber de verdade o que eu fazia por hábito na bancada. O Laboratório de Eletrônica
+e Instalações Elétricas me deram a base; o que aprendi ensinando foi escrever para quem não sabe, e
+medir se a pessoa aprendeu --- as duas questões mal escritas me ensinaram mais do que as oito boas.
+\end{aprendizados}
+\end{atividade}

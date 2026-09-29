@@ -1,0 +1,183 @@
+%% EXEMPLO FICTÍCIO — Atividade 1: eletrônica e placa de circuito impresso
+\begin{atividade}{Placa de potência do estimulador do NEBULA, revisão B}{
+  tipo         = pcb,
+  modalidade   = COMP,
+  alternativa  = PES,
+  horas        = 150,
+  inicio       = 2024-03,
+  fim          = 2024-09,
+  projeto      = {NEBULA, estimulação elétrica funcional para ciclismo},
+  papel        = Responsável,
+  supervisor   = {Rafael Fictício, supervisor do projeto NEBULA},
+  registros    = {NBL-114; NBL-121; NBL-133; NRO-PRO-014-901; NRO-PRO-003-901},
+  competencias = {I, II, III, V},
+  disciplinas  = {Eletrônica Analógica; Eletrônica de Potência; Circuitos Elétricos II; Compatibilidade Eletromagnética},
+}
+
+\begin{contexto}
+O NEBULA é o projeto da equipe que leva uma pessoa com lesão medular a pedalar uma bicicleta
+adaptada por meio de estimulação elétrica funcional (FES): pulsos de corrente, aplicados por eletrodos
+de superfície, contraem na ordem certa os músculos das pernas. O coração do sistema é o estimulador,
+e a placa de potência é a parte dele que gera os pulsos.
+
+A revisão A da placa funcionava, mas os testes de 2023 (\texttt{NRO-PRO-003-900}) registraram quatro
+problemas: a amplitude da corrente caía quando a impedância do eletrodo subia; o estágio de saída
+chegava a \SI{71}{\celsius} em estimulação contínua; o chaveamento da saída induzia ruído no sinal do
+encoder do pedal; e não havia limite de corrente por hardware --- a proteção dependia só do firmware.
+
+Os requisitos vêm da USRS do projeto (\texttt{NRO-PRO-004-901}): pulsos bifásicos com carga
+balanceada; amplitude de 0 a \SI{100}{\milli\ampere}, em passos de \SI{1}{\milli\ampere}; largura de
+50 a \SI{500}{\micro\second}; frequência de 20 a \SI{50}{\hertz}; quatro canais; e isolação galvânica
+entre o usuário e todo ponto ligado à rede elétrica (o carregador e o USB). A revisão B tinha de
+resolver os quatro problemas sem sair desses requisitos.
+\end{contexto}
+
+\begin{contribuicao}
+Fui a responsável pela revisão B, do esquemático à placa montada e testada:
+\begin{itemize}
+  \item reprojetei o estágio de saída (a fonte de corrente e a ponte H) e criei o limite de corrente
+    por hardware, que não existia;
+  \item escolhi os componentes críticos --- o amplificador operacional, os MOSFETs de \SI{250}{\volt}, os
+    isoladores --- e registrei as escolhas e as alternativas no design record (\texttt{NRO-PRO-014-901});
+  \item fiz o layout das quatro camadas, montei as duas primeiras placas no LABBIO e conduzi a primeira
+    energização.
+\end{itemize}
+Não foram meus: o firmware que gera os pulsos (Lucas Fictício); o conversor boost, que veio da
+revisão A e em que só ajustei a tensão de saída; e a revisão do layout antes da fabricação, feita pelo
+supervisor do projeto.
+\end{contribuicao}
+
+\begin{desenvolvimento}
+\fichatecnica{
+  ferramenta  = {KiCad 8.0},
+  revisao     = {B (a revisão C incorpora a errata desta)},
+  camadas     = {4 camadas, FR-4 de 1,6\,mm},
+  dimensoes   = {100 × 80\,mm},
+  componentes = {146},
+  alimentacao = {Bateria 3S (11,1\,V); DC-DC isolado de 3\,kV para o lado do usuário; boost de 120\,V},
+  fabricacao  = {Fabricação terceirizada; montagem manual no LABBIO (duas placas)},
+  normas      = {IEC 60601-1 e IEC 60601-2-10 como referência de projeto, sem certificação},
+  arquivos    = {Repositório \texttt{nebula-hw}, tag \texttt{rev-b}},
+}
+
+\textbf{A arquitetura.} A placa tem dois lados, separados por uma barreira de isolação
+(Figura~\ref{fig:ex-blocos}). Do lado ligado ao USB e ao carregador ficam o microcontrolador e a
+bateria; do lado do usuário, o conversor boost que gera os \SI{120}{\volt}, os conversores
+digital-analógicos que definem a corrente de cada canal e os estágios de saída. Só atravessam a barreira
+a energia, por um conversor DC-DC isolado, e os sinais digitais, por isoladores. A revisão A não tinha
+essa separação: o USB e o eletrodo dividiam o mesmo terra.
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\linewidth}{!}{\input{exemplo/figuras/diagrama-blocos}}
+  \caption{Diagrama de blocos da placa de potência, revisão B. Em verde-claro, os blocos refeitos nesta
+    revisão.}
+  \fonte{Elaborado pela autora.}
+  \label{fig:ex-blocos}
+\end{figure}
+
+\textbf{A fonte de corrente.} Cada canal tem uma fonte de corrente controlada por tensão
+(Figura~\ref{fig:ex-fonte}): o amplificador operacional força sobre o resistor de medição $R_S$ a
+tensão que o DAC define, e a mesma corrente atravessa a carga. Com ganho de malha alto,
+\begin{equation}
+  I_\text{saída} = \frac{V_\mathrm{DAC}}{R_S}.
+  \label{eq:ex-fonte}
+\end{equation}
+Com $R_S = \SI{10}{\ohm}$, a faixa de 0 a \SI{100}{\milli\ampere} pede $V_\mathrm{DAC}$ de 0 a
+\SI{1}{\volt}; o DAC de 12 bits dá passos de \SI{24}{\micro\ampere}, bem abaixo do passo de
+\SI{1}{\milli\ampere} do requisito. Escolhi um resistor de 0,1\,\% e 25\,ppm/°C: a exatidão da
+corrente é a dele.
+
+A queda de amplitude da revisão A tinha duas causas, que a simulação da Atividade~2 separou: a
+tensão de \SI{90}{\volt} não bastava para manter \SI{100}{\milli\ampere} em eletrodos de impedância
+alta, e o laço oscilava na borda do pulso. A revisão B sobe a tensão para \SI{120}{\volt} e tem o
+capacitor de compensação $C_c = \SI{22}{\pico\farad}$, que a simulação dimensionou.
+
+\begin{figure}[htbp]
+  \centering
+  \input{exemplo/figuras/fonte-corrente}
+  \caption{A fonte de corrente de um canal. A tensão em $R_S$ também alimenta o comparador do limite de
+    corrente.}
+  \fonte{Elaborado pela autora.}
+  \label{fig:ex-fonte}
+\end{figure}
+
+\textbf{A dissipação.} No pior caso --- carga em curto ---, o MOSFET dissipa toda a tensão:
+\begin{equation}
+  P_\mathrm{pico} = V_\mathrm{HV}\, I = \SI{120}{\volt} \times \SI{0,1}{\ampere} = \SI{12}{\watt},
+  \qquad
+  P_\text{média} = P_\mathrm{pico}\, (2\, t_p\, f) = \SI{12}{\watt} \times 0{,}03 = \SI{0,36}{\watt},
+  \label{eq:ex-potencia}
+\end{equation}
+com $t_p = \SI{300}{\micro\second}$ e $f = \SI{50}{\hertz}$. A câmera térmica mostrou que o
+aquecimento da revisão A não vinha dos MOSFETs, mas do regulador linear que alimentava os drivers da
+ponte, dissipando \SI{1,4}{\watt}. Troquei-o por um regulador chaveado e pus vias térmicas sob cada
+MOSFET.
+
+\textbf{O limite de corrente.} Um comparador lê a tensão em $R_S$; acima de \SI{1,1}{\volt}
+(\SI{110}{\milli\ampere}), ele aciona uma trava que desliga os drivers da ponte H, sem passar pelo
+firmware. A trava só se desfaz por comando do firmware depois de a pessoa que opera apertar o reset,
+e o botão de parada de emergência corta a habilitação do boost diretamente.
+
+\textbf{O layout.} Quatro camadas: sinais e componentes em cima, terra contínuo na segunda, as
+alimentações de \SI{12}{\volt} e de \SI{120}{\volt} em ilhas separadas na terceira, sinais embaixo
+(Figura~\ref{fig:ex-layout}). Entre os dois lados, um rasgo de \SI{2,5}{\milli\meter} e
+\SI{8}{\milli\meter} de distância de escoamento, com a tabela da IEC 60601-1 como referência. A malha de
+corrente de cada canal ficou tão pequena quanto possível, com ligação Kelvin em $R_S$; o nó chaveado
+da ponte ficou longe da entrada do encoder, que ganhou um filtro RC e um Schmitt trigger. A verificação
+de regras (DRC) usou \SI{0,3}{\milli\meter} de isolação geral e \SI{1,5}{\milli\meter} na área de alta
+tensão, e a verificação elétrica (ERC) terminou sem erro.
+
+\begin{figure}[htbp]
+  \centering
+  \input{exemplo/figuras/layout}
+  \caption{Planta simplificada do layout da revisão B: as áreas, a barreira de isolação e os estágios
+    de saída. O layout completo está no repositório.}
+  \fonte{Elaborado pela autora.}
+  \label{fig:ex-layout}
+\end{figure}
+\end{desenvolvimento}
+
+\begin{resultados}
+As duas placas foram ensaiadas na bancada com o procedimento do plano de validação; a Atividade~4
+descreve a montagem. A Tabela~\ref{tab:ex-revb} compara as revisões com os requisitos.
+
+\begin{table}[htbp]
+  \centering\small
+  \caption{Revisão A e revisão B, contra os requisitos (média de 5 medições, placa 1).}
+  \label{tab:ex-revb}
+  \begin{tabular}{|l|c|c|c|}\hline
+    \rowcolor{nro-fundo}\rotulo{Requisito} & \rotulo{Esperado} & \rotulo{Rev. A} & \rotulo{Rev. B} \\ \hline
+    Amplitude em \SI{1}{\kilo\ohm}, \SI{100}{\milli\ampere} programados & $100 \pm 2$\,mA & 84\,mA & 100,9\,mA \\ \hline
+    Amplitude em \SI{500}{\ohm}, \SI{100}{\milli\ampere} programados & $100 \pm 2$\,mA & 99\,mA & 100,4\,mA \\ \hline
+    Temperatura do estágio de saída (60\,min, 50\,Hz) & $\le \SI{60}{\celsius}$ & \SI{71}{\celsius} & \SI{48}{\celsius} \\ \hline
+    Ruído no sinal do encoder (pico a pico) & $\le \SI{50}{\milli\volt}$ & \SI{420}{\milli\volt} & \SI{35}{\milli\volt} \\ \hline
+    Disparo do limite de corrente & 105 a 115\,mA & não havia & 108\,mA, em \SI{1,6}{\micro\second} \\ \hline
+  \end{tabular}
+  \fonte{Relatório de execução \texttt{NRO-PRO-003-901}.}
+\end{table}
+
+A primeira energização revelou dois defeitos, ambos meus: faltava o resistor de pull-down na
+habilitação da trava, e as saídas podiam pulsar na partida; e o footprint do DC-DC isolado estava
+espelhado. Os dois foram corrigidos à mão nas duas placas e estão entre os sete itens da errata que
+virou a revisão C (\texttt{NBL-140}).
+\end{resultados}
+
+\begin{evidencias}
+\evidencia{Repositório}{nebula-hw, tag rev-b}{O esquemático, o layout e a lista de materiais da revisão B, com os meus commits}{GitHub da equipe (acesso a pedido)}
+\evidencia{Arquivo controlado}{NRO-PRO-014-901}{O design record da revisão B: requisitos, escolhas e alternativas}{SOMA › Arquivos}
+\evidencia{Arquivo controlado}{NRO-PRO-003-901}{O relatório de execução dos ensaios de bancada da revisão B}{SOMA › Arquivos}
+\evidencia{Atividade}{NBL-114; NBL-121; NBL-133}{Os cartões do esquemático, do layout e da montagem, atribuídos a mim e concluídos}{SOMA › Atividades › NEBULA}
+\evidencia{Arquivo controlado}{NRO-PRO-004-901}{A USRS, de onde vêm os requisitos elétricos citados}{SOMA › Arquivos}
+\end{evidencias}
+
+\begin{aprendizados}
+O curso me deu a fonte de corrente com amplificador operacional (Eletrônica Analógica), o
+dimensionamento da dissipação (Eletrônica de Potência) e o transitório de primeira ordem (Circuitos
+Elétricos II). O que ele não deu, e a placa deu: projetar para a segurança de uma pessoa ligada ao
+circuito, ler uma norma de equipamento eletromédico, fazer layout pensando em ruído e em isolação, e
+descobrir que a causa de um problema raramente é a primeira suspeita --- o calor não vinha de onde eu
+esperava. Na próxima revisão, eu faria a revisão do footprint dos componentes novos contra o datasheet
+antes de mandar fabricar, e não depois.
+\end{aprendizados}
+\end{atividade}

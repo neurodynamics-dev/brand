@@ -1,0 +1,36 @@
+% Diagrama de blocos da placa de potência, revisão B (exemplo fictício)
+\begin{tikzpicture}[
+    bloco/.style={draw=nro-tinta, line width=0.5pt, fill=white, rounded corners=1.2pt,
+      minimum height=11mm, text width=29mm, align=center, font=\footnotesize, inner sep=1.5pt},
+    critico/.style={bloco, fill=nro-synapse!18},
+    seta/.style={-{Stealth[length=1.8mm]}, line width=0.55pt, draw=nro-tinta},
+    alta/.style={seta, draw=nro-pulso-texto, line width=0.8pt},
+    x=1mm, y=1mm]
+  % colunas: controle | barreira | lado do usuário
+  \node[bloco]   (mcu)   at (0,32)  {Microcontrolador\\{\scriptsize firmware, USB}};
+  \node[bloco]   (bat)   at (0,0)   {Bateria 3S\\{\scriptsize 11,1\,V, 2,6\,Ah}};
+  \node[bloco]   (iso)   at (44,32) {Isoladores digitais\\{\scriptsize SPI e habilitações}};
+  \node[bloco]   (dcdc)  at (44,0)  {DC-DC isolado\\{\scriptsize 3\,kV, 12\,V}};
+  \node[bloco]   (dac)   at (88,32) {DAC de 12 bits\\{\scriptsize a referência de corrente}};
+  \node[bloco]   (boost) at (88,0)  {Conversor boost\\{\scriptsize 12\,V para 120\,V}};
+  \node[critico] (fonte) at (132,32) {Fonte de corrente\\{\scriptsize amp. op. e MOSFET}};
+  \node[critico] (ponte) at (132,0)  {Ponte H\\{\scriptsize pulso bifásico}};
+  \node[critico] (lim)   at (88,16) {\scriptsize Limite de corrente: 110\,mA, trava e parada de emergência};
+  \node[bloco, text width=22mm] (ele) at (132,-17) {Eletrodos\\{\scriptsize 4 canais}};
+  \draw[seta] (mcu) -- (iso);
+  \draw[seta] (iso) -- (dac);
+  \draw[seta] (dac) -- (fonte);
+  \draw[seta] (bat) -- (dcdc);
+  \draw[seta] (dcdc) -- (boost);
+  \draw[alta] (boost) -- node[above, font=\scriptsize, text=nro-pulso-texto] {120\,V} (ponte);
+  \draw[seta] (fonte) -- (ponte);
+  \draw[seta] (ponte) -- (ele);
+  \draw[seta] ([xshift=-10mm]fonte.south) |- ([yshift=2mm]lim.east);
+  \draw[seta] ([yshift=-2.5mm]lim.east) -| ([xshift=-7mm]ponte.north);
+  \draw[seta] (bat.north) -- (mcu.south);
+  % a barreira de isolação
+  \draw[dashed, line width=0.7pt, nro-pulso-texto] (44,-9) -- (44,43)
+    node[above, font=\scriptsize, text=nro-pulso-texto] {barreira de isolação (3\,kV)};
+  \node[font=\scriptsize, text=nro-cinza, anchor=west] at (-14,41) {lado ligado ao USB e ao carregador};
+  \node[font=\scriptsize, text=nro-cinza, anchor=east] at (146,41) {lado do usuário};
+\end{tikzpicture}

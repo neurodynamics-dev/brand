@@ -1,0 +1,111 @@
+%% EXEMPLO FICTÍCIO — Atividade 4: ensaio experimental e validação
+\begin{atividade}{Ensaios de bancada da revisão B e sessões de validação com o atleta-piloto}{
+  tipo         = ensaio,
+  modalidade   = EXT,
+  alternativa  = PES,
+  horas        = 70,
+  inicio       = 2024-09,
+  fim          = 2025-02,
+  projeto      = {NEBULA, estimulação elétrica funcional para ciclismo},
+  papel        = {Responsável pela parte técnica},
+  supervisor   = {Rafael Fictício, supervisor do NEBULA; Dra. Carla Fictícia, fisioterapeuta do Depto. Clínico},
+  registros    = {NRO-PRO-005-901; NRO-PRO-003-901; NRO-PRO-003-903; NBL-135},
+  competencias = {I, II, IV, VI, VII},
+  disciplinas  = {Laboratório de Eletrônica; Instrumentação Eletrônica; Probabilidade e Estatística},
+}
+
+\begin{contexto}
+Uma placa que funciona na bancada ainda não é um sistema que serve a quem vai usá-lo. O plano de
+validação do NEBULA (\texttt{NRO-PRO-005-901}) pedia duas etapas depois da montagem: a verificação
+da revisão B contra os requisitos elétricos da USRS, na bancada; e doze sessões de treino com o
+atleta-piloto --- uma pessoa com lesão medular, voluntária, de fora da UFMG ---, para confirmar que o
+sistema faz o que ela precisa: pedalar por mais tempo. As sessões são a parte da ação de extensão da
+equipe em que a tecnologia volta para quem motivou o projeto.
+\end{contexto}
+
+\begin{contribuicao}
+Escrevi as seções de bancada do plano de validação, conduzi os ensaios de bancada e respondi pela
+parte técnica das doze sessões: antes de cada uma, conferi a impedância dos eletrodos e carreguei os
+parâmetros prescritos; durante, registrei os dados e monitorei a segurança elétrica. Quem conduziu as
+sessões, definiu os parâmetros de estimulação e esteve com o atleta foi a fisioterapeuta do
+Departamento Clínico; eu não posicionei eletrodos nem ajustei nada sem a indicação dela.
+\end{contribuicao}
+
+\begin{desenvolvimento}
+\fichatecnica{
+  protocolo    = {Plano de validação \texttt{NRO-PRO-005-901}, seções 4 (bancada) e 6 (sessões)},
+  instrumentos = {Osciloscópio de 100\,MHz e sonda de corrente de 50\,MHz (calibrados em 2024); câmera térmica; cargas resistivas de 0,1\,\%; multímetro de 6\,½ dígitos},
+  local        = {LABBIO, Escola de Engenharia da UFMG},
+  amostra      = {Duas placas; um atleta-piloto voluntário, em 12 sessões},
+  etica        = {Protocolo aprovado pelo Comitê de Ética em Pesquisa da UFMG, CAAE 00000000.0.0000.0000 (exemplo); termo de consentimento assinado},
+  relatorio    = {\texttt{NRO-PRO-003-901} (bancada) e \texttt{NRO-PRO-003-903} (sessões)},
+}
+
+\textbf{A bancada.} Cada canal das duas placas foi ensaiado em três cargas de 0,1\,\% (\SI{500}{\ohm},
+\SI{1}{\kilo\ohm} e \SI{1,5}{\kilo\ohm}), em seis amplitudes, com cinco repetições
+(Figura~\ref{fig:ex-bancada}). A corrente foi medida com a sonda, e a carga de cada fase, pela integral
+do pulso no próprio osciloscópio; o desbalanço de carga é a diferença entre as fases dividida pela
+carga de uma delas. A incerteza combinada da amplitude, somando a da sonda (1\,\%) e a do canal do
+osciloscópio (1,5\,\%) em quadratura, é de 1,8\,\%.
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.92\linewidth}{!}{\input{exemplo/figuras/bancada}}
+  \caption{A montagem dos ensaios de bancada. As linhas tracejadas são as medições auxiliares.}
+  \fonte{Elaborado pela autora.}
+  \label{fig:ex-bancada}
+\end{figure}
+
+\textbf{As sessões.} Doze sessões de cerca de uma hora, em oito semanas, no LABBIO. Antes de cada uma,
+eu media a impedância dos eletrodos e, acima de \SI{1}{\kilo\ohm} --- o limite que saiu da
+Atividade~2 ---, a fisioterapeuta trocava o eletrodo. O indicador de desempenho definido no plano foi o
+tempo de pedalada contínua até a cadência cair 20\,\% abaixo da inicial. As quatro primeiras sessões
+usaram o perfil de estímulo da revisão A; as oito seguintes, o perfil ajustado pela fisioterapeuta com
+a faixa maior de largura de pulso que a revisão B permite. Os dados foram registrados sem nenhuma
+informação que identifique o atleta.
+\end{desenvolvimento}
+
+\begin{resultados}
+Na bancada, as duas placas atenderam a todos os requisitos (Tabela~\ref{tab:ex-bancada}). Na carga de
+\SI{1,5}{\kilo\ohm}, a corrente ficou limitada a \SI{78}{\milli\ampere}, como a tensão de conformidade
+prevê (\SI{118}{\volt}/\SI{1,5}{\kilo\ohm}): nessa carga, as amplitudes acima disso ficam fora da
+faixa de operação, e o firmware da revisão C passou a bloqueá-las.
+
+\begin{table}[htbp]
+  \centering\small
+  \caption{Verificação da revisão B na bancada (duas placas, quatro canais, cinco repetições).}
+  \label{tab:ex-bancada}
+  \begin{tabular}{|l|c|c|}\hline
+    \rowcolor{nro-fundo}\rotulo{Requisito} & \rotulo{Critério de aceite} & \rotulo{Pior resultado} \\ \hline
+    Exatidão da amplitude (10 a 100\,mA, até 1\,k$\Omega$) & $\le$\,2\,\% & 0,9\,\% \\ \hline
+    Desbalanço de carga entre as fases & $\le$\,2\,\% & 0,8\,\% \\ \hline
+    Largura do pulso (50 a 500\,µs) & $\le$\,2\,µs de erro & 0,6\,µs \\ \hline
+    Frequência (20 a 50\,Hz) & $\le$\,0,5\,\% & 0,1\,\% \\ \hline
+    Disparo do limite de corrente & 105 a 115\,mA & 108 a 111\,mA \\ \hline
+  \end{tabular}
+  \fonte{Relatório de execução \texttt{NRO-PRO-003-901}.}
+\end{table}
+
+Nas sessões, o tempo até a queda de 20\,\% da cadência passou de 11 minutos, em média, nas quatro
+primeiras sessões, para 19 minutos nas quatro últimas. Não houve evento adverso. O limite de corrente
+por hardware disparou duas vezes, ambas por eletrodo descolado durante a pedalada: a saída foi
+desligada antes de qualquer desconforto, como o projeto prevê. O atleta pediu que a parada de
+emergência ficasse ao alcance da mão direita --- mudança feita no invólucro.
+\end{resultados}
+
+\begin{evidencias}
+\evidencia{Arquivo controlado}{NRO-PRO-005-901}{O plano de validação, com as seções de bancada que escrevi}{SOMA › Arquivos}
+\evidencia{Arquivo controlado}{NRO-PRO-003-901}{O relatório dos ensaios de bancada da revisão B}{SOMA › Arquivos}
+\evidencia{Arquivo controlado}{NRO-PRO-003-903}{O relatório das doze sessões, sem dados pessoais}{SOMA › Arquivos (classe confidencial)}
+\evidencia{Atividade}{NBL-135}{O cartão da validação, atribuído a mim e concluído}{SOMA › Atividades › NEBULA}
+\evidencia{Presença}{Check-ins de set./2024 a fev./2025}{A presença no LABBIO nos dias de ensaio e de sessão}{SOMA › Equipe › Presença (a pedido)}
+\end{evidencias}
+
+\begin{aprendizados}
+A bancada pôs em prática o que Instrumentação Eletrônica ensina sobre incerteza, e o que Probabilidade e
+Estatística ensina sobre repetição; o Laboratório de Eletrônica me deu o hábito do procedimento
+escrito. O que só as sessões ensinaram: trabalhar ao lado de uma profissional de saúde, respeitando o
+que é dela; que um protocolo aprovado por comitê de ética é compromisso, não burocracia; e que o
+requisito mais importante das doze sessões veio do próprio atleta --- a posição do botão de parada.
+\end{aprendizados}
+\end{atividade}

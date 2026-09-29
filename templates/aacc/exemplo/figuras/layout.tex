@@ -1,0 +1,36 @@
+% Planta simplificada do layout da revisão B (exemplo fictício): as áreas,
+% a barreira de isolação e os estágios de saída. Não é o layout completo.
+\begin{tikzpicture}[x=0.95mm, y=0.95mm, font=\scriptsize]
+  % a placa, 100 x 80 mm
+  \draw[line width=0.8pt, fill=nro-axon!8, rounded corners=1.5] (0,0) rectangle (100,80);
+  \foreach \x/\y in {4/4,96/4,4/76,96/76} \draw[fill=white] (\x,\y) circle (1.6);
+  % lado ligado ao USB
+  \draw[densely dashed, nro-cinza, fill=nro-fundoclaro] (7,8) rectangle (33,72);
+  \node[align=center, text=nro-cinza] at (20,67) {controle};
+  \draw[fill=nro-cinza!45] (12,42) rectangle (26,56) node[midway, text=white] {MCU};
+  \draw[fill=nro-cinza!25] (8,18) rectangle (16,24) node[midway, font=\tiny] {USB};
+  \draw[fill=nro-cinza!25] (18,12) rectangle (30,22) node[midway, font=\tiny, align=center] {carga da\\bateria};
+  % a barreira: o rasgo e os componentes que a cruzam
+  \fill[white] (36,6) rectangle (38.5,74);
+  \draw[nro-pulso-texto, line width=0.4pt] (36,6) rectangle (38.5,74);
+  \draw[fill=nro-synapse!45] (32,28) rectangle (43,38) node[midway, font=\tiny, align=center] {DC-DC\\isolado};
+  \draw[fill=nro-synapse!45] (32,48) rectangle (43,56) node[midway, font=\tiny, align=center] {isol.\\digitais};
+  % lado do usuário (alta tensão)
+  \draw[densely dashed, nro-pulso-texto, fill=nro-pulso!7] (46,8) rectangle (93,72);
+  \node[text=nro-pulso-texto] at (69.5,67) {lado do usuário (120\,V)};
+  \draw[fill=nro-tinta!55] (49,48) rectangle (63,60) node[midway, text=white, align=center, font=\tiny] {boost\\120\,V};
+  \draw[fill=nro-tinta!30] (49,30) rectangle (61,40) node[midway, font=\tiny, align=center] {DAC e\\fontes};
+  % os quatro estágios de saída, com as vias térmicas
+  \foreach \i in {0,...,3} {
+    \draw[fill=nro-tinta!75] (66+\i*6.5,14) rectangle (71+\i*6.5,22);
+    \foreach \a in {0,1,2} \fill[nro-synapse!80!black] (66.8+\i*6.5+\a*1.6,12.2) circle (0.4);
+  }
+  \node[align=center, font=\tiny] at (79,27) {estágios de saída (Q1--Q4)\\e vias térmicas};
+  % as saídas
+  \foreach \i in {0,...,3} \draw[fill=nro-synapse!70] (95,14+\i*14) rectangle (100,22+\i*14);
+  \node[anchor=west, align=left] at (101.5,40) {4 saídas\\(eletrodos)};
+  % cotas
+  \draw[{Stealth[length=1.4mm]}-{Stealth[length=1.4mm]}] (0,-4) -- (100,-4) node[midway, below] {100\,mm};
+  \draw[{Stealth[length=1.4mm]}-{Stealth[length=1.4mm]}] (-4,0) -- (-4,80) node[midway, left] {80\,mm};
+  \draw[nro-pulso-texto] (37.25,74) -- (37.25,86) node[above, align=center] {rasgo de 2,5\,mm: 8\,mm de\\distância de escoamento};
+\end{tikzpicture}

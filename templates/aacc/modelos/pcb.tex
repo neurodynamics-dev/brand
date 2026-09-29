@@ -1,0 +1,83 @@
+%% ============================================================
+%% MODELO DE ATIVIDADE · ELETRÔNICA E PLACA DE CIRCUITO IMPRESSO
+%%
+%% Copie este arquivo para atividades/ (atividade-02.tex, por exemplo),
+%% inclua-o no relatorio-aacc.tex com \input{atividades/atividade-02}
+%% e escreva. Cada \preencher{…} é uma pendência: troque-o pelo seu
+%% texto. Cada \figuraprovisoria também: troque-a pela figura de verdade.
+%%
+%% Uma atividade é UMA entrega sua, com começo, meio e fim. "Participei
+%% do projeto X por dois anos" não é uma atividade: são várias. Divida.
+%% ============================================================
+\begin{atividade}{Projeto da placa X, revisão B: esquemático, layout e testes}{
+  tipo         = pcb,
+  modalidade   = {},   % a chave da modalidade pedida: EXT, PES, COMP, VPC, EVT, PRD, ORG, ENS, GES, CUR, OUT
+  alternativa  = {},   % a modalidade alternativa, se o Colegiado não aceitar a primeira
+  horas        = {},   % as horas desta atividade, com base nos registros (Parte IV)
+  inicio       = {},   % AAAA-MM
+  fim          = {},   % AAAA-MM, ou: em andamento
+  projeto      = {},
+  papel        = {},   % Responsável, Corresponsável ou Colaborador(a)
+  supervisor   = {},   % quem confirma: nome e cargo (o supervisor do projeto, o gerente)
+  registros    = {},   % os códigos no SOMA, com ponto e vírgula: NBL-14; NRO-PRO-003-7
+  competencias = {},   % as competências das DCN que ela desenvolveu (I a VIII): I, III, V
+  disciplinas  = {},   % as disciplinas do seu curso ligadas a ela: ELE075 Eletrônica; ELE067 Circuitos
+}
+
+\begin{contexto}
+\preencher{Que sistema a placa integra, que problema ela resolve e que requisitos a definem --- cite a USRS (NRO-PRO-004), se houver. Por que foi preciso projetar uma placa, e não comprar uma pronta?}
+\end{contexto}
+
+\begin{contribuicao}
+\preencher{O que foi seu: o esquemático inteiro ou quais blocos, o layout, a escolha dos componentes, a montagem, os testes. Diga também o que não foi seu, e quem fez.}
+\end{contribuicao}
+
+\begin{desenvolvimento}
+\fichatecnica{
+  ferramenta  = {},   % Ferramenta (EDA) e versão
+  revisao     = {},   % Revisão da placa
+  camadas     = {},   % Camadas e espessura
+  dimensoes   = {},   % Dimensões
+  componentes = {},   % Componentes (quantidade) — opcional
+  alimentacao = {},   % Alimentação e isolação
+  fabricacao  = {},   % Fabricação e montagem
+  normas      = {},   % Normas consideradas — opcional
+  arquivos    = {},   % Onde estão os arquivos
+}
+
+\preencher{Explique o circuito bloco a bloco: a função, os cálculos (divisores, filtros, ganhos, dissipação, correntes de pico), os componentes críticos e as alternativas descartadas. Depois o layout: as camadas, os planos de terra, o roteamento dos sinais sensíveis e da potência, a isolação e as distâncias, as regras de projeto (DRC e ERC). Equações numeradas, valores com unidade.}
+
+\begin{figure}[htbp]
+  \centering
+  \figuraprovisoria{O esquemático, ou o diagrama de blocos com o esquemático do bloco principal (exporte em PDF do KiCad ou do Altium).}
+  % \includegraphics[width=0.9\linewidth]{figuras/esquematico.pdf}
+  \caption{Esquemático do bloco … da placa X, revisão B.}
+  \fonte{Elaborado pelo autor.}
+  \label{fig:esquematico}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \figuraprovisoria{O layout: as camadas, ou a placa montada, com os blocos identificados.}
+  % \includegraphics[width=0.9\linewidth]{figuras/layout.pdf}
+  \caption{Layout da placa X, revisão B (camadas superior e inferior).}
+  \fonte{Elaborado pelo autor.}
+  \label{fig:layout}
+\end{figure}
+\end{desenvolvimento}
+
+\begin{resultados}
+\preencher{O que foi medido na placa montada, com que instrumento e contra qual requisito: uma tabela com o esperado e o obtido. Os defeitos encontrados, a causa e o que a revisão seguinte corrigiu.}
+\end{resultados}
+
+\begin{evidencias}
+% Uma linha por evidência: \evidencia{tipo}{identificador}{o que mostra}{onde conferir}
+% \evidencia{Repositório}{github.com/neurodynamics-dev/<projeto>-hw @ <commit>}{Esquemático e layout da rev. B}{GitHub (acesso a pedido)}
+% \evidencia{Arquivo controlado}{NRO-PRO-003-<PN>}{Relatório de execução de teste da placa}{SOMA › Arquivos}
+% \evidencia{Atividade}{<GRUPO>-<n>}{O cartão do layout, atribuído a você e concluído}{SOMA › Atividades}
+\end{evidencias}
+
+\begin{aprendizados}
+\preencher{O que o projeto de uma placa real ensinou que as disciplinas de circuitos e de eletrônica não ensinaram, e o que delas você aplicou. O que faria diferente na próxima revisão.}
+\end{aprendizados}
+\end{atividade}

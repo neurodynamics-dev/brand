@@ -1,0 +1,24 @@
+% Tensão no eletrodo durante um pulso de 100 mA, pela eq. (2), limitada
+% pela tensão de conformidade (exemplo fictício).
+\begin{tikzpicture}
+  \begin{axis}[
+      width=0.86\linewidth, height=60mm,
+      xlabel={Tempo desde o início do pulso (\si{\micro\second})},
+      ylabel={Tensão no eletrodo (\si{\volt})},
+      xmin=0, xmax=300, ymin=0, ymax=135,
+      grid=major, grid style={nro-fundo},
+      tick label style={font=\scriptsize}, label style={font=\footnotesize},
+      legend pos=south east, legend cell align=left,
+      legend style={font=\scriptsize, draw=nro-linha, fill=white, fill opacity=0.9, text opacity=1}]
+    \addplot[domain=0:300, samples=121, very thick, nro-axon] {min(118, 0.1*(200+500*(1-exp(-x/50))))};
+    \addlegendentry{$R_p = 500\,\Omega$}
+    \addplot[domain=0:300, samples=121, very thick, nro-tinta, dashed] {min(118, 0.1*(200+1000*(1-exp(-x/100))))};
+    \addlegendentry{$R_p = 1\,\mathrm{k}\Omega$}
+    \addplot[domain=0:300, samples=121, very thick, nro-pulso-texto] {min(118, 0.1*(200+2000*(1-exp(-x/200))))};
+    \addlegendentry{$R_p = 2\,\mathrm{k}\Omega$}
+    \addplot[domain=0:300, thin, nro-cinza, densely dotted] {118};
+    \addlegendentry{conformidade (118\,V)}
+    \draw[nro-pulso-texto] (axis cs:134.7,118) circle (1.6pt);
+    \node[font=\scriptsize, text=nro-pulso-texto, anchor=south east] at (axis cs:132,119) {a corrente cai a partir de \SI{135}{\micro\second}};
+  \end{axis}
+\end{tikzpicture}
