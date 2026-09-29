@@ -1,4 +1,4 @@
-<!-- @dsCard group="Componentes" name="Quadro e atribuição" subtitle="Cartão com relevo, brilho de prioridade, selo de origem e editor de pills" width="1180" height="1460" -->
+<!-- @dsCard group="Componentes" name="Quadro e atribuição" subtitle="Cartão com relevo, brilho de prioridade, selo de origem, etiquetas, checklist, menção e editor de pills" width="1180" height="2200" -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -102,7 +102,7 @@ input,select{font-family:inherit;font-size:var(--fs-body);color:var(--ink)}
 /* ---- barra de filtros ---- */
 
 /* ---- avatar e miudezas, para o preview render isolado ---- */
-.av{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;
+.av,.avx{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;
   background:var(--soma);color:var(--ink);font-weight:600;flex:none}
 .small{font-size:12px}
 .muted{color:var(--muted)}
@@ -151,6 +151,53 @@ code{font-family:var(--fm);font-size:.92em;color:var(--ion)}
 .kb-sem{font-size:11px;color:var(--dim);font-style:italic}
 .kb-meta{display:flex;gap:9px;font-family:var(--fm);font-size:10.5px;color:var(--dim)}
 .kb-meta .atrasado{color:var(--pulso);font-weight:500}
+.ic{width:16px;height:16px;flex:none}
+/* a conta da checklist, as pessoas do cartão e as etiquetas */
+.kb-meta .ck{display:inline-flex;align-items:center;gap:3px}
+.kb-meta .ck.cheia{color:var(--vital)}
+.kb-meta .ic{width:12px;height:12px}
+.kb-rostos{display:inline-flex;align-items:center;min-width:0}
+.kb-rostos .avx{margin-left:-6px;box-shadow:0 0 0 2px var(--painel)}
+.kb-rostos .avx:first-child{margin-left:0}
+.kb-rostos .mais{font-family:var(--fm);font-size:10px;color:var(--dim);margin-left:5px}
+.kb-ets{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 8px}
+.et{display:inline-flex;align-items:center;gap:5px;max-width:100%;font-size:10.5px;line-height:1.25;
+  color:var(--muted);border:1px solid var(--line2);border-radius:999px;padding:2px 8px 2px 6px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.et::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--et,var(--dim));flex:none}
+.et.on{border-color:var(--synapse);color:var(--ink);background:rgba(206,220,0,.08)}
+/* o cartão aberto: as outras pessoas, e o botão de pôr mais */
+.pessoa-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line2);border-radius:999px;
+  padding:2px 5px 2px 2px;font-size:12px;color:var(--ink)}
+.pessoa-chip button{width:18px;height:18px;border-radius:50%;color:var(--dim);font-size:13px;line-height:1}
+.cd-add{display:inline-flex;align-items:center;gap:5px;border:1px dashed var(--line2);border-radius:999px;
+  padding:3px 10px;font-size:12px;color:var(--dim)}
+.cd-add:hover{color:var(--ink);border-color:var(--dim)}
+/* a checklist: título, a barra do que já foi feito e os itens */
+.ck-topo{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.ck-topo h4{font-family:var(--fd);font-size:14px;font-weight:600;flex:1;min-width:0}
+.ck-topo .n{font-family:var(--fm);font-size:10.5px;color:var(--dim)}
+.ck-barra{height:5px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden;margin-bottom:8px}
+.ck-barra i{display:block;height:100%;background:var(--synapse);border-radius:4px}
+.ck-barra.cheia i{background:var(--vital)}
+.ck-item{display:flex;align-items:flex-start;gap:9px;padding:5px 6px;border-radius:9px}
+.ck-item input[type=checkbox]{margin-top:3px;width:15px;height:15px;accent-color:var(--synapse)}
+.ck-item .tx{flex:1;min-width:0;font-size:13px;line-height:1.5;color:var(--ink)}
+.ck-item.feito .tx{color:var(--dim);text-decoration:line-through}
+/* a menção: @Nome no comentário, e a lista que abre ao digitar @ */
+.mencao{color:var(--synapse);background:rgba(206,220,0,.10);border-radius:6px;padding:0 4px;font-weight:600;text-decoration:none}
+.mencao.eu{background:rgba(206,220,0,.22);color:var(--ink)}
+.menc-pop{min-width:230px;max-width:300px;background:var(--painel);border:1px solid var(--line2);border-radius:12px;padding:6px;
+  box-shadow:0 18px 40px -12px rgba(0,0,0,.7)}
+.menc-op{display:flex;align-items:center;gap:9px;width:100%;padding:6px 8px;border-radius:8px;font-size:13px;color:var(--muted)}
+.menc-op.ativo,.menc-op:hover{background:rgba(206,220,0,.10);color:var(--ink)}
+.menc-op .sub{font-size:11px;color:var(--dim);margin-left:auto}
+/* o comentário, como o cartão aberto desenha */
+.cm{display:flex;gap:11px;align-items:flex-start}
+.cm-cx{flex:1;min-width:0}
+.cm-tp{display:flex;gap:9px;align-items:baseline;font-size:12.5px;margin-bottom:3px}
+.cm-tp span{font-family:var(--fm);font-size:10.5px;color:var(--dim)}
+.cm-cp{font-size:13.5px;line-height:1.55}
 
 /* ---- editor de pills ---- */
 .pills-ed{display:flex;flex-wrap:wrap;align-items:center;gap:7px;min-height:42px;
@@ -200,9 +247,11 @@ code{font-family:var(--fm);font-size:.92em;color:var(--ion)}
 <body>
 
 <h1 class="ds-t">Quadro e atribuição</h1>
-<p class="ds-d">O quadro de atividades é onde o trabalho da equipe acontece, e tudo nele
-cabe em três peças: o cartão, o selo que diz de onde o cartão veio e o editor de pills,
-que é como se atribui pessoa a grupo sem digitar vírgula.</p>
+<p class="ds-d">O quadro de atividades é onde o trabalho da equipe acontece. O cartão
+fechado diz o essencial (código, etiquetas, título, quem está nele, a conta da checklist e o
+prazo); o cartão aberto traz a checklist, as outras pessoas e os comentários com menção. O
+selo diz de onde o cartão veio, e o editor de pills é como se atribui pessoa a grupo sem
+digitar vírgula.</p>
 
 <div class="ds-g">Cartão do quadro</div>
 <div class="bloco" style="display:flex;gap:18px;flex-wrap:wrap;max-width:840px">
@@ -251,12 +300,82 @@ que é como se atribui pessoa a grupo sem digitar vírgula.</p>
       <span class="kb-ids"><span class="cod">ORT-11</span></span>
       <span class="pri" style="background:var(--mielina)" title="Prioridade alta"></span>
     </div>
+    <div class="kb-ets"><span class="et" style="--et:var(--dendrito)">Sensor</span></div>
     <div class="kb-tit">Montar o suporte do sensor (concluída)</div>
     <div class="kb-pe">
       <span class="av" style="width:22px;height:22px;font-size:9px">CM</span>
-      <span class="kb-meta"><span>18/09</span></span>
+      <span class="kb-meta"><span class="ck cheia" title="Checklist: 3 de 3"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 5.5 8 8 5.5M4 12.5 5.5 14 8 11.5M4 18.5 5.5 20 8 17.5"/><path d="M11 7h9M11 13h9M11 19h9"/></svg>3/3</span><span>18/09</span></span>
     </div>
   </article>
+
+  <article class="kb-card" style="width:250px;--pri:var(--mielina)">
+    <div class="kb-top">
+      <span class="kb-ids"><span class="cod">ORT-15</span></span>
+      <span class="pri" style="background:var(--mielina)" title="Prioridade alta"></span>
+    </div>
+    <div class="kb-ets"><span class="et" style="--et:var(--mielina)">Firmware</span><span
+      class="et" style="--et:var(--vital)">Bancada 2</span><span
+      class="et" style="--et:var(--nevoa)">Mecânica</span><span
+      class="et" style="--et:transparent">+1</span></div>
+    <div class="kb-tit">Trocar o driver do motor e refazer o ensaio de torque</div>
+    <div class="kb-pe">
+      <span class="kb-rostos" title="Bruna Teixeira, Ana Faria, Caio Mendes, Davi Lopes"><span
+        class="avx" style="width:22px;height:22px;font-size:9px">BT</span><span
+        class="avx" style="width:22px;height:22px;font-size:9px;background:var(--axon)">AF</span><span
+        class="avx" style="width:22px;height:22px;font-size:9px;background:var(--cortex)">CM</span><span
+        class="mais">+1</span></span>
+      <span class="kb-meta"><span class="ck" title="Checklist: 1 de 3"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 5.5 8 8 5.5M4 12.5 5.5 14 8 11.5M4 18.5 5.5 20 8 17.5"/><path d="M11 7h9M11 13h9M11 19h9"/></svg>1/3</span><span>02/10</span><span>4c</span></span>
+    </div>
+  </article>
+
+</div>
+
+<div class="ds-g">Cartão aberto: checklist, pessoas e menção</div>
+<div class="bloco" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;max-width:1040px">
+
+  <div>
+    <span class="cap">Checklist</span>
+    <div class="ck-topo"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 5.5 8 8 5.5M4 12.5 5.5 14 8 11.5M4 18.5 5.5 20 8 17.5"/><path d="M11 7h9M11 13h9M11 19h9"/></svg>
+      <h4>Ensaio</h4><span class="n">1/3</span></div>
+    <div class="ck-barra"><i style="width:33%"></i></div>
+    <div class="ck-item feito"><input type="checkbox" checked aria-label="Soldar o conector"><span class="tx">Soldar o conector</span></div>
+    <div class="ck-item"><input type="checkbox" aria-label="Medir o torque"><span class="tx">Medir o torque a <code>12 V</code></span></div>
+    <div class="ck-item"><input type="checkbox" aria-label="Registrar em ORT-14"><span class="tx">Registrar o resultado em ORT-14</span></div>
+    <div class="ck-topo" style="margin-top:16px"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 5.5 8 8 5.5M4 12.5 5.5 14 8 11.5M4 18.5 5.5 20 8 17.5"/><path d="M11 7h9M11 13h9M11 19h9"/></svg>
+      <h4>Compras</h4><span class="n">2/2</span></div>
+    <div class="ck-barra cheia"><i style="width:100%"></i></div>
+  </div>
+
+  <div>
+    <span class="cap">Outras pessoas e etiquetas</span>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px">
+      <span class="pessoa-chip"><span class="av" style="width:20px;height:20px;font-size:8px;background:var(--axon)">AF</span>Ana Faria<button type="button" title="Tirar">×</button></span>
+      <span class="pessoa-chip"><span class="av" style="width:20px;height:20px;font-size:8px;background:var(--cortex)">CM</span>Caio Mendes<button type="button" title="Tirar">×</button></span>
+      <button type="button" class="cd-add">+ Pessoa</button>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <span class="et" style="--et:var(--mielina)">Firmware</span>
+      <span class="et" style="--et:var(--vital)">Bancada 2</span>
+      <span class="et on" style="--et:var(--nevoa)">Mecânica</span>
+      <button type="button" class="cd-add">+ Etiqueta</button>
+    </div>
+    <p class="small muted" style="margin-top:10px"><code>.et.on</code> é a etiqueta escolhida
+      no filtro do quadro ou marcada no seletor.</p>
+  </div>
+
+  <div>
+    <span class="cap">Menção</span>
+    <div class="cm">
+      <span class="av" style="width:28px;height:28px;font-size:10px">BT</span>
+      <div class="cm-cx"><div class="cm-tp"><b>Bruna Teixeira</b><span>há 2 h</span></div>
+        <div class="cm-cp"><a class="mencao" href="#">@Ana Faria</a> o driver novo chegou.
+          <a class="mencao eu" href="#">@Caio Mendes</a>, consegue medir amanhã?</div></div>
+    </div>
+    <div class="menc-pop" style="margin-top:8px">
+      <button type="button" class="menc-op ativo"><span class="av" style="width:20px;height:20px;font-size:8px;background:var(--axon)">AF</span>Ana Faria<span class="sub">Órtese</span></button>
+      <button type="button" class="menc-op"><span class="av" style="width:20px;height:20px;font-size:8px">AL</span>André Lima<span class="sub">Sinais</span></button>
+    </div>
+  </div>
 
 </div>
 
@@ -308,6 +427,28 @@ que é como se atribui pessoa a grupo sem digitar vírgula.</p>
     <div class="row"><span class="k">Sinalizado</span>
       <span class="v">O motivo em <code>.kb-flag</code>, em <code>--mielina</code>.
       Sinalizar sem escrever o motivo não é sinalizar.</span></div>
+    <div class="row"><span class="k">Etiqueta</span>
+      <span class="v"><code>.et</code>: um ponto de 7px na cor que sai do nome, e o texto em
+      <code>--nevoa</code> com borda. A mesma palavra tem a mesma cor em qualquer quadro, sem
+      ninguém escolher. O fundo não é tingido: lê igual nos dois temas e não compete com o
+      brilho do topo. No cartão fechado cabem três, acima do título; o resto vira
+      <code>+N</code>. <code>.et.on</code> marca a etiqueta escolhida no filtro ou no seletor.</span></div>
+    <div class="row"><span class="k">Pessoas</span>
+      <span class="v">O responsável continua sendo um só, e é o primeiro rosto. As outras
+      pessoas entram na pilha <code>.kb-rostos</code>, até três, com <code>+N</code> depois; o
+      <code>title</code> da pilha dá todos os nomes. No cartão aberto cada uma é um
+      <code>.pessoa-chip</code> com ×, e <code>.cd-add</code> põe mais.</span></div>
+    <div class="row"><span class="k">Checklist</span>
+      <span class="v">No cartão fechado, só a conta: <code>1/3</code> em <code>--fm</code>, ao lado
+      do prazo, que fica <code>--vital</code> quando fecha. Aberto, cada lista tem a sua barra
+      fina, Synapse enquanto falta e <code>--vital</code> quando termina. Item feito fica
+      riscado e apagado, mas fica: o que já foi feito também é informação.</span></div>
+    <div class="row"><span class="k">Menção</span>
+      <span class="v"><code>@Nome Sobrenome</code> em Synapse sobre fundo levemente tingido, e é
+      link para a ficha. Quando a menção é a quem está lendo, <code>.mencao.eu</code> engrossa o
+      fundo: a pessoa acha o próprio nome sem ler o resto. A lista <code>.menc-pop</code> abre ao
+      digitar <code>@</code>, junto do cursor, com o grupo ao lado do nome para desempatar
+      xarás.</span></div>
     <div class="row"><span class="k">Editor de pills</span>
       <span class="v">Para conjunto pequeno e de nome conhecido — grupos, etiquetas. O
       <code>datalist</code> não é enfeite: é o que faz duas grafias do mesmo nome virarem uma.</span></div>
@@ -331,6 +472,9 @@ que é como se atribui pessoa a grupo sem digitar vírgula.</p>
     <div class="nao"><b>Sem "separados por vírgula"</b>
       <p>Instrução de sintaxe num rótulo é sinal de que o campo está errado. Se a vírgula
       importa, a tela é que tem de tratá-la.</p></div>
+    <div class="nao"><b>Sem etiqueta pintada à mão</b>
+      <p>A cor sai do nome e fica só no ponto. Escolhida à mão, "Firmware" teria três cores em
+      três quadros; de fundo cheio, a etiqueta grita mais que o título.</p></div>
   </div>
 </div>
 
