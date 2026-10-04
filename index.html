@@ -10,15 +10,18 @@
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
   /* ---- paleta oficial (ver seção Cores) ---- */
-  --cortex:#00352F; --axon:#00594F; --soma:#0B7D6E; --synapse:#CEDC00;
+  --cortex:#00352F; --axon:#00594F; --synapse:#CEDC00; --cortex-light:#E3EFEC; --cortex-medium:#A9CCC4;
   --void:#050807; --painel:#0B1210; --blackout:#1D1D1F;
-  --ink:#F5F5F7; --aura:#F8F7FF; --nevoa:#9AA5A1; --grafite:#616C68;
-  --ion:#2DD4BF; --vital:#4ADE97; --mielina:#F5C36A; --pulso:#F1806F;
-  --plasma:#7FA7F2; --dendrito:#A78BFA;
+  --ink:#E8EDEB; --aura:#E8EDEB; --nevoa:#9AA5A1; --grafite:#616C68;
+  --ion:#5BBFB0; --dendrito:#A78BFA;
+  /* conjunto funcional: só estados de interface */
+  --fn-nominal:#00F59B; --fn-caution:#FFAA00; --fn-critical:#FF2D20; --fn-signal:#00C8FF; --fn-idle:#7C8499;
+  /* nomes antigos, apontando para o conjunto funcional */
+  --soma:var(--axon); --vital:var(--fn-nominal); --mielina:var(--fn-caution); --pulso:var(--fn-critical); --plasma:var(--fn-signal);
   /* ---- tokens de interface ---- */
   --bg:var(--void); --muted:var(--nevoa); --dim:var(--grafite);
   --line:rgba(245,245,247,.08); --line2:rgba(245,245,247,.16);
@@ -26,7 +29,8 @@
   --r:18px; --max:1240px;
   --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --f:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --fs-formal:'Instrument Serif',Georgia,'Times New Roman',serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -54,7 +58,7 @@ img{max-width:100%}
   background:radial-gradient(circle,var(--axon) 0%,rgba(0,89,79,0) 70%);
   animation:fl1 38s ease-in-out infinite alternate}
 .b2{width:42vmax;height:42vmax;right:-16vmax;top:8vmax;opacity:.2;
-  background:radial-gradient(circle,var(--soma) 0%,rgba(11,125,110,0) 70%);
+  background:radial-gradient(circle,var(--axon) 0%,rgba(0,89,79,0) 70%);
   animation:fl2 32s ease-in-out infinite alternate}
 .b3{width:30vmax;height:30vmax;left:36vw;bottom:-18vmax;opacity:.06;
   background:radial-gradient(circle,var(--synapse) 0%,rgba(206,220,0,0) 70%);
@@ -79,8 +83,8 @@ img{max-width:100%}
 .hd-logo{display:flex;align-items:center;gap:10px;flex-shrink:0;margin-right:auto}
 .hd-logo img{height:18px;width:auto;display:block;filter:brightness(0) invert(1)}
 .logotype{font-family:var(--fd);font-weight:700;font-size:16.5px;letter-spacing:-.02em;white-space:nowrap}
-.hd-tag{font-family:var(--fm);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--synapse);border:1px solid rgba(206,220,0,.35);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.hd-tag{font-family:var(--fd);font-weight:600;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--synapse);border:1px solid rgba(206,220,0,.35);border-radius:5px;padding:3px 9px;white-space:nowrap}
 nav.hd-nav{display:flex;gap:2px}
 nav.hd-nav a{font-family:var(--fd);font-size:12.5px;font-weight:500;color:var(--muted);
   padding:8px 11px;border-radius:10px;transition:color .15s,background .15s;white-space:nowrap}
@@ -90,8 +94,8 @@ nav.hd-nav a:hover{color:var(--ink);background:rgba(255,255,255,.05)}
 /* ============ LAYOUT ============ */
 main{max-width:var(--max);margin:0 auto;padding:0 26px}
 section{margin:0 0 clamp(80px,10vh,130px);scroll-margin-top:100px}
-.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--fm);font-size:11px;
-  letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--fd);font-weight:600;font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 .eyebrow::before{content:'';width:7px;height:7px;background:var(--synapse);flex-shrink:0}
 .sec-head{display:grid;grid-template-columns:220px 1fr;gap:26px;align-items:start;margin-bottom:42px}
 .sec-head h2{font-size:clamp(26px,3.8vw,42px);font-weight:600;line-height:1.08;max-width:680px}
@@ -120,7 +124,7 @@ section{margin:0 0 clamp(80px,10vh,130px);scroll-margin-top:100px}
 .hero-sub{font-size:clamp(15px,1.7vw,18px);color:var(--muted);max-width:620px;margin-bottom:34px}
 .hero-meta{margin-top:56px;padding-top:22px;display:flex;justify-content:space-between;gap:14px;
   flex-wrap:wrap;border-top:1px solid var(--line)}
-.hero-meta span{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.hero-meta span{font-family:var(--fd);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 .hero-meta span em{font-style:normal;color:var(--muted)}
 
 /* ============ LOGO ============ */
@@ -133,7 +137,7 @@ section{margin:0 0 clamp(80px,10vh,130px);scroll-margin-top:100px}
 .logo-stage.claro{background:var(--ink)}
 .logo-stage img{height:44px;width:auto}
 .logo-stage.escuro img{filter:brightness(0) invert(1)}
-.logo-stage .lb{position:absolute;left:14px;bottom:12px;font-family:var(--fm);font-size:10px;
+.logo-stage .lb{position:absolute;left:14px;bottom:12px;font-family:var(--fd);font-weight:600;font-size:10px;
   letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
 .logo-stage.claro .lb{color:#8A8A90}
 .crop{position:absolute;width:14px;height:14px;color:rgba(245,245,247,.25)}
@@ -151,7 +155,7 @@ section{margin:0 0 clamp(80px,10vh,130px);scroll-margin-top:100px}
 
 /* ============ CORES ============ */
 .cor-bloco{margin-bottom:28px}
-.cor-bloco > h3{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+.cor-bloco > h3{font-family:var(--fd);font-weight:600;font-size:10.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--dim);margin-bottom:12px}
 .cores{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
 .cor{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);
@@ -163,6 +167,17 @@ section{margin:0 0 clamp(80px,10vh,130px);scroll-margin-top:100px}
 .cor .nm{font-family:var(--fd);font-weight:600;font-size:14px}
 .cor .hx{font-family:var(--fm);font-size:11.5px;color:var(--muted);margin-top:2px}
 .cor .uso{font-size:11.5px;color:var(--dim);margin-top:6px;line-height:1.45}
+.fmls{display:flex;flex-direction:column;gap:8px}
+.fml{display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:center}
+.fml-nm b{font-family:var(--fd);font-weight:600;font-size:14px;display:block}
+.fml-nm small{font-size:11.5px;color:var(--muted);display:block;line-height:1.4;margin-top:2px}
+.tons{display:grid;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.tom{height:62px;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;
+  text-align:left;transition:filter .15s}
+.tom:hover{filter:brightness(1.06)}
+.tom span{font-family:var(--fd);font-weight:600;font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.tom code{font-family:var(--fm);font-size:11.5px}
+@media (max-width:720px){.fml{grid-template-columns:1fr;gap:6px}.tom{height:56px;padding:8px}.tom span{font-size:8.5px;letter-spacing:.06em}}
 .prop-bar{display:flex;height:34px;border-radius:10px;overflow:hidden;border:1px solid var(--line2);margin:10px 0 6px}
 .prop-bar div{height:100%}
 .cor-acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
@@ -170,8 +185,8 @@ section{margin:0 0 clamp(80px,10vh,130px);scroll-margin-top:100px}
 /* ============ TIPOGRAFIA ============ */
 .type-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media (max-width:860px){.type-grid{grid-template-columns:1fr}}
-.spec .fam{font-family:var(--fm);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--synapse);margin-bottom:12px;display:block}
+.spec .fam{font-family:var(--fd);font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--nevoa);margin-bottom:12px;display:block}
 .spec .amostra{font-size:clamp(30px,4.4vw,52px);line-height:1.05;letter-spacing:-.02em;margin-bottom:12px}
 .spec.archivo .amostra{font-family:var(--fd);font-weight:600}
 .spec.plex .amostra{font-family:var(--fm);font-weight:400;font-size:clamp(20px,3vw,32px);letter-spacing:0}
@@ -179,11 +194,18 @@ section{margin:0 0 clamp(80px,10vh,130px);scroll-margin-top:100px}
 .spec.archivo .glyphs{font-family:var(--fd)}
 .spec.plex .glyphs{font-family:var(--fm);font-size:12.5px}
 .spec p.uso{font-size:13px;color:var(--muted);margin-top:12px}
+.type-grid.tres{grid-template-columns:repeat(3,1fr)}
+.spec.sans .amostra{font-family:var(--f);font-weight:400;letter-spacing:0}
+.spec.serifa .amostra{font-family:var(--fs-formal);font-weight:400;letter-spacing:0}
+.spec.serifa .glyphs{font-family:var(--fs-formal)}
+.spec.leve .amostra,.spec.leve .glyphs{font-weight:300}
+.spec.plex .amostra{white-space:nowrap;font-size:clamp(18px,2.2vw,26px)}
+@media (max-width:960px){.type-grid.tres{grid-template-columns:1fr}}
 .escala{margin-top:16px}
 .escala .row{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:baseline;
   padding:14px 4px;border-top:1px solid var(--line)}
 .escala .row:last-child{border-bottom:1px solid var(--line)}
-.escala .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.escala .k{font-family:var(--fd);font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 @media (max-width:640px){.escala .row{grid-template-columns:1fr;gap:4px}}
 
 /* ============ ELEMENTOS ============ */
@@ -205,18 +227,18 @@ section{margin:0 0 clamp(80px,10vh,130px);scroll-margin-top:100px}
   right:-30px;bottom:-50px;background:radial-gradient(circle,rgba(206,220,0,.5),transparent 70%);filter:blur(36px);opacity:.5}
 .demo-vidro .painel-vidro{width:70%;height:58%;border:1px solid var(--line2);border-radius:14px;
   background:rgba(7,12,10,.55);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;
-  font-family:var(--fm);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  font-family:var(--fd);font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .demo-banda{background:linear-gradient(118deg,var(--cortex) 0%,var(--axon) 62%,#0A6F62 100%)}
 .demo-banda::after{content:'';position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;
   background:radial-gradient(circle,rgba(206,220,0,.25),transparent 70%);filter:blur(20px)}
 .demo-fig .glyph{position:absolute;right:-6px;bottom:-34px;font-family:var(--fd);font-weight:700;
   font-size:120px;line-height:1;color:rgba(245,245,247,.05);user-select:none}
-.demo-fig .fig{position:absolute;left:12px;bottom:10px;font-family:var(--fm);font-size:9.5px;
+.demo-fig .fig{position:absolute;left:12px;bottom:10px;font-family:var(--fd);font-weight:600;font-size:9.5px;
   letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
-.pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:10px;
-  letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line2);
-  border-radius:999px;padding:3px 10px;color:var(--muted)}
-.pill .dt{width:7px;height:7px;border-radius:50%}
+.pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-weight:500;font-size:10.5px;
+  letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line2);
+  border-radius:5px;padding:3px 10px;color:var(--muted)}
+.pill .dt{width:6px;height:6px;border-radius:1px}
 
 /* ============ ESTÚDIO (geradores) ============ */
 .estudio{display:grid;grid-template-columns:340px 1fr;gap:18px;align-items:start}
@@ -276,7 +298,7 @@ details.gmail .k{color:var(--synapse);font-weight:600}
 @media (max-width:620px){.dl-grid{grid-template-columns:1fr}}
 .dl{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:22px;
   display:flex;flex-direction:column;gap:8px}
-.dl .lb{font-family:var(--fm);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.dl .lb{font-family:var(--fd);font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 .dl .lb b{color:var(--syn);font-weight:500}
 .dl .soon{opacity:.5;pointer-events:none;user-select:none}
 .dl h3{font-size:16px;font-weight:600}
@@ -287,7 +309,7 @@ details.gmail .k{color:var(--synapse);font-weight:600}
 footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
 .ft-in{max-width:var(--max);margin:0 auto;padding:40px 26px;display:flex;
   justify-content:space-between;gap:14px;flex-wrap:wrap;
-  font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+  font-family:var(--fd);font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:99;display:flex;
   flex-direction:column;gap:8px;align-items:center;width:max-content;max-width:92vw}
 .toast{background:#151B19;border:1px solid var(--line2);color:var(--ink);border-radius:12px;
@@ -381,18 +403,21 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
     <span class="eyebrow">02 / Cores</span>
     <div>
       <h2>Verde profundo, um lampejo de Synapse.</h2>
-      <p class="sub">A base é sóbria, feita de verdes profundos e neutros quase-pretos.
-        O <b>Synapse</b> aparece pouco, como um disparo: seleção, foco, destaque. As cores
-        auxiliares existem para dados, status e marcos; nunca competem com a identidade.
-        Clique em qualquer cartão para copiar o hex.</p>
+      <p class="sub">Quatro conjuntos, só famílias, quatro tons cada (light, medium, primary, dark).
+        O <b>Cortex</b> é a assinatura e o <b>Synapse</b> é o disparo: foco e o CTA único da tela.
+        As famílias secundárias complementam, uma por peça. O conjunto funcional existe só para
+        estados de interface. Clique em qualquer tom para copiar o hex.</p>
     </div>
   </div>
   <div id="cores-blocos"></div>
   <div class="cor-bloco">
     <h3>Proporção de uso</h3>
     <div class="prop-bar" id="prop-bar" title="Proporção aproximada de uso da paleta"></div>
-    <p class="nota">Superfícies Void/Painel dominam; verdes estruturam; Ink escreve;
-      Synapse pontua. Auxiliares aparecem só onde significam algo.</p>
+    <p class="nota">Primário com neutro é a composição principal: Void e Painel dominam,
+      os verdes estruturam, Ink escreve, Synapse pontua.</p>
+    <p class="nota" style="margin-top:8px">Uma família por superfície, mais branco ou um neutro.
+      Pareamento: fundo light com o dark da família; fundo dark com branco; fundo primary com o
+      dark, exceto Cortex, Retina e Nexo, que levam branco. Brilho, blur e gradiente só no Cortex.</p>
   </div>
   <div class="cor-acts">
     <button class="btn ghost" onclick="baixarPaletaJSON()">Baixar paleta (.json)</button>
@@ -405,26 +430,49 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
   <div class="sec-head">
     <span class="eyebrow">03 / Tipografia</span>
     <div>
-      <h2>Archivo fala. Plex Mono mede.</h2>
-      <p class="sub">Duas vozes: <b>Archivo</b> (500 a 700) para títulos, botões e navegação;
-        <b>IBM Plex Mono</b> (400 e 500) para dados, códigos, rótulos e coordenadas. O texto
-        corrido usa a pilha do sistema, rápida e neutra em qualquer dispositivo.</p>
+      <h2>Dois modos, cada um com seu par.</h2>
+      <p class="sub">O <b>modo operacional</b> é o padrão de toda interface e canal digital:
+        Archivo nos títulos e rótulos, Instrument Sans no texto, IBM Plex Mono só em códigos e dados.
+        O <b>modo executivo</b> é só para peças formais (certificados, relatórios formais, convites,
+        apresentações formais, cartões de visita): Instrument Serif nos títulos, nomes e citações,
+        Archivo Light no texto. Hierarquia sem negrito: o secundário tem o mesmo peso, um tom mais claro.</p>
     </div>
   </div>
-  <div class="type-grid">
+  <div class="type-grid tres">
     <div class="card spec archivo">
-      <span class="fam">Archivo 500 / 600 / 700</span>
+      <span class="fam">Archivo 500 a 700, títulos e rótulos</span>
       <div class="amostra">Intelligent systems for human health.</div>
       <div class="glyphs">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789</div>
-      <p class="uso">Títulos, subtítulos, botões, navegação e números de destaque, com
-        tracking levemente negativo (de −0.015em a −0.03em) nos tamanhos grandes.</p>
+      <p class="uso">Títulos com tracking negativo (−.015em; display −.025em). Rótulos em caixa alta,
+        600, tracking de .12em a .18em.</p>
+    </div>
+    <div class="card spec sans">
+      <span class="fam">Instrument Sans 400 e 500, texto</span>
+      <div class="amostra">Sinais mais limpos, decisões melhores.</div>
+      <div class="glyphs">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789</div>
+      <p class="uso">Texto corrido em 15px, entrelinha 1,65, medida de 640px.</p>
     </div>
     <div class="card spec plex">
-      <span class="fam">IBM Plex Mono 400 / 500</span>
-      <div class="amostra">EVT-041 19°52′S 43°58′W SOL26-0001</div>
-      <div class="glyphs">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789 {}[]()·—</div>
-      <p class="uso">Eyebrows, protocolos, datas, legendas técnicas e rótulos em caixa alta
-        com tracking largo (de .14em a .22em).</p>
+      <span class="fam">IBM Plex Mono 400 e 500, códigos e dados</span>
+      <div class="amostra">NRO-REL-2026-014</div>
+      <div class="glyphs">0123456789 1.284 0,94 #00352F</div>
+      <p class="uso">Só códigos, leituras, números em tabelas e status. Nunca rótulo, título ou data.
+        Código nunca quebra linha.</p>
+    </div>
+  </div>
+  <div class="type-grid" style="margin-top:16px">
+    <div class="card spec serifa">
+      <span class="fam">Instrument Serif, modo executivo</span>
+      <div class="amostra">Mariana Costa <i>Albuquerque</i></div>
+      <div class="glyphs">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789</div>
+      <p class="uso">Títulos, nomes, numerais e citações. Regular e itálico, nunca negrito.</p>
+    </div>
+    <div class="card spec archivo leve">
+      <span class="fam">Archivo Light 300, modo executivo</span>
+      <div class="amostra">Relatório técnico</div>
+      <div class="glyphs">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789</div>
+      <p class="uso">Texto corrido em 10,5 pt na impressão; 400 e 500 em rótulos pequenos e códigos.
+        Nunca Plex Mono.</p>
     </div>
   </div>
   <div class="card escala" style="margin-top:16px">
@@ -432,17 +480,23 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
       <span style="font-family:var(--fd);font-weight:600;font-size:clamp(28px,4vw,44px);letter-spacing:-.025em;line-height:1.05">Título de página</span></div>
     <div class="row"><span class="k">H2, seção</span>
       <span style="font-family:var(--fd);font-weight:600;font-size:clamp(22px,3vw,30px)">Título de seção</span></div>
-    <div class="row"><span class="k">Eyebrow</span>
+    <div class="row"><span class="k">Rótulo</span>
       <span class="eyebrow">Rótulo de contexto</span></div>
     <div class="row"><span class="k">Corpo</span>
-      <span style="color:var(--muted)">Texto corrido na pilha do sistema, 14–15&nbsp;px, entrelinha 1.6.</span></div>
-    <div class="row"><span class="k">Mono, dado</span>
-      <span class="mono" style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)">FIG.01 PROTÓTIPO, IMAGERY IN PRODUCTION</span></div>
+      <span>Texto corrido em Instrument Sans, 15&nbsp;px, entrelinha 1,65.</span></div>
+    <div class="row"><span class="k">Secundário</span>
+      <span style="color:var(--muted)">Mesmo peso, um tom mais claro. Nunca negrito.</span></div>
+    <div class="row"><span class="k">Dado</span>
+      <span class="mono" style="font-size:13px">1.284 leituras, 0,94 de correlação</span></div>
+    <div class="row"><span class="k">Executivo</span>
+      <span style="font-family:var(--fs-formal);font-size:clamp(24px,3vw,32px)">Resultados da fase II</span></div>
   </div>
   <p class="nota" style="margin-top:14px">Webfonts:
-    <a style="border-bottom:1px solid var(--line2)" href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Archivo</a> e
+    <a style="border-bottom:1px solid var(--line2)" href="https://fonts.google.com/specimen/Archivo" target="_blank" rel="noopener">Archivo</a>,
+    <a style="border-bottom:1px solid var(--line2)" href="https://fonts.google.com/specimen/Instrument+Sans" target="_blank" rel="noopener">Instrument Sans</a>,
+    <a style="border-bottom:1px solid var(--line2)" href="https://fonts.google.com/specimen/Instrument+Serif" target="_blank" rel="noopener">Instrument Serif</a> e
     <a style="border-bottom:1px solid var(--line2)" href="https://fonts.google.com/specimen/IBM+Plex+Mono" target="_blank" rel="noopener">IBM Plex Mono</a>
-    (Google Fonts, licença aberta).</p>
+    (Google Fonts, licença aberta SIL OFL).</p>
 </section>
 
 <!-- ================= ELEMENTOS ================= -->
@@ -604,10 +658,10 @@ footer{border-top:1px solid var(--line);margin-top:clamp(80px,10vh,130px)}
     <div class="dl"><span class="lb">Template</span><h3>Documentos e registros</h3>
       <p>O template oficial NRO-PUB-002: Arial, cabeçalho com departamento, título, código e revisão, e as instruções de controle.</p>
       <div class="acts"><a class="btn ghost mini" href="assets/NRO-PUB-002-template-documentos-e-registros.docx" download>Baixar DOCX</a></div></div>
-    <div class="dl"><span class="lb">Template · <b>em desenvolvimento</b></span><h3>Artigo científico</h3>
+    <div class="dl"><span class="lb">Template, <b>em desenvolvimento</b></span><h3>Artigo científico</h3>
       <p>Template LaTeX no Overleaf para artigos e relatórios técnicos da equipe, com a tipografia e o cabeçalho no padrão da marca.</p>
       <div class="acts"><span class="btn ghost mini soon">Disponível em breve</span></div></div>
-    <div class="dl"><span class="lb">Template · <b>em desenvolvimento</b></span><h3>Pôster acadêmico</h3>
+    <div class="dl"><span class="lb">Template, <b>em desenvolvimento</b></span><h3>Pôster acadêmico</h3>
       <p>Template LaTeX no Overleaf para pôsteres de congresso e da Semana do Conhecimento, na paleta e na grade da NeuroDynamics.</p>
       <div class="acts"><span class="btn ghost mini soon">Disponível em breve</span></div></div>
     <div class="dl"><span class="lb">Template</span><h3>Página HTML</h3>
@@ -661,65 +715,84 @@ function toast(msg){ const t=document.createElement('div'); t.className='toast';
 $('#ft-ano').textContent = new Date().getFullYear();
 
 /* ============================================================
-   PALETA — nomes oficiais (sistema neural) + auxiliares
+   PALETA: famílias em quatro tons (primário, neutro, secundário, funcional)
    ============================================================ */
+const TONS = ['light','medium','primary','dark'];
 const PALETA = [
-  { grupo:'Primárias', cores:[
-    { nome:'Cortex',  hex:'#00352F', uso:'Verde profundo institucional: bandas, fundos de marca, favicon.', pct:10 },
-    { nome:'Axon',    hex:'#00594F', uso:'Verde estrutural: gradientes, botões e superfícies de destaque.', pct:8 },
-    { nome:'Synapse', hex:'#CEDC00', uso:'O disparo da marca: seleção, foco, acentos. Em pequenas doses.', pct:4 }
+  { grupo:'Conjunto primário', nota:'Únicas cores permitidas em brilho, blur, gradiente e vidro.', familias:[
+    { nome:'Cortex', id:'cortex', tons:['#E3EFEC','#A9CCC4','#00594F','#00352F'], acento:'#CEDC00',
+      uso:'A assinatura. Primary é o Axon, dark é o Cortex, o acento é o Synapse (foco e CTA único).' }
   ]},
-  { grupo:'Profundos e neutros', cores:[
-    { nome:'Void',     hex:'#050807', uso:'O fundo de tudo nas interfaces escuras.', pct:34 },
-    { nome:'Painel',   hex:'#0B1210', uso:'Cartões e superfícies elevadas sobre o Void.', pct:12 },
-    { nome:'Blackout', hex:'#1D1D1F', uso:'Texto sobre fundos claros; assinaturas e impressos.', pct:4 },
-    { nome:'Ink',      hex:'#F5F5F7', uso:'Texto e marca em branco sobre fundos escuros.', pct:14 },
-    { nome:'Aura',     hex:'#F8F7FF', uso:'Fundos claros de documentos e cartões de assinatura.', pct:6 },
-    { nome:'Névoa',    hex:'#9AA5A1', uso:'Texto secundário sobre escuro.', pct:5 },
-    { nome:'Grafite',  hex:'#616C68', uso:'Legendas, rótulos técnicos e bordas visíveis.', pct:3 }
+  { grupo:'Conjunto neutro', familias:[
+    { nome:'Sulco',  id:'sulco',  tons:['#616C68','#1D1D1F','#0B1210','#050807'], uso:'Grafite, tinta, Painel e Void.' },
+    { nome:'Pia',    id:'pia',    tons:['#E8EDEB','#C4CCC9','#9AA5A1','#2E3533'], uso:'Ink, regras, Névoa e tinta secundária.' },
+    { nome:'Medula', id:'medula', tons:['#F7F4EE','#E6DFD3','#C9BFAF','#4A453E'], uso:'Papel quente para documentos.' }
   ]},
-  { grupo:'Auxiliares para dados e status', cores:[
-    { nome:'Soma',     hex:'#0B7D6E', uso:'Terceiro verde: gradientes longos e visualizações.', pct:0 },
-    { nome:'Íon',      hex:'#2DD4BF', uso:'Links de destaque, taglines, eventos no calendário.', pct:0 },
-    { nome:'Vital',    hex:'#4ADE97', uso:'Sucesso: confirmado, ativo, concluído.', pct:0 },
-    { nome:'Mielina',  hex:'#F5C36A', uso:'Atenção: prazos, pendências, em análise.', pct:0 },
-    { nome:'Pulso',    hex:'#F1806F', uso:'Erro e urgência: falhas, recusas, avisos críticos.', pct:0 },
-    { nome:'Plasma',   hex:'#7FA7F2', uso:'Informação neutra; férias no calendário.', pct:0 },
-    { nome:'Dendrito', hex:'#A78BFA', uso:'Processo seletivo e pesquisa nas visualizações.', pct:0 }
+  { grupo:'Conjunto secundário', nota:'Uso chapado, uma família por peça. Verdes e frios, depois o registro quente de primavera.', familias:[
+    { nome:'Ion',      id:'ion',      tons:['#D9F7F2','#93E8DB','#5BBFB0','#0B4F48'] },
+    { nome:'Neuron',   id:'neuron',   tons:['#E4F2E3','#B3D9B0','#5AA65E','#1F4A22'] },
+    { nome:'Glia',     id:'glia',     tons:['#E9EFEA','#C3D3C7','#8AA894','#2E4636'] },
+    { nome:'Retina',   id:'retina',   tons:['#E0E6FC','#A9B9F6','#3456E3','#142A75'] },
+    { nome:'Nexo',     id:'nexo',     tons:['#E7E5FA','#BAB4F0','#5A4ED4','#251C66'] },
+    { nome:'Dendrito', id:'dendrito', tons:['#EEE8FE','#CDBEFC','#A78BFA','#3B2378'] },
+    { nome:'Lúmen',    id:'lumen',    tons:['#FFF9D6','#FFEE8A','#FFD91A','#594A00'] },
+    { nome:'Ritmo',    id:'ritmo',    tons:['#FFEDE0','#FFCBA6','#FF9B5E','#6B2E08'] },
+    { nome:'Impulso',  id:'impulso',  tons:['#FFE4E6','#FFAEB5','#FF4F61','#6E0A1A'] },
+    { nome:'Plexo',    id:'plexo',    tons:['#FFE6F0','#FFB9D3','#FF70A6','#6B0F38'] },
+    { nome:'Íris',     id:'iris',     tons:['#F8E7FC','#EBBAF5','#D676EB','#4E0F5E'] }
+  ]},
+  { grupo:'Conjunto funcional', nota:'Só estados de interface. Nunca em documentos, peças de marca ou como identidade.', familias:[
+    { nome:'Nominal',  id:'fn-nominal',  tons:['#D6FFEE','#7DFFC8','#00F59B','#00422A'], uso:'Sucesso.' },
+    { nome:'Caution',  id:'fn-caution',  tons:['#FFF1CC','#FFD470','#FFAA00','#4D3300'], uso:'Atenção.' },
+    { nome:'Critical', id:'fn-critical', tons:['#FFE0DD','#FF948C','#FF2D20','#5C0A05'], uso:'Erro e ação destrutiva.' },
+    { nome:'Signal',   id:'fn-signal',   tons:['#D4F5FF','#7FE0FF','#00C8FF','#003A4D'], uso:'Informação e dado ao vivo.' },
+    { nome:'Idle',     id:'fn-idle',     tons:['#E6E8EE','#B8BDCC','#7C8499','#2A2F3D'], uso:'Offline e desativado.' }
   ]}
 ];
+/* proporção da composição principal (primário + neutro) */
+const PROPORCAO = [
+  ['Void','#050807',34],['Painel','#0B1210',14],['Cortex','#00352F',16],['Axon','#00594F',10],
+  ['Ink','#E8EDEB',12],['Névoa','#9AA5A1',7],['Grafite','#616C68',4],['Synapse','#CEDC00',3]
+];
+const BRANCO_NO_PRIMARY = ['cortex','retina','nexo'];
 function hex2rgb(h){ const n=parseInt(h.slice(1),16); return [(n>>16)&255,(n>>8)&255,n&255]; }
-function corTextoSobre(hex){ const [r,g,b]=hex2rgb(hex); return (r*.299+g*.587+b*.114)>150 ? '#1D1D1F' : '#F5F5F7'; }
+function tintaSobre(f, i){
+  if (f.id==='sulco' || i===3 || (i===2 && BRANCO_NO_PRIMARY.includes(f.id))) return '#FFFFFF';
+  return f.tons[3];
+}
 function desenhaCores(){
   $('#cores-blocos').innerHTML = PALETA.map(bl => `
-    <div class="cor-bloco"><h3>${esc(bl.grupo)}</h3>
-      <div class="cores">${bl.cores.map(c => `
-        <button class="cor" onclick="copiarHex('${c.hex}')" title="Copiar ${c.hex}">
-          <span class="sw" style="background:${c.hex};display:block">
-            <span class="pct" style="color:${corTextoSobre(c.hex)}">${c.pct?c.pct+'%':''}</span></span>
-          <span class="info" style="display:block">
-            <span class="nm" style="display:block">${esc(c.nome)}</span>
-            <span class="hx" style="display:block">${c.hex} · rgb(${hex2rgb(c.hex).join(', ')})</span>
-            <span class="uso" style="display:block">${esc(c.uso)}</span></span>
-        </button>`).join('')}
+    <div class="cor-bloco"><h3>${esc(bl.grupo)}</h3>${bl.nota?`<p class="nota" style="margin:-4px 0 12px">${esc(bl.nota)}</p>`:''}
+      <div class="fmls">${bl.familias.map(f => `
+        <div class="fml"><div class="fml-nm"><b>${esc(f.nome)}</b>${f.uso?`<small>${esc(f.uso)}</small>`:''}</div>
+          <div class="tons" style="grid-template-columns:repeat(${f.acento?5:4},1fr)">${f.tons.map((h,i) => `
+            <button class="tom" onclick="copiarHex('${h}')" title="Copiar ${h}" style="background:${h};color:${tintaSobre(f,i)}">
+              <span>${f.id==='cortex'&&i===2?'primary, Axon':f.id==='cortex'&&i===3?'dark, Cortex':TONS[i]}</span><code>${h}</code></button>`).join('')}${f.acento?`
+            <button class="tom" onclick="copiarHex('${f.acento}')" title="Copiar ${f.acento}" style="background:${f.acento};color:#00352F">
+              <span>acento, Synapse</span><code>${f.acento}</code></button>`:''}
+          </div></div>`).join('')}
       </div></div>`).join('');
-  const usadas = PALETA.flatMap(b=>b.cores).filter(c=>c.pct);
-  $('#prop-bar').innerHTML = usadas.map(c =>
-    `<div style="width:${c.pct}%;background:${c.hex}" title="${esc(c.nome)} ${c.pct}%"></div>`).join('');
+  $('#prop-bar').innerHTML = PROPORCAO.map(([n,h,p]) =>
+    `<div style="width:${p}%;background:${h}" title="${esc(n)} ${p}%"></div>`).join('');
+}
+function tokensPaleta(){
+  const out = [];
+  PALETA.forEach(b => b.familias.forEach(f => {
+    f.tons.forEach((h,i) => out.push({ grupo:b.grupo, familia:f.nome, tom:TONS[i], token:`--${f.id}-${TONS[i]}`, hex:h, rgb:hex2rgb(h) }));
+    if (f.acento) out.push({ grupo:b.grupo, familia:f.nome, tom:'accent', token:`--${f.id}-accent`, hex:f.acento, rgb:hex2rgb(f.acento) });
+  }));
+  return out;
 }
 function copiarHex(hex){
   navigator.clipboard?.writeText(hex).then(()=>toast(hex+' copiado.')).catch(()=>toast(hex));
 }
 function baixarPaletaJSON(){
-  const data = { marca:'NeuroDynamics', versao:'1.0',
-    cores: PALETA.flatMap(b => b.cores.map(c => ({
-      grupo:b.grupo, nome:c.nome, hex:c.hex, rgb:hex2rgb(c.hex), uso:c.uso }))) };
+  const data = { marca:'NeuroDynamics', versao:'2.0', cores: tokensPaleta() };
   baixarBlob(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}), 'nro-paleta.json');
   toast('Paleta baixada.');
 }
 function copiarTokensCSS(){
-  const nm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-  const css = ':root{\n' + PALETA.flatMap(b=>b.cores).map(c=>`  --${nm(c.nome)}:${c.hex};`).join('\n') + '\n}';
+  const css = ':root{\n' + tokensPaleta().map(c=>`  ${c.token}:${c.hex};`).join('\n') + '\n}';
   navigator.clipboard?.writeText(css).then(()=>toast('Tokens CSS copiados.')).catch(()=>toast('Não foi possível copiar.'));
 }
 function baixarBlob(blob, nome){
@@ -841,7 +914,7 @@ function trocarRecurso(){
   if (g.campos.includes('departamento')) html += campo('departamento','Departamento','ex.: P&D');
   if (g.campos.includes('frase')) html += campo('frase','Frase (opcional)','ex.: Intelligent systems for human health.');
   if (g.campos.includes('titulo')) html += campo('titulo','Título','ex.: Relatório de execução');
-  if (g.campos.includes('subtitulo')) html += campo('subtitulo','Subtítulo (opcional)','ex.: Projeto Órion · 2026');
+  if (g.campos.includes('subtitulo')) html += campo('subtitulo','Subtítulo (opcional)','ex.: Projeto Órion, 2026');
   if (g.campos.includes('foto')) html += `<div class="fld"><label>Foto (opcional)</label>
     <input type="file" id="g-foto" accept="image/*" onchange="carregarFoto(this)">
     <p class="mini">A foto entra num círculo com anel Synapse.</p></div>`;

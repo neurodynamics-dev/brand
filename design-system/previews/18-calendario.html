@@ -4,30 +4,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Calendário · NeuroDynamics</title>
+<title>Calendário | NeuroDynamics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 /* @tokens:start · gerado de tokens.css — rode `node build.mjs` */
 :root{
-  --cortex:#00352F;
-  --axon:#00594F;
-  --synapse:#CEDC00;
-  --void:#050807;
-  --painel:#0B1210;
-  --blackout:#1D1D1F;
-  --ink:#F5F5F7;
-  --aura:#F8F7FF;
-  --nevoa:#9AA5A1;
-  --grafite:#616C68;
-  --soma:#0B7D6E;
-  --ion:#2DD4BF;
-  --vital:#4ADE97;
-  --mielina:#F5C36A;
-  --pulso:#F1806F;
-  --plasma:#7FA7F2;
-  --dendrito:#A78BFA;
+  --cortex-light:#E3EFEC;
+  --cortex-medium:#A9CCC4;
+  --cortex-primary:#00594F;
+  --cortex-dark:#00352F;
+  --cortex-accent:#CEDC00;
+  --sulco-light:#616C68;
+  --sulco-medium:#1D1D1F;
+  --sulco-primary:#0B1210;
+  --sulco-dark:#050807;
+  --pia-light:#E8EDEB;
+  --pia-medium:#C4CCC9;
+  --pia-primary:#9AA5A1;
+  --pia-dark:#2E3533;
+  --medula-light:#F7F4EE;
+  --medula-medium:#E6DFD3;
+  --medula-primary:#C9BFAF;
+  --medula-dark:#4A453E;
+  --ion-light:#D9F7F2;
+  --ion-medium:#93E8DB;
+  --ion-primary:#5BBFB0;
+  --ion-dark:#0B4F48;
+  --neuron-light:#E4F2E3;
+  --neuron-medium:#B3D9B0;
+  --neuron-primary:#5AA65E;
+  --neuron-dark:#1F4A22;
+  --glia-light:#E9EFEA;
+  --glia-medium:#C3D3C7;
+  --glia-primary:#8AA894;
+  --glia-dark:#2E4636;
+  --retina-light:#E0E6FC;
+  --retina-medium:#A9B9F6;
+  --retina-primary:#3456E3;
+  --retina-dark:#142A75;
+  --nexo-light:#E7E5FA;
+  --nexo-medium:#BAB4F0;
+  --nexo-primary:#5A4ED4;
+  --nexo-dark:#251C66;
+  --dendrito-light:#EEE8FE;
+  --dendrito-medium:#CDBEFC;
+  --dendrito-primary:#A78BFA;
+  --dendrito-dark:#3B2378;
+  --lumen-light:#FFF9D6;
+  --lumen-medium:#FFEE8A;
+  --lumen-primary:#FFD91A;
+  --lumen-dark:#594A00;
+  --ritmo-light:#FFEDE0;
+  --ritmo-medium:#FFCBA6;
+  --ritmo-primary:#FF9B5E;
+  --ritmo-dark:#6B2E08;
+  --impulso-light:#FFE4E6;
+  --impulso-medium:#FFAEB5;
+  --impulso-primary:#FF4F61;
+  --impulso-dark:#6E0A1A;
+  --plexo-light:#FFE6F0;
+  --plexo-medium:#FFB9D3;
+  --plexo-primary:#FF70A6;
+  --plexo-dark:#6B0F38;
+  --iris-light:#F8E7FC;
+  --iris-medium:#EBBAF5;
+  --iris-primary:#D676EB;
+  --iris-dark:#4E0F5E;
+  --fn-nominal-light:#D6FFEE;
+  --fn-nominal-medium:#7DFFC8;
+  --fn-nominal-primary:#00F59B;
+  --fn-nominal-dark:#00422A;
+  --fn-caution-light:#FFF1CC;
+  --fn-caution-medium:#FFD470;
+  --fn-caution-primary:#FFAA00;
+  --fn-caution-dark:#4D3300;
+  --fn-critical-light:#FFE0DD;
+  --fn-critical-medium:#FF948C;
+  --fn-critical-primary:#FF2D20;
+  --fn-critical-dark:#5C0A05;
+  --fn-signal-light:#D4F5FF;
+  --fn-signal-medium:#7FE0FF;
+  --fn-signal-primary:#00C8FF;
+  --fn-signal-dark:#003A4D;
+  --fn-idle-light:#E6E8EE;
+  --fn-idle-medium:#B8BDCC;
+  --fn-idle-primary:#7C8499;
+  --fn-idle-dark:#2A2F3D;
+  --cortex:var(--cortex-dark);
+  --axon:var(--cortex-primary);
+  --synapse:var(--cortex-accent);
+  --signature:var(--cortex-dark);
+  --void:var(--sulco-dark);
+  --painel:var(--sulco-primary);
+  --blackout:var(--sulco-medium);
+  --grafite:var(--sulco-light);
+  --nevoa:var(--pia-primary);
+  --ink:var(--pia-light);
+  --aura:var(--pia-light);
   --bg:var(--void);
   --muted:var(--nevoa);
   --dim:var(--grafite);
@@ -35,9 +110,39 @@
   --line2:rgba(245,245,247,.16);
   --card:rgba(255,255,255,.03);
   --glass:rgba(7,12,10,.62);
+  --veil:rgba(255,255,255,.055);
+  --surface-page:var(--void);
+  --surface-card:var(--card);
+  --surface-raised:var(--painel);
+  --text-body:var(--ink);
+  --text-secondary:var(--nevoa);
+  --text-caption:var(--grafite);
+  --accent:var(--synapse);
+  --on-accent:var(--cortex);
+  --status-success:var(--fn-nominal-primary);
+  --status-warning:var(--fn-caution-primary);
+  --status-danger:var(--fn-critical-primary);
+  --status-info:var(--fn-signal-primary);
+  --status-idle:var(--fn-idle-primary);
+  --paper:#FFFFFF;
+  --paper-warm:var(--medula-light);
+  --paper-tint:var(--pia-light);
+  --formal-ink:var(--sulco-medium);
+  --formal-ink-2:var(--pia-dark);
+  --formal-ink-3:var(--sulco-light);
+  --formal-rule:var(--pia-medium);
+  --formal-rule-strong:var(--sulco-medium);
+  --formal-accent:var(--cortex-dark);
+  --formal-spark:var(--cortex-accent);
   --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --f:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fs-formal:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --formal-body:'Archivo',-apple-system,'Segoe UI',Arial,sans-serif;
+  --font-display:var(--fd);
+  --font-body:var(--f);
+  --font-mono:var(--fm);
+  --font-serif:var(--fs-formal);
   --fs-display:clamp(40px,6.8vw,88px);
   --fs-h1:clamp(36px,6vw,72px);
   --fs-h2:clamp(26px,3.8vw,42px);
@@ -47,12 +152,28 @@
   --fs-xs:12.5px;
   --fs-label:11px;
   --fs-micro:10px;
+  --lh-body:1.65;
+  --lh-display:1.02;
+  --tr-display:-.025em;
+  --tr-heading:-.015em;
+  --tr-label:.14em;
+  --pt-title:28pt;
+  --pt-h1:18pt;
+  --pt-h2:13pt;
+  --pt-body:10.5pt;
+  --pt-small:8.5pt;
+  --pt-label:7pt;
+  --doc-margin:22mm;
+  --doc-gutter:8mm;
   --r:18px;
   --r-sm:11px;
   --r-md:14px;
   --r-lg:20px;
   --r-xl:24px;
-  --r-pill:999px;
+  --r-chip:6px;
+  --r-tag:5px;
+  --r-badge:4px;
+  --r-formal:2px;
   --s1:4px;
   --s2:8px;
   --s3:12px;
@@ -68,7 +189,18 @@
   --max:1240px;
   --measure:640px;
   --t-fast:.15s;
-  --t:.25s
+  --t:.25s;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --shadow-cta:0 8px 26px rgba(206,220,0,.22);
+  --blur-glass:blur(18px) saturate(1.5);
+  --r-pill:7px;
+  --soma:var(--cortex-primary);
+  --ion:var(--ion-primary);
+  --vital:var(--fn-nominal-primary);
+  --mielina:var(--fn-caution-primary);
+  --pulso:var(--fn-critical-primary);
+  --plasma:var(--fn-signal-primary);
+  --dendrito:var(--dendrito-primary)
 }
 /* @tokens:end */
 *{box-sizing:border-box;margin:0;padding:0}
@@ -78,7 +210,7 @@ h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
 button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:none;font-size:inherit}
 .ds-t{font-size:19px;font-weight:600;margin-bottom:4px}
 .ds-d{color:var(--muted);font-size:var(--fs-sm);max-width:var(--measure);margin-bottom:28px}
-.ds-g{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+.ds-g{font-family:var(--fd);font-weight:600;font-size:10.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--dim);margin:32px 0 13px}
 /* ---- botões e seletor (de neuro.css, para o preview render isolado) ---- */
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--fd);font-weight:600;font-size:13px;
@@ -100,7 +232,7 @@ button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:n
 @media (max-width:700px){.cal-tit{font-size:17px;width:100%;order:5;margin:4px 0 0}}
 .calm{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--card)}
 .calm-cab{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-bottom:1px solid var(--line)}
-.calm-cab span{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+.calm-cab span{font-family:var(--fd);font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
   text-align:center;padding:8px 0}
 .calm-grade{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));grid-auto-rows:minmax(112px,1fr)}
 .calm-cel{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:4px 4px 6px;min-width:0;
@@ -122,7 +254,7 @@ button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:n
   background:color-mix(in srgb,var(--cc) 22%,transparent)}
 .calm-chip.segue{border-top-right-radius:0;border-bottom-right-radius:0;margin-right:-5px}
 .calm-chip.recusado{opacity:.5;text-decoration:line-through}
-.calm-chip.atras{box-shadow:inset 0 0 0 1px rgba(241,128,111,.6)}
+.calm-chip.atras{box-shadow:inset 0 0 0 1px rgba(255,45,32,.6)}
 .calm-pts{display:inline-flex;gap:2px;flex:none}
 .calm-pts i{width:6px;height:6px;border-radius:50%}
 .calm-mais{align-self:flex-start;font-size:11px;font-weight:600;color:var(--muted);padding:1px 6px;border-radius:6px}
@@ -130,7 +262,7 @@ button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:n
 .escala .row{display:grid;grid-template-columns:190px 1fr;gap:18px;align-items:baseline;
   padding:13px 4px;border-top:1px solid var(--line)}
 .escala .row:last-child{border-bottom:1px solid var(--line)}
-.escala .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.escala .k{font-family:var(--fd);font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 .escala .v{font-size:13.5px}
 .escala .v code{font-family:var(--fm);font-size:12.5px;color:var(--synapse)}
 </style>
@@ -154,15 +286,15 @@ button{font-family:inherit;cursor:pointer;color:inherit;border:none;background:n
   <div class="calm-grade">
     <div class="calm-cel fora"><button class="calm-n">31</button></div>
     <div class="calm-cel"><button class="calm-n">1</button></div>
-    <div class="calm-cel"><button class="calm-n">2</button><button class="calm-chip" style="--cc:#2DD4BF"><span class="h">14:00</span>Reunião geral</button></div>
-    <div class="calm-cel"><button class="calm-n">3</button><button class="calm-chip segue" style="--cc:#F5C36A">CBEB 2026</button></div>
-    <div class="calm-cel"><button class="calm-n">4</button><button class="calm-chip meio" style="--cc:#F5C36A">CBEB 2026</button></div>
+    <div class="calm-cel"><button class="calm-n">2</button><button class="calm-chip" style="--cc:#5BBFB0"><span class="h">14:00</span>Reunião geral</button></div>
+    <div class="calm-cel"><button class="calm-n">3</button><button class="calm-chip segue" style="--cc:#FFAA00">CBEB 2026</button></div>
+    <div class="calm-cel"><button class="calm-n">4</button><button class="calm-chip meio" style="--cc:#FFAA00">CBEB 2026</button></div>
     <div class="calm-cel"><button class="calm-n">5</button></div>
     <div class="calm-cel"><button class="calm-n">6</button></div>
-    <div class="calm-cel"><button class="calm-n">7</button><button class="calm-chip" style="--cc:#7FA7F2">ORT-14 Calibrar o encoder</button></div>
-    <div class="calm-cel hoje"><button class="calm-n">8</button><button class="calm-chip" style="--cc:#A78BFA"><span class="h">10:00</span><span class="calm-pts"><i style="background:#E1306C"></i><i style="background:#0A66C2"></i></span>POST-4 Demo Day</button><button class="calm-chip atras" style="--cc:#F5C36A"><span class="h">17:00</span>POST-6</button><button class="calm-mais">+2</button></div>
+    <div class="calm-cel"><button class="calm-n">7</button><button class="calm-chip" style="--cc:#00C8FF">ORT-14 Calibrar o encoder</button></div>
+    <div class="calm-cel hoje"><button class="calm-n">8</button><button class="calm-chip" style="--cc:#A78BFA"><span class="h">10:00</span><span class="calm-pts"><i style="background:#E1306C"></i><i style="background:#0A66C2"></i></span>POST-4 Demo Day</button><button class="calm-chip atras" style="--cc:#FFAA00"><span class="h">17:00</span>POST-6</button><button class="calm-mais">+2</button></div>
     <div class="calm-cel"><button class="calm-n">9</button></div>
-    <div class="calm-cel"><button class="calm-n">10</button><button class="calm-chip recusado" style="--cc:#2DD4BF"><span class="h">09:00</span>Daily do grupo</button></div>
+    <div class="calm-cel"><button class="calm-n">10</button><button class="calm-chip recusado" style="--cc:#5BBFB0"><span class="h">09:00</span>Daily do grupo</button></div>
     <div class="calm-cel"><button class="calm-n">11</button></div>
     <div class="calm-cel"><button class="calm-n">12</button></div>
     <div class="calm-cel"><button class="calm-n">13</button></div>
