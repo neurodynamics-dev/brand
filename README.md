@@ -1,49 +1,38 @@
 # Brand — brand.neurodynamics.dev
 
-Brand guidelines e central de assets da NeuroDynamics, em arquivo único
-(`index.html`), no mesmo padrão dos demais apps do ecossistema e com a
-linguagem visual do site institucional.
+Manual da marca e central de assets da NeuroDynamics (`index.html`). A
+página carrega as mesmas folhas que os apps importam
+(`design-system/tokens.css` e `design-system/neuro.css`), então o que
+aparece nela é o próprio design system.
 
 ## O que a página contém
 
-- **Marca** — imagotipo nas versões branca e preta, regras de respiro,
-  tamanho mínimo e usos proibidos.
-- **Cores** — quatro conjuntos de famílias, cada uma em quatro tons
-  (light, medium, primary, dark), com nomes do sistema nervoso: o
-  **primário** Cortex (Axon `#00594F`, Cortex `#00352F` e o acento
-  Synapse `#CEDC00`), o **neutro** (Sulco, Pia, Medula), o **secundário**
-  (Ion, Neuron, Glia, Retina, Nexo, Dendrito, Lúmen, Ritmo, Impulso,
-  Plexo, Íris) e o **funcional**, só para estados de interface (Nominal,
-  Caution, Critical, Signal, Idle). Clique copia o hex; há download em
-  JSON e tokens CSS.
-- **Tipografia** — dois modos. Operacional: Archivo nos títulos e
-  rótulos, Instrument Sans no texto, IBM Plex Mono só em códigos e dados.
-  Executivo (peças formais): Instrument Serif nos títulos, nomes e
-  citações, Archivo Light no texto.
-- **Elementos visuais** — grade técnica, blobs orgânicos, vidro, banda em
-  gradiente, placeholder técnico (FIG.), eyebrow e pills — com exemplos
-  vivos e regras de uso.
-- **Estúdio (geradores de mídia)** — tudo renderizado em canvas, no
-  navegador, com download em PNG na resolução final e 4 visuais
-  selecionáveis (Void, Cortex, Synapse, Aura):
-  - banner/header de redes sociais (LinkedIn pessoal e empresa, X, YouTube);
-  - post de entrada na equipe (feed, quadrado e story, com foto);
-  - post de aviso ou frase (feed, quadrado e story);
-  - foto de perfil com anel Synapse (com upload de foto);
-  - thumbnail de vídeo (YouTube) e crachá de evento;
-  - wallpaper (desktop, ultrawide e celular);
-  - fundo de reunião (1920×1080, centro limpo);
-  - capa de apresentação/documento (16:9 e A4).
-- **Assinaturas de e-mail** — a pessoa entra com a própria conta
-  (mesmo login das ferramentas internas), os dados de cargo e contato
-  vêm do cadastro da equipe no banco, e dá para ajustar o **nome de
-  exibição** e incluir **pronomes**. O HTML gerado é o mesmo da
-  ferramenta original do repositório `signature`.
-- **Downloads e templates** — logos e símbolo oficiais via Brandfetch
-  (fonte única da marca), paleta, o template de documentos NRO-PUB-002
-  (`assets/`), os templates Overleaf de artigo e pôster (em
-  desenvolvimento), um `template.html` de página no padrão da marca e
-  os links de fontes e do ecossistema.
+O conteúdo é dividido em seis abas (SectionNav), com subabas onde ajuda.
+O endereço guarda as duas, por exemplo `#cores/secundario`.
+
+1. **Cores** — primário e neutro, secundário, funcional e "em uso"
+   (pareamento com exemplos, regras, download da paleta em JSON e CSS).
+   Clique em qualquer tom para copiar o hex.
+2. **Tipografia** — o modo operacional (Archivo, Instrument Sans,
+   IBM Plex Mono), a escala e as regras. O modo executivo aparece no fim,
+   como extra, numa peça no próprio registro (papel, Cortex, fio fino).
+3. **Elementos** — marcas (imagotipo, recolorido por família, ícone
+   quadrado, símbolo, onda branca, selo), superfícies e fundo, bandas e
+   forma e espaço (raios, escala, movimento).
+4. **Interfaces** — componentes vivos de `neuro.css`: ações, formulários,
+   navegação, dados, feedback e widgets.
+5. **Creative gallery** — wallpapers, pôsteres e peças sociais, e o
+   **Estúdio**, com os geradores de mídia em canvas (PNG na resolução
+   final, renderizado no navegador): banners, posts de entrada e de aviso,
+   foto de perfil, thumbnail, crachá de evento, wallpaper, fundo de
+   reunião e capa.
+6. **Aplicações** — documentos, apresentações, e-mails e crachás, cada
+   um com miniaturas e o link para o template; as **assinaturas de
+   e-mail** (login com a conta da equipe, dados do cadastro, nome de
+   exibição e pronomes); e os **downloads**.
+
+As miniaturas das peças ficam em `assets/manual/` e foram geradas a
+partir de `templates/`. Se um template mudar, gere a miniatura de novo.
 
 ## Design system (Claude Design)
 
