@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" crossorigin="anonymous">
 <!-- o manual usa as mesmas folhas que os apps: o que aparece aqui é o design system -->
 <link rel="stylesheet" href="design-system/tokens.css">
 <link rel="stylesheet" href="design-system/neuro.css">
@@ -262,6 +262,14 @@ section.painel{margin:0 0 var(--s9);scroll-margin-top:150px}
 .estudio .quadro{flex:1;display:flex;align-items:center;justify-content:center;min-height:240px}
 .estudio canvas{max-width:100%;max-height:62vh;height:auto;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5);border:1px solid var(--line2)}
 .estudio .base{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.estudio .peca-palco{position:relative;overflow:hidden;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5);
+  outline:1px solid var(--line2)}
+.estudio .peca-palco>*{position:absolute;left:0;top:0}
+.estudio textarea{resize:vertical}
+/* área de foto dos templates: troque por uma foto, sem filtros */
+.foto-slot{position:relative;overflow:hidden;background:rgba(127,127,127,.08);display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:12px;box-sizing:border-box;font:13px/1.3 'Instrument Sans',system-ui,sans-serif;color:rgba(127,127,127,.9)}
+.foto-slot>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .estudio .dim{font-family:var(--fm);font-size:11px;color:var(--grafite);margin-right:auto}
 
 /* ---------- assinaturas ---------- */
@@ -880,7 +888,7 @@ details.gmail .k{color:var(--ink);font-weight:600}
       <h2>O lado expressivo do sistema.</h2>
       <p class="sub">Wallpapers, pôsteres e peças sociais: onde a grade, os blobs e o registro de bancada
         aparecem com mais liberdade, sempre no conjunto primário ou em uma família. No Estúdio, a equipe gera
-        as próprias peças, já no padrão.</p>
+        as próprias peças a partir desses mesmos templates: troca os textos e a foto e baixa o PNG.</p>
     </div>
   </div>
   <div class="abas sub-abas" role="tablist" data-grupo="galeria">
@@ -928,13 +936,13 @@ details.gmail .k{color:var(--ink);font-weight:600}
         <div class="fld"><label id="g-formato-rot">Formato</label><div class="sel-wrap" id="g-formato"></div></div>
         <div class="fld"><label>Visual</label><div class="visuais" id="g-variantes" role="radiogroup" aria-label="Visual"></div></div>
         <div id="g-campos"></div>
-        <button class="btn solid" style="width:100%" onclick="baixarPeca()">Baixar PNG</button>
-        <p class="nota" style="margin-top:10px">Renderizado no seu navegador, na resolução final. Nada é enviado a servidor.</p>
+        <button class="btn solid" id="g-baixar" style="width:100%" onclick="baixarPeca()">Baixar PNG</button>
+        <p class="nota" style="margin-top:10px">As peças saem dos templates da marca, na resolução final, geradas no seu navegador. Nada é enviado a servidor.</p>
       </div>
       <div class="palco">
-        <div class="quadro"><canvas id="g-canvas" width="1584" height="396"></canvas></div>
+        <div class="quadro"><canvas id="g-canvas" width="1584" height="396" hidden></canvas><div id="g-peca" class="peca-palco"></div></div>
         <div class="base"><span class="dim" id="g-dim">1584 × 396 px</span>
-          <button class="btn ghost mini" onclick="renderPeca()">Atualizar prévia</button></div>
+          <a class="link-seta" id="g-template" href="templates/social/Social.html" target="_blank" rel="noopener">Abrir o template ↗</a></div>
       </div>
     </div>
   </div>
@@ -1415,96 +1423,242 @@ function logoTintado(cor){
   return c;
 }
 /* ============================================================
-   ESTÚDIO — geradores de mídia em canvas
+   ESTÚDIO: as peças saem dos próprios templates de templates/.
+   A peça é clonada do HTML do template, os textos e as fotos viram
+   campos, e o PNG é gerado na resolução final, no navegador.
+   O que não tem template (foto de perfil, thumbnail, fundo de
+   reunião, banners de outras redes) continua desenhado em canvas.
    ============================================================ */
-const VARIANTES = {
-  void:    { l:'Void',    sw:'linear-gradient(135deg,#050807,#0B1210)', bg:'escuro' },
-  cortex:  { l:'Cortex',  sw:'linear-gradient(118deg,#00352F,#00594F 62%,#0A6F62)', bg:'banda' },
-  synapse: { l:'Synapse', sw:'#CEDC00', bg:'lima' },
-  aura:    { l:'Aura',    sw:'#F5F5F7', bg:'claro' }
-};
-const GERADORES = {
-  banner: { l:'Banner / header de rede social', campos:['frase'], formatos:[
-    { id:'linkedin',     l:'LinkedIn, capa pessoal (1584×396)', w:1584, h:396 },
+const T = 'templates/';
+const WALL_ESTILOS = [['mesh','Rede'],['waves','Ondas'],['circuit','Circuito'],['pulse','Pulso']];
+const WALL_FORMATOS = [['desktop','Desktop (2560×1440)'],['phone','Celular (1179×2556)'],['tablet','Tablet (2048×2732)'],['video','Videochamada (1920×1080)']];
+const RECURSOS = {
+  feed: { l:'Post de feed', pecas:[
+    { visual:'Cortex', formato:'Feed (1080×1350)', fonte:'social/Social.html', rot:'01 Feed Cortex' },
+    { visual:'Família, com foto', formato:'Feed (1080×1350)', fonte:'social/Social.html', rot:'02 Feed Retina' } ]},
+  story: { l:'Story', pecas:[
+    { visual:'Cortex, com foto', formato:'Story (1080×1920)', fonte:'social/Social.html', rot:'03 Story' } ]},
+  linkedin: { l:'Banner do LinkedIn', pecas:[
+    { visual:'Cortex', formato:'Capa pessoal (1584×396)', fonte:'social/Social.html', rot:'04 Banner LinkedIn' } ]},
+  cracha: { l:'Crachá (CR80)', escala:2, pecas:[
+    { visual:'Sinal', formato:'Frente', fonte:'badges/Badges.html', rot:'A1 Sinal frente' },
+    { visual:'Sinal', formato:'Verso', fonte:'badges/Badges.html', rot:'A2 Sinal verso' },
+    { visual:'Sinal', formato:'Visitante', fonte:'badges/Badges.html', rot:'A3 Sinal visitante' },
+    { visual:'Retrato', formato:'Escuro', fonte:'badges/Badges.html', rot:'B1 Retrato escuro' },
+    { visual:'Retrato', formato:'Claro', fonte:'badges/Badges.html', rot:'B2 Retrato claro' },
+    { visual:'Ficha', formato:'Frente', fonte:'badges/Badges.html', rot:'C1 Ficha frente' },
+    { visual:'Ficha', formato:'Verso', fonte:'badges/Badges.html', rot:'C2 Ficha verso' } ]},
+  wallpaper: { l:'Wallpaper', pecas: WALL_ESTILOS.flatMap(([id, nome]) => WALL_FORMATOS.map(([f, fl]) =>
+    ({ visual:nome, formato:fl, fonte:'wallpapers/Wallpapers.html', rot:`${id}-${f}`, interno:'.sc-host' }))) },
+  poster: { l:'Pôster', escala:3, pecas:[
+    { visual:'Every signal has noise', formato:'Retrato (840×1188)', fonte:'posters/Posters.html', rot:'01 Every signal has noise' },
+    { visual:'Trust but verify', formato:'Retrato (840×1188)', fonte:'posters/Posters.html', rot:'02 Trust but verify' },
+    { visual:'Simplicidade', formato:'Retrato (840×1188)', fonte:'posters/Posters.html', rot:'03 Simplicidade' },
+    { visual:'Se não está no log', formato:'Retrato (840×1188)', fonte:'posters/Posters.html', rot:'04 Se não está no log' } ]},
+  capa: { l:'Capa de apresentação', pecas:[
+    { visual:'Cortex, com brilho', formato:'Slide 16:9 (1920×1080)', fonte:'brand-deck/BrandDeck.html', rot:'01 Capa, Cortex com brilho' },
+    { visual:'Axon, logo grande', formato:'Slide 16:9 (1920×1080)', fonte:'brand-deck/BrandDeck.html', rot:'02 Capa, Axon, logo grande' },
+    { visual:'Sulco', formato:'Slide 16:9 (1920×1080)', fonte:'brand-deck/BrandDeck.html', rot:'03 Capa, Sulco' },
+    { visual:'Ion', formato:'Slide 16:9 (1920×1080)', fonte:'brand-deck/BrandDeck.html', rot:'06 Capa, Ion' },
+    { visual:'Branca', formato:'Slide 16:9 (1920×1080)', fonte:'brand-deck/BrandDeck.html', rot:'07 Capa, branca' },
+    { visual:'Formal, Cortex', formato:'Slide 16:9 (1920×1080)', fonte:'formal-deck/FormalDeck.html', rot:'01 Capa, Cortex' },
+    { visual:'Formal, papel', formato:'Slide 16:9 (1920×1080)', fonte:'formal-deck/FormalDeck.html', rot:'06 Capa, papel centrada' } ]},
+  relatorio: { l:'Capa de relatório', escala:3, pecas:[
+    { visual:'Formal', formato:'A4 retrato', fonte:'formal-report/FormalReport.html', rot:'01 Cover' } ]},
+  /* sem template equivalente: canvas */
+  avatar:  { l:'Foto de perfil com anel', canvas:true, campos:['foto'], formatos:[
+    { id:'quad', l:'Avatar (800×800)', w:800, h:800 } ]},
+  thumb:   { l:'Thumbnail de vídeo', canvas:true, campos:['titulo','subtitulo'], formatos:[
+    { id:'yt', l:'YouTube (1280×720)', w:1280, h:720 } ]},
+  reuniao: { l:'Fundo de reunião', canvas:true, campos:[], formatos:[
+    { id:'fhd', l:'Full HD (1920×1080)', w:1920, h:1080 } ]},
+  redes:   { l:'Banner de outras redes', canvas:true, campos:['frase'], formatos:[
     { id:'linkedin-emp', l:'LinkedIn, página da empresa (1128×191)', w:1128, h:191 },
-    { id:'x',            l:'X / Twitter, header (1500×500)', w:1500, h:500 },
-    { id:'youtube',      l:'YouTube, banner (2560×1440, área segura central)', w:2560, h:1440 }
-  ]},
-  entrada: { l:'Post de entrada na equipe', campos:['nome','cargo','departamento','foto'], formatos:[
-    { id:'feed',     l:'Instagram, feed (1080×1350)', w:1080, h:1350 },
-    { id:'quadrado', l:'Quadrado (1080×1080)', w:1080, h:1080 },
-    { id:'story',    l:'Story (1080×1920)', w:1080, h:1920 }
-  ]},
-  aviso: { l:'Post de aviso ou frase', campos:['titulo','frase'], formatos:[
-    { id:'feed',     l:'Instagram, feed (1080×1350)', w:1080, h:1350 },
-    { id:'quadrado', l:'Quadrado (1080×1080)', w:1080, h:1080 },
-    { id:'story',    l:'Story (1080×1920)', w:1080, h:1920 }
-  ]},
-  avatar: { l:'Foto de perfil com anel', campos:['foto'], formatos:[
-    { id:'quad', l:'Avatar (800×800)', w:800, h:800 }
-  ]},
-  thumb: { l:'Thumbnail de vídeo', campos:['titulo','subtitulo'], formatos:[
-    { id:'yt', l:'YouTube (1280×720)', w:1280, h:720 }
-  ]},
-  cracha: { l:'Crachá de evento', campos:['nome','cargo','foto'], formatos:[
-    { id:'horizontal', l:'Horizontal (1024×640)', w:1024, h:640 }
-  ]},
-  wallpaper: { l:'Wallpaper', campos:[], formatos:[
-    { id:'desktop',   l:'Desktop (2560×1440)', w:2560, h:1440 },
-    { id:'ultrawide', l:'Ultrawide (3440×1440)', w:3440, h:1440 },
-    { id:'celular',   l:'Celular (1170×2532)', w:1170, h:2532 }
-  ]},
-  reuniao: { l:'Fundo de reunião', campos:[], formatos:[
-    { id:'fhd', l:'Full HD (1920×1080)', w:1920, h:1080 }
-  ]},
-  capa: { l:'Capa de apresentação / documento', campos:['titulo','subtitulo'], formatos:[
-    { id:'slides', l:'Slides 16:9 (1920×1080)', w:1920, h:1080 },
-    { id:'a4',     l:'Documento A4 retrato (2480×3508)', w:2480, h:3508 }
-  ]}
+    { id:'x',            l:'X, header (1500×500)', w:1500, h:500 },
+    { id:'youtube',      l:'YouTube, banner (2560×1440, área segura central)', w:2560, h:1440 } ]}
 };
-const gState = { recurso:'banner', formato:'linkedin', variante:'void',
-  frase:'', nome:'', cargo:'', departamento:'', titulo:'', subtitulo:'', foto:null };
+/* visuais do canvas: só o conjunto primário e o neutro; Synapse nunca é campo */
+const VARIANTES = {
+  void:   { l:'Void',   sw:'linear-gradient(135deg,#050807,#0B1210)' },
+  cortex: { l:'Cortex', sw:'linear-gradient(118deg,#00352F,#00594F 62%,#0A6F62)' },
+  claro:  { l:'Claro',  sw:'#E8EDEB' }
+};
+const gState = { recurso:'feed', visual:'Cortex', formato:'Feed (1080×1350)', variante:'void',
+  frase:'', titulo:'', subtitulo:'', foto:null };
 
+/* ---------- cache dos templates e montagem da peça ---------- */
+const docsTemplates = {};
+async function docTemplate(fonte){
+  if (!docsTemplates[fonte]){
+    docsTemplates[fonte] = fetch(T + fonte).then(r => {
+      if (!r.ok) throw new Error(r.status);
+      return r.text();
+    }).then(t => new DOMParser().parseFromString(t, 'text/html'));
+  }
+  return docsTemplates[fonte];
+}
+function pecaAtual(){
+  const r = RECURSOS[gState.recurso];
+  return r.pecas.find(p => p.visual === gState.visual && p.formato === gState.formato)
+      || r.pecas.find(p => p.visual === gState.visual) || r.pecas[0];
+}
+let pecaNo = null;          /* a peça no tamanho real, dentro do palco */
+let pecaPedido = 0;
+async function montarPeca(){
+  const p = pecaAtual(), pedido = ++pecaPedido;
+  $('#g-dim').textContent = 'Carregando…';
+  let doc;
+  try { doc = await docTemplate(p.fonte); }
+  catch(e){ $('#g-dim').textContent = 'Não foi possível abrir o template.'; return; }
+  if (pedido !== pecaPedido) return;
+  let alvo = doc.querySelector(`[data-screen-label="${CSS.escape(p.rot)}"]`);
+  if (alvo && p.interno) alvo = alvo.querySelector(p.interno);
+  if (!alvo){ $('#g-dim').textContent = 'Peça não encontrada no template.'; return; }
+  /* os caminhos do template são relativos a templates/<pasta>/ */
+  const html = alvo.outerHTML.replaceAll('../../assets/', 'assets/').replaceAll('../../design-system/', 'design-system/');
+  const caixa = document.createElement('div');
+  caixa.innerHTML = html;
+  pecaNo = caixa.firstElementChild;
+  pecaNo.removeAttribute('data-screen-label');
+  pecaNo.style.transform = ''; pecaNo.style.margin = '0';
+  const palco = $('#g-peca');
+  palco.innerHTML = ''; palco.appendChild(pecaNo);
+  $('#g-canvas').hidden = true; palco.hidden = false;
+  await Promise.all([...pecaNo.querySelectorAll('img')].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+  ajustarPalco();
+  camposDaPeca();
+  const escala = RECURSOS[gState.recurso].escala || 1;
+  $('#g-template').href = T + p.fonte; $('#g-template').hidden = false;
+  $('#g-dim').textContent = `${Math.round(pecaNo.offsetWidth*escala)} × ${Math.round(pecaNo.offsetHeight*escala)} px`;
+}
+function ajustarPalco(){
+  if (!pecaNo) return;
+  const palco = $('#g-peca'), w = pecaNo.offsetWidth, h = pecaNo.offsetHeight;
+  const maxW = palco.parentElement.clientWidth, maxH = Math.min(window.innerHeight * .62, 640);
+  const k = Math.min(maxW / w, maxH / h, 1);
+  pecaNo.style.transformOrigin = '0 0';
+  pecaNo.style.transform = `scale(${k})`;
+  palco.style.width = (w * k) + 'px'; palco.style.height = (h * k) + 'px';
+}
+window.addEventListener('resize', ajustarPalco);
 
+/* textos (fora de svg) e áreas de foto viram campos */
+function camposDaPeca(){
+  const textos = [];
+  const andar = document.createTreeWalker(pecaNo, NodeFilter.SHOW_TEXT, { acceptNode: n => {
+    const t = n.nodeValue.trim();
+    if (t.length < 3) return NodeFilter.FILTER_REJECT;
+    if (n.parentElement.closest('svg, .foto-slot')) return NodeFilter.FILTER_REJECT;
+    return NodeFilter.FILTER_ACCEPT;
+  }});
+  while (andar.nextNode()) textos.push(andar.currentNode);
+  const fotos = [...pecaNo.querySelectorAll('.foto-slot')];
+  /* rótulo do campo pelo papel do texto na peça */
+  const papel = no => {
+    const el = no.parentElement, cs = getComputedStyle(el);
+    if (el.closest('h1,h2,h3')) return 'Título';
+    if (/Plex Mono/.test(cs.fontFamily)) return 'Código ou dado';
+    if (cs.textTransform === 'uppercase') return 'Rótulo';
+    return 'Texto';
+  };
+  const papeis = textos.map(papel), total = {}, conta = {};
+  papeis.forEach(pp => total[pp] = (total[pp] || 0) + 1);
+  let html = '';
+  textos.forEach((no, i) => {
+    const pp = papeis[i]; conta[pp] = (conta[pp] || 0) + 1;
+    const rot = total[pp] > 1 ? `${pp} ${conta[pp]}` : pp;
+    const v = no.nodeValue.trim();
+    html += `<div class="fld"><label for="g-t${i}">${rot}</label>` + (v.length > 46
+      ? `<textarea id="g-t${i}" rows="2" data-t="${i}">${esc(v)}</textarea>`
+      : `<input id="g-t${i}" data-t="${i}" value="${esc(v)}">`) + `</div>`;
+  });
+  fotos.forEach((f, i) => {
+    html += `<div class="fld"><label for="g-f${i}">Foto${fotos.length > 1 ? ' ' + (i + 1) : ''}</label>
+      <input type="file" id="g-f${i}" accept="image/*" data-f="${i}">
+      <p class="mini">${esc(f.getAttribute('aria-label') || 'Foto')}. Sem filtros.</p></div>`;
+  });
+  if (!html) html = '<p class="nota" style="margin-bottom:16px">Esta peça não tem texto editável.</p>';
+  $('#g-campos').innerHTML = html;
+  $$('#g-campos [data-t]').forEach(c => c.addEventListener('input', () => {
+    const no = textos[+c.dataset.t], orig = no.nodeValue;
+    const ini = orig.match(/^\s*/)[0], fim = orig.match(/\s*$/)[0];
+    no.nodeValue = ini + c.value + fim;
+  }));
+  $$('#g-campos [data-f]').forEach(c => c.addEventListener('change', () => {
+    const arq = c.files && c.files[0], slot = fotos[+c.dataset.f];
+    if (!arq) return;
+    const leitor = new FileReader();
+    leitor.onload = () => { slot.innerHTML = `<img src="${leitor.result}" alt="">`; };
+    leitor.readAsDataURL(arq);
+  }));
+}
+
+/* ---------- interface do estúdio ---------- */
 let selRecurso = null, selFormato = null;
+function visuaisDe(recurso){
+  const r = RECURSOS[recurso];
+  return r.canvas ? Object.keys(VARIANTES) : [...new Set(r.pecas.map(p => p.visual))];
+}
+function formatosDe(recurso, visual){
+  const r = RECURSOS[recurso];
+  return r.canvas ? r.formatos.map(f => ({ valor:f.id, rotulo:f.l }))
+    : r.pecas.filter(p => p.visual === visual).map(p => ({ valor:p.formato, rotulo:p.formato }));
+}
 function montarEstudio(){
+  const grupo = ([k, r]) => ({ valor:k, rotulo:r.l });
   selRecurso = criarSelect($('#g-recurso'), { rotulo:'g-recurso-rot', valor:gState.recurso,
-    opcoes: Object.entries(GERADORES).map(([k,g]) => ({ valor:k, rotulo:g.l })),
-    aoMudar: v => trocarRecurso(v) });
+    opcoes: Object.entries(RECURSOS).map(grupo), aoMudar: v => trocarRecurso(v) });
   selFormato = criarSelect($('#g-formato'), { rotulo:'g-formato-rot', valor:gState.formato,
-    opcoes: GERADORES[gState.recurso].formatos.map(f => ({ valor:f.id, rotulo:f.l })),
+    opcoes: formatosDe(gState.recurso, gState.visual),
     aoMudar: v => { gState.formato = v; renderPeca(); } });
-  $('#g-variantes').innerHTML = Object.entries(VARIANTES).map(([k,v]) =>
-    `<button class="visual" role="radio" aria-checked="${k===gState.variante}" data-v="${k}" onclick="selVariante('${k}')">
-       <span class="sw" style="background:${v.sw}"></span>${v.l}</button>`).join('');
   trocarRecurso(gState.recurso, true);
+}
+function desenhaVisuais(){
+  const r = RECURSOS[gState.recurso];
+  const atual = r.canvas ? gState.variante : gState.visual;
+  $('#g-variantes').innerHTML = visuaisDe(gState.recurso).map(v => {
+    const sw = r.canvas ? `<span class="sw" style="background:${VARIANTES[v].sw}"></span>` : '';
+    const nome = r.canvas ? VARIANTES[v].l : v;
+    return `<button class="visual" role="radio" aria-checked="${v === atual}" data-v="${esc(v)}">${sw}${esc(nome)}</button>`;
+  }).join('');
+  $$('#g-variantes .visual').forEach(b => b.addEventListener('click', () => selVisual(b.dataset.v)));
 }
 function trocarRecurso(recurso, inicial){
   gState.recurso = recurso;
-  const g = GERADORES[recurso];
-  gState.formato = g.formatos[0].id;
-  if (!inicial) selFormato.definir(g.formatos.map(f => ({ valor:f.id, rotulo:f.l })), gState.formato);
+  const r = RECURSOS[recurso];
+  if (!r.canvas) gState.visual = r.pecas[0].visual;
+  const formatos = formatosDe(recurso, gState.visual);
+  gState.formato = formatos[0].valor;
+  if (!inicial) selFormato.definir(formatos, gState.formato);
+  desenhaVisuais();
+  if (r.canvas) camposCanvas();
+  if (!inicial) renderPeca();
+}
+function selVisual(v){
+  const r = RECURSOS[gState.recurso];
+  if (r.canvas) gState.variante = v;
+  else {
+    gState.visual = v;
+    const formatos = formatosDe(gState.recurso, v);
+    if (!formatos.some(f => f.valor === gState.formato)) gState.formato = formatos[0].valor;
+    selFormato.definir(formatos, gState.formato);
+  }
+  $$('#g-variantes .visual').forEach(c => c.setAttribute('aria-checked', c.dataset.v === v));
+  renderPeca();
+}
+function camposCanvas(){
+  const r = RECURSOS[gState.recurso];
   const campo = (id, rotulo, ph) => `<div class="fld"><label for="g-${id}">${rotulo}</label>
     <input id="g-${id}" value="${esc(gState[id]||'')}" placeholder="${esc(ph)}" oninput="gState.${id}=this.value;renderPeca()"></div>`;
   let html = '';
-  if (g.campos.includes('nome')) html += campo('nome','Nome','ex.: Ana Ribeiro');
-  if (g.campos.includes('cargo')) html += campo('cargo','Cargo','ex.: Engenharia de software');
-  if (g.campos.includes('departamento')) html += campo('departamento','Departamento','ex.: P&D');
-  if (g.campos.includes('frase')) html += campo('frase','Frase (opcional)','ex.: Intelligent systems for human health.');
-  if (g.campos.includes('titulo')) html += campo('titulo','Título','ex.: Relatório de execução');
-  if (g.campos.includes('subtitulo')) html += campo('subtitulo','Subtítulo (opcional)','ex.: Projeto Órion, 2026');
-  if (g.campos.includes('foto')) html += `<div class="fld"><label for="g-foto">Foto (opcional)</label>
+  if (r.campos.includes('frase')) html += campo('frase','Frase (opcional)','ex.: Intelligent systems for human health.');
+  if (r.campos.includes('titulo')) html += campo('titulo','Título','ex.: Como o NeuroAmp-32 filtra o ruído');
+  if (r.campos.includes('subtitulo')) html += campo('subtitulo','Subtítulo (opcional)','ex.: Projeto Órion, 2026');
+  if (r.campos.includes('foto')) html += `<div class="fld"><label for="g-foto">Foto (opcional)</label>
     <input type="file" id="g-foto" accept="image/*" onchange="carregarFoto(this)">
-    <p class="mini">A foto entra num círculo com anel Synapse.</p></div>`;
+    <p class="mini">A foto entra num círculo com anel Synapse. Sem foto, entra o símbolo.</p></div>`;
   $('#g-campos').innerHTML = html;
-  if (!inicial) renderPeca();
 }
-function selVariante(v){
-  gState.variante = v;
-  $$('.visual').forEach(c => c.setAttribute('aria-checked', c.dataset.v === v));
-  renderPeca();
-}
-
 function carregarFoto(inp){
   const f = inp.files && inp.files[0];
   if (!f){ gState.foto = null; renderPeca(); return; }
@@ -1512,14 +1666,58 @@ function carregarFoto(inp){
   img.onload = () => { gState.foto = img; renderPeca(); };
   img.src = URL.createObjectURL(f);
 }
+async function renderPeca(){
+  const r = RECURSOS[gState.recurso];
+  if (!r.canvas) return montarPeca();
+  pecaNo = null; pecaPedido++;
+  $('#g-template').hidden = true;
+  $('#g-peca').hidden = true; $('#g-canvas').hidden = false;
+  return desenhaCanvas();
+}
 
-/* ---------- motor de desenho ---------- */
+/* ---------- exportação ---------- */
+let libImagem = null;
+function carregarLibImagem(){
+  if (!libImagem) libImagem = new Promise((ok, falha) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.js';
+    s.onload = () => ok(window.htmlToImage); s.onerror = falha;
+    document.head.appendChild(s);
+  });
+  return libImagem;
+}
+async function baixarPeca(){
+  const r = RECURSOS[gState.recurso];
+  const nome = `nro-${gState.recurso}-${(r.canvas ? gState.formato + '-' + gState.variante : gState.visual + '-' + gState.formato)}`
+    .normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/-+$/,'') + '.png';
+  if (r.canvas){
+    $('#g-canvas').toBlob(b => {
+      if (!b){ toast('Não foi possível gerar o arquivo.', 'erro'); return; }
+      baixarBlob(b, nome); toast('PNG baixado, pronto para publicar.');
+    }, 'image/png');
+    return;
+  }
+  if (!pecaNo) return;
+  const botao = $('#g-baixar'); botao.disabled = true; botao.textContent = 'Gerando PNG…';
+  try {
+    const lib = await carregarLibImagem();
+    await document.fonts.ready;
+    const w = pecaNo.offsetWidth, h = pecaNo.offsetHeight;
+    const url = await lib.toPng(pecaNo, { width:w, height:h, pixelRatio: r.escala || 1, cacheBust:false,
+      style:{ transform:'none', transformOrigin:'0 0', margin:'0' } });
+    const b = await (await fetch(url)).blob();
+    baixarBlob(b, nome); toast('PNG baixado, pronto para publicar.');
+  } catch(e){
+    toast('Não foi possível gerar o PNG. Tente de novo ou use o template.', 'erro');
+  } finally { botao.disabled = false; botao.textContent = 'Baixar PNG'; }
+}
+
+/* ---------- motor de desenho (canvas) ---------- */
 function corVar(v){
   return {
-    void:    { fundo:'#050807', texto:'#F5F5F7', sub:'#9AA5A1', logo:'#F5F5F7', grade:'rgba(245,245,247,.045)', escuro:true },
-    cortex:  { fundo:null,      texto:'#F5F5F7', sub:'rgba(245,245,247,.75)', logo:'#F5F5F7', grade:'rgba(245,245,247,.06)', escuro:true },
-    synapse: { fundo:'#CEDC00', texto:'#00352F', sub:'rgba(0,53,47,.75)', logo:'#00352F', grade:'rgba(0,53,47,.10)', escuro:false },
-    aura:    { fundo:'#F5F5F7', texto:'#1D1D1F', sub:'#6E6E73', logo:'#1D1D1F', grade:'rgba(29,29,31,.07)', escuro:false }
+    void:   { fundo:'#050807', texto:'#E8EDEB', sub:'#A9CCC4', logo:'#E8EDEB', grade:'rgba(245,245,247,.045)' },
+    cortex: { fundo:null,      texto:'#FFFFFF', sub:'#A9CCC4', logo:'#FFFFFF', grade:'rgba(245,245,247,.06)' },
+    claro:  { fundo:'#E8EDEB', texto:'#00352F', sub:'#2E3533', logo:'#00352F', grade:'rgba(0,53,47,.07)' }
   }[v];
 }
 function desenhaBase(ctx, W, H, v){
@@ -1535,14 +1733,13 @@ function desenhaBase(ctx, W, H, v){
     rg.addColorStop(0,'#081511'); rg.addColorStop(1,'rgba(5,8,7,0)');
     ctx.fillStyle = rg; ctx.fillRect(0,0,W,H);
   }
-  // grade técnica
   const passo = Math.max(90, Math.round(Math.min(W,H)/9));
   ctx.strokeStyle = c.grade; ctx.lineWidth = Math.max(1, Math.round(W/1600));
   ctx.beginPath();
   for (let x=passo; x<W; x+=passo){ ctx.moveTo(x,0); ctx.lineTo(x,H); }
   for (let y=passo; y<H; y+=passo){ ctx.moveTo(0,y); ctx.lineTo(W,y); }
   ctx.stroke();
-  // blobs
+  /* brilho só do conjunto primário: Axon, e Synapse no máximo a 6% */
   const blob = (cx,cy,r,cor,alpha) => {
     const g = ctx.createRadialGradient(cx,cy,0,cx,cy,r);
     g.addColorStop(0,cor); g.addColorStop(1,'rgba(0,0,0,0)');
@@ -1551,29 +1748,13 @@ function desenhaBase(ctx, W, H, v){
   };
   if (v==='void'){
     blob(-W*.08, -H*.3, Math.max(W,H)*.75, '#00594F', .34);
-    blob(W*1.02, H*.45, Math.max(W,H)*.5, '#0B7D6E', .18);
+    blob(W*1.02, H*.45, Math.max(W,H)*.5, '#00594F', .18);
     blob(W*.5, H*1.15, Math.max(W,H)*.4, '#CEDC00', .06);
   } else if (v==='cortex'){
-    blob(W*.94, -H*.1, Math.max(W,H)*.45, 'rgba(206,220,0,.9)', .16);
-  } else if (v==='synapse'){
-    blob(W*.1, H*1.05, Math.max(W,H)*.5, '#00352F', .12);
+    blob(W*.94, -H*.1, Math.max(W,H)*.45, '#CEDC00', .06);
   } else {
     blob(-W*.05, -H*.2, Math.max(W,H)*.6, '#00594F', .10);
-    blob(W*1.0, H*1.0, Math.max(W,H)*.45, '#CEDC00', .07);
   }
-}
-function desenhaSimbolo(ctx, x, y, h, cor, corAcento){
-  // neurônio (mesma geometria do favicon, sem o tile)
-  const u = h/32;
-  ctx.save(); ctx.translate(x,y);
-  ctx.fillStyle = cor;
-  ctx.beginPath(); ctx.arc(11*u,16*u,5*u,0,7); ctx.fill();
-  ctx.beginPath(); ctx.arc(23*u,9.5*u,2.8*u,0,7); ctx.fill();
-  ctx.beginPath(); ctx.arc(23*u,22.5*u,2.8*u,0,7); ctx.fill();
-  ctx.strokeStyle = corAcento; ctx.lineWidth = 1.7*u; ctx.lineCap='round';
-  ctx.beginPath(); ctx.moveTo(15*u,13.8*u); ctx.lineTo(20.6*u,10.6*u);
-  ctx.moveTo(15*u,18.2*u); ctx.lineTo(20.6*u,21.4*u); ctx.stroke();
-  ctx.restore();
 }
 function desenhaLogo(ctx, x, y, h, cor){
   if (LOGO_IMG){
@@ -1582,17 +1763,13 @@ function desenhaLogo(ctx, x, y, h, cor){
     ctx.drawImage(t, x, y, w, h);
     return w;
   }
-  // fallback vetorial: símbolo + wordmark
-  ctx.save();
-  ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-  desenhaSimbolo(ctx, x, y, h, cor, '#CEDC00');
-  ctx.fillStyle = cor;
-  ctx.font = `700 ${h*.62}px Archivo, sans-serif`;
-  ctx.fillText('NeuroDynamics', x + h*1.25, y + h/2 + h*.03);
-  const w = h*1.25 + ctx.measureText('NeuroDynamics').width;
-  ctx.restore();
+  ctx.save(); ctx.textBaseline = 'middle'; ctx.fillStyle = cor;
+  ctx.font = `600 ${h*.62}px Archivo, sans-serif`;
+  ctx.fillText('NeuroDynamics', x, y + h/2);
+  const w = ctx.measureText('NeuroDynamics').width; ctx.restore();
   return w;
 }
+function larguraLogo(h){ return LOGO_IMG ? h*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : h*7; }
 function quebraLinhas(ctx, texto, maxW){
   const palavras = String(texto).split(/\s+/).filter(Boolean);
   const linhas = []; let atual = '';
@@ -1604,6 +1781,13 @@ function quebraLinhas(ctx, texto, maxW){
   if (atual) linhas.push(atual);
   return linhas;
 }
+/* rótulo: Archivo 600 em caixa alta com tracking aberto, nunca mono */
+function rotulo(ctx, texto, x, y, pt){
+  ctx.font = `600 ${pt}px Archivo, sans-serif`;
+  ctx.letterSpacing = (pt * .14).toFixed(2) + 'px';
+  ctx.fillText(String(texto).toUpperCase(), x, y);
+  ctx.letterSpacing = '0px';
+}
 function marcasDeCorte(ctx, W, H, cor, m){
   const s = Math.round(Math.min(W,H)*.02)+8;
   ctx.strokeStyle = cor; ctx.lineWidth = Math.max(1, Math.round(W/1800));
@@ -1613,18 +1797,12 @@ function marcasDeCorte(ctx, W, H, cor, m){
   L(m,H-m,m+s,H-m); L(m,H-m,m,H-m-s);
   L(W-m,H-m,W-m-s,H-m); L(W-m,H-m,W-m,H-m-s);
 }
-
-function formatoAtual(){
-  const g = GERADORES[gState.recurso];
-  return g.formatos.find(f => f.id === gState.formato) || g.formatos[0];
-}
-async function renderPeca(){
+async function desenhaCanvas(){
   await Promise.all([
-    document.fonts.load('700 100px Archivo'), document.fonts.load('600 100px Archivo'),
-    document.fonts.load('500 40px "IBM Plex Mono"'), logoPronto, simbPronto
+    document.fonts.load('600 100px Archivo'), document.fonts.load('400 40px "Instrument Sans"'), logoPronto, simbPronto
   ]).catch(()=>{});
-  const f = formatoAtual();
-  gState.formato = f.id;
+  const r = RECURSOS[gState.recurso];
+  const f = r.formatos.find(x => x.id === gState.formato) || r.formatos[0];
   const cv = $('#g-canvas');
   cv.width = f.w; cv.height = f.h;
   $('#g-dim').textContent = `${f.w} × ${f.h} px`;
@@ -1632,221 +1810,58 @@ async function renderPeca(){
   const v = gState.variante, c = corVar(v);
   const W = f.w, H = f.h, base = Math.min(W,H);
   desenhaBase(ctx, W, H, v);
-  const mono = pt => `500 ${pt}px "IBM Plex Mono", monospace`;
-  const arch = (peso,pt) => `${peso} ${pt}px Archivo, sans-serif`;
+  const corte = v === 'claro' ? 'rgba(0,53,47,.3)' : 'rgba(245,245,247,.22)';
 
-  if (gState.recurso === 'banner'){
-    // área segura: à direita (LinkedIn cobre o canto esquerdo-baixo com o avatar)
-    const lh = Math.round(H*.16);
-    const isYT = f.id==='youtube';
-    const cy = isYT ? H/2 : H*.42;
-    const lw = LOGO_IMG ? lh*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : lh*7;
-    const lx = W/2 - lw/2;
-    desenhaLogo(ctx, lx, cy - lh/2, lh, c.logo);
+  if (gState.recurso === 'redes'){
+    const lh = Math.round(H*.16), yt = f.id === 'youtube';
+    const cy = yt ? H/2 : H*.42, lw = larguraLogo(lh);
+    desenhaLogo(ctx, W/2 - lw/2, cy - lh/2, lh, c.logo);
     ctx.fillStyle = '#CEDC00';
     ctx.fillRect(W/2 - Math.round(W*.03), cy + lh*.9, Math.round(W*.06), Math.max(3,Math.round(H*.008)));
-    const frase = (gState.frase||'').trim() || 'HEALTH-TECH R&D · UFMG';
-    ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*(isYT?.018:.055)));
-    ctx.textAlign = 'center';
-    ctx.fillText(frase.toUpperCase(), W/2, cy + lh*1.6 + Math.round(H*.02));
+    const frase = (gState.frase||'').trim() || 'Health-tech R&D, UFMG';
+    ctx.fillStyle = c.sub; ctx.textAlign = 'center';
+    rotulo(ctx, frase, W/2, cy + lh*1.6 + Math.round(H*.02), Math.round(base*(yt ? .016 : .05)));
     ctx.textAlign = 'left';
-    marcasDeCorte(ctx, W, H, v==='synapse'?'rgba(0,53,47,.35)':'rgba(245,245,247,.22)', Math.round(H*.07));
+    marcasDeCorte(ctx, W, H, corte, Math.round(H*.07));
   }
-
-  else if (gState.recurso === 'entrada'){
-    const cx = W/2;
-    let y = H*.16;
-    ctx.textAlign = 'center';
-    ctx.fillStyle = v==='synapse' ? '#00352F' : '#CEDC00';
-    ctx.font = mono(Math.round(base*.028));
-    ctx.fillText('B O A S - V I N D A S', cx, y);
-    // foto circular
-    const r = base*.16;
-    y += r + H*.055;
-    if (gState.foto){
-      ctx.save();
-      ctx.beginPath(); ctx.arc(cx, y, r, 0, 7); ctx.clip();
-      const im = gState.foto, esc2 = Math.max(2*r/im.width, 2*r/im.height);
-      ctx.drawImage(im, cx - im.width*esc2/2, y - im.height*esc2/2, im.width*esc2, im.height*esc2);
-      ctx.restore();
-      ctx.strokeStyle = '#CEDC00'; ctx.lineWidth = Math.max(4, base*.008);
-      ctx.beginPath(); ctx.arc(cx, y, r, 0, 7); ctx.stroke();
-    } else {
-      ctx.strokeStyle = v==='synapse' ? 'rgba(0,53,47,.4)' : 'rgba(245,245,247,.25)';
-      ctx.setLineDash([base*.012, base*.012]); ctx.lineWidth = Math.max(2, base*.004);
-      ctx.beginPath(); ctx.arc(cx, y, r, 0, 7); ctx.stroke(); ctx.setLineDash([]);
-      if (SIMB_IMG) ctx.drawImage(SIMB_IMG, cx - r*.5, y - r*.5, r, r);
-      else desenhaSimbolo(ctx, cx - r*.45, y - r*.45, r*.9, c.texto, '#CEDC00');
-    }
-    y += r + H*.075;
-    const nome = (gState.nome||'').trim() || 'Nome do membro';
-    ctx.fillStyle = c.texto; ctx.font = arch(700, Math.round(base*.075));
-    const linhasNome = quebraLinhas(ctx, nome, W*.84);
-    linhasNome.forEach(l => { ctx.fillText(l, cx, y); y += base*.085; });
-    const cargoTxt = [gState.cargo, gState.departamento].map(s=>(s||'').trim()).filter(Boolean).join(' · ');
-    if (cargoTxt){
-      ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.026));
-      ctx.fillText(cargoTxt.toUpperCase(), cx, y + base*.005);
-      y += base*.05;
-    }
-    ctx.fillStyle = '#CEDC00';
-    ctx.fillRect(cx - base*.03, y + base*.015, base*.06, Math.max(3, base*.006));
-    // rodapé
-    const lh2 = Math.round(base*.045);
-    const lw2 = LOGO_IMG ? lh2*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : lh2*7;
-    desenhaLogo(ctx, cx - lw2/2, H - H*.08 - lh2, lh2, c.logo);
-    ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.02));
-    ctx.fillText('neurodynamics.dev', cx, H - H*.045);
-    ctx.textAlign = 'left';
-  }
-
-  else if (gState.recurso === 'aviso'){
-    const cx = W/2, story = f.id==='story';
-    let y = H*(story ? .32 : .36);
-    ctx.textAlign = 'center';
-    ctx.fillStyle = v==='synapse' ? '#00352F' : '#CEDC00';
-    ctx.font = mono(Math.round(base*.026));
-    ctx.fillText('A V I S O', cx, y - base*.12);
-    const tit = (gState.titulo||'').trim() || 'Título do aviso';
-    ctx.fillStyle = c.texto; ctx.font = arch(700, Math.round(base*.068));
-    quebraLinhas(ctx, tit, W*.84).forEach(l => { ctx.fillText(l, cx, y); y += base*.078; });
-    const fr = (gState.frase||'').trim();
-    if (fr){
-      y += base*.01;
-      ctx.fillStyle = c.sub; ctx.font = arch(500, Math.round(base*.032));
-      quebraLinhas(ctx, fr, W*.78).forEach(l => { ctx.fillText(l, cx, y); y += base*.045; });
-    }
-    ctx.fillStyle = '#CEDC00';
-    ctx.fillRect(cx - base*.03, y + base*.02, base*.06, Math.max(3, base*.006));
-    const lh2 = Math.round(base*.04);
-    const lw2 = LOGO_IMG ? lh2*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : lh2*7;
-    desenhaLogo(ctx, cx - lw2/2, H - H*.07 - lh2, lh2, c.logo);
-    ctx.textAlign = 'left';
-  }
-
   else if (gState.recurso === 'avatar'){
-    const cx = W/2, cy = H/2, r = Math.min(W,H)*.355;
+    const cx = W/2, cy = H/2, rr = Math.min(W,H)*.355;
     if (gState.foto){
-      ctx.save();
-      ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.clip();
-      const im = gState.foto, k = Math.max(2*r/im.width, 2*r/im.height);
+      ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, rr, 0, 7); ctx.clip();
+      const im = gState.foto, k = Math.max(2*rr/im.width, 2*rr/im.height);
       ctx.drawImage(im, cx - im.width*k/2, cy - im.height*k/2, im.width*k, im.height*k);
       ctx.restore();
     } else if (SIMB_IMG){
-      ctx.drawImage(SIMB_IMG, cx - r*.62, cy - r*.62, r*1.24, r*1.24);
+      ctx.drawImage(SIMB_IMG, cx - rr*.62, cy - rr*.62, rr*1.24, rr*1.24);
     }
     ctx.strokeStyle = '#CEDC00'; ctx.lineWidth = Math.max(6, base*.02);
-    ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.stroke();
-    ctx.strokeStyle = v==='synapse' ? 'rgba(0,53,47,.35)' : 'rgba(245,245,247,.18)';
+    ctx.beginPath(); ctx.arc(cx, cy, rr, 0, 7); ctx.stroke();
+    ctx.strokeStyle = v === 'claro' ? 'rgba(0,53,47,.3)' : 'rgba(245,245,247,.18)';
     ctx.lineWidth = Math.max(2, base*.005);
-    ctx.beginPath(); ctx.arc(cx, cy, r + Math.max(10, base*.035), 0, 7); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx, cy, rr + Math.max(10, base*.035), 0, 7); ctx.stroke();
   }
-
   else if (gState.recurso === 'thumb'){
-    const mx = W*.07;
-    const lh0 = Math.round(base*.075);
-    const lw0 = LOGO_IMG ? lh0*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : lh0*7;
+    const mx = W*.07, lh0 = Math.round(base*.075);
     desenhaLogo(ctx, mx, H*.09, lh0, c.logo);
     let y = H*.46;
     const tit = (gState.titulo||'').trim() || 'Título do vídeo';
-    ctx.fillStyle = c.texto; ctx.font = arch(700, Math.round(base*.115));
+    ctx.fillStyle = c.texto; ctx.font = `600 ${Math.round(base*.115)}px Archivo, sans-serif`;
+    ctx.letterSpacing = (-base*.115*.02).toFixed(2) + 'px';
     quebraLinhas(ctx, tit, W*.72).slice(0,3).forEach(l => { ctx.fillText(l, mx, y); y += base*.13; });
+    ctx.letterSpacing = '0px';
     const sub = (gState.subtitulo||'').trim();
-    if (sub){
-      ctx.fillStyle = v==='synapse' ? '#00352F' : '#CEDC00';
-      ctx.font = mono(Math.round(base*.035));
-      ctx.fillText(sub.toUpperCase(), mx, y + base*.01);
-    }
+    if (sub){ ctx.fillStyle = c.sub; rotulo(ctx, sub, mx, y + base*.01, Math.round(base*.032)); }
     ctx.fillStyle = '#CEDC00';
     ctx.fillRect(mx, H*.84, W*.09, Math.max(4, base*.01));
   }
-
-  else if (gState.recurso === 'cracha'){
-    const r = H*.26, ccx = W*.23, ccy = H*.42;
-    if (gState.foto){
-      ctx.save();
-      ctx.beginPath(); ctx.arc(ccx, ccy, r, 0, 7); ctx.clip();
-      const im = gState.foto, k = Math.max(2*r/im.width, 2*r/im.height);
-      ctx.drawImage(im, ccx - im.width*k/2, ccy - im.height*k/2, im.width*k, im.height*k);
-      ctx.restore();
-    } else if (SIMB_IMG){
-      ctx.drawImage(SIMB_IMG, ccx - r*.6, ccy - r*.6, r*1.2, r*1.2);
-    }
-    ctx.strokeStyle = '#CEDC00'; ctx.lineWidth = Math.max(4, base*.012);
-    ctx.beginPath(); ctx.arc(ccx, ccy, r, 0, 7); ctx.stroke();
-    const tx = W*.42;
-    let y = H*.36;
-    const nome = (gState.nome||'').trim() || 'Nome do membro';
-    ctx.fillStyle = c.texto; ctx.font = arch(700, Math.round(base*.085));
-    quebraLinhas(ctx, nome, W*.5).slice(0,2).forEach(l => { ctx.fillText(l, tx, y); y += base*.1; });
-    const cargo = (gState.cargo||'').trim();
-    if (cargo){
-      ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.032));
-      ctx.fillText(cargo.toUpperCase(), tx, y + base*.005);
-    }
-    const lh3 = Math.round(base*.05);
-    desenhaLogo(ctx, tx, H - H*.14 - lh3/2, lh3, c.logo);
-    ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.024));
-    ctx.textAlign = 'right';
-    ctx.fillText('EQUIPE', W - W*.06, H*.14);
+  else if (gState.recurso === 'reuniao'){
+    /* logo discreto no topo direito; o centro fica limpo para a pessoa */
+    const lh = Math.round(base*.05), lw = larguraLogo(lh);
+    desenhaLogo(ctx, W - lw - W*.04, H*.07, lh, c.logo);
+    ctx.fillStyle = c.sub; ctx.textAlign = 'right';
+    rotulo(ctx, 'LABBIO, UFMG', W - W*.04, H*.94, Math.round(base*.016));
     ctx.textAlign = 'left';
-    marcasDeCorte(ctx, W, H, v==='synapse'?'rgba(0,53,47,.35)':'rgba(245,245,247,.22)', Math.round(base*.045));
   }
-
-  else if (gState.recurso === 'wallpaper' || gState.recurso === 'reuniao'){
-    const reuniao = gState.recurso === 'reuniao';
-    const lh = Math.round(base*(reuniao ? .05 : .07));
-    if (reuniao){
-      // logo discreto no topo-direito; centro fica limpo para a pessoa
-      const lw = LOGO_IMG ? lh*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : lh*7;
-      desenhaLogo(ctx, W - lw - W*.04, H*.07, lh, c.logo);
-      ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.016));
-      ctx.textAlign = 'right';
-      ctx.fillText('NEURODYNAMICS · LABBIO — UFMG', W - W*.04, H*.94);
-      ctx.textAlign = 'left';
-    } else {
-      const lw = LOGO_IMG ? lh*(LOGO_IMG.naturalWidth/LOGO_IMG.naturalHeight) : lh*7;
-      desenhaLogo(ctx, W/2 - lw/2, H/2 - lh/2, lh, c.logo);
-      ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.014));
-      ctx.textAlign = 'center';
-      ctx.fillText('19°52′S 43°58′W · BELO HORIZONTE', W/2, H*.93);
-      ctx.textAlign = 'left';
-    }
-  }
-
-  else if (gState.recurso === 'capa'){
-    const a4 = f.id==='a4';
-    const mx = W*.09;
-    let y = a4 ? H*.16 : H*.3;
-    ctx.fillStyle = v==='synapse' ? '#00352F' : '#CEDC00';
-    ctx.fillRect(mx, y - base*.012, base*.012, base*.012); // quadrado do eyebrow
-    ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.02));
-    ctx.fillText('NEURODYNAMICS — DOCUMENTO OFICIAL', mx + base*.03, y);
-    y += base*.075;
-    const tit = (gState.titulo||'').trim() || 'Título do documento';
-    ctx.fillStyle = c.texto; ctx.font = arch(600, Math.round(base*.075));
-    quebraLinhas(ctx, tit, W - mx*2).forEach(l => { ctx.fillText(l, mx, y); y += base*.085; });
-    const sub = (gState.subtitulo||'').trim();
-    if (sub){
-      ctx.fillStyle = c.sub; ctx.font = arch(500, Math.round(base*.03));
-      ctx.fillText(sub, mx, y + base*.005);
-    }
-    const lh3 = Math.round(base*.04);
-    desenhaLogo(ctx, mx, H - H*.09 - lh3, lh3, c.logo);
-    ctx.fillStyle = c.sub; ctx.font = mono(Math.round(base*.016));
-    ctx.textAlign = 'right';
-    ctx.fillText(new Date().getFullYear() + ' · LABBIO — UFMG', W - mx, H - H*.07);
-    ctx.textAlign = 'left';
-    marcasDeCorte(ctx, W, H, v==='synapse'?'rgba(0,53,47,.35)':'rgba(245,245,247,.22)', Math.round(base*.04));
-  }
-}
-function baixarPeca(){
-  const f = formatoAtual();
-  $('#g-canvas').toBlob(b => {
-    if (!b){ toast('Não foi possível gerar o arquivo.'); return; }
-    baixarBlob(b, `nro-${gState.recurso}-${f.id}-${gState.variante}.png`);
-    toast('PNG baixado, pronto para publicar.');
-  }, 'image/png');
 }
 
 /* ============================================================

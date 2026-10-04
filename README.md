@@ -22,10 +22,15 @@ O endereço guarda as duas, por exemplo `#cores/secundario`.
 4. **Interfaces** — componentes vivos de `neuro.css`: ações, formulários,
    navegação, dados, feedback e widgets.
 5. **Creative gallery** — wallpapers, pôsteres e peças sociais, e o
-   **Estúdio**, com os geradores de mídia em canvas (PNG na resolução
-   final, renderizado no navegador): banners, posts de entrada e de aviso,
-   foto de perfil, thumbnail, crachá de evento, wallpaper, fundo de
-   reunião e capa.
+   **Estúdio**. As peças do Estúdio saem dos próprios templates de
+   `templates/`: post de feed, story, banner do LinkedIn, crachás, os
+   quatro wallpapers em quatro formatos, pôsteres, capas de apresentação
+   e capa de relatório. Os textos e as fotos da peça viram campos, e o
+   PNG é gerado no navegador, na resolução final (biblioteca
+   html-to-image, carregada do jsDelivr só na hora de baixar). Foto de
+   perfil, thumbnail de vídeo, fundo de reunião e banners de outras redes
+   não têm template e continuam desenhados em canvas, já nas regras
+   novas (rótulos em Archivo, sem ponto médio, Synapse só como acento).
 6. **Aplicações** — documentos, apresentações, e-mails e crachás, cada
    um com miniaturas e o link para o template; as **assinaturas de
    e-mail** (login com a conta da equipe, dados do cadastro, nome de
