@@ -3,21 +3,21 @@
     {
       "name": "Cores",
       "path": "previews/01-cores.html",
-      "subtitle": "Primárias, neutros, auxiliares e contraste",
+      "subtitle": "Primário, neutro, secundário, funcional e contraste",
       "group": "Fundamentos",
       "viewport": {
         "width": 1180,
-        "height": 2240
+        "height": 3100
       }
     },
     {
       "name": "Tipografia",
       "path": "previews/02-tipografia.html",
-      "subtitle": "Archivo, IBM Plex Mono e a escala",
+      "subtitle": "Modo operacional, modo executivo e a escala",
       "group": "Fundamentos",
       "viewport": {
         "width": 1180,
-        "height": 1320
+        "height": 2080
       }
     },
     {
@@ -53,7 +53,7 @@
     {
       "name": "Botões",
       "path": "previews/06-botoes.html",
-      "subtitle": "Solid, claro, ghost · dois tamanhos e todos os estados",
+      "subtitle": "Solid, claro, ghost, dois tamanhos e todos os estados",
       "group": "Componentes",
       "viewport": {
         "width": 1180,

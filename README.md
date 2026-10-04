@@ -8,13 +8,18 @@ linguagem visual do site institucional.
 
 - **Marca** — imagotipo nas versões branca e preta, regras de respiro,
   tamanho mínimo e usos proibidos.
-- **Cores** — paleta oficial nomeada (sistema neural): primárias
-  **Cortex `#00352F` · Axon `#00594F` · Synapse `#CEDC00`**, profundos e
-  neutros (Void, Painel, Blackout, Ink, Aura, Névoa, Grafite) e a paleta
-  **auxiliar** para dados e status (Soma, Íon, Vital, Mielina, Pulso,
-  Plasma, Dendrito). Clique copia o hex; há download em JSON e tokens CSS.
-- **Tipografia** — Archivo (500–700) para display/UI, IBM Plex Mono
-  (400–500) para dados e rótulos técnicos, pilha do sistema no corpo.
+- **Cores** — quatro conjuntos de famílias, cada uma em quatro tons
+  (light, medium, primary, dark), com nomes do sistema nervoso: o
+  **primário** Cortex (Axon `#00594F`, Cortex `#00352F` e o acento
+  Synapse `#CEDC00`), o **neutro** (Sulco, Pia, Medula), o **secundário**
+  (Ion, Neuron, Glia, Retina, Nexo, Dendrito, Lúmen, Ritmo, Impulso,
+  Plexo, Íris) e o **funcional**, só para estados de interface (Nominal,
+  Caution, Critical, Signal, Idle). Clique copia o hex; há download em
+  JSON e tokens CSS.
+- **Tipografia** — dois modos. Operacional: Archivo nos títulos e
+  rótulos, Instrument Sans no texto, IBM Plex Mono só em códigos e dados.
+  Executivo (peças formais): Instrument Serif nos títulos, nomes e
+  citações, Archivo Light no texto.
 - **Elementos visuais** — grade técnica, blobs orgânicos, vidro, banda em
   gradiente, placeholder técnico (FIG.), eyebrow e pills — com exemplos
   vivos e regras de uso.
@@ -43,12 +48,21 @@ linguagem visual do site institucional.
 ## Design system (Claude Design)
 
 A pasta [`design-system/`](design-system/) traz a mesma linguagem visual
-organizada como biblioteca de componentes para o **Claude Design**: 15 cards
+organizada como biblioteca de componentes para o **Claude Design**: 18 cards
 em três grupos (Fundamentos, Marca, Componentes), tokens em arquivo único e
 um `build.mjs` que mantém tudo em sincronia. Com ela sincronizada, as
 interfaces que o Claude gera para a equipe já saem na marca.
 
 O passo a passo do setup está em [`design-system/README.md`](design-system/README.md).
+
+## Templates
+
+A pasta [`templates/`](templates/) traz as peças prontas da marca em HTML
+estático: relatório formal, certificados, convite, papel timbrado, cartão
+de visita, apresentações formal e de marca, crachás, redes sociais,
+e-mails, wallpapers e pôsteres. O índice e as regras de cada uma estão em
+[`templates/README.md`](templates/README.md). As regras completas da marca
+ficam em [`design-system/DIRETRIZES.md`](design-system/DIRETRIZES.md).
 
 ## Como editar
 

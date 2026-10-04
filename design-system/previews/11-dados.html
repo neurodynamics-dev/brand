@@ -4,30 +4,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dados · NeuroDynamics</title>
+<title>Dados | NeuroDynamics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 /* @tokens:start · gerado de tokens.css — rode `node build.mjs` */
 :root{
-  --cortex:#00352F;
-  --axon:#00594F;
-  --synapse:#CEDC00;
-  --void:#050807;
-  --painel:#0B1210;
-  --blackout:#1D1D1F;
-  --ink:#F5F5F7;
-  --aura:#F8F7FF;
-  --nevoa:#9AA5A1;
-  --grafite:#616C68;
-  --soma:#0B7D6E;
-  --ion:#2DD4BF;
-  --vital:#4ADE97;
-  --mielina:#F5C36A;
-  --pulso:#F1806F;
-  --plasma:#7FA7F2;
-  --dendrito:#A78BFA;
+  --cortex-light:#E3EFEC;
+  --cortex-medium:#A9CCC4;
+  --cortex-primary:#00594F;
+  --cortex-dark:#00352F;
+  --cortex-accent:#CEDC00;
+  --sulco-light:#616C68;
+  --sulco-medium:#1D1D1F;
+  --sulco-primary:#0B1210;
+  --sulco-dark:#050807;
+  --pia-light:#E8EDEB;
+  --pia-medium:#C4CCC9;
+  --pia-primary:#9AA5A1;
+  --pia-dark:#2E3533;
+  --medula-light:#F7F4EE;
+  --medula-medium:#E6DFD3;
+  --medula-primary:#C9BFAF;
+  --medula-dark:#4A453E;
+  --ion-light:#D9F7F2;
+  --ion-medium:#93E8DB;
+  --ion-primary:#5BBFB0;
+  --ion-dark:#0B4F48;
+  --neuron-light:#E4F2E3;
+  --neuron-medium:#B3D9B0;
+  --neuron-primary:#5AA65E;
+  --neuron-dark:#1F4A22;
+  --glia-light:#E9EFEA;
+  --glia-medium:#C3D3C7;
+  --glia-primary:#8AA894;
+  --glia-dark:#2E4636;
+  --retina-light:#E0E6FC;
+  --retina-medium:#A9B9F6;
+  --retina-primary:#3456E3;
+  --retina-dark:#142A75;
+  --nexo-light:#E7E5FA;
+  --nexo-medium:#BAB4F0;
+  --nexo-primary:#5A4ED4;
+  --nexo-dark:#251C66;
+  --dendrito-light:#EEE8FE;
+  --dendrito-medium:#CDBEFC;
+  --dendrito-primary:#A78BFA;
+  --dendrito-dark:#3B2378;
+  --lumen-light:#FFF9D6;
+  --lumen-medium:#FFEE8A;
+  --lumen-primary:#FFD91A;
+  --lumen-dark:#594A00;
+  --ritmo-light:#FFEDE0;
+  --ritmo-medium:#FFCBA6;
+  --ritmo-primary:#FF9B5E;
+  --ritmo-dark:#6B2E08;
+  --impulso-light:#FFE4E6;
+  --impulso-medium:#FFAEB5;
+  --impulso-primary:#FF4F61;
+  --impulso-dark:#6E0A1A;
+  --plexo-light:#FFE6F0;
+  --plexo-medium:#FFB9D3;
+  --plexo-primary:#FF70A6;
+  --plexo-dark:#6B0F38;
+  --iris-light:#F8E7FC;
+  --iris-medium:#EBBAF5;
+  --iris-primary:#D676EB;
+  --iris-dark:#4E0F5E;
+  --fn-nominal-light:#D6FFEE;
+  --fn-nominal-medium:#7DFFC8;
+  --fn-nominal-primary:#00F59B;
+  --fn-nominal-dark:#00422A;
+  --fn-caution-light:#FFF1CC;
+  --fn-caution-medium:#FFD470;
+  --fn-caution-primary:#FFAA00;
+  --fn-caution-dark:#4D3300;
+  --fn-critical-light:#FFE0DD;
+  --fn-critical-medium:#FF948C;
+  --fn-critical-primary:#FF2D20;
+  --fn-critical-dark:#5C0A05;
+  --fn-signal-light:#D4F5FF;
+  --fn-signal-medium:#7FE0FF;
+  --fn-signal-primary:#00C8FF;
+  --fn-signal-dark:#003A4D;
+  --fn-idle-light:#E6E8EE;
+  --fn-idle-medium:#B8BDCC;
+  --fn-idle-primary:#7C8499;
+  --fn-idle-dark:#2A2F3D;
+  --cortex:var(--cortex-dark);
+  --axon:var(--cortex-primary);
+  --synapse:var(--cortex-accent);
+  --signature:var(--cortex-dark);
+  --void:var(--sulco-dark);
+  --painel:var(--sulco-primary);
+  --blackout:var(--sulco-medium);
+  --grafite:var(--sulco-light);
+  --nevoa:var(--pia-primary);
+  --ink:var(--pia-light);
+  --aura:var(--pia-light);
   --bg:var(--void);
   --muted:var(--nevoa);
   --dim:var(--grafite);
@@ -35,9 +110,39 @@
   --line2:rgba(245,245,247,.16);
   --card:rgba(255,255,255,.03);
   --glass:rgba(7,12,10,.62);
+  --veil:rgba(255,255,255,.055);
+  --surface-page:var(--void);
+  --surface-card:var(--card);
+  --surface-raised:var(--painel);
+  --text-body:var(--ink);
+  --text-secondary:var(--nevoa);
+  --text-caption:var(--grafite);
+  --accent:var(--synapse);
+  --on-accent:var(--cortex);
+  --status-success:var(--fn-nominal-primary);
+  --status-warning:var(--fn-caution-primary);
+  --status-danger:var(--fn-critical-primary);
+  --status-info:var(--fn-signal-primary);
+  --status-idle:var(--fn-idle-primary);
+  --paper:#FFFFFF;
+  --paper-warm:var(--medula-light);
+  --paper-tint:var(--pia-light);
+  --formal-ink:var(--sulco-medium);
+  --formal-ink-2:var(--pia-dark);
+  --formal-ink-3:var(--sulco-light);
+  --formal-rule:var(--pia-medium);
+  --formal-rule-strong:var(--sulco-medium);
+  --formal-accent:var(--cortex-dark);
+  --formal-spark:var(--cortex-accent);
   --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-  --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+  --f:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fs-formal:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --formal-body:'Archivo',-apple-system,'Segoe UI',Arial,sans-serif;
+  --font-display:var(--fd);
+  --font-body:var(--f);
+  --font-mono:var(--fm);
+  --font-serif:var(--fs-formal);
   --fs-display:clamp(40px,6.8vw,88px);
   --fs-h1:clamp(36px,6vw,72px);
   --fs-h2:clamp(26px,3.8vw,42px);
@@ -47,12 +152,28 @@
   --fs-xs:12.5px;
   --fs-label:11px;
   --fs-micro:10px;
+  --lh-body:1.65;
+  --lh-display:1.02;
+  --tr-display:-.025em;
+  --tr-heading:-.015em;
+  --tr-label:.14em;
+  --pt-title:28pt;
+  --pt-h1:18pt;
+  --pt-h2:13pt;
+  --pt-body:10.5pt;
+  --pt-small:8.5pt;
+  --pt-label:7pt;
+  --doc-margin:22mm;
+  --doc-gutter:8mm;
   --r:18px;
   --r-sm:11px;
   --r-md:14px;
   --r-lg:20px;
   --r-xl:24px;
-  --r-pill:999px;
+  --r-chip:6px;
+  --r-tag:5px;
+  --r-badge:4px;
+  --r-formal:2px;
   --s1:4px;
   --s2:8px;
   --s3:12px;
@@ -68,7 +189,18 @@
   --max:1240px;
   --measure:640px;
   --t-fast:.15s;
-  --t:.25s
+  --t:.25s;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --shadow-cta:0 8px 26px rgba(206,220,0,.22);
+  --blur-glass:blur(18px) saturate(1.5);
+  --r-pill:7px;
+  --soma:var(--cortex-primary);
+  --ion:var(--ion-primary);
+  --vital:var(--fn-nominal-primary);
+  --mielina:var(--fn-caution-primary);
+  --pulso:var(--fn-critical-primary);
+  --plasma:var(--fn-signal-primary);
+  --dendrito:var(--dendrito-primary)
 }
 /* @tokens:end */
 *{box-sizing:border-box;margin:0;padding:0}
@@ -78,36 +210,36 @@ h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
 ::selection{background:var(--synapse);color:var(--cortex)}
 .ds-t{font-size:19px;font-weight:600;margin-bottom:4px}
 .ds-d{color:var(--muted);font-size:var(--fs-sm);max-width:var(--measure);margin-bottom:28px}
-.ds-g{font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.2em;
+.ds-g{font-family:var(--fd);font-weight:600;font-size:10.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--dim);margin:32px 0 13px}
 
 .bloco{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:24px}
-.cap{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+.cap{font-family:var(--fd);font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--dim);margin-bottom:13px;display:block}
 
 /* tabela */
 .wrap{overflow-x:auto}
 .tabela{width:100%;border-collapse:collapse;font-size:var(--fs-sm);min-width:560px}
-.tabela th{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--dim);text-align:left;font-weight:500;padding:10px 12px;border-bottom:1px solid var(--line2)}
+.tabela th{font-family:var(--fd);font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2)}
 .tabela td{padding:13px 12px;border-bottom:1px solid var(--line)}
 .tabela tr:hover td{background:rgba(255,255,255,.02)}
 .tabela .num{font-family:var(--fm);text-align:right;color:var(--muted)}
 .tabela th.num{text-align:right}
 .tabela .nome{font-weight:600}
-.pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:10px;
-  letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line2);
-  border-radius:var(--r-pill);padding:3px 10px;color:var(--muted)}
-.pill .dt{width:7px;height:7px;border-radius:50%;flex:none}
-.st-vital{color:var(--vital);border-color:rgba(74,222,151,.35)} .st-vital .dt{background:var(--vital)}
-.st-mielina{color:var(--mielina);border-color:rgba(245,195,106,.35)} .st-mielina .dt{background:var(--mielina)}
-.st-plasma{color:var(--plasma);border-color:rgba(127,167,242,.35)} .st-plasma .dt{background:var(--plasma)}
+.pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-weight:500;font-size:10.5px;
+  letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line2);
+  border-radius:5px;padding:3px 10px;color:var(--muted)}
+.pill .dt{width:6px;height:6px;border-radius:1px;flex:none}
+.st-vital{color:var(--vital);border-color:rgba(0,245,155,.35)} .st-vital .dt{background:var(--vital)}
+.st-mielina{color:var(--mielina);border-color:rgba(255,170,0,.35)} .st-mielina .dt{background:var(--mielina)}
+.st-plasma{color:var(--plasma);border-color:rgba(0,200,255,.35)} .st-plasma .dt{background:var(--plasma)}
 
 /* lista de especificação */
 .escala .row{display:grid;grid-template-columns:190px 1fr;gap:18px;align-items:baseline;
   padding:13px 4px;border-top:1px solid var(--line)}
 .escala .row:last-child{border-bottom:1px solid var(--line)}
-.escala .k{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;
+.escala .k{font-family:var(--fd);font-weight:600;font-size:10.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--dim)}
 .escala .v{font-size:13.5px}
 .escala .v code{font-family:var(--fm);font-size:12.5px;color:var(--synapse)}
@@ -118,7 +250,7 @@ h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
 @media (max-width:900px){.metricas{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.metricas{grid-template-columns:1fr}}
 .metrica{border:1px solid var(--line);border-radius:var(--r-md);background:var(--card);padding:18px 20px}
-.metrica .rot{font-family:var(--fm);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+.metrica .rot{font-family:var(--fd);font-weight:600;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--dim);display:block;margin-bottom:9px}
 .metrica .val{font-family:var(--fd);font-weight:600;font-size:30px;letter-spacing:-.02em;line-height:1}
 .metrica .var{font-family:var(--fm);font-size:11px;margin-top:7px;display:block}
@@ -130,7 +262,7 @@ h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
 .prop-bar{display:flex;height:34px;border-radius:10px;overflow:hidden;
   border:1px solid var(--line2);margin-bottom:10px}
 .prop-bar div{height:100%}
-.legenda{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--fm);font-size:10.5px;
+.legenda{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--fd);font-weight:600;font-size:10.5px;
   letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .legenda span{display:inline-flex;align-items:center;gap:7px}
 .legenda i{width:9px;height:9px;border-radius:2px;display:block}
@@ -233,7 +365,7 @@ h1,h2,h3{font-family:var(--fd);letter-spacing:-.015em}
     <div class="row"><span class="k">Alinhamento</span>
       <span class="v">Número à direita, texto à esquerda. Nunca centralize coluna numérica.</span></div>
     <div class="row"><span class="k">Fonte do número</span>
-      <span class="v"><code>--fm</code> · IBM Plex Mono, para as casas se empilharem.</span></div>
+      <span class="v"><code>--fm</code>, IBM Plex Mono, para as casas se empilharem.</span></div>
     <div class="row"><span class="k">Separador</span>
       <span class="v">Ponto para milhar e vírgula para decimal: <code>1.284</code> e <code>1,8s</code>.</span></div>
     <div class="row"><span class="k">Linha</span>

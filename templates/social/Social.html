@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redes sociais | NeuroDynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../design-system/tokens.css">
+<style>
+
+    .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
+      border:1px solid color-mix(in srgb,currentColor 50%,transparent);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:color-mix(in srgb,currentColor 70%,transparent);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:color-mix(in srgb,currentColor 50%,transparent);
+      background:color-mix(in srgb,currentColor 10%,transparent);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  
+x-dc{display:none!important}
+html,body{height:100%;margin:0}#dc-root,#dc-root>.sc-host{height:100%}
+body{margin:0;background:#1A1F1D}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--f);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--fd);letter-spacing:var(--tr-heading)}
+a{color:var(--ion);text-decoration:none}
+::selection{background:var(--synapse);color:var(--cortex)}
+/* foto: troque o placeholder por <img> com object-fit:cover; sem filtros */
+.foto-slot{position:relative;overflow:hidden;background:rgba(127,127,127,.08);display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;box-sizing:border-box;font:13px/1.3 'Instrument Sans',system-ui,sans-serif;color:rgba(127,127,127,.9)}
+.foto-slot>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* apresentação: slides empilhados; imprima em PDF com uma página por slide */
+.deck{display:flex;flex-direction:column;align-items:center;gap:40px;padding:40px 0}
+.deck>section{flex:none}
+@media print{@page{size:1920px 1080px;margin:0}body{background:none!important}.deck{gap:0;padding:0}.deck>section{break-after:page}}
+</style>
+</head>
+<body>
+<div class="sc-host" data-sc-name="Social"><div style="display: flex; flex-direction: column; align-items: safe center; gap: 48px; padding: 48px;"><div style="display: flex; gap: 48px; align-items: flex-start;"><section data-screen-label="01 Feed Cortex" style="position: relative; overflow: hidden; width: 1080px; height: 1350px; flex: 0 0 auto; box-sizing: border-box; padding: 96px; display: flex; flex-direction: column; background: radial-gradient(120% 90% at 72% -12%, rgb(10, 42, 36) 0%, rgb(5, 8, 7) 62%); color: rgb(245, 245, 247); font-family: &quot;Instrument Sans&quot;, sans-serif;"><div style="position: absolute; inset: 0px; background-image: linear-gradient(rgba(245, 245, 247, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 245, 247, 0.05) 1px, transparent 1px); background-size: 72px 72px;"></div><div style="position: absolute; width: 900px; height: 900px; left: -300px; top: -460px; border-radius: 50%; filter: blur(110px); opacity: 0.6; background: radial-gradient(circle, rgb(0, 89, 79), transparent 70%);"></div><div style="position: absolute; width: 520px; height: 520px; right: -160px; bottom: -200px; border-radius: 50%; filter: blur(120px); opacity: 0.22; background: radial-gradient(circle, rgb(206, 220, 0), transparent 70%);"></div><header style="position: relative; display: flex; justify-content: space-between; align-items: center;"><img src="../../assets/logo-imagotipo-white.png" alt="NeuroDynamics" style="height: 40px;"><span style="display: inline-flex; align-items: center; gap: 14px; font-family: Archivo, sans-serif; font-weight: 600; font-size: 20px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(169, 204, 196);"><span style="width: 12px; height: 12px; background: rgb(206, 220, 0);"></span>Simpósio 2026</span></header><div style="position: relative; margin-top: auto; display: flex; flex-direction: column; gap: 28px;"><h1 style="margin: 0px; font-family: Archivo, sans-serif; font-weight: 600; font-size: 118px; line-height: 0.98; letter-spacing: -0.03em; text-wrap: balance;">Neurotecnologia que chega ao paciente.</h1><p style="margin: 0px; font-size: 34px; line-height: 1.4; color: rgb(169, 204, 196); max-width: 760px;">Dois dias de pesquisa aplicada, clínica e engenharia no LABBIO, UFMG.</p></div><footer style="position: relative; margin-top: 72px; padding-top: 32px; border-top: 1px solid rgba(245, 245, 247, 0.16); display: flex; justify-content: space-between; align-items: flex-end; font-size: 28px;"><div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-family: Archivo, sans-serif; font-weight: 600; font-size: 36px; letter-spacing: -0.015em;">18 e 19 de setembro</span><span style="color: rgb(169, 204, 196);">Belo Horizonte</span></div><span style="color: rgb(245, 245, 247);">neurodynamics.dev</span></footer></section><section data-screen-label="02 Feed Retina" style="position: relative; overflow: hidden; width: 1080px; height: 1350px; flex: 0 0 auto; box-sizing: border-box; display: grid; grid-template-rows: minmax(0px, 1fr) auto; background: rgb(224, 230, 252); color: rgb(20, 42, 117); font-family: &quot;Instrument Sans&quot;, sans-serif;"><div class="foto-slot" role="img" aria-label="Foto do evento ou da pessoa (sem filtros)" data-slot="social-feed-photo" style="width: 100%; height: 100%;"><span>Foto do evento ou da pessoa (sem filtros)</span></div><div style="padding: 72px 96px 88px; display: flex; flex-direction: column; gap: 24px;"><span style="display: inline-flex; align-items: center; gap: 14px; font-family: Archivo, sans-serif; font-weight: 600; font-size: 20px; letter-spacing: 0.16em; text-transform: uppercase;"><span style="width: 12px; height: 12px; background: rgb(52, 86, 227);"></span>Pesquisa</span><h1 style="margin: 0px; font-family: Archivo, sans-serif; font-weight: 600; font-size: 76px; line-height: 1.02; letter-spacing: -0.025em; text-wrap: balance;">Classificador de sinais neurais conclui a Fase II</h1><div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;"><span style="font-size: 28px; color: rgb(52, 86, 227);">Leia o relatório no link da bio</span><div role="img" aria-label="NeuroDynamics" style="width: 240px; height: 40px; background: rgb(20, 42, 117); mask: url(&quot;../../assets/logo-imagotipo-black.png&quot;) right center / contain no-repeat;"></div></div></div></section></div><div style="display: flex; gap: 48px; align-items: flex-start;"><section data-screen-label="03 Story" style="position: relative; overflow: hidden; width: 1080px; height: 1920px; flex: 0 0 auto; box-sizing: border-box; padding: 220px 96px 260px; display: flex; flex-direction: column; background: radial-gradient(120% 70% at 30% 0%, rgb(10, 42, 36) 0%, rgb(5, 8, 7) 60%); color: rgb(245, 245, 247); font-family: &quot;Instrument Sans&quot;, sans-serif;"><div style="position: absolute; inset: 0px; background-image: linear-gradient(rgba(245, 245, 247, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 245, 247, 0.05) 1px, transparent 1px); background-size: 72px 72px;"></div><div style="position: absolute; width: 1100px; height: 1100px; right: -500px; top: -420px; border-radius: 50%; filter: blur(120px); opacity: 0.55; background: radial-gradient(circle, rgb(0, 89, 79), transparent 70%);"></div><header style="position: relative; display: flex; justify-content: space-between; align-items: center;"><img src="../../assets/logo-imagotipo-white.png" alt="NeuroDynamics" style="height: 44px;"><span style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 26px; color: rgb(169, 204, 196);">18.09</span></header><div style="position: relative; margin-top: 120px; border-radius: 24px; overflow: hidden; height: 760px;"><div class="foto-slot" role="img" aria-label="Foto vertical do palestrante ou do laboratório" data-slot="social-story-photo" style="width: 100%; height: 100%;"><span>Foto vertical do palestrante ou do laboratório</span></div></div><div style="position: relative; margin-top: 72px; display: flex; flex-direction: column; gap: 24px;"><span style="display: inline-flex; align-items: center; gap: 14px; font-family: Archivo, sans-serif; font-weight: 600; font-size: 22px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(169, 204, 196);"><span style="width: 12px; height: 12px; background: rgb(206, 220, 0);"></span>Palestra de abertura</span><h1 style="margin: 0px; font-family: Archivo, sans-serif; font-weight: 600; font-size: 96px; line-height: 1; letter-spacing: -0.03em; text-wrap: balance;">Dra. Paula Viana</h1><p style="margin: 0px; font-size: 36px; line-height: 1.4; color: rgb(169, 204, 196);">Interfaces neurais fora do laboratório</p></div><div style="position: relative; margin-top: auto; display: flex; align-items: center; justify-content: center; height: 96px; border-radius: 11px; background: rgb(206, 220, 0); color: rgb(0, 53, 47); font-family: Archivo, sans-serif; font-weight: 600; font-size: 34px;">Garanta sua vaga</div></section><div style="display: flex; flex-direction: column; gap: 32px;"><section data-screen-label="04 Banner LinkedIn" style="position: relative; overflow: hidden; width: 1584px; height: 396px; flex: 0 0 auto; box-sizing: border-box; padding: 0px 120px 0px 600px; display: flex; align-items: center; justify-content: space-between; gap: 48px; background: radial-gradient(90% 160% at 85% -20%, rgb(10, 42, 36) 0%, rgb(5, 8, 7) 60%); color: rgb(245, 245, 247); font-family: &quot;Instrument Sans&quot;, sans-serif;"><div style="position: absolute; inset: 0px; background-image: linear-gradient(rgba(245, 245, 247, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 245, 247, 0.05) 1px, transparent 1px); background-size: 44px 44px; mask-image: linear-gradient(90deg, transparent 25%, rgb(0, 0, 0) 60%);"></div><div style="position: absolute; width: 760px; height: 760px; right: -200px; top: -380px; border-radius: 50%; filter: blur(90px); opacity: 0.6; background: radial-gradient(circle, rgb(0, 89, 79), transparent 70%);"></div><div style="position: absolute; width: 300px; height: 300px; right: 220px; bottom: -200px; border-radius: 50%; filter: blur(90px); opacity: 0.2; background: radial-gradient(circle, rgb(206, 220, 0), transparent 70%);"></div><div style="position: relative; display: flex; flex-direction: column; gap: 14px;"><h1 style="margin: 0px; font-family: Archivo, sans-serif; font-weight: 600; font-size: 56px; line-height: 1.02; letter-spacing: -0.025em;">Tools for health.</h1><span style="font-size: 22px; color: rgb(169, 204, 196);">Neurotecnologia aplicada à saúde · Belo Horizonte</span></div><img src="../../assets/logo-imagotipo-white.png" alt="NeuroDynamics" style="position: relative; height: 36px;"></section><p style="margin: 0px; max-width: 1584px; font-family: &quot;Instrument Sans&quot;, sans-serif; font-size: 15px; line-height: 1.6; color: rgb(154, 165, 161);">Banner: os primeiros 560px à esquerda ficam sob a foto de perfil no LinkedIn; mantenha o conteúdo à direita. Story: 220px no topo e 260px na base são áreas seguras da interface. Uma família por peça; Synapse só como acento ou na ação.</p></div></div></div></div>
+</body>
+</html>
