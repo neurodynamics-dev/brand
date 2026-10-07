@@ -1,0 +1,226 @@
+[
+  {
+    "file": "cartao-frente.jpg",
+    "template": "templates/business-card/BusinessCard.html",
+    "label": "01 Frente",
+    "width": 800,
+    "height": 518
+  },
+  {
+    "file": "cartao-verso.jpg",
+    "template": "templates/business-card/BusinessCard.html",
+    "label": "02 Verso",
+    "width": 800,
+    "height": 518
+  },
+  {
+    "file": "certificado.jpg",
+    "template": "templates/certificate/Certificate.html",
+    "label": "01 Clássico",
+    "width": 800,
+    "height": 566
+  },
+  {
+    "file": "certificado-marca-ion.jpg",
+    "template": "templates/certificate-brand/CertificateBrand.html",
+    "label": "02 Ion",
+    "width": 800,
+    "height": 566
+  },
+  {
+    "file": "convite-cortex.jpg",
+    "template": "templates/invitation/Invitation.html",
+    "label": "Front, Cortex",
+    "width": 800,
+    "height": 1134
+  },
+  {
+    "file": "convite-retina.jpg",
+    "template": "templates/invitation/Invitation.html",
+    "label": "Front, Retina",
+    "width": 800,
+    "height": 1134
+  },
+  {
+    "file": "cracha-ficha.jpg",
+    "template": "templates/badges/Badges.html",
+    "label": "C1 Ficha frente",
+    "width": 800,
+    "height": 1274
+  },
+  {
+    "file": "cracha-retrato.jpg",
+    "template": "templates/badges/Badges.html",
+    "label": "B1 Retrato escuro",
+    "width": 800,
+    "height": 1274
+  },
+  {
+    "file": "cracha-sinal.jpg",
+    "template": "templates/badges/Badges.html",
+    "label": "A1 Sinal frente",
+    "width": 800,
+    "height": 1274
+  },
+  {
+    "file": "deck-formal-capa.jpg",
+    "template": "templates/formal-deck/FormalDeck.html",
+    "label": "01 Capa, Cortex",
+    "width": 800,
+    "height": 450
+  },
+  {
+    "file": "deck-formal-numeros.jpg",
+    "template": "templates/formal-deck/FormalDeck.html",
+    "label": "16 Big numbers",
+    "width": 800,
+    "height": 450
+  },
+  {
+    "file": "deck-marca-capa.jpg",
+    "template": "templates/brand-deck/BrandDeck.html",
+    "label": "01 Capa, Cortex com brilho",
+    "width": 800,
+    "height": 450
+  },
+  {
+    "file": "deck-marca-grafico.jpg",
+    "template": "templates/brand-deck/BrandDeck.html",
+    "label": "19 Bar chart",
+    "width": 800,
+    "height": 450
+  },
+  {
+    "file": "deck-marca-paineis.jpg",
+    "template": "templates/brand-deck/BrandDeck.html",
+    "label": "14 Content, three panels",
+    "width": 800,
+    "height": 450
+  },
+  {
+    "file": "poster-blocos.jpg",
+    "template": "templates/posters/Posters.html",
+    "label": "06 Diagrama de blocos",
+    "width": 800,
+    "height": 1131
+  },
+  {
+    "file": "poster-pcb.jpg",
+    "template": "templates/posters/Posters.html",
+    "label": "05 PCB NeuroAmp-32",
+    "width": 800,
+    "height": 1131
+  },
+  {
+    "file": "poster-simplicidade.jpg",
+    "template": "templates/posters/Posters.html",
+    "label": "03 Simplicidade",
+    "width": 800,
+    "height": 1131
+  },
+  {
+    "file": "poster-sinal.jpg",
+    "template": "templates/posters/Posters.html",
+    "label": "01 Every signal has noise",
+    "width": 800,
+    "height": 1131
+  },
+  {
+    "file": "relatorio-capa.jpg",
+    "template": "templates/formal-report/FormalReport.html",
+    "label": "01 Cover",
+    "width": 800,
+    "height": 1131
+  },
+  {
+    "file": "relatorio-texto.jpg",
+    "template": "templates/formal-report/FormalReport.html",
+    "label": "02 Body",
+    "width": 800,
+    "height": 1131
+  },
+  {
+    "file": "social-feed-cortex.jpg",
+    "template": "templates/social/Social.html",
+    "label": "01 Feed Cortex",
+    "width": 800,
+    "height": 1000
+  },
+  {
+    "file": "social-feed-retina.jpg",
+    "template": "templates/social/Social.html",
+    "label": "02 Feed Retina",
+    "width": 800,
+    "height": 1000
+  },
+  {
+    "file": "social-story.jpg",
+    "template": "templates/social/Social.html",
+    "label": "03 Story",
+    "width": 800,
+    "height": 1422
+  },
+  {
+    "file": "social-linkedin.jpg",
+    "template": "templates/social/Social.html",
+    "label": "04 Banner LinkedIn",
+    "width": 800,
+    "height": 200
+  },
+  {
+    "file": "timbre-executivo.jpg",
+    "template": "templates/letterhead/Letterhead.html",
+    "label": "01 Carta executiva",
+    "width": 800,
+    "height": 1131
+  },
+  {
+    "file": "timbre-operacional.jpg",
+    "template": "templates/letterhead/Letterhead.html",
+    "label": "03 Carta operacional",
+    "width": 800,
+    "height": 1131
+  },
+  {
+    "file": "wall-mesh.jpg",
+    "template": "templates/wallpapers/Wallpapers.html",
+    "label": "mesh-desktop",
+    "width": 800,
+    "height": 450
+  },
+  {
+    "file": "wall-waves.jpg",
+    "template": "templates/wallpapers/Wallpapers.html",
+    "label": "waves-desktop",
+    "width": 800,
+    "height": 450
+  },
+  {
+    "file": "wall-circuit.jpg",
+    "template": "templates/wallpapers/Wallpapers.html",
+    "label": "circuit-desktop",
+    "width": 800,
+    "height": 450
+  },
+  {
+    "file": "wall-pulse.jpg",
+    "template": "templates/wallpapers/Wallpapers.html",
+    "label": "pulse-desktop",
+    "width": 800,
+    "height": 450
+  },
+  {
+    "file": "email-boletim.jpg",
+    "template": "templates/email/Boletim.html",
+    "label": null,
+    "width": 800,
+    "height": 1467
+  },
+  {
+    "file": "email-comunicado-retina.jpg",
+    "template": "templates/email/variantes/Comunicado-retina.html",
+    "label": null,
+    "width": 800,
+    "height": 1074
+  }
+]

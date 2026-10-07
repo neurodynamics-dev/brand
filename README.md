@@ -1,83 +1,37 @@
-# Brand — brand.neurodynamics.dev
+# Manual da marca NeuroDynamics
 
-Manual da marca e central de assets da NeuroDynamics (`index.html`). A
-página carrega as mesmas folhas que os apps importam
-(`design-system/tokens.css` e `design-system/neuro.css`), então o que
-aparece nela é o próprio design system.
+Site estático em `brand.neurodynamics.dev`, com páginas independentes: `/marca`, `/cores`, `/tipografia`, `/escrita`, `/elementos`, `/aplicacoes` e `/galeria`. A página inicial redireciona os hashes anteriores. Assinaturas, materiais controlados e ferramentas de criação ficam em **SOMA › Marca**.
 
-## O que a página contém
+## Desenvolvimento
 
-O conteúdo é dividido em seis abas (SectionNav), com subabas onde ajuda.
-O endereço guarda as duas, por exemplo `#cores/secundario`.
+```sh
+npm ci --prefix scripts
+node scripts/servir.mjs
+```
 
-1. **Cores** — primário e neutro, secundário, funcional e "em uso"
-   (pareamento com exemplos, regras, download da paleta em JSON e CSS).
-   Clique em qualquer tom para copiar o hex.
-2. **Tipografia** — o modo operacional (Archivo, Instrument Sans,
-   IBM Plex Mono), a escala e as regras. O modo executivo aparece no fim,
-   como extra, numa peça no próprio registro (papel, Cortex, fio fino).
-3. **Elementos** — marcas (imagotipo, recolorido por família, ícone
-   quadrado, símbolo, onda branca, selo), superfícies e fundo, bandas e
-   forma e espaço (raios, escala, movimento).
-4. **Interfaces** — componentes vivos de `neuro.css`: ações, formulários,
-   navegação, dados, feedback e widgets.
-5. **Creative gallery** — wallpapers, pôsteres e peças sociais, e o
-   **Estúdio**. As peças do Estúdio saem dos próprios templates de
-   `templates/`: post de feed, story, banner do LinkedIn, crachás, os
-   quatro wallpapers em quatro formatos, pôsteres, capas de apresentação
-   e capa de relatório. Os textos e as fotos da peça viram campos, e o
-   PNG é gerado no navegador, na resolução final (biblioteca
-   html-to-image, carregada do jsDelivr só na hora de baixar). Foto de
-   perfil, thumbnail de vídeo, fundo de reunião e banners de outras redes
-   não têm template e continuam desenhados em canvas, já nas regras
-   novas (rótulos em Archivo, sem ponto médio, Synapse só como acento).
-6. **Aplicações** — documentos, apresentações, e-mails e crachás, cada
-   um com miniaturas e o link para o template; as **assinaturas de
-   e-mail** (login com a conta da equipe, dados do cadastro, nome de
-   exibição e pronomes); e os **downloads**.
+O servidor usa `127.0.0.1:8766` e resolve os mesmos endereços sem `.html` do GitHub Pages. Não precisa de credenciais.
 
-As miniaturas das peças ficam em `assets/manual/` e foram geradas a
-partir de `templates/`. Se um template mudar, gere a miniatura de novo.
+- Conteúdo: arquivos HTML na raiz; estilos e comportamento em `site/`.
+- Cabeçalho e rodapé: `site/partes/`. Depois de editar, rode `node scripts/carimbar.mjs`.
+- Fontes da marca: `design-system/tokens.css`, `neuro.css`, `formal.css` e `DIRETRIZES.md`.
+- Integração SOMA: `design-system/portal.css`, `select.css` e `select.js`.
+- Templates de peças: `templates/`. Dados pessoais dos exemplos são fictícios.
 
-## Design system (Claude Design)
+## Gerar imagens e conferir
 
-A pasta [`design-system/`](design-system/) traz a mesma linguagem visual
-organizada como biblioteca de componentes para o **Claude Design**: 18 cards
-em três grupos (Fundamentos, Marca, Componentes), tokens em arquivo único e
-um `build.mjs` que mantém tudo em sincronia. Com ela sincronizada, as
-interfaces que o Claude gera para a equipe já saem na marca.
+Com o servidor iniciado e Chromium instalado (`CHROMIUM_PATH` permite indicar outro executável):
 
-O passo a passo do setup está em [`design-system/README.md`](design-system/README.md).
+```sh
+node scripts/gerar-miniaturas.mjs
+node scripts/gerar-downloads.mjs
+node scripts/conferir.mjs
+node design-system/build.mjs --check
+```
 
-## Templates
+As fontes dos renderizadores vêm das dependências locais `@fontsource`; não é necessário liberar TLS nem carregar fontes remotas para gerar imagens. `assets/manual/index.json` registra a origem de cada miniatura. `downloads/index.json` lista as dimensões dos 16 wallpapers e da capa de LinkedIn. Os scripts sobrescrevem somente as imagens geradas correspondentes.
 
-A pasta [`templates/`](templates/) traz as peças prontas da marca em HTML
-estático: relatório formal, certificados, convite, papel timbrado, cartão
-de visita, apresentações formal e de marca, crachás, redes sociais,
-e-mails, wallpapers e pôsteres. O índice e as regras de cada uma estão em
-[`templates/README.md`](templates/README.md). As regras completas da marca
-ficam em [`design-system/DIRETRIZES.md`](design-system/DIRETRIZES.md).
+Não há backend nem login no manual público. Documentos controlados continuam sujeitos à permissão de Arquivos no SOMA. A versão publicada deve acompanhar a atualização do portal para que os downloads novos estejam disponíveis.
 
-## Como editar
+## Decisões de marca pendentes
 
-- **Cores e nomes:** bloco `PALETA` no `<script>` de `index.html`.
-- **Geradores:** blocos `GERADORES` (formatos/campos) e `VARIANTES`
-  (visuais); o desenho fica nas funções `desenhaBase`/`renderPeca`.
-- **Assinaturas:** os dados vêm do banco (tabelas `perfis` e
-  `membros`), com a conta da própria pessoa. O bloco `SIG_ORG` espelha
-  a configuração institucional da ferramenta original.
-- **Versão:** atualize o marcador `#versao` no hero quando houver mudança
-  relevante nas guidelines.
-
-## Como publicar
-
-1. Ative o GitHub Pages neste repositório (branch `main`, raiz).
-2. No Cloudflare, aponte `brand.neurodynamics.dev` → `CNAME` para
-   `neurodynamics-dev.github.io`.
-
-## Observações
-
-- A página é pública (como o site institucional); os geradores rodam
-  inteiramente no navegador — nada é enviado a servidor.
-- A seção de assinaturas exige login: cada pessoa vê apenas os
-  próprios dados, lidos com a permissão da própria conta.
+As regras de redução mínima da marca, unidade de área de proteção e equivalências oficiais CMYK/Pantone dependem da validação dos responsáveis pela marca. Não foram inventadas medidas ou equivalências nesta implementação.

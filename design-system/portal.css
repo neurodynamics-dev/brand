@@ -1,0 +1,133 @@
+/* Aliases da casca: escuro e claro. Use depois de tokens.css e neuro.css. */
+:root{
+  color-scheme:dark;
+  --bg:#050807; --panel:#0B1210; --ink:#E8EDEB; --muted:#9AA5A1; --dim:#616C68;
+  --line:rgba(var(--ink-rgb),.08); --line2:rgba(var(--ink-rgb),.16);
+  --deep:#00352F; --green:#00594F; --green2:#0B7D6E; --teal:#93E8DB; --syn:#CEDC00;
+  --bad:#FF2D20; --ok:#00F59B; --warn:#FFAA00; --info:#00C8FF;
+  --card:rgba(var(--tom),.03); --glass:rgba(var(--fundo-rgb),.62);
+  /* os trios, para as transparências */
+  --tom:255,255,255; --ink-rgb:232,237,235; --syn-rgb:206,220,0; --bad-rgb:255,45,32;
+  --ok-rgb:0,245,155; --warn-rgb:255,170,0; --info-rgb:0,200,255; --teal-rgb:91,191,176;
+  --cinza-rgb:124,132,153; --roxo-rgb:167,139,250; --fundo-rgb:6,10,9; --painel-rgb:11,18,16;
+  --sombra-rgb:0,0,0; --sombra-k:1; --veu-rgb:4,7,6; --veu-k:1;
+  /* o Synapse como texto, borda e foco: no escuro, ele mesmo; no claro,
+     um oliva que se lê — o fundo dos botões continua Synapse */
+  --syn-tx:#CEDC00; --syn-borda:#CEDC00; --foco:#CEDC00;
+  /* texto sobre os avisos tingidos */
+  --bad-tx:#FF948C; --warn-tx:#FFD470; --info-tx:#7FE0FF; --lima-tx:#A9CCC4; --teal-tx:#D6FBF6;
+  --roxo-tx:#CDBEFC; --cinza-tx:#E4E4E6; --ocup-tx:#FFE8E3; --fora-tx:#E8A79B;
+  --bg-topo:#081511; --toast:#151B19;
+  /* o fundo de um campo: no claro, branco — o campo se destaca do cartão */
+  --campo:rgba(255,255,255,.05);
+  --r:18px; --max:1240px;
+  --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Helvetica,sans-serif;
+
+  --ok-tx:#7DFFC8;
+}
+:root[data-tema="claro"]{
+  color-scheme:light;
+  --bg:#E8EDEB; --panel:#FFFFFF; --ink:#1D1D1F; --muted:#2E3533; --dim:#616C68;
+  --teal:#0B4F48; --bad:#5C0A05; --ok:#00422A; --warn:#4D3300; --info:#003A4D;
+  --card:rgba(255,255,255,.74); --glass:rgba(255,255,255,.72);
+  --tom:29,29,31; --ink-rgb:29,29,31; --syn-rgb:0,89,79; --bad-rgb:255,45,32;
+  --ok-rgb:0,245,155; --warn-rgb:255,170,0; --info-rgb:0,200,255; --teal-rgb:11,79,72;
+  --cinza-rgb:124,132,153; --roxo-rgb:59,35,120; --fundo-rgb:255,255,255; --painel-rgb:255,255,255;
+  --sombra-rgb:24,40,34; --sombra-k:.26; --veu-rgb:22,34,30; --veu-k:.5;
+  --syn-tx:#00594F; --syn-borda:#00594F; --foco:#00594F;
+  --bad-tx:#5C0A05; --warn-tx:#4D3300; --info-tx:#003A4D; --lima-tx:#00352F; --teal-tx:#0A6358;
+  --roxo-tx:#3B2378; --cinza-tx:#3A3E44; --ocup-tx:#8A2A18; --fora-tx:#A3412F;
+  --bg-topo:#E3EFEC; --toast:#FFFFFF; --campo:#FFFFFF;
+
+  --ok-tx:#00422A;
+}
+
+/* Design v2: canonical portal components, mirrored in brand/design-system/portal.css. */
+:root{--r-sm:11px;--r-md:14px;--r-lg:20px;--r-xl:24px;--r-chip:6px;--r-tag:5px;--r-badge:4px;--t-fast:.15s;--t:.25s;--ease:cubic-bezier(.2,.7,.2,1);--cortex-light:#E3EFEC;
+--cortex-medium:#A9CCC4;
+--cortex-primary:#00594F;
+--cortex-dark:#00352F;
+--cortex-accent:#CEDC00;
+--ion-light:#D9F7F2;
+--ion-medium:#93E8DB;
+--ion-primary:#5BBFB0;
+--ion-dark:#0B4F48;
+--neuron-light:#E4F2E3;
+--neuron-medium:#B3D9B0;
+--neuron-primary:#5AA65E;
+--neuron-dark:#1F4A22;
+--glia-light:#E9EFEA;
+--glia-medium:#C3D3C7;
+--glia-primary:#8AA894;
+--glia-dark:#2E4636;
+--retina-light:#E0E6FC;
+--retina-medium:#A9B9F6;
+--retina-primary:#3456E3;
+--retina-dark:#142A75;
+--nexo-light:#E7E5FA;
+--nexo-medium:#BAB4F0;
+--nexo-primary:#5A4ED4;
+--nexo-dark:#251C66;
+--dendrito-light:#EEE8FE;
+--dendrito-medium:#CDBEFC;
+--dendrito-primary:#A78BFA;
+--dendrito-dark:#3B2378;
+--lumen-light:#FFF9D6;
+--lumen-medium:#FFEE8A;
+--lumen-primary:#FFD91A;
+--lumen-dark:#594A00;
+--ritmo-light:#FFEDE0;
+--ritmo-medium:#FFCBA6;
+--ritmo-primary:#FF9B5E;
+--ritmo-dark:#6B2E08;
+--impulso-light:#FFE4E6;
+--impulso-medium:#FFAEB5;
+--impulso-primary:#FF4F61;
+--impulso-dark:#6E0A1A;
+--plexo-light:#FFE6F0;
+--plexo-medium:#FFB9D3;
+--plexo-primary:#FF70A6;
+--plexo-dark:#6B0F38;
+--iris-light:#F8E7FC;
+--iris-medium:#EBBAF5;
+--iris-primary:#D676EB;
+--iris-dark:#4E0F5E;
+--fn-nominal-light:#D6FFEE;
+--fn-nominal-medium:#7DFFC8;
+--fn-nominal-primary:#00F59B;
+--fn-nominal-dark:#00422A;
+--fn-caution-light:#FFF1CC;
+--fn-caution-medium:#FFD470;
+--fn-caution-primary:#FFAA00;
+--fn-caution-dark:#4D3300;
+--fn-critical-light:#FFE0DD;
+--fn-critical-medium:#FF948C;
+--fn-critical-primary:#FF2D20;
+--fn-critical-dark:#5C0A05;
+--fn-signal-light:#D4F5FF;
+--fn-signal-medium:#7FE0FF;
+--fn-signal-primary:#00C8FF;
+--fn-signal-dark:#003A4D;
+--fn-idle-light:#E6E8EE;
+--fn-idle-medium:#B8BDCC;
+--fn-idle-primary:#7C8499;
+--fn-idle-dark:#2A2F3D;}
+.lt-imagotipo{width:142px;height:auto;display:block}
+.lt-marca>.lt-simbolo{display:none}
+body.lt-recolhida .lt-marca>.lt-simbolo{display:block}
+.chip,.chip-b{border-radius:6px}
+.pill,.tag,.res-pill{border-radius:5px}
+.bolha,.badge{border-radius:4px!important}
+.seg button.on,.chip-b.on,.chip.on{background:rgba(var(--tom),.09);color:var(--ink);font-weight:600;border-color:var(--line2)}
+.seg button.on:hover,.chip-b.on:hover{background:rgba(var(--tom),.12);color:var(--ink)}
+.fld label,.eyebrow{font-family:var(--fd);font-weight:600;letter-spacing:.12em}
+.aviso-box.lima,.tre-caixa.dica{background:rgba(0,89,79,.12);color:var(--lima-tx)}
+.p-ok,.aviso-box.ok{color:var(--ok-tx)}
+.p-bad,.aviso-box.err{color:var(--bad-tx)}
+.p-warn,.aviso-box.warn{color:var(--warn-tx)}
+.p-info,.aviso-box.info{color:var(--info-tx)}
+.evp-p .rs.ok,.evp-p .rs.warn,.evp-p .rs.bad,.tre-ed-marca.on{color:var(--ink);background:rgba(var(--tom),.09)}
+[data-tema="claro"] :is(.on,:hover)>:is(.dim,.muted){color:var(--muted)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;animation-iteration-count:1!important}}
