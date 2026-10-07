@@ -107,3 +107,9 @@ Primary set:
 - `guidelines/`, foundation cards; `components/*/*.card.html`, component cards
 - `assets/`, imagotipo, square icons (solid), symbol, white wave, solemn seals (`seal-*.png`, laurel source `seal-laurel.svg`)
 - `templates/`, `SKILL.md`, `github.md`
+
+## SOMA: tema claro e navegação
+
+O portal admite tema claro e escuro. `portal.css` documenta os aliases utilizados pela casca; carregar depois dos tokens e componentes. Claro: superfície Pia light, tinta Sulco, linhas Pia medium. Escuro: Void e Sulco. Estados funcionais usam marca ou ícone; o texto continua na cor de leitura. A área de destaque (`.sl-destaque`) preserva os aliases escuros nos dois temas.
+
+O menu usa imagotipo branco no escuro e preto no claro, sem filtros. Recolhido, usa o ícone quadrado correspondente. Seleção permanece discreta (fundo neutro e peso 600); Synapse identifica a ação principal, não a opção selecionada. Marca fica entre Studio e Equipe. Selects usam realce progressivo: o elemento nativo permanece sincronizado com o controle acessível e continua disponível para automação.

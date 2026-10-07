@@ -1,0 +1,87 @@
+[
+  {
+    "file": "wallpapers/rede-desktop.jpg",
+    "width": 2560,
+    "height": 1440
+  },
+  {
+    "file": "wallpapers/rede-celular.jpg",
+    "width": 1179,
+    "height": 2556
+  },
+  {
+    "file": "wallpapers/rede-tablet.jpg",
+    "width": 2048,
+    "height": 2732
+  },
+  {
+    "file": "wallpapers/rede-videochamada.jpg",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "wallpapers/ondas-desktop.jpg",
+    "width": 2560,
+    "height": 1440
+  },
+  {
+    "file": "wallpapers/ondas-celular.jpg",
+    "width": 1179,
+    "height": 2556
+  },
+  {
+    "file": "wallpapers/ondas-tablet.jpg",
+    "width": 2048,
+    "height": 2732
+  },
+  {
+    "file": "wallpapers/ondas-videochamada.jpg",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "wallpapers/circuito-desktop.jpg",
+    "width": 2560,
+    "height": 1440
+  },
+  {
+    "file": "wallpapers/circuito-celular.jpg",
+    "width": 1179,
+    "height": 2556
+  },
+  {
+    "file": "wallpapers/circuito-tablet.jpg",
+    "width": 2048,
+    "height": 2732
+  },
+  {
+    "file": "wallpapers/circuito-videochamada.jpg",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "wallpapers/pulso-desktop.jpg",
+    "width": 2560,
+    "height": 1440
+  },
+  {
+    "file": "wallpapers/pulso-celular.jpg",
+    "width": 1179,
+    "height": 2556
+  },
+  {
+    "file": "wallpapers/pulso-tablet.jpg",
+    "width": 2048,
+    "height": 2732
+  },
+  {
+    "file": "wallpapers/pulso-videochamada.jpg",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "file": "linkedin/capa.jpg",
+    "width": 1584,
+    "height": 396
+  }
+]
