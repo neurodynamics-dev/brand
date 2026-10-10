@@ -46,7 +46,7 @@ const REGRAS = [
 ];
 
 const IGNORAR_PASTA = /(^|\/)(node_modules|\.git|ds|v3|previews|templates|downloads|assets|fontes|mailer|db|supabase|testes|scripts|marca)(\/|$)/;
-const IGNORAR_ARQ = /(^|\/)(tokens\.css|formal\.css|cartazes\.html|redes\.html|doc-nro\.js|mod-criador\.js|mod-mailer\.js|fontes-pdf\.js|sw\.js)$/;
+const IGNORAR_ARQ = /(^|\/)(tokens\.css|formal\.css|cartazes\.html|redes\.html|doc-nro\.js|mod-criador\.js|mod-mailer\.js|mod-marca\.js|fontes-pdf\.js|sw\.js)$/;
 const EXT = /\.(html|css|js|mjs)$/;
 
 const args = process.argv.slice(2);
