@@ -1,0 +1,3 @@
+import React from 'react';
+export function Segmented({items=[],active=0,onChange}){const [a,setA]=React.useState(active);
+  return <div role="radiogroup" style={{display:'inline-flex',alignItems:'center',gap:2,height:32,padding:2,boxSizing:'border-box',border:'1px solid var(--line)',borderRadius:8,background:'rgba(255,255,255,.02)'}}>{items.map((t,i)=>{const on=i===a;return <button key={i} onClick={()=>{setA(i);onChange&&onChange(i);}} style={{display:'inline-flex',alignItems:'center',gap:6,fontFamily:'var(--f)',border:'none',cursor:'pointer',whiteSpace:'nowrap',height:'100%',padding:'0 11px',borderRadius:6,fontSize:12.5,fontWeight:on?600:500,background:on?'rgba(255,255,255,.09)':'transparent',color:on?'var(--ink)':'var(--nevoa)'}}>{t}</button>;})}</div>;}

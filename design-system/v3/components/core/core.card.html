@@ -1,0 +1,17 @@
+<!-- @dsCard group="Interface" viewport="700x676" name="Core" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{margin:0;padding:24px;background:#050807;color:var(--ink)}.r{display:flex;gap:12px;flex-wrap:wrap;align-items:center}</style></head><body><div id="root"></div>
+<script type="text/babel">window.NRO_ASSET_BASE='../../../../';const NS=window.NeuroDynamicsDesignSystem_10bbff;const {Button,IconButton,Switch,Pill,Tag,Chip,Eyebrow,Card,Alert,Band,Letterhead,SignatureBlock,DataTable}=NS;
+function App(){return <div style={{display:'flex',flexDirection:'column',gap:18}}>
+<div className="r"><Button>Gerar asset →</Button><Button variant="claro">Baixar</Button><Button variant="ghost">Cancelar</Button><Button size="mini">Mini</Button><Button variant="ghost" size="mini">Mini ghost</Button><Button disabled>Desativado</Button></div>
+<div className="r"><IconButton icon="copy" value="ana@neurodynamics.dev"/><IconButton icon="link" value="https://neurodynamics.dev"/><IconButton icon="download" label="Baixar"/><IconButton icon="clear" label="Remover"/><span style={{display:'inline-flex',alignItems:'center',gap:8,fontFamily:'var(--f)',fontSize:14,color:'var(--nevoa)'}}>Contato: <span style={{color:'var(--ink)'}}>ana@neurodynamics.dev</span><IconButton icon="copy" size="sm" value="ana@neurodynamics.dev"/></span></div>
+<div className="r"><Switch label="Idioma" items={['EN','PT']} active={1}/><Switch label="Idioma" items={['EN','PT','ES']}/><Switch label="Equipamento" items={[{label:'Ativo',status:'nominal'},{label:'Pausa',status:'idle'},{label:'Falha',status:'critical'}]}/><Switch label="Sincronização" active={1} items={[{label:'Ao vivo',status:'signal',iconOnly:true},{label:'Atenção',status:'caution',iconOnly:true},{label:'Parado',status:'idle',iconOnly:true}]}/></div>
+<div className="r"><Pill status="nominal">Concluído</Pill><Pill status="caution">Em análise</Pill><Pill status="critical">Falhou</Pill><Pill status="signal">Férias</Pill><Pill status="idle">Em espera</Pill><Tag>NRO-PUB-002</Tag></div>
+<div className="r"><Chip on>Feed</Chip><Chip>Quadrado</Chip><Chip>Story</Chip><Eyebrow>01 / Primeira seção</Eyebrow></div>
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}><Card title="Cartão de conteúdo">Bordas de 1px, cantos de 18px, fundo de vidro.</Card><Alert status="nominal" title="Assinatura gerada">Copie o HTML e cole no Gmail.</Alert></div>
+<Band eyebrow="Chamada" title="A banda verde é para o que importa." action={<Button>Ação principal</Button>}>Reserve este bloco para a ação principal.</Band></div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);</script></body></html>

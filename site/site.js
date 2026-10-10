@@ -1,6 +1,2 @@
-const toggle=document.querySelector('.menu-toggle'),nav=document.querySelector('#site-nav');
-toggle?.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.focus();}});
-document.addEventListener('click',e=>{if(!e.target.closest('.site-header')){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');}});
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('js');const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('seen');observer.unobserve(e.target);}}),{threshold:.06});document.querySelectorAll('.reveal').forEach(e=>observer.observe(e));}
 document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);const t=document.createElement('div');t.className='toast';t.role='status';t.textContent='Cor copiada: '+b.dataset.copy;document.body.append(t);setTimeout(()=>t.remove(),3000);}catch{b.textContent=b.dataset.copy;}}));

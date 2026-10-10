@@ -1,0 +1,2 @@
+import React from 'react';
+export function SignatureBlock({name,role,org='NeuroDynamics',align='left'}){return <div style={{display:'flex',flexDirection:'column',alignItems:align==='center'?'center':'flex-start',minWidth:220}}><div style={{width:220,height:1,background:'var(--formal-rule-strong)',marginBottom:10}}></div><div style={{fontFamily:'var(--fs-formal)',fontSize:20,color:'var(--formal-ink)',lineHeight:1.1}}>{name}</div><div style={{fontFamily:'var(--fd)',fontWeight:300,fontSize:12,color:'var(--formal-ink-2)',marginTop:3}}>{role}{org?', '+org:''}</div></div>;}

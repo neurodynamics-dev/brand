@@ -1,0 +1,2 @@
+import React from 'react';
+export function Tag({children}){return <span style={{fontFamily:'var(--fd)',fontWeight:600,fontSize:10,letterSpacing:'.12em',textTransform:'uppercase',color:'var(--synapse)',border:'1px solid rgba(206,220,0,.35)',borderRadius:5,padding:'3px 9px'}}>{children}</span>;}

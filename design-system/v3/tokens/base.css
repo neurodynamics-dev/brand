@@ -1,0 +1,5 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--f);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--fd);letter-spacing:var(--tr-heading)}
+a{color:var(--ion);text-decoration:none}a:hover{color:var(--synapse)}
+::selection{background:var(--synapse);color:var(--cortex)}
