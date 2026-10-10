@@ -13,7 +13,7 @@ O servidor usa `127.0.0.1:8766` e resolve os mesmos endereços sem `.html` do Gi
 
 - Conteúdo: arquivos HTML na raiz; estilos e comportamento em `site/`.
 - Design system: `design-system/tokens.css`, `neuro.css`, `casca.css`, `casca.js`, `formal.css`, `select.*`; regras em `design-system/v3/` (ver `design-system/DIRETRIZES.md`).
-- Cabeçalho e rodapé: saem de `design-system/casca.js`, os mesmos dos outros sites. Depois de mudar a casca ou os capítulos, rode `node scripts/carimbar.mjs`.
+- Cabeçalho e rodapé: saem de `design-system/casca.js`, os mesmos dos outros sites. Depois de mudar a casca ou os capítulos, rode `node scripts/montar.mjs`, que gera todas as páginas do manual.
 - Consumidores: `node scripts/distribuir.mjs` copia o design system para `ds/` em membro, website e selecao; `node scripts/auditar.mjs <pasta>` roda o checklist de interface.
 - Templates de peças: `templates/`. Dados pessoais dos exemplos são fictícios.
 
