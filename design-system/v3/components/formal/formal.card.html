@@ -1,0 +1,14 @@
+<!-- @dsCard group="Components" viewport="700x560" name="Formal" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{margin:0;padding:24px;background:#F3F5F4;color:var(--ink)}.r{display:flex;gap:12px;flex-wrap:wrap;align-items:center}</style></head><body><div id="root"></div>
+<script type="text/babel">window.NRO_ASSET_BASE='../../../../';const NS=window.NeuroDynamicsDesignSystem_10bbff;const {Button,Pill,Tag,Chip,Eyebrow,Card,Alert,Band,Letterhead,SignatureBlock,DataTable,Kicker}=NS;
+function App(){return <div style={{background:'#fff',padding:32,border:'1px solid var(--formal-rule)',display:'flex',flexDirection:'column',gap:24}}>
+<Letterhead reference="NRO-REL-2026-014" date="3 de outubro de 2026" classification="Documento de uso interno"/>
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:24,alignItems:'start'}}><Kicker label="Resultados" index="iii"/><Kicker variant="folio" label="Métodos e população" index="2"/><Kicker variant="tint" label="Sumário executivo" family="sky"/></div>
+<DataTable columns={['Coorte','n','Sensibilidade','Especificidade']} rows={[['Ambulatorial',120,'0,94','0,91'],['Hospitalar',86,'0,92','0,89']]} caption="Tabela 1. Desempenho do classificador por coorte."/>
+<div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end'}}><SignatureBlock name="Ana Ribeiro" role="Diretora científica"/><div style={{display:'flex',gap:10}}><Button variant="formal-outline">Ver anexo</Button><Button variant="formal">Assinar documento</Button></div></div></div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);</script></body></html>

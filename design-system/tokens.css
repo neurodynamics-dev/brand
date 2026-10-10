@@ -77,28 +77,57 @@
   --ink:var(--pia-light);         /* texto sobre escuro */
   --aura:var(--pia-light);
 
-  /* ---- papéis de interface ---------------------------------- */
+  /* ---- papéis de interface (tema escuro, o padrão) --------- */
+  /* Componentes usam estes papéis, nunca a família direto: são eles
+     que o tema claro troca (bloco [data-tema="claro"] no fim). */
+  color-scheme:dark;
   --bg:var(--void);
-  --muted:var(--nevoa);
-  --dim:var(--grafite);
-  --line:rgba(245,245,247,.08);   /* borda padrão, linha de tabela */
-  --line2:rgba(245,245,247,.16);  /* borda visível, campo, cabeçalho de tabela */
-  --card:rgba(255,255,255,.03);   /* superfície de cartão sobre o Void */
-  --glass:rgba(7,12,10,.62);      /* vidro do cabeçalho flutuante */
-  --veil:rgba(255,255,255,.055);  /* fundo das ações utilitárias */
-  --surface-page:var(--void);
+  --panel:var(--painel);
+  --muted:var(--nevoa);           /* texto secundário */
+  --dim:var(--grafite);           /* rótulos e legendas; nunca texto corrido */
+  --deep:var(--cortex);           /* texto sobre Synapse */
+  /* Synapse em três usos: fundo (botão, contador), texto, e linha de
+     estado ou foco. No claro, texto e linha viram Axon. */
+  --syn:var(--synapse);
+  --syn-tx:var(--synapse);
+  --syn-borda:var(--synapse);
+  --foco:var(--synapse);
+  /* trios para transparência: rgba(var(--tom),.05). --tom clareia no
+     escuro e escurece no claro (hover, seleção, o vidro de um cartão) */
+  --tom:255,255,255;
+  --ink-rgb:232,237,235;
+  --syn-rgb:206,220,0;
+  --fundo-rgb:6,10,9;
+  --painel-rgb:11,18,16;
+  --ok-rgb:0,245,155; --warn-rgb:255,170,0; --bad-rgb:255,45,32; --info-rgb:0,200,255; --idle-rgb:124,132,153;
+  --sombra-rgb:0,0,0; --sombra-k:1; --veu-rgb:4,7,6; --veu-k:1;
+  --line:rgba(var(--ink-rgb),.08);  /* borda padrão, linha de tabela */
+  --line2:rgba(var(--ink-rgb),.16); /* borda visível, campo, cabeçalho de tabela */
+  --card:rgba(var(--tom),.03);      /* superfície de cartão sobre o Void */
+  --glass:rgba(var(--fundo-rgb),.62); /* vidro do cabeçalho flutuante */
+  --veil:rgba(var(--tom),.055);     /* fundo das ações utilitárias */
+  --campo:rgba(var(--tom),.05);     /* fundo de campo; no claro, branco */
+  --toast:#151B19;
+  /* estados: o primary é linha e indicador; o texto sobre caixa
+     tingida usa o *-tx */
+  --ok:var(--fn-nominal-primary);  --ok-tx:var(--fn-nominal-medium);
+  --warn:var(--fn-caution-primary); --warn-tx:var(--fn-caution-medium);
+  --bad:var(--fn-critical-primary); --bad-tx:var(--fn-critical-medium);
+  --info:var(--fn-signal-primary);  --info-tx:var(--fn-signal-medium);
+  --idle:var(--fn-idle-primary);    --idle-tx:var(--fn-idle-medium);
+  --surface-page:var(--bg);
   --surface-card:var(--card);
-  --surface-raised:var(--painel);
+  --surface-raised:var(--panel);
   --text-body:var(--ink);
-  --text-secondary:var(--nevoa);
-  --text-caption:var(--grafite);
-  --accent:var(--synapse);
-  --on-accent:var(--cortex);
-  --status-success:var(--fn-nominal-primary);
-  --status-warning:var(--fn-caution-primary);
-  --status-danger:var(--fn-critical-primary);
-  --status-info:var(--fn-signal-primary);
-  --status-idle:var(--fn-idle-primary);
+  --text-secondary:var(--muted);
+  --text-caption:var(--dim);
+  --accent:var(--syn);
+  --on-accent:var(--deep);
+  --status-success:var(--ok);
+  --status-warning:var(--warn);
+  --status-danger:var(--bad);
+  --status-info:var(--info);
+  --status-idle:var(--idle);
 
   /* ---- registro formal (documentos) ------------------------- */
   --paper:#FFFFFF;
@@ -134,13 +163,13 @@
   --fs-body:15px;
   --fs-sm:13.5px;
   --fs-xs:12.5px;
-  --fs-label:11px;    /* Archivo 600, caixa alta, tracking .12em a .18em */
-  --fs-micro:10px;
+  --fs-label:11px;    /* Archivo 600, caixa alta, tracking .12em a .18em; nunca mono */
+  --fs-micro:10px;    /* idem */
   --lh-body:1.65;
   --lh-display:1.02;
   --tr-display:-.025em;
   --tr-heading:-.015em;
-  --tr-label:.14em;
+  --tr-label:.14em;   /* rótulos: Archivo 600 caixa alta, nunca mono */
 
   /* escala de impressão (modo executivo) */
   --pt-title:28pt; --pt-h1:18pt; --pt-h2:13pt; --pt-body:10.5pt; --pt-small:8.5pt; --pt-label:7pt;
@@ -165,6 +194,11 @@
   --sec:clamp(80px,10vh,130px);
   --max:1240px;
   --measure:640px;
+  /* larguras dos templates de tela (PLANO-DESIGN-SYSTEM.md, seção 3) */
+  --w-leitura:720px;   /* Leitura: feed, notas, módulo de treinamento */
+  --w-fluxo:760px;     /* Fluxo: formulário em etapas */
+  --w-lateral:320px;   /* Objeto: a coluna lateral */
+  --w-quiosque-col:420px; /* Quiosque: a coluna do check-in */
 
   /* ---- movimento e efeitos ---------------------------------- */
   --t-fast:.15s;
@@ -173,13 +207,41 @@
   --shadow-cta:0 8px 26px rgba(206,220,0,.22);
   --blur-glass:blur(18px) saturate(1.5);
 
-  /* ---- legado: não use em código novo ----------------------- */
-  --r-pill:7px;                       /* pílulas aposentadas */
-  --soma:var(--cortex-primary);
   --ion:var(--ion-primary);
-  --vital:var(--fn-nominal-primary);
-  --mielina:var(--fn-caution-primary);
-  --pulso:var(--fn-critical-primary);
-  --plasma:var(--fn-signal-primary);
   --dendrito:var(--dendrito-primary);
+}
+
+/* ---- tema claro ---------------------------------------------
+   Escolha de cada pessoa no SOMA (<html data-tema="claro">); os
+   sites são sempre escuros. Troca só os papéis: os componentes não
+   mudam. Synapse sobre papel não se lê: texto, linha e foco viram
+   Axon; o fundo dos botões continua Synapse. Todo texto lê a 4,5:1
+   ou mais sobre o fundo real. */
+:root[data-tema="claro"]{
+  color-scheme:light;
+  --bg:var(--pia-light); --panel:#FFFFFF; --ink:var(--sulco-medium); --muted:var(--pia-dark); --dim:var(--sulco-light);
+  --card:rgba(255,255,255,.74); --glass:rgba(255,255,255,.72); --campo:#FFFFFF; --toast:#FFFFFF;
+  --tom:29,29,31; --ink-rgb:29,29,31; --syn-rgb:0,89,79; --fundo-rgb:255,255,255; --painel-rgb:255,255,255;
+  --sombra-rgb:24,40,34; --sombra-k:.26; --veu-rgb:22,34,30; --veu-k:.5;
+  --syn-tx:var(--axon); --syn-borda:var(--axon); --foco:var(--axon);
+  --ok:var(--fn-nominal-dark); --ok-tx:var(--fn-nominal-dark);
+  --warn:var(--fn-caution-dark); --warn-tx:var(--fn-caution-dark);
+  --bad:var(--fn-critical-dark); --bad-tx:var(--fn-critical-dark);
+  --info:var(--fn-signal-dark); --info-tx:var(--fn-signal-dark);
+  --idle-tx:var(--fn-idle-dark);
+}
+/* ilha escura: uma faixa que continua escura no tema claro */
+:root[data-tema="claro"] .ilha-escura{
+  color-scheme:dark; color:var(--pia-light);
+  --bg:var(--void); --panel:var(--painel); --ink:var(--pia-light); --muted:var(--nevoa); --dim:var(--grafite);
+  --card:rgba(255,255,255,.03); --glass:rgba(6,10,9,.62); --campo:rgba(255,255,255,.05); --toast:#151B19;
+  --tom:255,255,255; --ink-rgb:232,237,235; --syn-rgb:206,220,0; --fundo-rgb:6,10,9; --painel-rgb:11,18,16;
+  --sombra-rgb:0,0,0; --sombra-k:1; --veu-rgb:4,7,6; --veu-k:1;
+  --line:rgba(232,237,235,.08); --line2:rgba(232,237,235,.16); --veil:rgba(255,255,255,.055);
+  --syn-tx:var(--synapse); --syn-borda:var(--synapse); --foco:var(--synapse);
+  --ok:var(--fn-nominal-primary); --ok-tx:var(--fn-nominal-medium);
+  --warn:var(--fn-caution-primary); --warn-tx:var(--fn-caution-medium);
+  --bad:var(--fn-critical-primary); --bad-tx:var(--fn-critical-medium);
+  --info:var(--fn-signal-primary); --info-tx:var(--fn-signal-medium);
+  --idle-tx:var(--fn-idle-medium);
 }

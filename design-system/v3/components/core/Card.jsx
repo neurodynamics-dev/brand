@@ -1,0 +1,2 @@
+import React from 'react';
+export function Card({title,children,tone='dark',style}){const p=tone==='paper';return <div style={{border:'1px solid '+(p?'var(--formal-rule)':'var(--line)'),borderRadius:p?'var(--r-formal)':'var(--r)',background:p?'var(--paper)':'var(--card)',padding:24,color:p?'var(--formal-ink)':'var(--ink)',...style}}>{title&&<h3 style={{fontFamily:'var(--fd)',fontSize:16,fontWeight:600,margin:'0 0 6px',letterSpacing:'-.015em'}}>{title}</h3>}<div style={{fontSize:13.5,color:p?'var(--formal-ink-2)':'var(--nevoa)',lineHeight:1.65}}>{children}</div></div>;}

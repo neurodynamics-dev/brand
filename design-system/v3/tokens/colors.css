@@ -1,0 +1,18 @@
+/* NeuroDynamics colour roles. All values resolve to families in palette.css and functional.css.
+   Single-name tokens below are aliases kept for the expressive UI; prefer the family tokens in new work. */
+:root{
+  /* primary set aliases */
+  --cortex:var(--cortex-dark); --axon:var(--cortex-primary); --synapse:var(--cortex-accent);
+  /* neutral set aliases */
+  --void:var(--sulco-dark); --painel:var(--sulco-primary); --blackout:var(--sulco-medium); --grafite:var(--sulco-light);
+  --nevoa:var(--pia-primary); --ink:var(--pia-light); --aura:var(--pia-light);
+  /* interface roles (dark, expressive register) */
+  --bg:var(--void); --muted:var(--nevoa); --dim:var(--grafite);
+  --line:rgba(245,245,247,.08); --line2:rgba(245,245,247,.16);
+  --card:rgba(255,255,255,.03); --glass:rgba(7,12,10,.62);
+  /* semantic aliases */
+  --surface-page:var(--void); --surface-card:var(--card); --surface-raised:var(--painel);
+  --text-body:var(--ink); --text-secondary:var(--nevoa); --text-caption:var(--grafite);
+  --accent:var(--synapse); --on-accent:var(--cortex);
+  --status-success:var(--fn-nominal-primary); --status-warning:var(--fn-caution-primary); --status-danger:var(--fn-critical-primary); --status-info:var(--fn-signal-primary); --status-idle:var(--fn-idle-primary);
+}
