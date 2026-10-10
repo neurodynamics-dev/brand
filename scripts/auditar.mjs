@@ -29,7 +29,7 @@ const REGRAS = [
     /* círculo (50%) é permitido em ponto, avatar, spinner e blob; a escala vai até 24px */
     re: /border-radius:\s*(9{2,4}|100)px|border-radius:\s*(2[5-9]|[3-9]\d)px|border-radius:\s*(1[5-9]|2[0-4])px(?![^;}]*\/\*\s*escala)(?=[^}]*\b(height:\s*(2\d|3[0-6])px))/g, css: true },
   { id: 'mono-rotulo', secao: '3', msg: 'Plex Mono em rótulo (caixa alta); rótulo é Archivo 600',
-    re: /var\(--fm\)[^;}]{0,80}text-transform:\s*uppercase|text-transform:\s*uppercase[^;}]{0,80}var\(--fm\)/g, css: true },
+    re: /var\(--fm\)[^}]{0,120}text-transform:\s*uppercase|text-transform:\s*uppercase[^}]{0,120}var\(--fm\)/g, css: true },
   { id: 'selecao-synapse', secao: '4', msg: 'seleção em Synapse; seleção é quieta: rgba(var(--tom),.09) e tinta',
     re: /\.(on|ativo|sel|selecionad[oa])\b[^{}]{0,60}\{[^}]*background:\s*var\(--(syn|synapse)\)/g, css: true },
   /* aviso, não erro: popover, listbox e diálogo podem ter sombra suave */
