@@ -45,7 +45,7 @@ const REGRAS = [
     re: /[\u{1F300}-\u{1FAFF}\u{2600}-\u{26FF}\u{2B50}\u{2B55}]/gu, texto: true },
 ];
 
-const IGNORAR_PASTA = /(^|\/)(node_modules|\.git|ds|v3|previews|templates|downloads|assets|fontes|mailer|db|supabase|testes|scripts|marca)(\/|$)/;
+const IGNORAR_PASTA = /(^|\/)(node_modules|\.git|ds|v3|previews|templates|downloads|assets|fontes|mailer|db|supabase|testes|scripts|marca|vendor)(\/|$)/;
 const IGNORAR_ARQ = /(^|\/)(tokens\.css|formal\.css|cartazes\.html|redes\.html|doc-nro\.js|mod-criador\.js|mod-mailer\.js|mod-marca\.js|fontes-pdf\.js|sw\.js)$/;
 const EXT = /\.(html|css|js|mjs)$/;
 
