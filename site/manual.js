@@ -4,8 +4,15 @@
   /* copiar */
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-copiar]'); if (!b) return;
-    var t = b.dataset.copiar, antes = b.textContent;
-    var ok = function () { b.textContent = 'Copiado'; b.classList.add('feito'); setTimeout(function () { b.textContent = antes; b.classList.remove('feito'); }, 1600); };
+    /* numa amostra de cor, só o código vira "Copiado"; o nome e o RGB ficam. O
+       conteúdo original é guardado uma vez (clique repetido não grava "Copiado"). */
+    var t = b.dataset.copiar, alvo = b.querySelector('.h') || b;
+    var ok = function () {
+      if (alvo._antes == null) alvo._antes = alvo.innerHTML;
+      clearTimeout(alvo._volta);
+      alvo.textContent = 'Copiado'; b.classList.add('feito');
+      alvo._volta = setTimeout(function () { alvo.innerHTML = alvo._antes; alvo._antes = null; b.classList.remove('feito'); }, 1600);
+    };
     if (navigator.clipboard) navigator.clipboard.writeText(t).then(ok, function () { window.prompt('Copie:', t); }); else window.prompt('Copie:', t);
   });
   /* índice: marca a seção visível */
