@@ -7,7 +7,7 @@ const TEXTOS = [
 ];
 const LOGOS = [
   ['Imagotipo branco', '/assets/logo-imagotipo-white.png', 'Para fundos escuros'],
-  ['Imagotipo preto', '/assets/logo-imagotipo-black.png', 'Para fundos claros'],
+  ['Imagotipo preto', '/assets/logo-imagotipo-black.png', 'Para fundos claros', 'claro'],
   ['Ícone colorido', '/assets/icon-colored-transparent.png', 'Fundo transparente'],
   ['Ícone monocromático', '/assets/icon-monochromatic.png', 'Uma cor, para carimbos e impressão simples'],
 ];
@@ -20,7 +20,7 @@ export default function () {
       + assimEvite('NeuroDynamics', 'Neurodynamics, Neuro Dynamics, NEURODYNAMICS, ND')
       + assimEvite('o LABBIO, Escola de Engenharia, UFMG', 'laboratório da NeuroDynamics na UFMG, sem citar o LABBIO'))
     + sec('logos', 'Logos para publicação', `<p>Escolha pelo fundo da peça. Não recolora, não distorça, não aplique sombra. As demais assinaturas estão em <a href="/fundamentos/assinaturas">Fundamentos, Assinaturas</a>.</p>`
-      + grade(LOGOS.map(([n, src, d]) => `<article class="card m-cartao"><div class="m-logo-prev"><img src="${src}" alt="${esc(n)}" loading="lazy"></div><h3>${esc(n)}</h3><p>${esc(d)}</p>${baixar(src, 'Baixar PNG')}</article>`)))
+      + grade(LOGOS.map(([n, src, d, fundo = '']) => `<article class="card m-cartao"><div class="m-logo-prev ${fundo}"><img src="${src}" alt="${esc(n)}" loading="lazy"></div><h3>${esc(n)}</h3><p>${esc(d)}</p>${baixar(src, 'Baixar PNG')}</article>`)))
     + sec('uso', 'Antes de publicar', lista([
       'Logo inteiro, em fundo com contraste. Ao redor, deixe espaço livre.',
       'Citações e números vêm de fonte da equipe. Em dúvida, pergunte.',
