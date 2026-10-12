@@ -133,11 +133,27 @@ main{max-width:none;margin:0;padding:0}
 .m-dl .item{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);padding:var(--s3) 0;border-top:1px solid var(--line);font-size:var(--fs-sm)}
 .m-dl .item:first-child{border-top:0}
 .m-dl .item small{display:block;color:var(--dim);font-family:var(--fm);font-size:11px}
-@media (prefers-reduced-motion:reduce){.m-porta,.m-peca,.m-tile{transition:none}}
+@media (prefers-reduced-motion:reduce){.m-porta,.m-peca,.m-tile,.m-dl{transition:none}}
 
 /* imprensa e downloads */
-.m-logo-prev{display:grid;place-items:center;height:120px;margin-bottom:var(--s3);border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg);padding:var(--s3)}
-.m-logo-prev img{max-width:100%;max-height:100%;object-fit:contain}
+/* a prévia tem altura fixa e a imagem ocupa a caixa interna inteira (com contain): sem isso, max-height:100%
+   não vale dentro da célula de grade e os PNGs de 1500 px vazavam do quadro */
+.m-logo-prev{position:relative;height:120px;margin-bottom:var(--s3);border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg);overflow:hidden}
+.m-logo-prev.claro{background:var(--paper)}
+.m-logo-prev img{position:absolute;inset:var(--s3);width:calc(100% - 2 * var(--s3));height:calc(100% - 2 * var(--s3));object-fit:contain}
+/* downloads em galeria */
+.m-galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:var(--s4);margin:var(--s5) 0}
+.m-dl{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--card);transition:border-color var(--t)}
+.m-dl:hover{border-color:var(--line2)}
+.m-dl-prev{position:relative;aspect-ratio:16/10;border-bottom:1px solid var(--line);background:var(--bg);overflow:hidden}
+.m-dl-prev img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.m-dl-prev.logo img{inset:18% 14%;width:72%;height:64%;object-fit:contain}
+.m-dl-prev.escuro{background:var(--void)}
+.m-dl-prev.claro{background:var(--paper)}
+.m-dl-info{display:flex;flex-direction:column;gap:6px;flex:1;padding:var(--s4)}
+.m-dl-info h3{margin:0;font-family:var(--fd);font-weight:500;font-size:var(--fs-body)}
+.m-dl-info p{margin:0;color:var(--muted);font-size:var(--fs-xs)}
+.m-dl-info .m-baixas{margin-top:auto;padding-top:var(--s2)}
 .m-textos{display:grid;gap:var(--s4);margin:var(--s5) 0}
 .m-textos .m-cartao p{margin-bottom:var(--s3)}
 .m-baixas{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s3)}
