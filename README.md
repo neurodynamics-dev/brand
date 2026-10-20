@@ -44,20 +44,23 @@ linguagem visual do site institucional.
 ## Relatório de AACC (LaTeX)
 
 A pasta [`templates/aacc/`](templates/aacc/) é o template com que um
-membro ou egresso pede ao colegiado o aproveitamento de horas de
-Atividades Acadêmicas Curriculares Complementares, no modelo NRO-PUB-002:
-a classe `nro-aacc.cls`, o relatório que o membro edita, um modelo por
-tipo de atividade (placa, peça, simulação, software, ensaio…), as regras
-da equipe em `nro/` e um exemplo fictício completo. O que falta vira
-pendência na capa; os quadros do pedido, as horas e os créditos se montam
-sozinhos. O passo a passo — do SOMA ao Colegiado — e o que a Diretoria
-precisa preencher antes de publicar estão no
+membro ou egresso pede ao colegiado o aproveitamento de Atividades
+Acadêmicas Curriculares Complementares pela Resolução nº 02/2019 da
+Congregação da Escola de Engenharia, no desenho do relatório formal do
+design system: a classe `nro-aacc.cls`, o relatório que o membro edita, um
+modelo por tipo de atividade (placa, peça, simulação, software, ensaio…),
+as regras da equipe em `nro/` e um exemplo fictício completo. O que falta
+vira pendência na capa; o pedido (o enquadramento por semestre letivo, as
+alternativas e as atividades à parte), os quadros e os créditos se montam
+sozinhos. O pedido começa no SOMA (Serviços, Aproveitamento de AACC), que
+gera o ZIP com os dados do membro, passa pelas aprovações e devolve o PDF
+com a folha de aprovação autenticável. O passo a passo está no
 [`LEIAME.md`](templates/aacc/LEIAME.md).
 
 O site serve `assets/template-relatorio-aacc.zip` (o botão *Abrir no
-Overleaf* aponta para ele) e `assets/exemplo-relatorio-aacc.pdf`. Mudou o
-template? Rode `templates/aacc/empacotar.sh`, que compila tudo e gera os
-dois de novo.
+Overleaf* aponta para ele, e o SOMA o baixa) e
+`assets/exemplo-relatorio-aacc.pdf`. Mudou o template? Rode
+`templates/aacc/empacotar.sh`, que compila tudo e gera os dois de novo.
 
 ## Design system (Claude Design)
 

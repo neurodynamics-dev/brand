@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # ============================================================
-# empacotar.sh — publica o template do relatório de AACC no site
+# empacotar.sh: publica o template do relatório de AACC no site
 #
 # Gera, em ../../assets (o que brand.neurodynamics.dev serve):
 #   template-relatorio-aacc.zip   o template, para baixar ou abrir no Overleaf
-#                                 (com o PDF do exemplo dentro)
+#                                 (com o PDF do exemplo dentro); o SOMA
+#                                 baixa este ZIP e junta o soma.tex de cada
+#                                 pedido
 #   exemplo-relatorio-aacc.pdf    o exemplo fictício, compilado
 #
 # Compila o template e o exemplo numa cópia limpa: se um dos dois não
@@ -19,14 +21,14 @@ trap 'rm -rf "$TMP"' EXIT
 
 cp -r . "$TMP/fonte"
 cd "$TMP/fonte"
-rm -f ./*.aux ./*.bbl ./*.bcf ./*.blg ./*.fdb_latexmk ./*.fls ./*.log ./*.out ./*.run.xml ./*.toc ./*.pdf
+rm -f ./soma.tex ./*.aux ./*.bbl ./*.bcf ./*.blg ./*.fdb_latexmk ./*.fls ./*.log ./*.out ./*.run.xml ./*.toc ./*.pdf
 
 echo "compilando o template…"
 latexmk -pdf -interaction=nonstopmode -halt-on-error -quiet relatorio-aacc.tex > /dev/null
 echo "compilando o exemplo…"
 latexmk -pdf -interaction=nonstopmode -halt-on-error -quiet exemplo-relatorio-aacc.tex > /dev/null
 if grep -q "pendencia(s)" exemplo-relatorio-aacc.log; then
-  echo "o exemplo tem pendências — confira antes de publicar" >&2
+  echo "o exemplo tem pendências: confira antes de publicar" >&2
   exit 1
 fi
 

@@ -1,8 +1,7 @@
-%% EXEMPLO FICTÍCIO — Atividade 5: ensino e formação de membros
+%% EXEMPLO FICTÍCIO, Atividade 5: ensino e formação de membros
 \begin{atividade}{Treinamento de segurança elétrica em bancada, para os trainees de 2025/1}{
   tipo         = ensino,
-  modalidade   = ENS,
-  alternativa  = VPC,
+  aproveitamento = participacao,
   horas        = 20,
   inicio       = 2025-03,
   fim          = 2025-04,
@@ -18,7 +17,7 @@
 Com a revisão B, a bancada do NEBULA passou a ter \SI{120}{\volt} contínuos numa placa aberta. O
 treinamento de segurança que a equipe tinha era um texto, de 2022, sobre a rede elétrica; não tratava
 de tensão contínua, de capacitores carregados nem de fontes com limite de corrente. Em 2024, um membro
-levou um choque leve do boost da revisão A --- sem consequência, mas registrado como ocorrência. Com
+levou um choque leve do boost da revisão A, sem consequência, mas registrado como ocorrência. Com
 catorze trainees chegando em 2025/1, a equipe precisava de um treinamento prático, com verificação.
 \end{contexto}
 
@@ -32,7 +31,7 @@ trainees como obrigatório.
 \begin{desenvolvimento}
 \fichatecnica{
   formato       = {Treinamento no SOMA (três módulos, com verificação) e duas sessões práticas},
-  treinamentos  = {\texttt{NRO-TRE-905} Rev.~A e Rev.~B},
+  treinamentos  = {\cod{NRO-TRE-905} Rev.~A e Rev.~B},
   publico       = {Os 14 trainees de 2025/1 e 3 membros do NEBULA},
   cargahoraria  = {3\,h (duas sessões de 1,5\,h)},
   participantes = {17},
@@ -40,18 +39,18 @@ trainees como obrigatório.
 }
 
 O treinamento foi escrito para quem nunca pôs a mão numa bancada de alta tensão
-(Tabela~\ref{tab:ex-modulos}). Cada módulo termina com questões, e a aprovação pede 70\,\% --- a nota
+(Tabela~\ref{tab:ex-modulos}). Cada módulo termina com questões, e a aprovação pede 70\,\%, a nota
 mínima padrão do SOMA. A sessão prática só começa depois da aprovação.
 
 \begin{table}[htbp]
   \centering\small
-  \caption{Os módulos do treinamento \texttt{NRO-TRE-905}.}
+  \caption{Os módulos do treinamento \cod{NRO-TRE-905}.}
   \label{tab:ex-modulos}
-  \begin{tabular}{|c|p{47mm}|p{85mm}|}\hline
-    \rowcolor{nro-fundo}\rotulo{Módulo} & \rotulo{Tema} & \rotulo{O que ensina} \\ \hline
-    1 & Por que 120\,V contínuos importam & A corrente no corpo e os seus efeitos; por que a tensão contínua prende; a energia guardada nos capacitores. \\ \hline
-    2 & O procedimento de bancada & A fonte com limite de corrente; a descarga dos capacitores antes de tocar; uma mão só na bancada; o que fazer num acidente. \\ \hline
-    3 & A prática & A energização da placa revisão B com o checklist, passo a passo, com a instrutora ao lado. \\ \hline
+  \begin{tabular}{@{}cp{47mm}p{85mm}@{}}\reguatopo
+    \cab{Módulo} & \cab{Tema} & \cab{O que ensina} \\ \reguameio
+    1 & Por que 120\,V contínuos importam & A corrente no corpo e os seus efeitos; por que a tensão contínua prende; a energia guardada nos capacitores. \\ \reguafina
+    2 & O procedimento de bancada & A fonte com limite de corrente; a descarga dos capacitores antes de tocar; uma mão só na bancada; o que fazer num acidente. \\ \reguafina
+    3 & A prática & A energização da placa revisão B com o checklist, passo a passo, com a instrutora ao lado. \\ \reguabase
   \end{tabular}
   \fonte{Elaborado pela autora.}
 \end{table}
@@ -66,14 +65,14 @@ impresso na bancada.
 \end{resultados}
 
 \begin{evidencias}
-\evidencia{Treinamento}{NRO-TRE-905 Rev. B}{O treinamento de minha autoria, publicado no SOMA}{SOMA › Treinamentos}
-\evidencia{Relatório}{Acompanhamento do NRO-TRE-905}{Quem concluiu, quando e com que nota}{SOMA › Treinamentos (a pedido)}
-\evidencia{Atividade}{PES-58}{O cartão do treinamento no quadro do Depto. de Pessoal, concluído}{SOMA › Atividades}
+\evidencia{Treinamento}{NRO-TRE-905 Rev. B}{O treinamento de minha autoria, publicado no SOMA}{SOMA, Treinamentos}
+\evidencia{Relatório}{Acompanhamento do NRO-TRE-905}{Quem concluiu, quando e com que nota}{SOMA, Treinamentos (a pedido)}
+\evidencia{Atividade}{PES-58}{O cartão do treinamento no quadro do Depto. de Pessoal, concluído}{SOMA, Atividades}
 \end{evidencias}
 
 \begin{aprendizados}
 Ensinar me obrigou a saber de verdade o que eu fazia por hábito na bancada. O Laboratório de Eletrônica
 e Instalações Elétricas me deram a base; o que aprendi ensinando foi escrever para quem não sabe, e
-medir se a pessoa aprendeu --- as duas questões mal escritas me ensinaram mais do que as oito boas.
+medir se a pessoa aprendeu: as duas questões mal escritas me ensinaram mais do que as oito boas.
 \end{aprendizados}
 \end{atividade}

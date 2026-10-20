@@ -1,8 +1,7 @@
-%% EXEMPLO FICTÍCIO — Atividade 6: evento, competição ou visita técnica
+%% EXEMPLO FICTÍCIO, Atividade 6: evento, competição ou visita técnica
 \begin{atividade}{Competição internacional de ciclismo com estimulação elétrica funcional}{
   tipo         = evento,
-  modalidade   = EVT,
-  alternativa  = COMP,
+  aproveitamento = participacao,
   horas        = 60,
   inicio       = 2024-10,
   fim          = 2024-10,
@@ -33,12 +32,12 @@ eletrônica do sistema à banca técnica, em inglês.
   datas      = {Quatro dias em outubro de 2024},
   funcao     = {Técnica responsável pelo estimulador},
   resultado  = {4.º lugar entre 9 equipes},
-  declaracao = {\texttt{NRO-DIR-006-901}},
+  declaracao = {\cod{NRO-DIR-006-901}},
 }
 
 \textbf{A preparação} (20 horas, em setembro). O checklist de preparação cobriu a placa reserva, os
 eletrodos, os cabos e o transporte das baterias de lítio, que as companhias aéreas só aceitam abaixo de
-\SI{100}{\watt\hour} por unidade e com a documentação do fabricante --- as nossas têm
+\SI{100}{\watt\hour} por unidade e com a documentação do fabricante; as nossas têm
 \SI{29}{\watt\hour}. Simulei, com o atleta e a fisioterapeuta, duas provas completas no LABBIO.
 
 \textbf{A competição} (quatro dias de cerca de dez horas). Conferência dos equipamentos na chegada,
@@ -48,14 +47,14 @@ eletrodos, carregava o perfil de estímulo e acompanhava a telemetria.
 
 \begin{resultados}
 A equipe terminou em 4.º lugar entre 9. O estimulador funcionou em todas as provas; um eletrodo descolou
-na segunda, e o limite de corrente por hardware desligou o canal como devia --- o atleta completou a
+na segunda, e o limite de corrente por hardware desligou o canal como devia, e o atleta completou a
 prova com três canais. Da conversa com as outras equipes, trouxemos a ideia do controle da cadência em
 malha fechada, que virou requisito do NEBULA para 2025.
 \end{resultados}
 
 \begin{evidencias}
 \evidencia{Declaração}{NRO-DIR-006-901}{A declaração de participação, com a função e as horas}{auth.neurodynamics.dev (código verificador)}
-\evidencia{Registro}{EXT-901}{O registro do evento no SOMA, aprovado por duas pessoas}{SOMA › Serviços › Eventos}
+\evidencia{Registro}{EXT-901}{O registro do evento no SOMA, aprovado por duas pessoas}{SOMA, Serviços, Eventos}
 \evidencia{Resultado}{Classificação oficial}{A colocação da equipe na prova}{Site da competição}
 \end{evidencias}
 

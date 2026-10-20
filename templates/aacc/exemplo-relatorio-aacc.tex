@@ -1,5 +1,5 @@
 %% ============================================================
-%% EXEMPLO FICTÍCIO — o nível que a equipe espera
+%% EXEMPLO FICTÍCIO: o nível que a equipe espera
 %%
 %% Tudo aqui é inventado: a pessoa, o professor, os códigos, os números,
 %% os resultados. O exemplo existe para mostrar como fica um relatório
@@ -10,6 +10,10 @@
 %% As figuras foram desenhadas em TikZ só para o exemplo caber no
 %% repositório; no seu relatório, exporte do KiCad, do CAD, do simulador,
 %% e use \includegraphics.
+%%
+%% Num relatório de verdade, os dados de \estudante, \membro, \documento
+%% e \pedido chegam no soma.tex, que o SOMA gera. Aqui eles estão no
+%% próprio arquivo.
 %% ============================================================
 \documentclass[final,exemplo]{nro-aacc}
 \usepackage{pgfplots}
@@ -36,33 +40,29 @@
   projetos     = NEBULA,
   supervisor   = {Rafael Fictício, supervisor do projeto NEBULA},
   dedicacao    = 10,
-  siex         = não,
-  vinculo      = NRO-DIR-004-999,
-  verificador  = EXEM-PLOF-ICTI,
 }
 \documento{
   pn   = 999,
   data = 2026-02-10,
 }
+%% o pedido: participação em equipe de competição; se o Colegiado não
+%% acolher, vivência profissional complementar. A publicação conta à parte.
+\pedido{
+  principal    = EQC,
+  alternativas = {VPC},
+}
+%% os códigos do quadro de AACC do curso também são de exemplo
+\modalidade{EQC}{codigo = {ENG-EX01 Participação em Equipe de Competição III (exemplo)}, limite = 24}
+\modalidade{PUB}{codigo = {ENG-EX05 Publicação I (exemplo)}}
 %% no exemplo, também a equipe é fictícia
 \equipe{
   professor             = {Prof. Dr. João Modelo},
   departamentoprofessor = {Departamento de Engenharia Mecânica},
-  dirigente             = {Beatriz Amostra},
-  cargodirigente        = {Diretora-geral},
   siextitulo            = {Tecnologias assistivas para a reabilitação e o esporte adaptado (exemplo)},
   siexnumero            = {000000},
   siexcoordenador       = {Prof. Dr. João Modelo},
   siexvigencia          = {2024 a 2026},
 }
-
-%% o pedido: os códigos e os dispositivos também são de exemplo
-\modalidade{COMP}{codigo = {ELE-AC-04 (exemplo)}, dispositivo = {art. X, inciso Y (exemplo)}, limite = 180}
-\modalidade{PES}{codigo = {ELE-AC-01 (exemplo)}, dispositivo = {art. X, inciso Y (exemplo)}}
-\modalidade{EXT}{codigo = {ELE-AC-02 (exemplo)}, dispositivo = {art. X, inciso Y (exemplo)}}
-\modalidade{ENS}{codigo = {ELE-AC-06 (exemplo)}, dispositivo = {art. X, inciso Y (exemplo)}}
-\modalidade{EVT}{codigo = {ELE-AC-03 (exemplo)}, dispositivo = {art. X, inciso Y (exemplo)}}
-\modalidade{GES}{codigo = {ELE-AC-07 (exemplo)}, dispositivo = {art. X, inciso Y (exemplo)}}
 
 \addbibresource{exemplo/referencias-exemplo.bib}
 
@@ -90,10 +90,12 @@ conduzi os ensaios de bancada e a parte técnica das sessões de validação com
 estimulador numa competição internacional; escrevi o treinamento de segurança elétrica que os trainees
 fazem hoje; e, em 2025, supervisionei o subsistema até a liberação da revisão C.
 
-É trabalho de Engenharia Elétrica do começo ao fim --- eletrônica analógica e de potência,
-compatibilidade eletromagnética, instrumentação, controle ---, com um usuário real, com as normas de
-equipamento eletromédico como referência e com a documentação que um produto exige. Peço 440 horas,
-e só as que têm evidência.
+É trabalho de Engenharia Elétrica do começo ao fim (eletrônica analógica e de potência,
+compatibilidade eletromagnética, instrumentação, controle), com um usuário real, com as normas de
+equipamento eletromédico como referência e com a documentação que um produto exige. Peço o
+aproveitamento da participação como equipe de competição estudantil, pelos seis semestres letivos em
+que estive na equipe, e o de um artigo publicado, à parte. As 480 horas que declaro são só as que têm
+evidência.
 
 \section{Trajetória na equipe}
 \begin{trajetoria}
@@ -109,7 +111,7 @@ e só as que têm evidência.
 
 \section{Afastamentos e interrupções}
 \begin{afastamentos}
-  \afastamento{2023-12}{2024-01}{afastamento temporário aprovado pelo Depto. de Pessoal (\texttt{NRO-PES-002-990}), para um estágio de férias.}
+  \afastamento{2023-12}{2024-01}{afastamento temporário aprovado pelo Depto. de Pessoal (\cod{NRO-PES-002-990}), para um estágio de férias.}
 \end{afastamentos}
 
 \section{Formação recebida na equipe}
@@ -130,24 +132,25 @@ e só as que têm evidência.
 \input{exemplo/atividades/a5-treinamento}
 \input{exemplo/atividades/a6-competicao}
 \input{exemplo/atividades/a7-supervisao}
+\input{exemplo/atividades/a8-publicacao}
 
 %% ============================================================
 \parte[O conjunto: as horas e a base delas, as competências desenvolvidas, a relação com o curso e a
   autoavaliação pelo mesmo barema que o professor usa.]{Síntese}
 
-\section{As horas pedidas}
+\section{As horas declaradas}
 \quadrohoras
 
 \subsection{Memória de cálculo}
 Mantive uma planilha semanal de horas durante todo o período, conferida com os check-ins no LABBIO e
 com as estimativas dos cartões de cada atividade no SOMA. Nos 32 meses de participação, descontado o
-afastamento, somei cerca de 1.300 horas --- em média, perto das dez horas semanais declaradas.
+afastamento, somei cerca de 1.300 horas: em média, perto das dez horas semanais declaradas.
 
-Peço 440 horas: só as que se ligam diretamente às sete atividades descritas e que têm evidência. Para
+Declaro 480 horas: só as que se ligam diretamente às oito atividades descritas e que têm evidência. Para
 cada atividade, somei as horas dos cartões dela (os códigos estão na ficha de cada uma) e conferi, nos
 dias de bancada, com os check-ins. Ficaram de fora o período trainee, as reuniões gerais, o trabalho
 em outros subsistemas e toda hora sem cartão. A Atividade~6 conta 20 horas de preparação e quatro dias
-de dez horas de competição, como diz a declaração \texttt{NRO-DIR-006-901}.
+de dez horas de competição, como diz a declaração \cod{NRO-DIR-006-901}.
 
 \section{As competências desenvolvidas}
 \matrizcompetencias

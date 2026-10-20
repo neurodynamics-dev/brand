@@ -1,8 +1,7 @@
-%% EXEMPLO FICTÍCIO — Atividade 2: simulação computacional
+%% EXEMPLO FICTÍCIO, Atividade 2: simulação computacional
 \begin{atividade}{Simulação do estágio de saída e do limite de tensão de conformidade}{
   tipo         = simulacao,
-  modalidade   = PES,
-  alternativa  = VPC,
+  aproveitamento = participacao,
   horas        = 45,
   inicio       = 2024-02,
   fim          = 2024-04,
@@ -19,14 +18,14 @@ Antes de refazer o estágio de saída (Atividade~1), a equipe precisava responde
 Primeira: com a impedância real dos eletrodos, que tensão de alimentação garante
 \SI{100}{\milli\ampere} durante um pulso inteiro de \SI{300}{\micro\second}? Segunda: o laço do
 amplificador operacional com o MOSFET, que oscilava na revisão A, fica estável com os componentes
-novos? Da primeira dependia a escolha entre manter \SI{90}{\volt} e subir para \SI{120}{\volt} ---
+novos? Da primeira dependia a escolha entre manter \SI{90}{\volt} e subir para \SI{120}{\volt},
 com MOSFETs, capacitores e isolação mais caros; da segunda, o capacitor de compensação.
 \end{contexto}
 
 \begin{contribuicao}
 Montei o modelo da carga a partir da literatura, levantei os parâmetros dos componentes, rodei as
 simulações e as varreduras, validei o resultado contra a medição na placa e escrevi o registro de
-decisão de arquitetura que fixou a tensão em \SI{120}{\volt} (\texttt{NRO-PRO-013-901}). O modelo do
+decisão de arquitetura que fixou a tensão em \SI{120}{\volt} (\cod{NRO-PRO-013-901}). O modelo do
 MOSFET é o do fabricante; o do amplificador operacional, o macromodelo do fabricante, sem alteração.
 \end{contribuicao}
 
@@ -38,11 +37,11 @@ MOSFET é o do fabricante; o do amplificador operacional, o macromodelo do fabri
   parametros    = {$R_s = 200\,\Omega$; $R_p$ de 500\,$\Omega$ a 2\,k$\Omega$; $C_p = 100$\,nF (faixas de Merrill, Bikson e Jefferys, 2005); modelos dos fabricantes para U1 e Q1},
   discretizacao = {Passo máximo de 10\,ns; com 5\,ns, o sobressinal mudou menos de 0,2 ponto percentual},
   validacao     = {Comparação com a placa montada, em carga resistiva de 1\,k$\Omega$ (Atividade~4)},
-  arquivos      = {Repositório \texttt{nebula-sim}, pasta \texttt{saida/}},
+  arquivos      = {Repositório \cod{nebula-sim}, pasta \cod{saida/}},
 }
 
 \textbf{O modelo da carga.} O conjunto eletrodo e pele se comporta, em primeira aproximação, como
-um resistor em série com um paralelo RC --- o modelo de Randles (Figura~\ref{fig:ex-randles}) ---, com
+um resistor em série com um paralelo RC, o modelo de Randles (Figura~\ref{fig:ex-randles}), com
 valores na faixa relatada por \textcite{merrill2005}. Sob um degrau de corrente $I$, a tensão no
 eletrodo é
 \begin{equation}
@@ -80,7 +79,7 @@ A Figura~\ref{fig:ex-tensao} responde à primeira pergunta. Com \SI{120}{\volt},
 \SI{300}{\micro\second} a \SI{100}{\milli\ampere} se sustenta até $R_p = \SI{1}{\kilo\ohm}$
 ($v_e = \SI{115}{\volt}$ no fim do pulso); com $R_p = \SI{2}{\kilo\ohm}$, a corrente cai a partir de
 \SI{135}{\micro\second}, como prevê \eqref{eq:ex-tsat}. Com \SI{90}{\volt}, o limite seria
-$R_p \approx \SI{690}{\ohm}$ --- abaixo dos eletrodos já gastos que a equipe usa. A decisão foi subir
+$R_p \approx \SI{690}{\ohm}$, abaixo dos eletrodos já gastos que a equipe usa. A decisão foi subir
 para \SI{120}{\volt} e, para impedâncias maiores, fazer o firmware medir a impedância no começo da
 sessão e limitar a amplitude: isso virou requisito na revisão C da USRS.
 
@@ -94,7 +93,7 @@ sessão e limitar a amplitude: isso virou requisito na revisão C da USRS.
 \end{figure}
 
 A Figura~\ref{fig:ex-borda} responde à segunda. Sem $C_c$, a simulação mostra 18\,\% de sobressinal
---- a oscilação que a revisão A tinha; com \SI{22}{\pico\farad}, 3\,\%. Na placa montada, o sobressinal
+(a oscilação que a revisão A tinha); com \SI{22}{\pico\farad}, 3\,\%. Na placa montada, o sobressinal
 medido foi de 1,9\,\% e o tempo de subida (10 a 90\,\%), de \SI{1,8}{\micro\second}, contra
 \SI{1,7}{\micro\second} na simulação: 6\,\% de diferença. A amplitude simulada em \SI{1}{\kilo\ohm}
 (\SI{100,0}{\milli\ampere}) ficou a 0,9\,\% da medida.
@@ -116,8 +115,8 @@ protocolo clínico.
 
 \begin{evidencias}
 \evidencia{Repositório}{nebula-sim, pasta saida/}{Os arquivos da simulação (.asc), os parâmetros e as varreduras}{GitHub da equipe (acesso a pedido)}
-\evidencia{Arquivo controlado}{NRO-PRO-013-901}{O registro da decisão de subir a alimentação para 120\,V, com as alternativas}{SOMA › Arquivos}
-\evidencia{Atividade}{NBL-109}{O cartão da simulação, atribuído a mim e concluído}{SOMA › Atividades › NEBULA}
+\evidencia{Arquivo controlado}{NRO-PRO-013-901}{O registro da decisão de subir a alimentação para 120\,V, com as alternativas}{SOMA, Arquivos}
+\evidencia{Atividade}{NBL-109}{O cartão da simulação, atribuído a mim e concluído}{SOMA, Atividades, NEBULA}
 \end{evidencias}
 
 \begin{aprendizados}

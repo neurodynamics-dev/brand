@@ -1,5 +1,5 @@
 %% ============================================================
-%% MODELO DE ATIVIDADE · PESQUISA E PRODUÇÃO CIENTÍFICA
+%% MODELO DE ATIVIDADE: PESQUISA E PRODUÇÃO CIENTÍFICA
 %%
 %% Copie este arquivo para atividades/ (atividade-02.tex, por exemplo),
 %% inclua-o no relatorio-aacc.tex com \input{atividades/atividade-02}
@@ -11,9 +11,11 @@
 %% ============================================================
 \begin{atividade}{Revisão da literatura sobre R, e o resumo submetido ao congresso C}{
   tipo         = pesquisa,
-  modalidade   = {},   % a chave da modalidade pedida: EXT, PES, COMP, VPC, EVT, PRD, ORG, ENS, GES, CUR, OUT
-  alternativa  = {},   % a modalidade alternativa, se o Colegiado não aceitar a primeira
-  horas        = {},   % as horas desta atividade, com base nos registros (Parte IV)
+  aproveitamento = participacao,   % participacao: compõe o enquadramento do pedido (o comum).
+                                   % À parte (art. 7º): PUB, EVO, EVP, CUR ou VOL (Parte I)
+  % duracao    = {},   % só EVO, EVP e CUR: a duração do evento ou do curso, em horas
+  % publicacao = {},   % só PUB: nacional, internacional, revista, periodico, livro ou patente
+  horas        = {},   % as horas que você dedicou a ela, com base nos registros (Parte IV)
   inicio       = {},   % AAAA-MM
   fim          = {},   % AAAA-MM, ou: em andamento
   projeto      = {},
@@ -36,7 +38,7 @@
 \fichatecnica{
   pergunta = {},   % Pergunta de pesquisa
   metodo   = {},   % Método
-  bases    = {},   % Bases e fontes consultadas — opcional
+  bases    = {},   % Bases e fontes consultadas, opcional
   produto  = {},   % Produto (artigo, resumo, relatório)
   situacao = {},   % Situação (submetido, aceito, publicado; DOI)
 }

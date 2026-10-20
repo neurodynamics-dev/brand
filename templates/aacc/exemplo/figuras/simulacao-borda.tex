@@ -6,11 +6,11 @@
       xlabel={Tempo (\si{\micro\second})},
       ylabel={Corrente (\% da programada)},
       xmin=0, xmax=8, ymin=0, ymax=125,
-      grid=major, grid style={nro-fundo},
+      grid=major, grid style={nro-pia-claro},
       tick label style={font=\scriptsize}, label style={font=\footnotesize},
       legend pos=south east, legend cell align=left,
-      legend style={font=\scriptsize, draw=nro-linha, fill=white, fill opacity=0.9, text opacity=1}]
-    \addplot[domain=0:8, samples=161, thick, nro-pulso-texto]
+      legend style={font=\scriptsize, draw=nro-pia, fill=white, fill opacity=0.9, text opacity=1}]
+    \addplot[domain=0:8, samples=161, thick, nro-cortex]
       {100*(1-exp(-0.48*1.35*x)*(cos(deg(1.35*sqrt(1-0.48^2)*x)) + 0.48/sqrt(1-0.48^2)*sin(deg(1.35*sqrt(1-0.48^2)*x))))};
     \addlegendentry{simulada, sem $C_c$ (sobressinal de 18\,\%)}
     \addplot[domain=0:8, samples=161, very thick, nro-axon]

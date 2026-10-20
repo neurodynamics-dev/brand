@@ -1,5 +1,5 @@
 %% ============================================================
-%% MODELO DE ATIVIDADE · GENÉRICO
+%% MODELO DE ATIVIDADE: GENÉRICO
 %%
 %% Esta é a primeira atividade. O melhor é trocá-la pelo modelo do
 %% tipo certo (modelos/pcb.tex, modelos/simulacao.tex…): ele já traz a
@@ -12,9 +12,11 @@
 \begin{atividade}{O que foi feito, em poucas palavras}{
   tipo         = {},   % o tipo: pcb, mecanico, simulacao, software, ensaio, clinico, pesquisa,
                        % extensao, ensino, evento, gestao, comunicacao ou outro
-  modalidade   = {},   % a chave da modalidade pedida: EXT, PES, COMP, VPC, EVT, PRD, ORG, ENS, GES, CUR, OUT
-  alternativa  = {},   % a modalidade alternativa, se o Colegiado não aceitar a primeira
-  horas        = {},   % as horas desta atividade, com base nos registros (Parte IV)
+  aproveitamento = participacao,   % participacao: compõe o enquadramento do pedido (o comum).
+                                   % À parte (art. 7º): PUB, EVO, EVP, CUR ou VOL (Parte I)
+  % duracao    = {},   % só EVO, EVP e CUR: a duração do evento ou do curso, em horas
+  % publicacao = {},   % só PUB: nacional, internacional, revista, periodico, livro ou patente
+  horas        = {},   % as horas que você dedicou a ela, com base nos registros (Parte IV)
   inicio       = {},   % AAAA-MM
   fim          = {},   % AAAA-MM, ou: em andamento
   projeto      = {},

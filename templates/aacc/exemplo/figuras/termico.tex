@@ -5,11 +5,11 @@
       width=0.86\linewidth, height=58mm,
       xlabel={Tempo (min)}, ylabel={Temperatura interna (\si{\celsius})},
       xmin=0, xmax=60, ymin=20, ymax=65,
-      grid=major, grid style={nro-fundo},
+      grid=major, grid style={nro-pia-claro},
       tick label style={font=\scriptsize}, label style={font=\footnotesize},
       legend pos=north west, legend cell align=left,
-      legend style={font=\scriptsize, draw=nro-linha, fill=white, fill opacity=0.9, text opacity=1}]
-    \addplot[only marks, mark=square*, mark size=1.4pt, nro-pulso-texto]
+      legend style={font=\scriptsize, draw=nro-pia, fill=white, fill opacity=0.9, text opacity=1}]
+    \addplot[only marks, mark=square*, mark size=1.4pt, nro-cortex]
       coordinates {(0,25.8) (5,33.2) (10,38.1) (15,41.9) (20,44.3) (25,45.6) (30,46.8) (35,48.3) (40,48.4) (45,48.8) (50,49.7) (55,49.5) (60,49.9)};
     \addlegendentry{sem ranhuras (1.ª impressão)}
     \addplot[only marks, mark=*, mark size=1.5pt, nro-axon]

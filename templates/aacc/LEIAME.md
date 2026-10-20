@@ -1,78 +1,129 @@
-# Relatório de AACC — o template LaTeX
+# Relatório de AACC: o template LaTeX
 
-O relatório com que um membro (ou egresso) da NeuroDynamics pede ao seu
-colegiado o aproveitamento de horas de **Atividades Acadêmicas Curriculares
-Complementares**, no modelo de documentos da equipe (NRO-PUB-002). O
-aproveitamento na Escola de Engenharia segue a Resolução da Congregação
-nº 02/2019, de 31 de maio de 2019.
+O relatório com que um membro (ou egresso) da NeuroDynamics pede ao seu colegiado
+o aproveitamento de **Atividades Acadêmicas Curriculares Complementares**, no
+modelo de documentos da equipe (NRO-PUB-002) e no registro formal do design
+system. O aproveitamento na Escola de Engenharia segue a **Resolução nº 02/2019,
+de 31 de maio de 2019, da Congregação**, e o relatório é escrito em cima dela.
 
-A equipe não é um órgão registrado da UFMG, e quem decide é o Colegiado. Por
-isso o template é exigente de propósito: ele pede, de cada atividade, o que foi
-feito, como, com que resultado e com que evidência — a placa com o esquemático
-e o layout, a peça com o modelo e o cálculo, a simulação com o modelo e a
-validação. Quem trabalhou de verdade tem o que escrever; quem não trabalhou
-fica com as pendências na capa. O que chega ao Colegiado já passou pela direção
-da equipe e pelo professor responsável, com nota.
+A equipe não é um órgão registrado da UFMG, e quem decide é o Colegiado. A
+resolução não pede esse registro: para a equipe de competição estudantil, pede o
+relatório das atividades aprovado pelo responsável pela equipe e pelo professor
+responsável, e a declaração do período de participação (art. 11). O template é
+exigente de propósito: ele pede, de cada atividade, o que foi feito, como, com
+que resultado e com que evidência. Quem trabalhou de verdade tem o que escrever;
+quem não trabalhou fica com as pendências, e o SOMA não aceita relatório com
+pendência.
 
 **Veja o exemplo antes de começar:** `exemplo-relatorio-aacc.pdf` (no ZIP e em
-brand.neurodynamics.dev, *Downloads*). É uma pessoa fictícia, com sete
-atividades, sem nenhuma pendência — o nível que a equipe espera.
+brand.neurodynamics.dev, *Downloads*). É uma pessoa fictícia, com oito
+atividades e nenhuma pendência: o nível que a equipe espera.
 
 ## O caminho
 
-1. **O membro cria o registro no SOMA.** Em *Arquivos*, na série
-   `NRO-PES-020` (*Relatório de atividades para aproveitamento de AACC*),
-   *Novo PN*. O PN que o SOMA der vai em `\documento{pn = …}`.
-2. **Emite a declaração de vínculo** (SOMA › Serviços › Declaração de vínculo)
-   e salva o PDF em `anexos/declaracao-vinculo.pdf`. O código verificador dela
-   vai em `\membro{verificador = …}`.
-3. **Escreve o relatório** — abaixo, *Como escrever*.
-4. **Passa para `final`** (`\documentclass[final]{nro-aacc}`). A capa diz
-   *SEM PENDÊNCIAS* ou *NÃO ENCAMINHE*, e a lista do que falta está logo
-   depois dos quadros do pedido.
-5. **Sobe o PDF no SOMA** como revisão do seu PN. O grupo revisor da série (a
-   direção da equipe) confere com os registros, ouve os supervisores e
-   preenche o *Parecer da direção da equipe* (Parte V).
-6. **O professor responsável** avalia pelo barema, dá a nota (0 a 100, com o
-   conceito da UFMG) e assina o *Parecer e nota*.
-7. **O membro entrega ao Colegiado**, pelo meio que o colegiado usar (e-mail,
-   SEI, formulário próprio). Se o colegiado tem formulário próprio, o
-   relatório vai como anexo dele. A *Deliberação do Colegiado* (Parte V) tem o
-   espaço para ele aprovar as horas em outra modalidade, no todo ou em parte.
+O pedido começa e termina no SOMA, em **Serviços, Aproveitamento de AACC**
+(`membro.neurodynamics.dev/aproveitamento`).
 
-Os campos dos pareceres se preenchem no próprio PDF (Acrobat, Edge, Preview) ou
-à mão. A assinatura pode ser digital, pelo gov.br. Para imprimir sem os campos
-do formulário, use a opção `impresso`.
+1. **Os seus dados.** A página confere o que falta na sua ficha (os dados do
+   recadastro) e os dados acadêmicos: o curso, a matrícula, o semestre de
+   ingresso, a entrada e a saída da equipe.
+2. **O enquadramento.** O painel mostra o que a resolução permite e quantos
+   créditos cada opção rende com os seus semestres. Você escolhe o principal e,
+   se quiser, alternativas para o Colegiado.
+3. **O ZIP.** O SOMA gera o template com o `soma.tex`: os seus dados, o número
+   do pedido e o enquadramento escolhido.
+4. **A escrita.** No Overleaf: *Novo projeto, Carregar projeto*, e o ZIP. O
+   arquivo que você edita é o `relatorio-aacc.tex`; as atividades vão em
+   `atividades/`.
+5. **O envio.** Em `final`, sem pendência, baixe o PDF e envie na mesma página
+   do SOMA. Ele confere que o PDF é deste template, do seu pedido e sem
+   pendência.
+6. **As aprovações.** O pedido passa por três instâncias da equipe, nesta ordem:
+   o PMO, o Departamento de Pessoal e a Coordenação. Aprova uma pessoa de cada
+   grupo, nunca quem pediu, e cada uma pode devolver o pedido com o motivo. Na
+   última etapa, a Coordenação indica o professor orientador (nome, título e
+   e-mail), que recebe o pedido por e-mail, lê o relatório, atribui a nota pelo
+   barema e aprova no próprio SOMA. Você é avisado por e-mail a cada passo.
+7. **A folha de aprovação.** Aprovado, o SOMA troca a segunda folha do PDF (a
+   *folha reservada*) pela folha de aprovação: as aprovações, a nota, a
+   declaração do período e o código verificador, conferível em
+   `auth.neurodynamics.dev`. Baixe o PDF final e entregue ao seu Colegiado, pelo
+   meio que ele usar (o Centro de Graduação, o SEI, o formulário do curso; art.
+   6º).
+8. **Se o Colegiado apontar algo.** Reabra o pedido no SOMA: a folha de
+   aprovação é revogada (a validação passa a dizer isso), você corrige, envia o
+   PDF de novo e o pedido passa pelas aprovações outra vez.
+
+## O enquadramento
+
+A resolução classifica as atividades em projeto, programa, evento e estágio (art.
+1º) e dá a regra de crédito de cada uma. O pedido tem duas partes.
+
+**A participação na equipe**, por inteiro, num enquadramento principal e, se
+quiser, em alternativas:
+
+| Chave | Enquadramento | Dispositivo | Créditos |
+|---|---|---|---|
+| EQC | Participação em equipe de competição estudantil | art. 1º, II, c; art. 11 | 3 por semestre letivo |
+| EXT | Projeto de extensão com vínculo formal | art. 1º, I, c; arts. 3º e 8º | 3 por semestre com registro no SIEX |
+| IC | Iniciação científica com vínculo formal | art. 1º, I, a; arts. 3º e 8º | 3 por semestre com vínculo na PRPq |
+| VPC | Vivência profissional complementar | art. 1º, IV, a; art. 17 | 1 a cada 300 horas |
+
+**As atividades que contam à parte** (art. 7º: uma atividade conta numa AACC
+só), cada uma com a sua regra:
+
+| Chave | Atividade | Dispositivo | Créditos |
+|---|---|---|---|
+| PUB | Publicação | art. 1º, I, d; art. 9º | 1 (evento nacional), 2 (internacional), 3 (revista indexada, periódico, livro, patente) |
+| EVO | Organização de evento técnico-científico | art. 1º, III, b; art. 14 | 1 a cada 7,5 h de duração do evento |
+| EVP | Participação em evento técnico-científico | art. 1º, III, a; art. 14 | 1 a cada 15 h de duração do evento |
+| CUR | Curso presencial ou a distância | art. 1º, III; art. 15 | 1 a cada 15 h de curso |
+| VOL | Voluntariado | art. 1º, II, g; art. 12 | 1 a cada 15 h |
+
+**Os semestres.** O 1º semestre vai de fevereiro a julho, e o 2º, de agosto a
+janeiro. Conta o semestre com ao menos quatro meses de participação, descontados
+os afastamentos, e posterior ao ingresso no curso (art. 5º). O SOMA e a classe
+contam do mesmo jeito; o Quadro 3 do relatório mostra a conta.
+
+Cada colegiado define quantos créditos o curso aceita (art. 2º). Se o quadro de
+AACC do seu curso tem o código da atividade ou um limite, informe com
+`\modalidade{EQC}{codigo = …, limite = …}`; o Quadro 1 avisa se o pedido passar
+do limite.
 
 ## Como escrever
 
-Abra no Overleaf (*Abrir no Overleaf*, em brand.neurodynamics.dev) ou compile
-localmente com `latexmk -pdf relatorio-aacc.tex` (TeX Live 2022 ou mais novo,
-com `biber`). O arquivo que você edita é o `relatorio-aacc.tex`.
+Abra no Overleaf ou compile localmente com `latexmk -pdf relatorio-aacc.tex`
+(TeX Live 2022 ou mais novo, com `biber`).
 
-- **Os seus dados** (`\estudante`, `\membro`, `\documento`) vão no começo do
-  arquivo. Datas como `AAAA-MM`; horas como número.
-- **As modalidades**: para cada uma em que você pede horas, o código da
-  atividade no quadro de AACC do seu curso e o dispositivo da norma do seu
-  colegiado: `\modalidade{EXT}{codigo = …, dispositivo = {Res. 02/2019, art. …}}`.
-  A lista das modalidades está na Parte I do próprio relatório.
-- **Uma atividade por arquivo**, em `atividades/`. Copie o modelo do tipo
-  certo de `modelos/` — ele já traz a ficha técnica e as perguntas do tipo — e
-  inclua o arquivo no `relatorio-aacc.tex` com `\input{atividades/…}`. Uma
-  atividade é uma entrega, com começo, meio e fim: "participei do projeto por
-  dois anos" são várias atividades.
-- **Cada atividade tem**: a ficha (tipo, modalidade pedida e alternativa,
-  horas, período, projeto, papel, quem confirma, registros no SOMA,
-  competências, disciplinas); as seções *Contexto e problema*, *Minha
-  contribuição*, *Desenvolvimento técnico*, *Resultados*, *Evidências* e
-  *Aprendizados*; a ficha técnica do tipo; e as figuras que o tipo pede.
+- **Os seus dados** chegam no `soma.tex`. Um campo vazio no `relatorio-aacc.tex`
+  não apaga o que veio do SOMA; preencha só o que faltar (o colegiado, o
+  supervisor, a dedicação semanal). Não edite o `soma.tex`: corrija no SOMA e
+  baixe de novo.
+- **Uma atividade por arquivo**, em `atividades/`. Copie o modelo do tipo certo
+  de `modelos/` (ele já traz a ficha técnica e as perguntas do tipo) e inclua o
+  arquivo no `relatorio-aacc.tex` com `\input{atividades/…}`. Uma atividade é
+  uma entrega, com começo, meio e fim: "participei do projeto por dois anos" são
+  várias atividades.
+- **Cada atividade tem**: a ficha (tipo, aproveitamento, horas, período,
+  projeto, papel, quem confirma, registros no SOMA, competências, disciplinas);
+  as seções *Contexto e problema*, *Minha contribuição*, *Desenvolvimento
+  técnico*, *Resultados*, *Evidências* e *Aprendizados*; a ficha técnica do
+  tipo; e as figuras que o tipo pede.
+- **O aproveitamento da atividade** é `participacao` (o comum: ela compõe o
+  enquadramento do pedido) ou a chave de uma atividade à parte. A publicação
+  pede `publicacao = nacional` (ou `internacional`, `revista`, `periodico`,
+  `livro`, `patente`); o evento e o curso pedem `duracao`, em horas.
 - **Evidência** é o que alguém de fora consegue conferir:
-  `\evidencia{tipo}{identificador}{o que mostra}{onde conferir}` — o código
-  de um arquivo controlado, de um cartão, um commit, uma declaração com código
+  `\evidencia{tipo}{identificador}{o que mostra}{onde conferir}`. O código de um
+  arquivo controlado, de um cartão, um commit, uma declaração com código
   verificador. Atividade sem evidência não conta.
+- **Códigos** (`NRO-PRO-003-7`, `CERT-…`) vão com `\cod{…}`: saem na fonte dos
+  rótulos e nunca quebram.
 - **Figuras**: exporte do KiCad, do CAD, do simulador (PDF, de preferência) para
   `figuras/` e use `\includegraphics`. A `\figuraprovisoria` dos modelos é
   pendência até ser trocada.
+- **Tabelas**: no estilo do relatório, com `\reguatopo`, `\cab{…}`,
+  `\reguameio`, `\reguafina` e `\reguabase` (veja as do exemplo).
 - **Nada confidencial**: nem dados de pacientes ou de participantes (LGPD), nem
   informação de projeto que a equipe não divulga. Na dúvida, pergunte ao
   supervisor antes de pôr a figura.
@@ -84,94 +135,109 @@ rascunho, vermelha no final), entra na lista do começo e na conta da capa.
 
 | Confere | Como |
 |---|---|
-| Os seus dados e os da equipe | cada campo obrigatório vazio |
-| A ficha de cada atividade | tipo, modalidade, horas, período, projeto, papel, quem confirma, registros, competências |
+| Os seus dados | cada campo obrigatório vazio; o ingresso como AAAA/1 ou AAAA/2 |
+| O pedido | o enquadramento principal; os semestres do SIEX, se pede EXT; os dados da ação no SIEX |
+| A ficha de cada atividade | tipo, horas, período, projeto, papel, quem confirma, registros, competências |
+| O art. 5º | a atividade que começou antes do ingresso no curso |
+| As atividades à parte | a espécie da publicação, a duração do evento ou do curso, e se chegam a um crédito |
 | As seções da atividade | as seis têm de existir |
 | As evidências | ao menos uma por atividade |
 | As figuras | o mínimo do tipo (2 para placa, peça e simulação; 1 para software, ensaio e comunicação) |
 | A ficha técnica | os campos obrigatórios do tipo |
-| O pedido | o código e o dispositivo de cada modalidade usada |
 | A Parte II | a trajetória e os afastamentos declarados |
 | A autoavaliação | as seis notas |
-| Os anexos | o PDF da declaração de vínculo |
 
-E calcula: as horas e os créditos por modalidade (15 h por crédito), o
-requerimento ao Colegiado, a lista das atividades com a página de cada uma, a
-média semanal das horas pedidas (e avisa acima de 20 h), a matriz das
-competências das DCN de Engenharia, o quadro das disciplinas e o índice de todas
-as evidências (Anexo A).
+E calcula: os semestres que contam, os créditos do principal, das alternativas e
+de cada atividade à parte, o requerimento ao Colegiado, a lista das atividades
+com a página de cada uma, a média semanal das horas (e avisa acima de 20 h), a
+matriz das competências das DCN de Engenharia, o quadro das disciplinas e o
+índice de todas as evidências (Anexo A).
 
-### Antes de encaminhar
+### Antes de enviar
 
-- [ ] Em `final`, a capa diz **SEM PENDÊNCIAS**.
-- [ ] A declaração de vínculo é recente e está em `anexos/`.
+- [ ] Em `final`, a capa diz **Sem pendências**.
 - [ ] Toda atividade tem evidência que outra pessoa consegue conferir.
 - [ ] As figuras são as de verdade, e o supervisor liberou as de projeto.
-- [ ] As horas batem com a memória de cálculo e não aparecem em outra atividade acadêmica.
+- [ ] As horas batem com a memória de cálculo e nenhuma atividade aparece em
+      outra AACC ou atividade acadêmica (art. 7º).
 - [ ] Os supervisores de *Quem confirma* sabem que serão consultados.
 - [ ] Nenhum dado pessoal de terceiros, nenhuma informação confidencial.
 
+## O desenho
+
+O relatório segue o **relatório formal** do design system: a capa com a régua
+Cortex, o título serifado e a grade dos dados; o kicker (régua fina, rótulo e
+numeral em itálico) em cada parte e atividade; tabelas com régua em cima e
+embaixo e linhas finas, sem colunas riscadas; texto alinhado à esquerda. O
+cabeçalho das folhas (menos a capa) continua o do NRO-PUB-002, igual aos PDFs
+do SOMA.
+
+As fontes do design system (Instrument Serif e Archivo Light) não existem no
+pdfLaTeX. A classe usa as mais próximas que o TeX Live tem: TeX Gyre Termes nos
+títulos, Roboto Light no texto e Archivo nos rótulos e nos códigos; se alguma
+faltar, cai para Times e Helvetica. Sem fonte de código em rótulos, sem ponto
+médio, sem travessão como separador. O PDF não tem campo de formulário: abre
+igual em qualquer leitor, e a mesma compilação dá o mesmo resultado no
+Overleaf, no Windows, no Mac e no Linux.
+
 ## Para a Diretoria
 
-**Antes de publicar o template**, preencha `nro/equipe.tex`: o professor
-responsável (com o título e o departamento), o dirigente que assina o parecer
-da equipe e os dados da ação de extensão no SIEX (título, número, coordenador,
-vigência). Enquanto estiverem vazios, todo relatório nasce com essas
-pendências — de propósito.
-
-**A série no SOMA.** O código `NRO-PES-020` é uma proposta. Em *Arquivos ›
-Adicionar › Série nova*, crie a série do Pessoal com a estrutura *Template →
-registros*, o grupo revisor (a direção da equipe) e a classe *controlado*. Se o
-número não for 020, troque-o em `nro/equipe.tex`.
+**Antes de publicar**, preencha em `nro/equipe.tex` os dados da ação de
+extensão no SIEX (título, número, coordenador, vigência): eles só viram
+pendência para quem pede o enquadramento EXT. O professor responsável é
+opcional ali; o professor orientador de cada pedido é indicado no SOMA.
 
 **As regras moram em `nro/`**, fora da classe, para a equipe ajustar sem mexer
 em código:
 
 | Arquivo | O que tem |
 |---|---|
-| `nro/equipe.tex` | a série, o professor, o dirigente, o SIEX, a norma, horas por crédito, média semanal máxima |
-| `nro/institucional.tex` | a Parte I — a equipe apresentada ao Colegiado (o vínculo com a UFMG, a governança, o SOMA, o padrão exigido) |
-| `nro/modalidades.tex` | o catálogo das modalidades de aproveitamento |
+| `nro/equipe.tex` | a série, o SIEX, a norma, horas por crédito, média semanal máxima, meses por semestre |
+| `nro/institucional.tex` | a Parte I: a equipe apresentada ao Colegiado e o enquadramento na resolução |
+| `nro/aproveitamento.tex` | o catálogo do aproveitamento: os enquadramentos e as atividades à parte |
 | `nro/tipos.tex` | os tipos de atividade: a ficha técnica, as figuras mínimas e o roteiro de cada um |
 | `nro/avaliacao.tex` | o barema do professor (os pesos somam 100) e as competências das DCN |
 
-A lista de repercussão da Parte I espelha a imprensa do site institucional
-(SOMA › Studio › Configurações › Imprensa do site); quando entrar matéria nova
-lá, atualize aqui.
+**O que anda junto com o SOMA.** O catálogo (`nro/aproveitamento.tex`), a regra
+dos semestres e o barema (`nro/avaliacao.tex`) têm uma cópia no portal
+(`mod-aproveitamento.js` e a configuração do aproveitamento no banco). Mudou
+aqui, mude lá no mesmo dia, e publique o ZIP de novo.
 
-**Os dispositivos da Resolução nº 02/2019 não vêm preenchidos.** Cada membro
-informa o artigo e o inciso do seu curso. Quando a equipe conferir o texto
-oficial e o quadro de AACC dos cursos mais comuns, vale pôr um exemplo por
-modalidade no comentário do `relatorio-aacc.tex`.
+A lista de repercussão e as competições da Parte I espelham a imprensa do site
+institucional (SOMA, Studio, Configurações, Imprensa do site); quando entrar
+matéria nova lá, atualize aqui.
 
 **Os modelos de `modelos/`** seguem os campos de `nro/tipos.tex`. Mudou um tipo,
 confira o modelo dele.
 
 **Publicar uma versão nova** (o ZIP e o PDF do exemplo em `assets/`, que o site
-serve): rode `./empacotar.sh` nesta pasta, com TeX Live, `latexmk`, `biber` e
-`zip`. Ele compila o template e o exemplo numa cópia limpa e só gera os arquivos
-se os dois compilarem.
+serve e que o SOMA baixa): rode `./empacotar.sh` nesta pasta, com TeX Live,
+`latexmk`, `biber` e `zip`. Ele compila o template e o exemplo numa cópia limpa
+e só gera os arquivos se os dois compilarem.
 
-## Para o professor responsável
+## Para o professor orientador
 
-O *Parecer e nota* (Parte V) tem o barema de seis critérios — aderência à
-formação (15), profundidade técnica (25), contribuição individual (20),
-evidências e rastreabilidade (15), resultados e impacto (15) e comunicação (10).
-Cada critério recebe de 0 a 10; os pontos são a nota vezes o peso, dividida por
-10; a nota final é a soma (0 a 100), com o conceito da UFMG. O mesmo barema está
-na autoavaliação do estudante, na Parte IV.
+O professor recebe o pedido por e-mail, com o link para o SOMA, e avalia ali
+pelo barema de seis critérios: aderência à formação (15), profundidade técnica
+(25), contribuição individual (20), evidências e rastreabilidade (15),
+resultados e impacto (15) e comunicação (10). Cada critério recebe de 0 a 10; os
+pontos são a nota vezes o peso, dividida por 10; a nota final é a soma (0 a
+100), com o conceito da UFMG. A nota mínima para o aproveitamento é 60 (art. 3º,
+II). O mesmo barema está na autoavaliação do estudante, na Parte IV, e na
+Parte V do relatório.
 
 ## Os arquivos
 
 ```
-relatorio-aacc.tex          o relatório — o arquivo que o membro edita
-nro-aacc.cls                a classe (o modelo NRO-PUB-002 e toda a lógica)
+relatorio-aacc.tex          o relatório: o arquivo que o membro edita
+soma.tex                    os dados do SOMA (vem no ZIP gerado pelo portal)
+nro-aacc.cls                a classe (o modelo e toda a lógica)
 referencias.bib             as referências, em ABNT
 nro/                        o que é da equipe (a Diretoria mantém)
 atividades/                 as atividades do membro, uma por arquivo
 modelos/                    um modelo por tipo de atividade, para copiar
 figuras/                    as figuras do membro
-anexos/                     os PDFs anexos (a declaração de vínculo…)
+anexos/                     os PDFs anexos
 exemplo-relatorio-aacc.tex  o exemplo fictício (fora do ZIP; o PDF vai junto)
 exemplo/                    as atividades e as figuras do exemplo
 empacotar.sh                gera o ZIP e o PDF do exemplo em ../../assets

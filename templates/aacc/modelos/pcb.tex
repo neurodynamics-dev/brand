@@ -1,5 +1,5 @@
 %% ============================================================
-%% MODELO DE ATIVIDADE · ELETRÔNICA E PLACA DE CIRCUITO IMPRESSO
+%% MODELO DE ATIVIDADE: ELETRÔNICA E PLACA DE CIRCUITO IMPRESSO
 %%
 %% Copie este arquivo para atividades/ (atividade-02.tex, por exemplo),
 %% inclua-o no relatorio-aacc.tex com \input{atividades/atividade-02}
@@ -11,9 +11,11 @@
 %% ============================================================
 \begin{atividade}{Projeto da placa X, revisão B: esquemático, layout e testes}{
   tipo         = pcb,
-  modalidade   = {},   % a chave da modalidade pedida: EXT, PES, COMP, VPC, EVT, PRD, ORG, ENS, GES, CUR, OUT
-  alternativa  = {},   % a modalidade alternativa, se o Colegiado não aceitar a primeira
-  horas        = {},   % as horas desta atividade, com base nos registros (Parte IV)
+  aproveitamento = participacao,   % participacao: compõe o enquadramento do pedido (o comum).
+                                   % À parte (art. 7º): PUB, EVO, EVP, CUR ou VOL (Parte I)
+  % duracao    = {},   % só EVO, EVP e CUR: a duração do evento ou do curso, em horas
+  % publicacao = {},   % só PUB: nacional, internacional, revista, periodico, livro ou patente
+  horas        = {},   % as horas que você dedicou a ela, com base nos registros (Parte IV)
   inicio       = {},   % AAAA-MM
   fim          = {},   % AAAA-MM, ou: em andamento
   projeto      = {},
@@ -25,7 +27,7 @@
 }
 
 \begin{contexto}
-\preencher{Que sistema a placa integra, que problema ela resolve e que requisitos a definem --- cite a USRS (NRO-PRO-004), se houver. Por que foi preciso projetar uma placa, e não comprar uma pronta?}
+\preencher{Que sistema a placa integra, que problema ela resolve e que requisitos a definem (cite a USRS, NRO-PRO-004, se houver). Por que foi preciso projetar uma placa, e não comprar uma pronta?}
 \end{contexto}
 
 \begin{contribuicao}
@@ -38,10 +40,10 @@
   revisao     = {},   % Revisão da placa
   camadas     = {},   % Camadas e espessura
   dimensoes   = {},   % Dimensões
-  componentes = {},   % Componentes (quantidade) — opcional
+  componentes = {},   % Componentes (quantidade), opcional
   alimentacao = {},   % Alimentação e isolação
   fabricacao  = {},   % Fabricação e montagem
-  normas      = {},   % Normas consideradas — opcional
+  normas      = {},   % Normas consideradas, opcional
   arquivos    = {},   % Onde estão os arquivos
 }
 
@@ -73,8 +75,8 @@
 \begin{evidencias}
 % Uma linha por evidência: \evidencia{tipo}{identificador}{o que mostra}{onde conferir}
 % \evidencia{Repositório}{github.com/neurodynamics-dev/<projeto>-hw @ <commit>}{Esquemático e layout da rev. B}{GitHub (acesso a pedido)}
-% \evidencia{Arquivo controlado}{NRO-PRO-003-<PN>}{Relatório de execução de teste da placa}{SOMA › Arquivos}
-% \evidencia{Atividade}{<GRUPO>-<n>}{O cartão do layout, atribuído a você e concluído}{SOMA › Atividades}
+% \evidencia{Arquivo controlado}{NRO-PRO-003-<PN>}{Relatório de execução de teste da placa}{SOMA, Arquivos}
+% \evidencia{Atividade}{<GRUPO>-<n>}{O cartão do layout, atribuído a você e concluído}{SOMA, Atividades}
 \end{evidencias}
 
 \begin{aprendizados}

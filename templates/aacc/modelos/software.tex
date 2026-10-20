@@ -1,5 +1,5 @@
 %% ============================================================
-%% MODELO DE ATIVIDADE · FIRMWARE E SOFTWARE
+%% MODELO DE ATIVIDADE: FIRMWARE E SOFTWARE
 %%
 %% Copie este arquivo para atividades/ (atividade-02.tex, por exemplo),
 %% inclua-o no relatorio-aacc.tex com \input{atividades/atividade-02}
@@ -11,9 +11,11 @@
 %% ============================================================
 \begin{atividade}{Módulo M do firmware: requisitos, arquitetura e testes}{
   tipo         = software,
-  modalidade   = {},   % a chave da modalidade pedida: EXT, PES, COMP, VPC, EVT, PRD, ORG, ENS, GES, CUR, OUT
-  alternativa  = {},   % a modalidade alternativa, se o Colegiado não aceitar a primeira
-  horas        = {},   % as horas desta atividade, com base nos registros (Parte IV)
+  aproveitamento = participacao,   % participacao: compõe o enquadramento do pedido (o comum).
+                                   % À parte (art. 7º): PUB, EVO, EVP, CUR ou VOL (Parte I)
+  % duracao    = {},   % só EVO, EVP e CUR: a duração do evento ou do curso, em horas
+  % publicacao = {},   % só PUB: nacional, internacional, revista, periodico, livro ou patente
+  horas        = {},   % as horas que você dedicou a ela, com base nos registros (Parte IV)
   inicio       = {},   % AAAA-MM
   fim          = {},   % AAAA-MM, ou: em andamento
   projeto      = {},
@@ -39,10 +41,10 @@
   repositorio   = {},   % Repositório
   contribuicoes = {},   % Contribuições (commits, PRs, revisões)
   testes        = {},   % Testes
-  licenca       = {},   % Licença — opcional
+  licenca       = {},   % Licença, opcional
 }
 
-\preencher{A arquitetura: os módulos, as interfaces e o fluxo de dados. As decisões registradas (ADR, NRO-PRO-013). Os trechos que importam, explicados --- não o código inteiro. Os testes.}
+\preencher{A arquitetura: os módulos, as interfaces e o fluxo de dados. As decisões registradas (ADR, NRO-PRO-013). Os trechos que importam, explicados, e não o código inteiro. Os testes.}
 
 \begin{figure}[htbp]
   \centering
@@ -66,7 +68,7 @@
 \begin{evidencias}
 % Uma linha por evidência: \evidencia{tipo}{identificador}{o que mostra}{onde conferir}
 % \evidencia{Repositório}{github.com/neurodynamics-dev/<repo>, PR \#<n>}{O pull request do módulo, com a revisão}{GitHub (acesso a pedido)}
-% \evidencia{Arquivo controlado}{NRO-PRO-013-<PN>}{O registro da decisão de arquitetura}{SOMA › Arquivos}
+% \evidencia{Arquivo controlado}{NRO-PRO-013-<PN>}{O registro da decisão de arquitetura}{SOMA, Arquivos}
 \end{evidencias}
 
 \begin{aprendizados}

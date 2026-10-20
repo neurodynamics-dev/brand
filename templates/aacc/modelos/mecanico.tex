@@ -1,5 +1,5 @@
 %% ============================================================
-%% MODELO DE ATIVIDADE · PROJETO MECÂNICO
+%% MODELO DE ATIVIDADE: PROJETO MECÂNICO
 %%
 %% Copie este arquivo para atividades/ (atividade-02.tex, por exemplo),
 %% inclua-o no relatorio-aacc.tex com \input{atividades/atividade-02}
@@ -11,9 +11,11 @@
 %% ============================================================
 \begin{atividade}{Projeto da peça Y: concepção, cálculo e protótipo}{
   tipo         = mecanico,
-  modalidade   = {},   % a chave da modalidade pedida: EXT, PES, COMP, VPC, EVT, PRD, ORG, ENS, GES, CUR, OUT
-  alternativa  = {},   % a modalidade alternativa, se o Colegiado não aceitar a primeira
-  horas        = {},   % as horas desta atividade, com base nos registros (Parte IV)
+  aproveitamento = participacao,   % participacao: compõe o enquadramento do pedido (o comum).
+                                   % À parte (art. 7º): PUB, EVO, EVP, CUR ou VOL (Parte I)
+  % duracao    = {},   % só EVO, EVP e CUR: a duração do evento ou do curso, em horas
+  % publicacao = {},   % só PUB: nacional, internacional, revista, periodico, livro ou patente
+  horas        = {},   % as horas que você dedicou a ela, com base nos registros (Parte IV)
   inicio       = {},   % AAAA-MM
   fim          = {},   % AAAA-MM, ou: em andamento
   projeto      = {},
@@ -25,7 +27,7 @@
 }
 
 \begin{contexto}
-\preencher{Que peça ou conjunto, para que sistema, com que requisitos --- cargas, ergonomia, massa, espaço, fabricação --- e de onde veio cada um.}
+\preencher{Que peça ou conjunto, para que sistema, com que requisitos (cargas, ergonomia, massa, espaço, fabricação) e de onde veio cada um.}
 \end{contexto}
 
 \begin{contribuicao}
@@ -37,10 +39,10 @@
   ferramenta    = {},   % Ferramenta CAD/CAE e versão
   materiais     = {},   % Materiais
   fabricacao    = {},   % Processo de fabricação
-  pecas         = {},   % Peças e montagem — opcional
+  pecas         = {},   % Peças e montagem, opcional
   carregamentos = {},   % Cargas e condições de uso
-  normas        = {},   % Normas consideradas — opcional
-  desenhos      = {},   % Desenhos técnicos (códigos) — opcional
+  normas        = {},   % Normas consideradas, opcional
+  desenhos      = {},   % Desenhos técnicos (códigos), opcional
   arquivos      = {},   % Onde estão os arquivos
 }
 
@@ -72,7 +74,7 @@
 \begin{evidencias}
 % Uma linha por evidência: \evidencia{tipo}{identificador}{o que mostra}{onde conferir}
 % \evidencia{Arquivo de projeto}{<projeto>/mecanica/Y\_revB.step}{O modelo CAD da revisão B}{Drive da equipe (acesso a pedido)}
-% \evidencia{Arquivo controlado}{NRO-PRO-014-<PN>}{O registro de projeto (design record) da peça}{SOMA › Arquivos}
+% \evidencia{Arquivo controlado}{NRO-PRO-014-<PN>}{O registro de projeto (design record) da peça}{SOMA, Arquivos}
 \end{evidencias}
 
 \begin{aprendizados}
