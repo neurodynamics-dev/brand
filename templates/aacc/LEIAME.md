@@ -200,8 +200,15 @@ em código:
 
 **O que anda junto com o SOMA.** O catálogo (`nro/aproveitamento.tex`), a regra
 dos semestres e o barema (`nro/avaliacao.tex`) têm uma cópia no portal
-(`mod-aproveitamento.js` e a configuração do aproveitamento no banco). Mudou
-aqui, mude lá no mesmo dia, e publique o ZIP de novo.
+(`mod-aproveitamento.js`, `doc-nro.js` e a configuração do aproveitamento no
+banco). Mudou aqui, mude lá no mesmo dia, e publique o ZIP de novo.
+
+O SOMA lê do PDF enviado as palavras-chave que a classe grava: `nro-aacc`, e
+`documento`, `modo`, `pendencias`, `folha` (a página da folha reservada),
+`principal`, `creditos`, `principalcreditos`, `itens`, `semestres` e
+`exemplo`. Ele recusa o PDF que não é do template, que é de outro pedido, em
+rascunho, com pendência ou sem a folha reservada. Mexer na classe sem manter
+essas chaves quebra o envio.
 
 A lista de repercussão e as competições da Parte I espelham a imprensa do site
 institucional (SOMA, Studio, Configurações, Imprensa do site); quando entrar
@@ -217,12 +224,13 @@ e só gera os arquivos se os dois compilarem.
 
 ## Para o professor orientador
 
-O professor recebe o pedido por e-mail, com o link para o SOMA, e avalia ali
-pelo barema de seis critérios: aderência à formação (15), profundidade técnica
-(25), contribuição individual (20), evidências e rastreabilidade (15),
-resultados e impacto (15) e comunicação (10). Cada critério recebe de 0 a 10; os
-pontos são a nota vezes o peso, dividida por 10; a nota final é a soma (0 a
-100), com o conceito da UFMG. A nota mínima para o aproveitamento é 60 (art. 3º,
+O professor recebe o pedido por e-mail, com um link pessoal para o SOMA, e
+avalia ali, sem cadastro no portal, pelo barema de seis critérios: aderência à
+formação (15), profundidade técnica (25), contribuição individual (20),
+evidências e rastreabilidade (15), resultados e impacto (15) e comunicação (10).
+Cada critério recebe de 0 a 10, de meio em meio ponto; os pontos são a nota
+vezes o peso, dividida por 10; a nota final é a soma (0 a 100), com o conceito
+da UFMG. A folha de aprovação imprime a nota e os pontos de cada critério. A nota mínima para o aproveitamento é 60 (art. 3º,
 II). O mesmo barema está na autoavaliação do estudante, na Parte IV, e na
 Parte V do relatório.
 

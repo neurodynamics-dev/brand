@@ -2064,6 +2064,9 @@
             folha = \tl_if_empty:NTF \g__nro_folha_tl { 0 } { \g__nro_folha_tl } ; ~
             principal = \g__nro_principal_tl ; ~
             creditos = \int_eval:n { \g__nro_principal_cred_int + \g__nro_itens_cred_int } ; ~
+            principalcreditos = \int_use:N \g__nro_principal_cred_int ; ~
+            itens = \int_use:N \g__nro_itens_cred_int ; ~
+            semestres = \int_use:N \g__nro_sem_conta_int ; ~
             exemplo = \bool_if:NTF \g__nro_exemplo_bool { sim } { nao }
           }
       }
@@ -3062,7 +3065,7 @@
 \newcommand\nro@avaliacao{%
   \section{A avaliação do professor orientador}
   O professor orientador avalia o relatório no SOMA, pelos critérios abaixo. Cada critério recebe uma
-  nota de 0 a 10; os pontos são a nota multiplicada pelo peso e dividida por 10, e a nota final é a soma
+  nota de 0 a 10, de meio em meio ponto; os pontos são a nota multiplicada pelo peso e dividida por 10, e a nota final é a soma
   dos pontos (0 a \nro@somapesos). A nota mínima para o aproveitamento é 60 (art.~3\textordmasculine, II).
   A nota e os pontos de cada critério vêm na folha de aprovação.\par
   \vspace{1mm}
