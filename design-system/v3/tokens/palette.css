@@ -1,0 +1,26 @@
+/* NeuroDynamics brand palette. Families only, four tones each (light, medium, primary, dark).
+   PRIMARY SET: one family, Cortex, with five tones: light, medium, primary (Axon), dark (Cortex) and accent (Synapse, the spark for Axon). The only colours allowed in glows, blurs, gradients and transparency.
+   NEUTRAL SET: Sulco (deep grounds and ink, after the deep folds of the cortex), Pia (cool greys, after pia mater), Medula (warm paper, after white matter). Replaces the old deep, neutral and formal paper tokens.
+   BRAND SET, green and cool: Ion, Neuron, Glia, Retina, Nexo, Dendrito. BRAND SET, warm palette (spring register): Lúmen, Ritmo, Impulso, Plexo, Íris.
+   Brand and neutral families are plain only: flat fills, text, rules. Never in glows, blurs or gradients.
+   One family per surface (plus white or a neutral). The imagotipo is recoloured to that family.
+   Pairing: light ground + dark of the family; dark ground + white; primary ground + dark of the family,
+   except Cortex, Retina and Nexo primaries, which take white. Interface states use the Functional set (functional.css). */
+:root{
+  --cortex-light:#E3EFEC; --cortex-medium:#A9CCC4; --cortex-primary:#00594F; --cortex-dark:#00352F; --cortex-accent:#CEDC00;
+  --sulco-light:#616C68; --sulco-medium:#1D1D1F; --sulco-primary:#0B1210; --sulco-dark:#050807;
+  --pia-light:#E8EDEB; --pia-medium:#C4CCC9; --pia-primary:#9AA5A1; --pia-dark:#2E3533;
+  --medula-light:#F7F4EE; --medula-medium:#E6DFD3; --medula-primary:#C9BFAF; --medula-dark:#4A453E;
+  --ion-light:#D9F7F2; --ion-medium:#93E8DB; --ion-primary:#5BBFB0; --ion-dark:#0B4F48;
+  --neuron-light:#E4F2E3; --neuron-medium:#B3D9B0; --neuron-primary:#5AA65E; --neuron-dark:#1F4A22;
+  --glia-light:#E9EFEA; --glia-medium:#C3D3C7; --glia-primary:#8AA894; --glia-dark:#2E4636;
+  --retina-light:#E0E6FC; --retina-medium:#A9B9F6; --retina-primary:#3456E3; --retina-dark:#142A75;
+  --nexo-light:#E7E5FA; --nexo-medium:#BAB4F0; --nexo-primary:#5A4ED4; --nexo-dark:#251C66;
+  --dendrito-light:#EEE8FE; --dendrito-medium:#CDBEFC; --dendrito-primary:#A78BFA; --dendrito-dark:#3B2378;
+  --lumen-light:#FFF9D6; --lumen-medium:#FFEE8A; --lumen-primary:#FFD91A; --lumen-dark:#594A00;
+  --ritmo-light:#FFEDE0; --ritmo-medium:#FFCBA6; --ritmo-primary:#FF9B5E; --ritmo-dark:#6B2E08;
+  --impulso-light:#FFE4E6; --impulso-medium:#FFAEB5; --impulso-primary:#FF4F61; --impulso-dark:#6E0A1A;
+  --plexo-light:#FFE6F0; --plexo-medium:#FFB9D3; --plexo-primary:#FF70A6; --plexo-dark:#6B0F38;
+  --iris-light:#F8E7FC; --iris-medium:#EBBAF5; --iris-primary:#D676EB; --iris-dark:#4E0F5E;
+  --signature:var(--cortex-dark);
+}

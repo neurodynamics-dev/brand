@@ -12,21 +12,23 @@ central de assets. Isto aqui é a versão que a ferramenta lê.
 
 ```
 design-system/
-├── tokens.css          fonte única dos tokens (cor, tipo, espaço, forma)
-├── neuro.css           folha consumível: base + componentes
-├── build.mjs           sincroniza tokens e artes nos previews; gera o manifesto
+├── tokens.css          fonte única dos tokens (famílias de cor, tipo, espaço, forma)
+├── neuro.css           folha consumível das interfaces: base + componentes
+├── formal.css          folha dos documentos no modo executivo (A4, timbre, kickers)
+├── DIRETRIZES.md       todas as regras da marca (fonte de verdade)
+├── build.mjs           sincroniza tokens, fontes e artes nos previews; gera o manifesto
 ├── _ds_manifest.json   índice dos cards (gerado)
 ├── marca/              artes de preview, derivadas de assets/
-└── previews/           17 cards, um HTML autocontido cada
+└── previews/           18 cards, um HTML autocontido cada
 ```
 
-Os 17 cards, em três grupos:
+Os 18 cards, em três grupos:
 
 | Grupo | Cards |
 | --- | --- |
 | **Fundamentos** | Cores · Tipografia · Espaço e forma · Superfícies |
 | **Marca** | Imagotipo · Fundo e textura · Banda e hero |
-| **Componentes** | Botões · Cartões · Formulários · Status e etiquetas · Navegação · Dados · Feedback · Telas de trabalho · Quadro e atribuição · Menu lateral |
+| **Componentes** | Botões · Cartões · Formulários · Status e etiquetas · Navegação · Dados · Feedback · Telas de trabalho · Quadro e atribuição · Menu lateral · Calendário |
 
 Cada preview mostra os estados reais do componente (repouso, hover, foco,
 erro, desativado) e fecha com as regras de uso — inclusive as proibições, que
@@ -81,14 +83,14 @@ não pode ser mudado depois, então crie por ali mesmo.
 
 **4. Confira**
 
-Abra claude.ai/design, entre no projeto e veja os 17 cards distribuídos em
+Abra claude.ai/design, entre no projeto e veja os 18 cards distribuídos em
 Fundamentos, Marca e Componentes. A partir daí, toda interface que o Claude
 gerar para a NeuroDynamics sai já na marca.
 
 ## Como editar
 
 **Mudou um token?** Edite `tokens.css` e rode `node build.mjs`. O bloco de
-tokens é reescrito nos 17 previews de uma vez.
+tokens é reescrito nos 18 previews de uma vez.
 
 **Mudou um componente?** Edite o preview correspondente em `previews/` e, se o
 componente também vive em `neuro.css`, atualize os dois. O preview é a
@@ -120,7 +122,9 @@ artes da marca entram como data URI, em vez de `<link>` e `<img src>`. É
 duplicação deliberada, e o `build.mjs` existe justamente para que essa
 duplicação nunca saia do lugar.
 
-As fontes (Archivo e IBM Plex Mono) vêm do Google Fonts por `<link>`. Se o
+As fontes (Archivo, Instrument Sans, Instrument Serif e IBM Plex Mono) vêm do
+Google Fonts por `<link>`, e o `build.mjs` mantém esse link igual em todos os
+previews. Se o
 ambiente de renderização bloquear a requisição, a pilha de fallback assume e o
 layout continua íntegro — só a fonte muda.
 
@@ -131,3 +135,32 @@ de Cores. O resultado que muda o dia a dia: **Grafite (`#616C68`) rende 3,69:1
 sobre o Void e reprova em AA para texto corrido** — serve para rótulo caixa
 alta, legenda e borda, e nada além disso. Para texto secundário, use Névoa
 (7,92:1).
+
+## Versão 2: o que mudou
+
+A versão exportada do Claude Design (projeto "NeuroDynamics Design System")
+trouxe a paleta em famílias, os dois modos de tipografia e o registro formal.
+O que isso muda para quem já usa estas folhas:
+
+- **Nada quebra.** Os nomes antigos continuam em `tokens.css` como aliases:
+  `--soma`, `--vital`, `--mielina`, `--pulso` e `--plasma` agora apontam para o
+  conjunto funcional (`--fn-*`) ou para o Axon; `--r-pill` vale 7px.
+- **Valores mudaram.** Ink e Aura passam a `#E8EDEB` (Pia light); os estados
+  usam os tons elétricos do conjunto funcional; o corpo de texto agora é
+  Instrument Sans (inclua o novo `<link>` de fontes).
+- **Componentes.** Rótulos saem do Plex Mono para Archivo 600; chips, pills,
+  tags e contadores perdem o formato pílula (6, 5 e 4px); a seleção de chips,
+  Segmented e SectionNav é 9% de branco, nunca Synapse. Novos: `.icbtn`,
+  `.chave` (Switch), `.alerta`, `.trilha`, `.fb` (FilterBar), `.lista` (select
+  próprio), campo com ações (`.caixa`) e envio (`.enviar`), `.band.fam`,
+  `.widget`, `.btn.fam`, `.btn.danger`, `.badge`, e as classes `.f-<família>`.
+- **Barras de comparação** viram traços discretos (1,5px e vão de 4,5px). A
+  marcação antiga de `.barras` continua funcionando.
+- **Documentos** usam `formal.css` (Instrument Serif + Archivo Light, A4 com
+  margens de 22mm, timbre com tipo e código do documento, kickers, tabela e
+  assinatura).
+
+Os cards de Cores e Tipografia foram refeitos. Nos demais, os rótulos em mono
+viraram Archivo, as cores de estado viraram as do conjunto funcional e o
+formato pílula saiu, mas o CSS de cada card ainda é uma cópia local: ao mexer
+num componente, confira o card contra `neuro.css`.

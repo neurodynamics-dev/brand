@@ -1,0 +1,153 @@
+/* ============================================================
+   NeuroDynamics · Registro formal
+   Folha para documentos lidos, impressos ou apresentados no modo
+   executivo: relatórios formais, certificados, convites, cartas,
+   apresentações formais e cartões de visita. Construída sobre
+   tokens.css; não use junto com neuro.css na mesma página.
+
+   Uso:
+     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="tokens.css">
+     <link rel="stylesheet" href="formal.css">
+
+   Regras:
+   - Instrument Serif, nunca negrito, para títulos, nomes, numerais
+     e citações. Archivo Light 300 para texto corrido (10,5 pt).
+     Archivo 400/500 para rótulos pequenos e códigos. Nunca Plex Mono.
+   - Secundário: mesmo peso, um tom mais claro da mesma família.
+   - Fundos: branco, Medula light, Cortex light ou Cortex dark chapado.
+     Regras em Pia medium ou no dark da família. Synapse nunca como
+     campo, só como acento mínimo.
+   - Uma família por peça. Nunca o conjunto funcional.
+   - Texto alinhado à esquerda, nunca justificado. Centralizado só em
+     peças específicas, como o certificado clássico.
+   - A4, margens de 22 mm. Fotos só quando fornecidas, retangulares,
+     sem filtro.
+   ============================================================ */
+
+/* ---------- base ------------------------------------------ */
+*{box-sizing:border-box;margin:0;padding:0}
+body.formal,.formal{font-family:var(--formal-body);font-weight:300;font-size:var(--pt-body);line-height:1.6;
+  color:var(--formal-ink);background:var(--paper);-webkit-font-smoothing:antialiased;
+  --fam-light:var(--cortex-light);--fam-medium:var(--cortex-medium);--fam-primary:var(--cortex-primary);--fam-dark:var(--cortex-dark)}
+.formal h1,.formal h2,.formal h3{font-family:var(--fs-formal);font-weight:400;letter-spacing:0;color:var(--fam-dark)}
+.formal h1{font-size:var(--pt-title);line-height:1.08}
+.formal h2{font-size:var(--pt-h1);line-height:1.2;margin:0 0 6pt}
+.formal h3{font-size:var(--pt-h2);line-height:1.3;margin:0 0 4pt}
+.formal p{margin:0 0 8pt;max-width:var(--measure);text-align:left}
+.formal em,.formal i{font-style:italic}
+.formal strong,.formal b{font-weight:500}   /* ênfase em Archivo 500; nunca negrito em serifa */
+.formal small,.formal .sec{color:var(--formal-ink-2);font-size:var(--pt-small)}
+.formal .cod{font-family:var(--formal-body);font-weight:400;white-space:nowrap}
+.formal .serifa{font-family:var(--fs-formal);font-weight:400}
+.formal .rot{font-family:var(--formal-body);font-weight:500;font-size:var(--pt-label);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--formal-ink-2)}
+.formal hr{border:0;height:1px;background:var(--formal-rule);margin:12pt 0}
+.formal a{color:var(--fam-dark);text-decoration:underline;text-underline-offset:2px}
+
+/* famílias da peça (uma só) */
+.formal.f-ion{--fam-light:var(--ion-light);--fam-medium:var(--ion-medium);--fam-primary:var(--ion-primary);--fam-dark:var(--ion-dark)}
+.formal.f-neuron{--fam-light:var(--neuron-light);--fam-medium:var(--neuron-medium);--fam-primary:var(--neuron-primary);--fam-dark:var(--neuron-dark)}
+.formal.f-glia{--fam-light:var(--glia-light);--fam-medium:var(--glia-medium);--fam-primary:var(--glia-primary);--fam-dark:var(--glia-dark)}
+.formal.f-retina{--fam-light:var(--retina-light);--fam-medium:var(--retina-medium);--fam-primary:var(--retina-primary);--fam-dark:var(--retina-dark)}
+.formal.f-nexo{--fam-light:var(--nexo-light);--fam-medium:var(--nexo-medium);--fam-primary:var(--nexo-primary);--fam-dark:var(--nexo-dark)}
+.formal.f-dendrito{--fam-light:var(--dendrito-light);--fam-medium:var(--dendrito-medium);--fam-primary:var(--dendrito-primary);--fam-dark:var(--dendrito-dark)}
+
+/* fundos */
+.papel-quente{background:var(--paper-warm)}
+.papel-cortex{background:var(--cortex-light)}
+.campo-cortex{background:var(--cortex-dark);color:#fff}
+.campo-cortex h1,.campo-cortex h2,.campo-cortex h3{color:#fff}
+.campo-cortex .sec,.campo-cortex small{color:var(--cortex-medium)}
+
+/* ---------- página A4 ------------------------------------- */
+.pagina{width:210mm;min-height:297mm;padding:var(--doc-margin);margin:0 auto;background:var(--paper);
+  position:relative;display:flex;flex-direction:column}
+.pagina.paisagem{width:297mm;min-height:210mm}
+.pagina+.pagina{margin-top:10mm}
+.pagina .rodape{margin-top:auto;padding-top:8pt;border-top:1px solid var(--formal-rule);display:flex;
+  justify-content:space-between;font-size:var(--pt-small);color:var(--formal-ink-3)}
+.colunas{display:grid;grid-template-columns:1fr 1fr;gap:var(--doc-gutter)}
+@page{size:A4;margin:0}
+@media print{
+  body{background:none}
+  .pagina{margin:0;page-break-after:always;break-after:page}
+  .pagina+.pagina{margin-top:0}
+}
+
+/* ---------- papel timbrado (Letterhead) ------------------- */
+/* Imagotipo recolorido no dark da família via máscara; aponte
+   --nd-imagotipo para url(.../logo-imagotipo-black.png). */
+.timbre{display:flex;flex-direction:column;gap:14px;margin-bottom:18pt}
+.timbre .linha{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.timbre .marca{width:118px;height:20px;background:var(--fam-dark);
+  -webkit-mask:var(--nd-imagotipo,none) left/contain no-repeat;mask:var(--nd-imagotipo,none) left/contain no-repeat}
+/* documento controlado: tipo e código no canto superior direito,
+   alinhados à direita, mesma fonte e corpo, mesmo sendo código */
+.timbre .controle{text-align:right;font-family:var(--formal-body);font-weight:300;font-size:11px;line-height:1.5;
+  color:var(--formal-ink-2)}
+.timbre .controle>*{display:block;white-space:nowrap}
+.timbre .fio{height:1px;background:var(--fam-dark)}
+.timbre .classe{font-family:var(--fs-formal);font-style:italic;font-size:14px;color:var(--fam-dark)}
+
+/* ---------- rótulos de seção (Kicker) --------------------- */
+/* Nunca mono em caixa alta. Três estilos: */
+/* fio: linha fina acima, rótulo em caixa de frase, numeral romano opcional */
+.kicker{margin:18pt 0 8pt}
+.kicker.fio::before{content:'';display:block;height:1px;background:var(--fam-dark)}
+.kicker.fio{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline}
+.kicker.fio::before{flex:0 0 100%;margin-bottom:10px}
+.kicker.fio .k{font-family:var(--formal-body);font-weight:500;font-size:14px;color:var(--fam-dark)}
+.kicker.fio .i{font-family:var(--fs-formal);font-style:italic;font-size:18px;color:var(--fam-dark)}
+/* fólio: numeral grande em serifa ao lado de um rótulo curto */
+.kicker.folio{display:flex;align-items:flex-start;gap:12px}
+.kicker.folio .i{font-family:var(--fs-formal);font-size:56px;line-height:.8;color:var(--fam-dark)}
+.formal:not([class*="f-"]) .kicker.folio .i,.kicker.folio.f-cortex .i{color:var(--cortex-primary)}
+.kicker.folio .k{font-family:var(--formal-body);font-weight:500;font-size:14px;line-height:1.3;color:var(--formal-ink);
+  padding-top:2px;max-width:160px}
+/* tinta: painel claro da família com itálico em serifa no dark */
+.kicker.tinta{display:inline-block;background:var(--fam-light);border-radius:10px;padding:12px 14px}
+.kicker.tinta .k{font-family:var(--fs-formal);font-style:italic;font-size:19px;color:var(--fam-dark)}
+
+/* ---------- tabela formal (DataTable) --------------------- */
+.tabela-formal{margin:12pt 0}
+.tabela-formal table{width:100%;border-collapse:collapse;font-family:var(--formal-body);font-size:12px;color:var(--formal-ink)}
+.tabela-formal th{font-weight:500;font-size:11px;color:var(--formal-ink-2);text-align:right;padding:8px 10px;
+  border-top:1.5px solid var(--formal-rule-strong);border-bottom:1px solid var(--formal-rule-strong)}
+.tabela-formal td{padding:8px 10px;text-align:right;font-weight:300;font-variant-numeric:tabular-nums;
+  border-bottom:1px solid var(--formal-rule)}
+.tabela-formal th:first-child,.tabela-formal td:first-child{text-align:left}
+.tabela-formal tr:last-child td{border-bottom:1.5px solid var(--formal-rule-strong)}
+.tabela-formal figcaption{font-family:var(--fs-formal);font-style:italic;font-size:13px;color:var(--formal-ink-2);margin-top:8px}
+
+/* ---------- assinatura (SignatureBlock) ------------------- */
+.assinatura{display:flex;flex-direction:column;align-items:flex-start;min-width:220px}
+.assinatura.centro{align-items:center;text-align:center}
+.assinatura::before{content:'';width:220px;height:1px;background:var(--formal-rule-strong);margin-bottom:10px}
+.assinatura .nome{font-family:var(--fs-formal);font-size:20px;line-height:1.1;color:var(--formal-ink)}
+.assinatura .cargo{font-family:var(--formal-body);font-weight:300;font-size:12px;color:var(--formal-ink-2);margin-top:3px}
+.assinaturas{display:flex;gap:40px;flex-wrap:wrap;margin-top:28pt}
+
+/* ---------- citação --------------------------------------- */
+/* travessão só para atribuir citação */
+.citacao{font-family:var(--fs-formal);font-size:22px;line-height:1.3;color:var(--fam-dark);max-width:520px}
+.citacao cite{display:block;margin-top:8px;font-family:var(--formal-body);font-weight:300;font-style:normal;
+  font-size:12px;color:var(--formal-ink-2)}
+.citacao cite::before{content:'— '}
+
+/* ---------- selo solene ----------------------------------- */
+/* Axon sobre papel (seal-axon.png) ou branco sobre Cortex (seal-white.png) */
+.selo{width:84px;height:auto;display:block}
+
+/* ---------- cartão (Card tone=paper) ---------------------- */
+.cartao-papel{border:1px solid var(--formal-rule);border-radius:var(--r-formal);background:var(--paper);padding:24px}
+.cartao-papel h3{font-family:var(--fd);font-size:16px;font-weight:600;letter-spacing:-.015em;color:var(--formal-ink);margin-bottom:6px}
+.cartao-papel p{font-size:13.5px;color:var(--formal-ink-2);line-height:1.65}
+
+/* ---------- botões no registro formal --------------------- */
+.btn-formal{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:44px;padding:0 20px;
+  border-radius:var(--r-formal);font-family:var(--fd);font-weight:600;font-size:14px;cursor:pointer;
+  background:var(--cortex);color:#fff;border:none;transition:background var(--t-fast)}
+.btn-formal:hover{background:var(--axon)}
+.btn-formal.contorno{background:transparent;border:1px solid var(--formal-rule-strong);color:var(--formal-ink)}
+.btn-formal.contorno:hover{background:var(--paper-tint)}

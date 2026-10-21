@@ -1,0 +1,15 @@
+/* Formal register — documents, reports, presentations, invitations, certificates.
+   Paper-first, no glows, grids or blobs. Cortex is the only institutional colour;
+   Colour comes from the palette families as flat fields and tinted panels. */
+:root{
+  /* formal colours are aliases into the neutral and primary sets; white is the only extra value */
+  --paper:#FFFFFF; --paper-warm:var(--medula-light); --paper-tint:var(--pia-light);
+  --formal-ink:var(--sulco-medium); --formal-ink-2:var(--pia-dark); --formal-ink-3:var(--sulco-light);
+  --formal-rule:var(--pia-medium); --formal-rule-strong:var(--sulco-medium);
+  --formal-accent:var(--cortex-dark); --formal-spark:var(--cortex-accent);
+  --fs-formal:'Instrument Serif',Georgia,'Times New Roman',serif; /* @kind font */
+  /* print scale (pt) */
+  --formal-body:'Archivo',-apple-system,'Segoe UI',Arial,sans-serif; /* @kind font */  /* weight 300 for running text */
+  --pt-title:28pt; /* @kind other */ --pt-h1:18pt; /* @kind other */ --pt-h2:13pt; /* @kind other */ --pt-body:10.5pt; /* @kind other */ --pt-small:8.5pt; /* @kind other */ --pt-label:7pt; /* @kind other */
+  --doc-margin:22mm; /* @kind spacing */ --doc-gutter:8mm; /* @kind spacing */
+}

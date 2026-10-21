@@ -1,0 +1,3 @@
+import React from 'react';
+function useKF(){React.useEffect(()=>{if(document.getElementById('nro-kf'))return;const s=document.createElement('style');s.id='nro-kf';s.textContent='@keyframes nroShine{0%{background-position:100% 50%}100%{background-position:0 50%}}@keyframes nroSpin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.nro-anim{animation:none!important}}';document.head.appendChild(s);},[]);}
+export function Skeleton({width='100%',height=11,radius=7}){useKF();return <div className="nro-anim" style={{width,height,borderRadius:radius,background:'linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.08) 37%,rgba(255,255,255,.04) 63%)',backgroundSize:'400% 100%',animation:'nroShine 1.4s ease infinite'}}></div>;}

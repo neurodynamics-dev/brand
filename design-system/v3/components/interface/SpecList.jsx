@@ -1,0 +1,2 @@
+import React from 'react';
+export function SpecList({rows=[]}){return <div>{rows.map((r,i)=><div key={i} style={{display:'grid',gridTemplateColumns:'190px 1fr',gap:18,alignItems:'baseline',padding:'13px 4px',borderTop:'1px solid var(--line)',borderBottom:i===rows.length-1?'1px solid var(--line)':'none'}}><span style={{fontFamily:'var(--fd)',fontWeight:600,fontSize:10.5,letterSpacing:'.12em',textTransform:'uppercase',fontSize:10.5,color:'var(--grafite)'}}>{r.k}</span><span style={{fontSize:13.5,color:'var(--ink)'}}>{r.v}</span></div>)}</div>;}

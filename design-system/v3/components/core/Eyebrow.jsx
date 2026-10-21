@@ -1,0 +1,2 @@
+import React from 'react';
+export function Eyebrow({children,tone='dark'}){const p=tone==='paper';return <span style={{display:'inline-flex',alignItems:'center',gap:10,fontFamily:'var(--fd)',fontWeight:600,fontSize:p?10:11.5,letterSpacing:'.14em',textTransform:'uppercase',color:'var(--nevoa)'}}><span style={{width:p?6:7,height:p?6:7,background:p?'var(--cortex)':'var(--synapse)'}}></span>{children}</span>;}

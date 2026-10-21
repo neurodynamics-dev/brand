@@ -13,7 +13,10 @@
         trecho entre @tokens:start / @tokens:end de cada preview;
      2. lê os arquivos de marca/ e embute como data URI no trecho
         entre @arte:start / @arte:end (hoje só 05-marca.html);
-     3. regrava _ds_manifest.json a partir dos marcadores @dsCard.
+     3. troca o <link> do Google Fonts de cada preview pelo de
+        FONTES abaixo (Archivo, Instrument Sans, Instrument Serif,
+        IBM Plex Mono);
+     4. regrava _ds_manifest.json a partir dos marcadores @dsCard.
 
    Uso:  node build.mjs          (grava)
          node build.mjs --check  (só confere; sai 1 se divergir)
@@ -98,6 +101,10 @@ const dirPreviews = join(raiz, 'previews');
 const arquivos = readdirSync(dirPreviews).filter(f => f.endsWith('.html')).sort();
 if (!arquivos.length) erro('previews/: nenhum .html encontrado.');
 
+/* as quatro famílias da marca, iguais em todo preview */
+const FONTES = 'https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap';
+const mFontes = /<link href="https:\/\/fonts\.googleapis\.com\/css2\?[^"]*" rel="stylesheet">/;
+
 const mTokens = /(\/\* @tokens:start[^*]*\*\/)[\s\S]*?(\/\* @tokens:end \*\/)/;
 const mArte = /(\/\* @arte:start[^*]*\*\/)[\s\S]*?(\/\* @arte:end \*\/)/;
 const cards = [];
@@ -109,6 +116,8 @@ for (const nome of arquivos) {
 
   if (!mTokens.test(html)) erro(`${nome}: marcadores @tokens:start/@tokens:end ausentes.`);
   html = html.replace(mTokens, `$1\n${tokensCompactos}\n$2`);
+
+  if (mFontes.test(html)) html = html.replace(mFontes, `<link href="${FONTES}" rel="stylesheet">`);
 
   /* o bloco de arte é opcional — só 05-marca.html usa hoje */
   if (mArte.test(html)) {

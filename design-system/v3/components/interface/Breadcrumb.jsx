@@ -1,0 +1,2 @@
+import React from 'react';
+export function Breadcrumb({items=[]}){return <nav aria-label="Trilha" style={{display:'flex',alignItems:'center',gap:9,fontFamily:'var(--fd)',fontWeight:600,fontSize:10.5,letterSpacing:'.12em',textTransform:'uppercase',fontSize:11,color:'var(--grafite)'}}>{items.map((t,i)=><React.Fragment key={i}>{i>0&&<span style={{opacity:.5}}>/</span>}<span style={{color:i===items.length-1?'var(--nevoa)':'var(--grafite)'}}>{t}</span></React.Fragment>)}</nav>;}

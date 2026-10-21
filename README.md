@@ -1,97 +1,43 @@
-# Brand — brand.neurodynamics.dev
+# Manual da marca NeuroDynamics
 
-Brand guidelines e central de assets da NeuroDynamics, em arquivo único
-(`index.html`), no mesmo padrão dos demais apps do ecossistema e com a
-linguagem visual do site institucional.
+Site estático em `brand.neurodynamics.dev`, com páginas independentes: `/marca`, `/cores`, `/tipografia`, `/escrita`, `/elementos`, `/aplicacoes` e `/galeria`. A página inicial redireciona os hashes anteriores. Assinaturas, materiais controlados e ferramentas de criação ficam em **SOMA › Marca**.
 
-## O que a página contém
+## Desenvolvimento
 
-- **Marca** — imagotipo nas versões branca e preta, regras de respiro,
-  tamanho mínimo e usos proibidos.
-- **Cores** — paleta oficial nomeada (sistema neural): primárias
-  **Cortex `#00352F` · Axon `#00594F` · Synapse `#CEDC00`**, profundos e
-  neutros (Void, Painel, Blackout, Ink, Aura, Névoa, Grafite) e a paleta
-  **auxiliar** para dados e status (Soma, Íon, Vital, Mielina, Pulso,
-  Plasma, Dendrito). Clique copia o hex; há download em JSON e tokens CSS.
-- **Tipografia** — Archivo (500–700) para display/UI, IBM Plex Mono
-  (400–500) para dados e rótulos técnicos, pilha do sistema no corpo.
-- **Elementos visuais** — grade técnica, blobs orgânicos, vidro, banda em
-  gradiente, placeholder técnico (FIG.), eyebrow e pills — com exemplos
-  vivos e regras de uso.
-- **Estúdio (geradores de mídia)** — tudo renderizado em canvas, no
-  navegador, com download em PNG na resolução final e 4 visuais
-  selecionáveis (Void, Cortex, Synapse, Aura):
-  - banner/header de redes sociais (LinkedIn pessoal e empresa, X, YouTube);
-  - post de entrada na equipe (feed, quadrado e story, com foto);
-  - post de aviso ou frase (feed, quadrado e story);
-  - foto de perfil com anel Synapse (com upload de foto);
-  - thumbnail de vídeo (YouTube) e crachá de evento;
-  - wallpaper (desktop, ultrawide e celular);
-  - fundo de reunião (1920×1080, centro limpo);
-  - capa de apresentação/documento (16:9 e A4).
-- **Assinaturas de e-mail** — a pessoa entra com a própria conta
-  (mesmo login das ferramentas internas), os dados de cargo e contato
-  vêm do cadastro da equipe no banco, e dá para ajustar o **nome de
-  exibição** e incluir **pronomes**. O HTML gerado é o mesmo da
-  ferramenta original do repositório `signature`.
-- **Downloads e templates** — logos e símbolo oficiais via Brandfetch
-  (fonte única da marca), paleta, o template de documentos NRO-PUB-002
-  (`assets/`), o **relatório de AACC** em LaTeX (abre no Overleaf, com
-  o exemplo em PDF — ver abaixo), os templates Overleaf de artigo e
-  pôster (em desenvolvimento), um `template.html` de página no padrão
-  da marca e os links de fontes e do ecossistema.
+```sh
+npm ci --prefix scripts
+node scripts/servir.mjs
+```
+
+O servidor usa `127.0.0.1:8766` e resolve os mesmos endereços sem `.html` do GitHub Pages. Não precisa de credenciais.
+
+- Conteúdo: arquivos HTML na raiz; estilos e comportamento em `site/`.
+- Design system: `design-system/tokens.css`, `neuro.css`, `casca.css`, `casca.js`, `formal.css`, `select.*`; regras em `design-system/v3/` (ver `design-system/DIRETRIZES.md`).
+- Cabeçalho e rodapé: saem de `design-system/casca.js`, os mesmos dos outros sites. Depois de mudar a casca ou os capítulos, rode `node scripts/montar.mjs`, que gera todas as páginas do manual.
+- Consumidores: `node scripts/distribuir.mjs` copia o design system para `ds/` em membro, website e selecao; `node scripts/auditar.mjs <pasta>` roda o checklist de interface.
+- Templates de peças: `templates/`. Dados pessoais dos exemplos são fictícios.
+
+## Gerar imagens e conferir
+
+Com o servidor iniciado e Chromium instalado (`CHROMIUM_PATH` permite indicar outro executável):
+
+```sh
+node scripts/gerar-miniaturas.mjs
+node scripts/gerar-downloads.mjs
+node scripts/conferir.mjs
+node design-system/build.mjs --check
+```
+
+As fontes dos renderizadores vêm das dependências locais `@fontsource`; não é necessário liberar TLS nem carregar fontes remotas para gerar imagens. `assets/manual/index.json` registra a origem de cada miniatura. `downloads/index.json` lista as dimensões dos 16 wallpapers e da capa de LinkedIn. Os scripts sobrescrevem somente as imagens geradas correspondentes.
+
+Não há backend nem login no manual público. Documentos controlados continuam sujeitos à permissão de Arquivos no SOMA. A versão publicada deve acompanhar a atualização do portal para que os downloads novos estejam disponíveis.
 
 ## Relatório de AACC (LaTeX)
 
-A pasta [`templates/aacc/`](templates/aacc/) é o template com que um
-membro ou egresso pede ao colegiado o aproveitamento de Atividades
-Acadêmicas Curriculares Complementares pela Resolução nº 02/2019 da
-Congregação da Escola de Engenharia, no desenho do relatório formal do
-design system: a classe `nro-aacc.cls`, o relatório que o membro edita, um
-modelo por tipo de atividade (placa, peça, simulação, software, ensaio…),
-as regras da equipe em `nro/` e um exemplo fictício completo. O que falta
-vira pendência na capa; o pedido (o enquadramento por semestre letivo, as
-alternativas e as atividades à parte), os quadros e os créditos se montam
-sozinhos. O pedido começa no SOMA (Serviços, Aproveitamento de AACC), que
-gera o ZIP com os dados do membro, passa pelas aprovações e devolve o PDF
-com a folha de aprovação autenticável. O passo a passo está no
-[`LEIAME.md`](templates/aacc/LEIAME.md).
+A pasta [`templates/aacc/`](templates/aacc/) é o template com que um membro ou egresso pede ao Colegiado do curso o aproveitamento de Atividades Acadêmicas Curriculares Complementares, pela Resolução nº 02/2019 da Congregação da Escola de Engenharia (ou pela norma de outro Colegiado), no desenho do relatório formal: a classe `nro-aacc.cls`, o relatório que a pessoa edita, um modelo por tipo de atividade, as regras da equipe em `nro/` e um exemplo fictício completo. O pedido começa no SOMA (Serviços, Aproveitamento de AACC), que gera o ZIP com os dados da pessoa, conduz as aprovações e devolve o PDF com a folha de aprovação autenticável. O passo a passo está no [`LEIAME.md`](templates/aacc/LEIAME.md); a peça está em `/aplicacoes/relatorio-aacc`.
 
-O site serve `assets/template-relatorio-aacc.zip` (o botão *Abrir no
-Overleaf* aponta para ele, e o SOMA o baixa) e
-`assets/exemplo-relatorio-aacc.pdf`. Mudou o template? Rode
-`templates/aacc/empacotar.sh`, que compila tudo e gera os dois de novo.
+O site serve `assets/template-relatorio-aacc.zip` (o SOMA o baixa) e `assets/exemplo-relatorio-aacc.pdf`. Mudou o template? Rode `templates/aacc/empacotar.sh`, que compila tudo e gera os dois de novo; as prévias da peça (`assets/manual/aacc-capa.jpg` e `aacc-atividade.jpg`) são as páginas 1 e 13 do exemplo, com `pdftoppm -jpeg -scale-to-x 800`.
 
-## Design system (Claude Design)
+## Decisões de marca pendentes
 
-A pasta [`design-system/`](design-system/) traz a mesma linguagem visual
-organizada como biblioteca de componentes para o **Claude Design**: 15 cards
-em três grupos (Fundamentos, Marca, Componentes), tokens em arquivo único e
-um `build.mjs` que mantém tudo em sincronia. Com ela sincronizada, as
-interfaces que o Claude gera para a equipe já saem na marca.
-
-O passo a passo do setup está em [`design-system/README.md`](design-system/README.md).
-
-## Como editar
-
-- **Cores e nomes:** bloco `PALETA` no `<script>` de `index.html`.
-- **Geradores:** blocos `GERADORES` (formatos/campos) e `VARIANTES`
-  (visuais); o desenho fica nas funções `desenhaBase`/`renderPeca`.
-- **Assinaturas:** os dados vêm do banco (tabelas `perfis` e
-  `membros`), com a conta da própria pessoa. O bloco `SIG_ORG` espelha
-  a configuração institucional da ferramenta original.
-- **Versão:** atualize o marcador `#versao` no hero quando houver mudança
-  relevante nas guidelines.
-
-## Como publicar
-
-1. Ative o GitHub Pages neste repositório (branch `main`, raiz).
-2. No Cloudflare, aponte `brand.neurodynamics.dev` → `CNAME` para
-   `neurodynamics-dev.github.io`.
-
-## Observações
-
-- A página é pública (como o site institucional); os geradores rodam
-  inteiramente no navegador — nada é enviado a servidor.
-- A seção de assinaturas exige login: cada pessoa vê apenas os
-  próprios dados, lidos com a permissão da própria conta.
+As regras de redução mínima da marca, unidade de área de proteção e equivalências oficiais CMYK/Pantone dependem da validação dos responsáveis pela marca. Não foram inventadas medidas ou equivalências nesta implementação.

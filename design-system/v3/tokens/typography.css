@@ -1,0 +1,11 @@
+:root{
+  --fd:'Archivo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; /* @kind font */
+  --fm:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace; /* @kind font */
+  --f:'Instrument Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; /* @kind font */
+  --font-display:var(--fd); /* @kind font */ --font-mono:var(--fm); /* @kind font */ --font-body:var(--f); /* @kind font */
+  --fs-display:clamp(40px,6.8vw,88px); /* @kind other */ --fs-h1:clamp(36px,6vw,72px); /* @kind other */ --fs-h2:clamp(26px,3.8vw,42px); /* @kind other */
+  --fs-h3:16px; /* @kind other */ --fs-body:15px; /* @kind other */ --fs-sm:13.5px; /* @kind other */ --fs-xs:12.5px; /* @kind other */
+  --fs-label:11px; /* @kind other */  /* Plex Mono, uppercase, tracking .22em */
+  --fs-micro:10px; /* @kind other */  /* Plex Mono, uppercase, tracking .12–.18em */
+  --lh-body:1.65; /* @kind other */ --lh-display:1.02; /* @kind other */ --tr-display:-.025em; /* @kind other */ --tr-heading:-.015em; /* @kind other */ --tr-label:.22em; /* @kind other */
+}

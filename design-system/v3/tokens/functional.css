@@ -1,0 +1,11 @@
+/* NeuroDynamics functional set. Interface and status colours for technological contexts (apps, dashboards, devices, data).
+   Names are system states, deliberately outside the brand vocabulary. Tones are electric and fully saturated so they never read as brand.
+   Plain use only: flat fills, 1px lines, square indicators, mono labels. Never in glows, blurs, gradients, or as identity colour.
+   Dark UI: dark tone as ground, primary for line, indicator and meter only (never text), medium for labels, light for values. Light UI: light ground, dark text, primary indicator. */
+:root{
+  --fn-nominal-light:#D6FFEE; --fn-nominal-medium:#7DFFC8; --fn-nominal-primary:#00F59B; --fn-nominal-dark:#00422A;
+  --fn-caution-light:#FFF1CC; --fn-caution-medium:#FFD470; --fn-caution-primary:#FFAA00; --fn-caution-dark:#4D3300;
+  --fn-critical-light:#FFE0DD; --fn-critical-medium:#FF948C; --fn-critical-primary:#FF2D20; --fn-critical-dark:#5C0A05;
+  --fn-signal-light:#D4F5FF; --fn-signal-medium:#7FE0FF; --fn-signal-primary:#00C8FF; --fn-signal-dark:#003A4D;
+  --fn-idle-light:#E6E8EE; --fn-idle-medium:#B8BDCC; --fn-idle-primary:#7C8499; --fn-idle-dark:#2A2F3D;
+}

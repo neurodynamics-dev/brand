@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certificado | NeuroDynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../design-system/tokens.css">
+<style>
+
+    .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
+      border:1px solid color-mix(in srgb,currentColor 50%,transparent);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:color-mix(in srgb,currentColor 70%,transparent);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:color-mix(in srgb,currentColor 50%,transparent);
+      background:color-mix(in srgb,currentColor 10%,transparent);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  
+x-dc{display:none!important}
+html,body{height:100%;margin:0}#dc-root,#dc-root>.sc-host{height:100%}
+body{margin:0;background:#E6E9E8}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--f);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--fd);letter-spacing:var(--tr-heading)}
+a{color:var(--ion);text-decoration:none}
+::selection{background:var(--synapse);color:var(--cortex)}
+/* foto: troque o placeholder por <img> com object-fit:cover; sem filtros */
+.foto-slot{position:relative;overflow:hidden;background:rgba(127,127,127,.08);display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;box-sizing:border-box;font:13px/1.3 'Instrument Sans',system-ui,sans-serif;color:rgba(127,127,127,.9)}
+.foto-slot>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* apresentação: slides empilhados; imprima em PDF com uma página por slide */
+.deck{display:flex;flex-direction:column;align-items:center;gap:40px;padding:40px 0}
+.deck>section{flex:none}
+@media print{@page{size:1920px 1080px;margin:0}body{background:none!important}.deck{gap:0;padding:0}.deck>section{break-after:page}}
+</style>
+</head>
+<body>
+<div class="sc-host" data-sc-name="Certificate"><div style="display: flex; flex-direction: column; align-items: safe center; gap: 32px; padding: 32px 0px;"><section data-screen-label="01 Clássico" style="width: 1123px; height: 794px; background: rgb(247, 244, 238); box-sizing: border-box; padding: 36px; font-family: Archivo, sans-serif; font-weight: 300; color: rgb(29, 29, 31);"><div style="height: 100%; box-sizing: border-box; border: 1px solid rgb(29, 29, 31); padding: 6px;"><div style="height: 100%; box-sizing: border-box; border: 1px solid rgb(196, 204, 201); padding: 56px 88px; display: flex; flex-direction: column; align-items: center; text-align: center;"><header style="align-self: stretch; display: flex; justify-content: space-between; align-items: flex-start; text-align: left;"><img src="../../assets/logo-imagotipo-black.png" alt="NeuroDynamics" style="height: 24px;"><div style="display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 2px; font-family: Archivo, sans-serif; font-weight: 400; font-size: 12px; line-height: 1.4; color: rgb(74, 79, 77);"><span>Certificado de participação</span><span style="white-space: nowrap;">NRO-CERT-2026-0412</span></div></header><p style="font-size: 15px; color: rgb(46, 53, 51); margin: 72px 0px 0px;">Certificamos que</p><h1 style="font-family: &quot;Instrument Serif&quot;, Georgia, serif; font-weight: 400; font-size: 68px; line-height: 1; margin: 14px 0px 18px; letter-spacing: -0.01em;">Mariana Costa Albuquerque</h1><p style="font-size: 15px; line-height: 1.7; color: rgb(29, 29, 31); margin: 0px; max-width: 640px; text-wrap: pretty;">participou do Simpósio NeuroDynamics de Neurotecnologia em Saúde, realizado em 18 e 19 de setembro de 2026, em Belo Horizonte, com carga horária total de 16 horas.</p><div style="margin-top: auto; width: 100%; display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 32px;"><div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 220px; height: 1px; background: rgb(29, 29, 31); margin-bottom: 10px;"></div><span style="font-family: &quot;Instrument Serif&quot;, serif; font-size: 20px;">Ana Ribeiro</span><span style="font-size: 12px; color: rgb(46, 53, 51);">Diretora científica</span></div><img src="../../assets/seal-axon.png" alt="Selo NeuroDynamics" style="width: 120px; height: 120px; object-fit: contain;"><div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 220px; height: 1px; background: rgb(29, 29, 31); margin-bottom: 10px;"></div><span style="font-family: &quot;Instrument Serif&quot;, serif; font-size: 20px;">Rafael Mendes</span><span style="font-size: 12px; color: rgb(46, 53, 51);">Coordenador do simpósio</span></div></div><span style="margin-top: 28px; font-size: 12px; color: rgb(97, 108, 104);">Verificável em neurodynamics.dev</span></div></div></section></div></div>
+</body>
+</html>
