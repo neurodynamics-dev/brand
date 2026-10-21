@@ -1,0 +1,71 @@
+%% EXEMPLO FICTÍCIO, Atividade 8: publicação, que conta à parte
+\begin{atividade}{Artigo completo sobre a fonte de corrente do estimulador, em congresso nacional}{
+  tipo           = pesquisa,
+  aproveitamento = PUB,
+  publicacao     = nacional,
+  horas          = 40,
+  inicio         = 2024-11,
+  fim            = 2025-05,
+  projeto        = {NEBULA, estimulação elétrica funcional para ciclismo},
+  papel          = {Primeira autora},
+  supervisor     = {Prof. Dr. Henrique Resende Martins, coautor e orientador do trabalho},
+  registros      = {NBL-161; NBL-168},
+  competencias   = {II, V, VIII, IX},
+  disciplinas    = {Eletrônica Analógica; Instrumentação Eletrônica},
+}
+
+\begin{contexto}
+Os resultados da revisão B da placa de potência (Atividades~1, 2 e~4) resolviam um problema que outras
+equipes de estimulação elétrica funcional também têm: manter a corrente quando a impedância do eletrodo
+sobe ao longo de uma sessão. O supervisor do projeto e o professor sugeriram transformar o projeto e os
+ensaios num artigo, para que a solução ficasse publicada e citável.
+
+Esta atividade é a escrita e a publicação do artigo. O projeto, a simulação e os ensaios que ele relata
+são as Atividades~1, 2 e~4, que contam na participação; aqui contam só as horas de escrever, revisar e
+apresentar (art.~7\textordmasculine\ da resolução).
+\end{contexto}
+
+\begin{contribuicao}
+Sou a primeira autora. Escrevi a primeira versão inteira, refiz as figuras a partir dos dados brutos
+dos ensaios, respondi aos dois pareceristas e apresentei o trabalho na sessão oral. O professor revisou
+o texto e a discussão; o supervisor do projeto e um colega do subsistema, coautores, conferiram os
+números e as figuras.
+\end{contribuicao}
+
+\begin{desenvolvimento}
+\fichatecnica{
+  pergunta = {Uma fonte de corrente com amplificador operacional e MOSFET, alimentada a \SI{120}{\volt}, mantém pulsos de \SI{100}{\milli\ampere} com eletrodos degradados?},
+  metodo   = {Projeto, simulação do transitório com o modelo de Randles e ensaio em bancada com carga equivalente e com eletrodos usados},
+  bases    = {IEEE Xplore e PubMed, com os termos functional electrical stimulation, current source e electrode impedance},
+  produto  = {Artigo completo, oito páginas, nos anais de um congresso nacional de engenharia biomédica (fictício)},
+  situacao = {Publicado; DOI \cod{10.0000/exemplo.2025.0042}},
+}
+
+O artigo segue a estrutura do relatório de teste da placa (\cod{NRO-PRO-003-901}), reescrita para quem
+não conhece o projeto: a introdução situa o problema na literatura \parencite{merrill2005}, a seção de
+métodos descreve o circuito e o modelo da carga, e a de resultados compara a simulação com as medições,
+com a incerteza de cada uma. A revisão por pares pediu duas mudanças: a análise do pior caso de
+dissipação, que acrescentei com os números da Atividade~1, e a declaração de que nenhum dado de pessoa
+foi usado, já que os ensaios com o atleta-piloto ficaram de fora do artigo.
+\end{desenvolvimento}
+
+\begin{resultados}
+O artigo foi aceito na primeira rodada, com revisões menores, e apresentado em sessão oral de quinze
+minutos. É a primeira publicação da equipe sobre o hardware do estimulador, e o repositório da placa
+passou a citá-lo. Como publicação em evento nacional, rende 1 crédito (art.~9\textordmasculine, II), à
+parte da participação.
+\end{resultados}
+
+\begin{evidencias}
+\evidencia{Publicação}{DOI 10.0000/exemplo.2025.0042}{O artigo completo, com a lista de autores}{Anais do congresso (exemplo)}
+\evidencia{Comprovante}{Certificado de apresentação (exemplo)}{A apresentação oral do trabalho}{Anexo do relatório}
+\evidencia{Atividade}{NBL-161}{O cartão da escrita do artigo, atribuído a mim e concluído}{SOMA, Atividades}
+\end{evidencias}
+
+\begin{aprendizados}
+Escrever para quem não estava no laboratório me obrigou a justificar o que, no relatório interno, era
+óbvio para a equipe. A resposta aos pareceristas ensinou a separar o que o ensaio mostra do que eu
+gostaria que ele mostrasse. As disciplinas de eletrônica deram o conteúdo; a de metodologia, que eu
+tinha achado abstrata, ganhou sentido aqui.
+\end{aprendizados}
+\end{atividade}

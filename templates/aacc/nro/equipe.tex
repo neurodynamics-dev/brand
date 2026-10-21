@@ -1,0 +1,69 @@
+%% ============================================================
+%% nro/equipe.tex: o que todo relatório sabe da equipe
+%%
+%% Mantido pela DIRETORIA. O membro não mexe aqui: se a norma do
+%% colegiado dele é outra, ele repete \equipe{…} no preâmbulo do
+%% relatório só com o que muda.
+%%
+%% O título e o número da ação no SIEX só viram pendência no relatório de
+%% quem pede o enquadramento como projeto de extensão (EXT). O professor
+%% orientador de cada relatório é indicado no SOMA, durante a
+%% aprovação, e aparece na folha de aprovação.
+%% ============================================================
+
+%% A série no controle de arquivos (NRO-PUB-001). Cada relatório é um
+%% pedido no SOMA (Serviços, Aproveitamento de AACC), e o número do
+%% pedido é o PN: o SOMA o põe no soma.tex.
+\serie{
+  codigo  = NRO-PES-020,
+  titulo  = Relatório de atividades para aproveitamento de AACC,
+  emissor = Departamento de Pessoal,
+  revisao = A,
+}
+
+\equipe{
+  %% o nome completo sai na primeira menção, com o significado; depois,
+  %% só o curto
+  nome         = NeuroDynamics PD\&I,
+  nomecurto    = NeuroDynamics,
+  significado  = {Pesquisa, Desenvolvimento e Inovação},
+  sigla        = NRO,
+  %% como a frase o escreve: "realizadas no …"
+  laboratorios = {Laboratório de Engenharia Biomédica e no Laboratório de Bioengenharia (LABBIO) da Escola de Engenharia da UFMG},
+  site         = neurodynamics.dev,
+  validacao    = auth.neurodynamics.dev,
+
+  %% o professor responsável pela equipe, para a Parte I (opcional: o
+  %% professor que avalia cada relatório é indicado no SOMA). Com o
+  %% título (Prof. Dr. …, Profa. Dra. …); o artigo (o ou a) faz o texto
+  %% dizer "do" ou "da".
+  professor             = {},
+  artigoprofessor       = o,
+  departamentoprofessor = {},   % ex.: Departamento de Engenharia Mecânica
+
+  %% a ação de extensão, como está no SIEX/UFMG: o registro que reconhece
+  %% a participação como extensão e como equipe de competição. O
+  %% coordenador e a vigência são opcionais.
+  siextitulo        = {Competição Cybathlon 2024},
+  siexnumero        = 205234,
+  siexcoordenador   = {},        % com o título: Prof. Dr. …
+  artigocoordenador = o,
+  siexvigencia      = {},        % ex.: 2024 a 2026
+
+  %% a norma que rege o aproveitamento; o membro de outra unidade troca
+  %% no próprio relatório. A curta é a que as frases e os quadros citam.
+  norma      = {Resolução n\textordmasculine~02/2019, de 31 de maio de 2019, da Congregação da Escola de Engenharia da UFMG},
+  normacurta = {Resolução n\textordmasculine~02/2019 da Congregação},
+
+  %% as contas: 1 crédito = 15 horas no quadro de AACC dos cursos; a
+  %% média semanal a partir da qual o relatório precisa justificar as
+  %% horas; e os meses de participação para um semestre letivo contar
+  %% (o SOMA usa o mesmo número)
+  horasporcredito  = 15,
+  mediamaxima      = 20,
+  mesespersemestre = 4,
+}
+
+\documento{
+  cidade = Belo Horizonte,
+}

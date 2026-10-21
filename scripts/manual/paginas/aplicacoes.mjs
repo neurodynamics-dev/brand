@@ -15,6 +15,12 @@ export const PECAS = [
     d: 'O modelo Word da série de documentos e registros (NRO-PUB-002).', quando: 'Procedimentos, registros e documentos controlados da equipe.',
     regras: ['O código segue o padrão NRO-XXX-000 e nunca quebra entre linhas.', 'Documentos controlados circulam pelo Arquivos, no SOMA, que decide a versão em vigor e quem baixa.'],
     assim: 'Baixar o modelo pelo SOMA, na versão em vigor.', evite: 'Reaproveitar uma cópia antiga do arquivo.' },
+  { k: 'relatorio-aacc', n: 'Relatório de AACC', grupo: 'Documentos', modo: 'Executivo', img: ['aacc-capa', 'aacc-atividade'], modelo: null,
+    arquivos: [['/assets/template-relatorio-aacc.zip', 'Template LaTeX', 'ZIP, abre no Overleaf'], ['/assets/exemplo-relatorio-aacc.pdf', 'O exemplo', 'PDF']],
+    d: 'O pedido de aproveitamento de AACC em LaTeX, no desenho do relatório formal: a equipe, a trajetória e cada atividade com as evidências.',
+    quando: 'Membros e egressos que pedem ao Colegiado do curso o aproveitamento da participação na equipe. O pedido começa no SOMA (Serviços, Aproveitamento de AACC), que gera o ZIP com os dados da pessoa.',
+    regras: ['O template mora em templates/aacc, com a classe nro-aacc.cls e o LEIAME.', 'Compila no pdfLaTeX do Overleaf, com as fontes do TeX Live.', 'O que falta vira pendência, e o SOMA não aceita PDF com pendência.', 'A folha de aprovação, emitida pelo SOMA, entra no lugar da segunda folha.'],
+    assim: 'Baixar o ZIP pelo SOMA, que já traz os seus dados.', evite: 'Começar do ZIP do site sem o soma.tex do pedido.' },
   { k: 'certificado', n: 'Certificado clássico', grupo: 'Documentos', modo: 'Executivo', img: ['certificado'], modelo: 'templates/certificate/Certificate.html',
     d: 'A4 paisagem, composição clássica centralizada com o selo Axon.', quando: 'Certificados de participação e atos solenes.',
     regras: ['O cabeçalho traz o tipo do documento, “Certificado de participação”; o corpo não repete o título.', 'Cidade e data vêm logo após o parágrafo de participação, na mesma fonte e tamanho.', 'Selo Axon sobre papel claro; branco sobre Cortex.'],
@@ -67,7 +73,7 @@ function catalogo() {
 
 function ficha(p) {
   const arqs = [...(p.modelo ? [[`/${p.modelo}`, 'Abrir o modelo', 'HTML']] : []), ...(p.arquivos || [])];
-  const dl = arqs.length ? `<div class="card m-dl">${arqs.map(([h, n, t]) => `<div class="item"><span>${esc(n)}<small>${esc(t)}</small></span><a class="btn ghost mini" href="${esc(h)}"${/\.(pptx|docx|jpg)$/.test(h) ? ' download' : ''}>${/\.(pptx|docx|jpg)$/.test(h) ? 'Baixar' : 'Abrir'}</a></div>`).join('')}</div>` : '';
+  const dl = arqs.length ? `<div class="card m-dl">${arqs.map(([h, n, t]) => `<div class="item"><span>${esc(n)}<small>${esc(t)}</small></span><a class="btn ghost mini" href="${esc(h)}"${/\.(pptx|docx|jpg|zip)$/.test(h) ? ' download' : ''}>${/\.(pptx|docx|jpg|zip)$/.test(h) ? 'Baixar' : 'Abrir'}</a></div>`).join('')}</div>` : '';
   const corpo = `<div class="m-ficha"><div>
     ${sec('uso', 'Quando usar', `<p>${esc(p.quando)}</p>` + p.img.map(k => figura(img(k), `${p.n}: exemplo`)).join(''))}
     ${sec('regras', 'Regras desta peça', lista(p.regras.map(esc)))}

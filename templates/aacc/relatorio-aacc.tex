@@ -1,0 +1,231 @@
+%% ============================================================
+%% RELATÓRIO DE ATIVIDADES PARA APROVEITAMENTO DE AACC
+%% NeuroDynamics PD&I, série NRO-PES-020
+%%
+%% Leia o LEIAME.md antes (cinco minutos) e o exemplo
+%% (exemplo-relatorio-aacc.pdf): ele mostra o nível que a equipe espera.
+%%
+%% O caminho:
+%%   1. no SOMA, em Serviços, Aproveitamento de AACC: confira os seus
+%%      dados, escolha o enquadramento e baixe este ZIP. Ele traz o
+%%      soma.tex, com o que o SOMA sabe de você e o número do pedido;
+%%   2. abra no Overleaf (Novo projeto, Carregar projeto, o ZIP) e
+%%      complete o que o SOMA não sabe (1 e 2, abaixo);
+%%   3. a Parte II: o resumo da sua participação, a trajetória, os
+%%      afastamentos e a formação recebida;
+%%   4. a Parte III: UMA ATIVIDADE POR ARQUIVO, em atividades/. Copie o
+%%      modelo do tipo certo de modelos/ (pcb.tex, simulacao.tex,
+%%      mecanico.tex, software.tex…) e escreva;
+%%   5. a Parte IV: a memória das horas, a relação com o curso e a
+%%      autoavaliação;
+%%   6. troque "rascunho" por "final" na linha do \documentclass. A capa
+%%      diz se ainda falta coisa; a lista está logo depois dos quadros
+%%      do pedido;
+%%   7. baixe o PDF e envie no SOMA, na mesma página. O SOMA não aceita
+%%      PDF com pendência.
+%%
+%% Cada caixa amarela (Preencher) é uma pendência. Ela some quando você
+%% troca o \preencher{…} pelo seu texto. A Parte I é da equipe: não mexa
+%% nos arquivos de nro/ nem na classe nro-aacc.cls.
+%% ============================================================
+\documentclass[rascunho]{nro-aacc}   % rascunho → final, quando terminar
+
+%% o que o SOMA sabe de você, o número do pedido e o enquadramento
+%% escolhido no painel. Não edite o soma.tex: corrija no SOMA e baixe de
+%% novo (há um botão só para ele).
+\InputIfFileExists{soma.tex}{}{}
+
+%% ------------------------------------------------------------
+%% 1. VOCÊ
+%% O que veio do SOMA já está valendo: um campo vazio aqui não apaga
+%% o que veio de lá. Preencha o que faltar; para corrigir um dado do
+%% SOMA, escreva o valor certo aqui (e avise o Depto. de Pessoal).
+%% ------------------------------------------------------------
+\estudante{
+  nome      = {},   % o nome completo, como no registro acadêmico
+  pronomes  = {},   % ela, ele ou elu: o texto do relatório concorda com eles
+  matricula = {},
+  curso     = {},   % ex.: Engenharia Elétrica (o nome escolhe as competências da Parte IV)
+  colegiado = {},   % ex.: Colegiado do Curso de Graduação em Engenharia Elétrica
+  email     = {},
+  ingresso  = {},   % o semestre de ingresso no curso: AAAA/1 ou AAAA/2
+  periodo   = {},   % ex.: 8º
+}
+
+\membro{
+  registro     = {},   % o seu registro no SOMA
+  situacao     = {},   % ativo, ou egresso
+  inicio       = {},   % a entrada na equipe: AAAA-MM
+  fim          = {},   % a saída (só egresso): AAAA-MM
+  cargo        = {},   % o cargo atual, ou o último
+  departamento = {},
+  projetos     = {},   % ex.: NEBULA; ÓRION
+  supervisor   = {},   % o supervisor imediato: nome e cargo
+  dedicacao    = {},   % horas por semana, em média, no período todo
+}
+
+\documento{
+  data = {},   % AAAA-MM-DD; em branco, vale a data de hoje
+}
+
+%% ------------------------------------------------------------
+%% 2. O PEDIDO
+%% O enquadramento vem do painel do SOMA. Os que existem:
+%%   EQC  participação em equipe de competição estudantil, 3 créditos
+%%        por semestre (art. 1º, II, c; art. 11)
+%%   EXT  projeto de extensão com vínculo formal, 3 por semestre com
+%%        registro no SIEX (art. 1º, I, c; arts. 3º e 8º)
+%%   VPC  vivência profissional complementar, 1 crédito a cada 300 h
+%%        (art. 1º, IV, a; art. 17)
+%%   OUT  outro, para quem é de curso que não segue a Resolução nº
+%%        02/2019 da Escola de Engenharia: descreva em "outro" e troque a
+%%        norma em \equipe, abaixo; o Colegiado define os créditos
+%% As atividades que contam à parte (publicação, organização ou
+%% participação em evento, curso, voluntariado) se indicam na própria
+%% atividade, com aproveitamento = PUB, EVO, EVP, CUR ou VOL.
+%% ------------------------------------------------------------
+\pedido{
+  principal    = {},   % EQC, EXT, VPC ou OUT
+  alternativas = {},   % ex.: {EXT, VPC}, para o Colegiado que não acolher o principal
+  siex         = {},   % os semestres com registro no SIEX, se pede EXT: {2024/1, 2024/2}
+  outro        = {},   % se OUT: o nome da atividade na norma do seu Colegiado (a norma vai em \equipe, abaixo)
+}
+%% Se o quadro de AACC do seu curso tem o código da atividade, ou um
+%% limite de créditos, informe (opcional):
+% \modalidade{EQC}{codigo = {ENG… Participação em Equipe de Competição III (45 h)}, limite = 12}
+
+%% Se a norma do seu colegiado é outra (outra unidade da UFMG, com OUT), troque:
+% \equipe{norma = {Resolução n\textordmasculine~…/…, do Colegiado de …}, normacurta = {Resolução n\textordmasculine~…/…}}
+
+%% as suas referências (datasheets, normas, artigos), em referencias.bib
+\addbibresource{referencias.bib}
+
+\begin{document}
+
+\capa            % a capa, a folha reservada, o requerimento e os quadros se montam sozinhos
+\requerimento
+\quadrospedido
+\sumario
+
+\parteinstitucional   % Parte I, escrita pela equipe
+
+%% ============================================================
+%% PARTE II: VOCÊ NA EQUIPE
+%% ============================================================
+\parte[Identificação, resumo, trajetória, afastamentos e formação recebida. As atividades estão na
+  Parte~III.]{Participação na equipe}
+
+\identificacao
+
+\section{Resumo da participação}
+\preencher[Parte II, resumo]{Em dois ou três parágrafos: o que você fez na equipe, em que projetos, com
+  que responsabilidade, e como isso se liga ao seu curso. É o que o Colegiado lê primeiro: seja concreto
+  (o que você entregou), não genérico (o que a equipe faz).}
+
+\section{Trajetória na equipe}
+\instrucao{Um marco por linha, em ordem, com \cod{\textbackslash marco\{AAAA-MM\}\{texto\}}: a entrada,
+  o trainee, os projetos, as mudanças de cargo, as entregas.}
+\begin{trajetoria}
+  % \marco{2023-03}{Aprovação no processo seletivo (edital de 2023/1) e período trainee.}
+  % \marco{2023-06}{Entrada no projeto NEBULA, no subsistema eletrônico.}
+\end{trajetoria}
+
+\section{Afastamentos e interrupções}
+\instrucao{Os afastamentos registrados no SOMA entram sozinhos. Declare os outros, ou escreva
+  \cod{\textbackslash semafastamentos}.}
+\begin{afastamentos}
+  % \afastamento{2024-07}{2024-08}{Intercâmbio acadêmico, afastamento aprovado pelo Depto. de Pessoal.}
+  % ou, se não houve nenhum:
+  % \semafastamentos
+\end{afastamentos}
+
+\section{Formação recebida na equipe}
+\instrucao{Os treinamentos concluídos no SOMA entram sozinhos. Acrescente os que faltarem.}
+\begin{treinamentos}
+  % \treinamento{NRO-TRE-003}{Segurança elétrica em bancada}{4}{2023-05-10}{CERT-XXXX-XXXX}
+\end{treinamentos}
+
+%% ============================================================
+%% PARTE III: AS ATIVIDADES
+%% Uma atividade por arquivo. Para cada uma: copie o modelo do tipo certo
+%% de modelos/ para atividades/, e inclua o arquivo aqui.
+%% Os tipos: pcb, mecanico, simulacao, software, ensaio, clinico,
+%% pesquisa, extensao, ensino, evento, gestao, comunicacao, outro.
+%%
+%% AS EVIDÊNCIAS, SEM O SOMA. Atividade de antes do SOMA, ou registro a
+%% que você não tem acesso: use o que você tem.
+%%   \evidencia{Arquivo}{placa-revB.kicad_pcb}{O layout da revisão B}{Anexo B}
+%%   \evidencia{Repositório}{github.com/…/commit/3f2a1c}{O firmware da medição}{GitHub}
+%%   \evidencia{Foto}{Bancada, 12/05/2024}{O ensaio com a carga equivalente}{Anexo C}
+%%   \evidencia{E-mail}{De: supervisor, 03/06/2024}{A entrega aceita}{Anexo D}
+%%   \evidencia{Confirmação}{Nome do supervisor, cargo}{Que a atividade foi sua}{A pedido da equipe}
+%% Os anexos vão em anexos/, com \anexo{…}{anexos/arquivo.pdf} no fim.
+%% Na dúvida, peça ao Depto. de Pessoal o que o SOMA tem de você.
+%% ============================================================
+\parteatividades
+
+\input{atividades/atividade-01}
+% \input{atividades/atividade-02}
+% \input{atividades/atividade-03}
+
+%% ============================================================
+%% PARTE IV: A SÍNTESE
+%% ============================================================
+\parte[As horas, as competências, a relação com o curso e a autoavaliação pelo barema do professor
+  orientador.]{Síntese}
+
+\section{Horas declaradas}
+\quadrohoras
+
+\subsection{Memória de cálculo}
+\preencher[Parte IV, memória de cálculo]{Explique como as horas de cada atividade foram apuradas: os
+  registros usados (apontamentos semanais, check-ins no laboratório, cartões do quadro, relatórios) e a
+  conta feita. Horas sem base não se declaram. Se a média semanal passou do limite, justifique aqui.}
+
+\section{Competências desenvolvidas}
+\matrizcompetencias
+
+\section{Relação com o curso}
+\quadrodisciplinas
+\preencher[Parte IV, relação com o curso]{Mostre, não afirme: que conteúdos das disciplinas do quadro
+  você aplicou, em que atividade, e o que a equipe ensinou que o curso não ensina. Use o projeto
+  pedagógico do seu curso, se ajudar.}
+
+\section{Autoavaliação}
+\instrucao{Dê a sua nota (de 0 a 10) em cada critério do barema, o mesmo que o professor orientador usa
+  (Parte~V), e justifique cada uma abaixo. Autoavaliação inflada pesa contra.}
+\autoavaliacao{
+  aderencia    = {},
+  profundidade = {},
+  contribuicao = {},
+  evidencias   = {},
+  resultados   = {},
+  comunicacao  = {},
+}
+\preencher[Parte IV, justificativa da autoavaliação]{Uma frase por critério: por que essa nota, e o
+  que faltou para a nota máxima.}
+
+\section{Considerações finais}
+\preencher[Parte IV, considerações finais]{O que a equipe mudou na sua formação, e o que você deixou
+  para ela: os documentos, os treinamentos, as pessoas que você formou, o que o seu sucessor encontra
+  pronto.}
+
+\referencias
+
+%% ============================================================
+%% PARTE V: A DECLARAÇÃO, A AVALIAÇÃO E O ESPAÇO DO COLEGIADO
+%% (monta-se sozinha; as aprovações e a nota vêm do SOMA)
+%% ============================================================
+\pareceres
+
+%% ============================================================
+%% ANEXOS
+%% O A se monta sozinho. Os PDFs vão em anexos/, com estes nomes.
+%% ============================================================
+\anexoevidencias
+% \anexo{Declaração de vínculo emitida pelo SOMA}{anexos/declaracao-vinculo.pdf}
+% \anexo{Declarações de participação em eventos}{anexos/declaracoes-eventos.pdf}
+% \anexo{Certificados de treinamento}{anexos/certificados.pdf}
+% \anexo{Desenhos técnicos e esquemáticos}{anexos/documentos-tecnicos.pdf}
+
+\end{document}

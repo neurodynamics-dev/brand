@@ -1,0 +1,141 @@
+%% ============================================================
+%% nro/aproveitamento.tex: o que a Resolução nº 02/2019 da
+%% Congregação da Escola de Engenharia permite, e como se conta
+%%
+%% Mantido pela DIRETORIA. É o cardápio do pedido: o painel do SOMA
+%% (Serviços, Aproveitamento de AACC) oferece as mesmas opções, com as
+%% mesmas regras (mod-aproveitamento.js, CATALOGO). Mudou aqui, muda lá.
+%%
+%% Duas classes:
+%%   participacao  o enquadramento da participação na equipe como um
+%%                 todo. O pedido tem um principal e, se quiser,
+%%                 alternativas para o Colegiado (\pedido, no relatório);
+%%   atividade     a atividade que conta à parte, com a sua própria
+%%                 regra. Art. 7º: uma atividade conta numa AACC só.
+%%
+%% As bases do cálculo:
+%%   semestre    créditos por semestre letivo de participação (o
+%%               Quadro 3 do relatório conta os semestres). Com
+%%               "semestres = siex", só os semestres da lista do pedido
+%%               contam;
+%%   colegiado   os créditos ficam a definir pelo Colegiado (OUT);
+%%   horas       créditos a cada "unidade" horas das atividades;
+%%   duracao     créditos a cada "unidade" horas de duração do evento
+%%               ou do curso (o campo duracao da atividade);
+%%   publicacao  pela espécie da publicação (art. 9º, II).
+%%
+%% Os dispositivos são os do texto da resolução. No art. 1º, III, o
+%% curso presencial e a distância aparece como alínea "e" (depois de "a"
+%% e "b"); por isso o catálogo o cita só pelo inciso.
+%% ============================================================
+
+%% ------------------------------------------------------------
+%% A PARTICIPAÇÃO NA EQUIPE
+%% ------------------------------------------------------------
+\definiraproveitamento{EQC}{
+  classe      = participacao,
+  nome        = Participação em equipe de competição estudantil,
+  frase       = participação em equipe de competição estudantil,
+  dispositivo = {art.~1\textordmasculine, II, c; art.~11},
+  base        = semestre,
+  creditos    = 3,
+  regra       = {3 créditos por semestre letivo (art.~11, III)},
+  comprova    = {O relatório das atividades, aprovado pelo responsável pela equipe e pelo professor responsável (art.~11, I); a declaração do período de participação, assinada pelo professor responsável (art.~11, II). Os dois estão na folha de aprovação emitida pelo SOMA.},
+  quando      = {O enquadramento de todo membro: a equipe disputa competições de desempenho de um produto que ela mesma concebe, projeta e monta.},
+}
+\definiraproveitamento{EXT}{
+  classe      = participacao,
+  nome        = Projeto de extensão com vínculo formal,
+  frase       = projeto de extensão com vínculo formal,
+  dispositivo = {art.~1\textordmasculine, I, c; arts.~3\textordmasculine\ e 8\textordmasculine},
+  base        = semestre,
+  creditos    = 3,
+  semestres   = siex,
+  regra       = {3 créditos por semestre na ação registrada na PROEX (art.~8\textordmasculine, III)},
+  comprova    = {O professor orientador (art.~3\textordmasculine, I); o período de participação e o resumo avaliado e assinado por ele, com nota de 0 a 100, mínima de 60 (art.~3\textordmasculine, II), na folha de aprovação; o registro na ação, no SIEX.},
+  quando      = {Só nos semestres com registro na equipe da ação no SIEX. Quando aplicável, o trabalho se apresenta na Semana do Conhecimento (art.~8\textordmasculine, II).},
+}
+\definiraproveitamento{VPC}{
+  classe      = participacao,
+  nome        = Vivência profissional complementar,
+  frase       = vivência profissional complementar,
+  dispositivo = {art.~1\textordmasculine, IV, a; art.~17},
+  base        = horas,
+  creditos    = 1,
+  unidade     = 300,
+  regra       = {1 crédito a cada 300 horas (art.~17, I)},
+  comprova    = {O documento com a duração e as atividades desenvolvidas (art.~17, II): este relatório e a folha de aprovação.},
+  quando      = {A participação em projetos de engenharia dentro da universidade (art.~1\textordmasculine, IV, a). É a alternativa para o Colegiado que não acolher as anteriores; rende menos créditos.},
+}
+
+%% Outro: o curso de fora da Escola de Engenharia, que segue a norma do
+%% próprio colegiado. A descrição vem do pedido (\pedido{outro = …}) e a
+%% norma, de \equipe{norma = …, normacurta = …}; o Colegiado define os
+%% créditos.
+\definiraproveitamento{OUT}{
+  classe      = participacao,
+  nome        = Outro enquadramento,
+  frase       = outro enquadramento,
+  dispositivo = {conforme a norma do Colegiado},
+  base        = colegiado,
+  regra       = {os créditos que a norma do Colegiado atribuir às horas declaradas},
+  comprova    = {Este relatório e a folha de aprovação, com a avaliação do professor orientador.},
+  quando      = {Cursos que não seguem a Resolução nº 02/2019 da Congregação da Escola de Engenharia.},
+}
+
+%% ------------------------------------------------------------
+%% AS ATIVIDADES QUE CONTAM À PARTE
+%% ------------------------------------------------------------
+\definiraproveitamento{PUB}{
+  classe      = atividade,
+  nome        = Publicação,
+  frase       = publicação,
+  dispositivo = {art.~1\textordmasculine, I, d; art.~9\textordmasculine},
+  base        = publicacao,
+  regra       = {1 crédito por artigo em evento nacional; 2 em evento internacional; 3 em revista técnica indexada, periódico com corpo editorial, livro técnico indexado ou depósito de patente},
+  comprova    = {A cópia completa do trabalho e o comprovante de publicação, de depósito ou de aceite (art.~9\textordmasculine, I).},
+}
+\definiraproveitamento{EVO}{
+  classe      = atividade,
+  nome        = Organização de evento técnico-científico,
+  frase       = organização de evento técnico-científico,
+  dispositivo = {art.~1\textordmasculine, III, b; art.~14},
+  base        = duracao,
+  creditos    = 1,
+  unidade     = 7.5,
+  regra       = {1 crédito a cada 7,5 horas de duração do evento (art.~14, III)},
+  comprova    = {A comprovação e o relatório das atividades desenvolvidas (art.~14, III). Quem organiza não pede também a participação no mesmo evento (art.~14, IV).},
+}
+\definiraproveitamento{EVP}{
+  classe      = atividade,
+  nome        = Participação em evento técnico-científico,
+  frase       = participação em evento técnico-científico,
+  dispositivo = {art.~1\textordmasculine, III, a; art.~14},
+  base        = duracao,
+  creditos    = 1,
+  unidade     = 15,
+  regra       = {1 crédito a cada 15 horas de duração do evento (art.~14, II)},
+  comprova    = {O certificado de participação, com a duração (art.~14, II); a declaração de participação emitida pelo SOMA traz a duração e é autenticável.},
+}
+\definiraproveitamento{CUR}{
+  classe      = atividade,
+  nome        = Curso presencial ou a distância,
+  frase       = curso presencial ou a distância,
+  dispositivo = {art.~1\textordmasculine, III; art.~15},
+  base        = duracao,
+  creditos    = 1,
+  unidade     = 15,
+  regra       = {1 crédito a cada 15 horas de curso (art.~15, III)},
+  comprova    = {A ementa e o certificado com a carga horária (art.~15, II). Os treinamentos da equipe têm programa e certificado no SOMA. Não vale como equivalência de disciplina (art.~15, IV).},
+}
+\definiraproveitamento{VOL}{
+  classe      = atividade,
+  nome        = Voluntariado,
+  frase       = voluntariado,
+  dispositivo = {art.~1\textordmasculine, II, g; art.~12},
+  base        = horas,
+  creditos    = 1,
+  unidade     = 15,
+  regra       = {1 crédito a cada 15 horas de atividade (art.~12, I)},
+  comprova    = {A comprovação emitida pela entidade responsável, com as atividades e a duração (art.~12, I). Só atividade de cunho social; nunca religioso ou político-partidário (art.~12, II e III).},
+}
