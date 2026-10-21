@@ -2741,6 +2741,7 @@
 %% por cima dele, no PDF final, a data da aprovação. A posição vai para o
 %% .aux e, na compilação seguinte, para as palavras-chave do PDF.
 \newcommand\nro@marcaposicao{%
+  \leavevmode% na linha do "Pendente", não antes dela
   \ifdefined\pdfsavepos\pdfsavepos
     \write\@auxout{\string\nro@posavaliacao{\the\pdflastxpos}{\the\pdflastypos}}\fi}
 
