@@ -16,8 +16,9 @@
 %% As bases do cálculo:
 %%   semestre    créditos por semestre letivo de participação (o
 %%               Quadro 3 do relatório conta os semestres). Com
-%%               "semestres = siex" (ou ic), só os semestres da lista
-%%               do pedido contam;
+%%               "semestres = siex", só os semestres da lista do pedido
+%%               contam;
+%%   colegiado   os créditos ficam a definir pelo Colegiado (OUT);
 %%   horas       créditos a cada "unidade" horas das atividades;
 %%   duracao     créditos a cada "unidade" horas de duração do evento
 %%               ou do curso (o campo duracao da atividade);
@@ -52,19 +53,7 @@
   semestres   = siex,
   regra       = {3 créditos por semestre na ação registrada na PROEX (art.~8\textordmasculine, III)},
   comprova    = {O professor orientador (art.~3\textordmasculine, I); o período de participação e o resumo avaliado e assinado por ele, com nota de 0 a 100, mínima de 60 (art.~3\textordmasculine, II), na folha de aprovação; o registro na ação, no SIEX.},
-  quando      = {Só nos semestres em que o estudante consta da equipe da ação no SIEX. Quando aplicável, o trabalho se apresenta na Semana do Conhecimento (art.~8\textordmasculine, II).},
-}
-\definiraproveitamento{IC}{
-  classe      = participacao,
-  nome        = Iniciação científica com vínculo formal,
-  frase       = iniciação científica com vínculo formal,
-  dispositivo = {art.~1\textordmasculine, I, a; arts.~3\textordmasculine\ e 8\textordmasculine},
-  base        = semestre,
-  creditos    = 3,
-  semestres   = ic,
-  regra       = {3 créditos por semestre com vínculo formal na PRPq (art.~8\textordmasculine, III)},
-  comprova    = {O professor orientador da UFMG (art.~3\textordmasculine, I); o período e o resumo avaliado por ele, com nota mínima de 60 (art.~3\textordmasculine, II), na folha de aprovação; o registro do vínculo de iniciação científica.},
-  quando      = {Só nos semestres com vínculo formal (bolsa ou registro na PRPq) num projeto de pesquisa conduzido na equipe.},
+  quando      = {Só nos semestres com registro na equipe da ação no SIEX. Quando aplicável, o trabalho se apresenta na Semana do Conhecimento (art.~8\textordmasculine, II).},
 }
 \definiraproveitamento{VPC}{
   classe      = participacao,
@@ -77,6 +66,21 @@
   regra       = {1 crédito a cada 300 horas (art.~17, I)},
   comprova    = {O documento com a duração e as atividades desenvolvidas (art.~17, II): este relatório e a folha de aprovação.},
   quando      = {A participação em projetos de engenharia dentro da universidade (art.~1\textordmasculine, IV, a). É a alternativa para o Colegiado que não acolher as anteriores; rende menos créditos.},
+}
+
+%% Outro: o curso de fora da Escola de Engenharia, que segue a norma do
+%% próprio colegiado. A descrição vem do pedido (\pedido{outro = …}) e a
+%% norma, de \equipe{norma = …, normacurta = …}; o Colegiado define os
+%% créditos.
+\definiraproveitamento{OUT}{
+  classe      = participacao,
+  nome        = Outro enquadramento,
+  frase       = outro enquadramento,
+  dispositivo = {conforme a norma do Colegiado},
+  base        = colegiado,
+  regra       = {os créditos que a norma do Colegiado atribuir às horas declaradas},
+  comprova    = {Este relatório e a folha de aprovação, com a avaliação do professor orientador.},
+  quando      = {Cursos que não seguem a Resolução nº 02/2019 da Congregação da Escola de Engenharia.},
 }
 
 %% ------------------------------------------------------------

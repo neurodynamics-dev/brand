@@ -5,8 +5,8 @@
 %% colegiado dele é outra, ele repete \equipe{…} no preâmbulo do
 %% relatório só com o que muda.
 %%
-%% Os dados do SIEX só viram pendência no relatório de quem pede o
-%% enquadramento como projeto de extensão (EXT). O professor
+%% O título e o número da ação no SIEX só viram pendência no relatório de
+%% quem pede o enquadramento como projeto de extensão (EXT). O professor
 %% orientador de cada relatório é indicado no SOMA, durante a
 %% aprovação, e aparece na folha de aprovação.
 %% ============================================================
@@ -22,7 +22,11 @@
 }
 
 \equipe{
+  %% o nome completo sai na primeira menção, com o significado; depois,
+  %% só o curto
   nome         = NeuroDynamics PD\&I,
+  nomecurto    = NeuroDynamics,
+  significado  = {Pesquisa, Desenvolvimento e Inovação},
   sigla        = NRO,
   %% como a frase o escreve: "realizadas no …"
   laboratorios = {Laboratório de Engenharia Biomédica e no Laboratório de Bioengenharia (LABBIO) da Escola de Engenharia da UFMG},
@@ -37,12 +41,14 @@
   artigoprofessor       = o,
   departamentoprofessor = {},   % ex.: Departamento de Engenharia Mecânica
 
-  %% a ação de extensão, como está no SIEX/UFMG
-  siextitulo        = {},
-  siexnumero        = {},
+  %% a ação de extensão, como está no SIEX/UFMG: o registro que reconhece
+  %% a participação como extensão e como equipe de competição. O
+  %% coordenador e a vigência são opcionais.
+  siextitulo        = {Competição Cybathlon 2024},
+  siexnumero        = 205234,
   siexcoordenador   = {},        % com o título: Prof. Dr. …
   artigocoordenador = o,
-  siexvigencia      = {},        % ex.: 2025 a 2027
+  siexvigencia      = {},        % ex.: 2024 a 2026
 
   %% a norma que rege o aproveitamento; o membro de outra unidade troca
   %% no próprio relatório. A curta é a que as frases e os quadros citam.

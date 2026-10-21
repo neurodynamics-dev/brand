@@ -264,6 +264,7 @@
     estudante/colegiado = { o~colegiado~do~curso } ,
     estudante/email = { o~e-mail } ,
     estudante/ingresso = { o~semestre~de~ingresso~no~curso~(AAAA/S) } ,
+    estudante/pronomes = { os~pronomes~(ela,~ele~ou~elu) } ,
     membro/registro = { o~registro~no~SOMA } ,
     membro/situacao = { a~situação~(ativo~ou~egresso) } ,
     membro/inicio = { o~mês~de~entrada~na~equipe } ,
@@ -283,7 +284,7 @@
 %% os campos sem os quais o relatório não se encaminha
 \clist_const:Nn \c__nro_obrigatorios_clist
   {
-    estudante/nome , estudante/matricula , estudante/curso , estudante/colegiado ,
+    estudante/nome , estudante/pronomes , estudante/matricula , estudante/curso , estudante/colegiado ,
     estudante/email , estudante/ingresso , membro/registro , membro/situacao ,
     membro/inicio , membro/cargo , membro/departamento , membro/supervisor ,
     membro/dedicacao , documento/pn , pedido/principal
@@ -323,11 +324,26 @@
       { \__nro_se_valor:nnTF { membro/siex } { sim , s , yes , registrado , registrada } {#1} {#2} }
   }
 \NewDocumentCommand \seegresso { +m +m } { \__nro_se_egresso:TF {#1} {#2} }
-%% "do Prof." ou "da Profa.": o artigo vem de equipe/artigoprofessor (o ou a)
+%% "do Prof." ou "da Prof.ª": o artigo vem de equipe/artigoprofessor (o ou a)
 \NewDocumentCommand \doprofessor { } { \__nro_se_valor:nnTF { equipe/artigoprofessor } { a } { da } { do } }
 \NewDocumentCommand \peloprofessor { } { \__nro_se_valor:nnTF { equipe/artigoprofessor } { a } { pela } { pelo } }
 \NewDocumentCommand \pelocoordenador { } { \__nro_se_valor:nnTF { equipe/artigocoordenador } { a } { pela } { pelo } }
 \NewDocumentCommand \sesiex { +m +m } { \__nro_se_siex:TF {#1} {#2} }
+%% Os pronomes da pessoa (estudante/pronomes: ela, ele ou elu) escolhem a
+%% forma: \pron{masculina}{feminina}{neutra}. Em branco, a masculina, até
+%% a pendência ser resolvida. Os atalhos cobrem os casos do texto.
+\cs_new:Npn \__nro_pron:nnn #1 #2 #3
+  {
+    \str_case_e:nnF { \str_lowercase:f { \__nro_dado:n { estudante/pronomes } } }
+      { { ela } {#2} { ela/dela } {#2} { elu } {#3} { elu/delu } {#3} }
+      {#1}
+  }
+\NewExpandableDocumentCommand \pron { m m m } { \__nro_pron:nnn {#1} {#2} {#3} }
+\NewExpandableDocumentCommand \oa { } { \__nro_pron:nnn { o } { a } { e } }
+\NewExpandableDocumentCommand \doa { } { \__nro_pron:nnn { do } { da } { de } }
+\NewExpandableDocumentCommand \ele { } { \__nro_pron:nnn { ele } { ela } { elu } }
+\NewExpandableDocumentCommand \dele { } { \__nro_pron:nnn { dele } { dela } { delu } }
+\NewExpandableDocumentCommand \egresso { } { \__nro_pron:nnn { egresso } { egressa } { egresse } }
 %% "Egresso" ou "Membro ativo"; a marca, se a situação está em branco
 \cs_new_protected:Npn \nro@textosituacao #1 #2
   { \__nro_se_dado:nTF { membro/situacao } { \__nro_se_egresso:TF {#1} {#2} } { \nro@marca { a~situação } } }
@@ -852,15 +868,59 @@
 \prg_generate_conditional_variant:Nnn \__nro_tipo_tem_obrigatorio:n { V } { T , F , TF }
 
 %% ------------------------------------------------------------
-%% 8. AS COMPETÊNCIAS E O BAREMA (nro/avaliacao.tex)
+%% 8. AS COMPETÊNCIAS, PELA DCN DO CURSO (nro/competencias.tex), E O
+%%    BAREMA (nro/avaliacao.tex)
+%%    Cada lista é aberta por \conjuntocompetencias{chave}{referência} e
+%%    preenchida com \competencia{I}{texto}; \cursos{chave}{A; B} diz que
+%%    cursos a usam. O curso de estudante/curso escolhe a lista; curso que
+%%    não está em nenhuma usa a "geral".
 %% ------------------------------------------------------------
-\seq_new:N \g__nro_comp_seq      % I, II, …, VIII
-\NewDocumentCommand \definircompetencia { m +m }
+\seq_new:N \g__nro_comp_seq      % as da lista do curso: I, II, …
+\tl_new:N \g__nro_conjunto_tl
+\tl_new:N \g__nro_conjunto_ativo_tl
+\prop_new:N \g__nro_cursos_prop  % o curso, em minúsculas → a lista
+\NewDocumentCommand \conjuntocompetencias { m +m }
+  {
+    \tl_gset:Nx \g__nro_conjunto_tl { \tl_trim_spaces:n {#1} }
+    \prop_gput:Nxn \g__nro_dados_prop { compref/\g__nro_conjunto_tl } {#2}
+    \seq_gclear_new:c { g__nro_comp_ \g__nro_conjunto_tl _seq }
+  }
+\NewDocumentCommand \competencia { m +m }
   {
     \tl_set:Nx \l__nro_tmpb_tl { \tl_trim_spaces:n {#1} }
-    \seq_gput_right:NV \g__nro_comp_seq \l__nro_tmpb_tl
-    \prop_gput:Nxn \g__nro_dados_prop { comp/\l__nro_tmpb_tl } {#2}
+    \seq_gput_right:cV { g__nro_comp_ \g__nro_conjunto_tl _seq } \l__nro_tmpb_tl
+    \prop_gput:Nxn \g__nro_dados_prop { comp/\g__nro_conjunto_tl/\l__nro_tmpb_tl } {#2}
   }
+\cs_new:Npn \__nro_curso_chave:n #1 { \str_lowercase:f { \tl_to_str:e { \tl_trim_spaces:e {#1} } } }
+\NewDocumentCommand \cursos { m +m }
+  {
+    \seq_set_split:Nnn \l__nro_tmp_seq { ; } {#2}
+    \seq_map_inline:Nn \l__nro_tmp_seq
+      {
+        \tl_if_blank:nF {##1}
+          { \prop_gput:Nxx \g__nro_cursos_prop { \__nro_curso_chave:n {##1} } { \tl_trim_spaces:n {#1} } }
+      }
+  }
+%% a lista do curso: as competências dela passam a ser as do relatório
+\cs_new_protected:Npn \__nro_escolher_competencias:
+  {
+    \tl_set:Nx \l__nro_tmp_tl { \__nro_curso_chave:n { \__nro_dado:n { estudante/curso } } }
+    \prop_get:NVNF \g__nro_cursos_prop \l__nro_tmp_tl \l__nro_tmpb_tl { \tl_set:Nn \l__nro_tmpb_tl { geral } }
+    \seq_if_exist:cF { g__nro_comp_ \l__nro_tmpb_tl _seq } { \tl_set:Nn \l__nro_tmpb_tl { geral } }
+    \tl_gset_eq:NN \g__nro_conjunto_ativo_tl \l__nro_tmpb_tl
+    \seq_gclear:N \g__nro_comp_seq
+    \seq_if_exist:cT { g__nro_comp_ \l__nro_tmpb_tl _seq }
+      { \seq_gset_eq:Nc \g__nro_comp_seq { g__nro_comp_ \l__nro_tmpb_tl _seq } }
+    \seq_map_inline:Nn \g__nro_comp_seq
+      {
+        \prop_get:NxN \g__nro_dados_prop { comp/\l__nro_tmpb_tl/##1 } \l__nro_tmpc_tl
+        \prop_gput:NnV \g__nro_dados_prop { comp/##1 } \l__nro_tmpc_tl
+      }
+    \prop_get:NxN \g__nro_dados_prop { compref/\l__nro_tmpb_tl } \l__nro_tmpc_tl
+    \prop_gput:NnV \g__nro_dados_prop { compref } \l__nro_tmpc_tl
+  }
+\cs_generate_variant:Nn \prop_get:NnN { NxN }
+\cs_generate_variant:Nn \prop_gput:Nnn { NnV }
 \seq_new:N \g__nro_crit_seq      % as chaves dos critérios, na ordem
 \NewDocumentCommand \criterio { m m +m +m }
   {
@@ -1244,8 +1304,18 @@
     \__nro_se_atv:nTF { competencias }
       {
         \clist_set:Nx \l_tmpa_clist { \__nro_atv:n { competencias } }
-        \clist_use:Nn \l_tmpa_clist { ,~ }
-        \c_space_tl \textcolor { nro-cinza } { (DCN~de~Engenharia,~art.~4\textordmasculine) }
+        \seq_clear:N \l__nro_tmp_seq
+        \clist_map_inline:Nn \l_tmpa_clist
+          {
+            \seq_if_in:NnTF \g__nro_comp_seq {##1}
+              { \seq_put_right:Nn \l__nro_tmp_seq {##1} }
+              {
+                \__nro_pend:n { \nro@contexto:~a~competência~##1~não~está~na~lista~do~curso~(Parte~IV) }
+                \seq_put_right:Nn \l__nro_tmp_seq { \nro@marca { ##1~não~está~na~lista~do~curso } }
+              }
+          }
+        \seq_use:Nn \l__nro_tmp_seq { ,~ }
+        \c_space_tl \textcolor { nro-cinza } { (DCN~do~curso,~Parte~IV) }
       }
       { \nro@marca { as~competências } }
   }
@@ -1493,9 +1563,27 @@
               { \fp_eval:n { floor ( \g__nro_part_fp / ( \__nro_dado:n { apr/#1/unidade } ) + 1e-9 ) * ( \__nro_dado:n { apr/#1/creditos } ) } }
             \tl_set:Nx \l__nro_base_tl { \exp_not:N \__nro_horas:n { \fp_use:N \g__nro_part_fp } \c_space_tl de~atividades }
           }
+        { colegiado }
+          {
+            \tl_set:Nx \l__nro_base_tl { \exp_not:N \__nro_horas:n { \fp_use:N \g__nro_part_fp } \c_space_tl de~atividades }
+          }
       }
       { }
   }
+%% os créditos e as horas de um enquadramento, para os quadros: na base
+%% "colegiado", os créditos ficam a definir e as horas são as declaradas
+\cs_new:Npn \__nro_col_cred:nn #1 #2
+  { \str_if_eq:eeTF { \__nro_dado:n { apr/#1/base } } { colegiado } { a~definir } { \__nro_cred:n {#2} } }
+\cs_new_protected:Npn \__nro_col_horas:nn #1 #2
+  {
+    \str_if_eq:eeTF { \__nro_dado:n { apr/#1/base } } { colegiado }
+      { \__nro_horas:n { \fp_use:N \g__nro_part_fp } }
+      { \__nro_cred_horas:n {#2} }
+  }
+\prg_new_conditional:Npnn \__nro_se_colegiado:n #1 { T , F , TF }
+  { \str_if_eq:eeTF { \__nro_dado:n { apr/#1/base } } { colegiado } { \prg_return_true: } { \prg_return_false: } }
+\cs_new_protected:Npn \nro@seprincipalcolegiado #1 #2
+  { \__nro_totais: \exp_args:NV \__nro_se_colegiado:nTF \g__nro_principal_tl {#1} {#2} }
 \cs_generate_variant:Nn \__nro_cred_participacao:nN { VN }
 
 \cs_new_protected:Npn \nro@escrevetotalhoras { \__nro_totais: \__nro_horas:n { \g__nro_total_fp } }
@@ -1560,12 +1648,12 @@
         \tl_if_blank:VF \g__nro_principal_tl
           {
             \__nro_se_classe:VnF \g__nro_principal_tl { participacao }
-              { \__nro_pend:n { Pedido:~o~enquadramento~principal~'\g__nro_principal_tl'~não~é~da~participação~(EQC,~EXT,~IC~ou~VPC) } }
+              { \__nro_pend:n { Pedido:~o~enquadramento~principal~'\g__nro_principal_tl'~não~é~da~participação~(EQC,~EXT,~VPC~ou~OUT) } }
           }
         \seq_map_inline:Nn \g__nro_alt_seq
           {
             \__nro_se_classe:nnF {##1} { participacao }
-              { \__nro_pend:n { Pedido:~a~alternativa~'##1'~não~é~da~participação~(EQC,~EXT,~IC~ou~VPC) } }
+              { \__nro_pend:n { Pedido:~a~alternativa~'##1'~não~é~da~participação~(EQC,~EXT,~VPC~ou~OUT) } }
           }
         %% os enquadramentos que dependem de uma lista de semestres
         \seq_set_eq:NN \l__nro_tmp_seq \g__nro_alt_seq
@@ -1580,7 +1668,7 @@
               }
             \str_if_eq:nnT {##1} { EXT }
               {
-                \clist_map_inline:nn { equipe/siextitulo , equipe/siexnumero , equipe/siexcoordenador , equipe/siexvigencia }
+                \clist_map_inline:nn { equipe/siextitulo , equipe/siexnumero }
                   {
                     \__nro_se_dado:nF {####1}
                       {
@@ -1615,8 +1703,8 @@
           }
           { \exp_not:N \__nro_apr_disp:n { \g__nro_principal_tl } }
           { \exp_not:V \l__nro_base_tl }
-          { \exp_not:N \__nro_cred:n { \int_use:N \l__nro_tmp_int } }
-          { \exp_not:N \__nro_cred_horas:n { \int_use:N \l__nro_tmp_int } }
+          { \exp_not:N \__nro_col_cred:nn { \g__nro_principal_tl } { \int_use:N \l__nro_tmp_int } }
+          { \exp_not:N \__nro_col_horas:nn { \g__nro_principal_tl } { \int_use:N \l__nro_tmp_int } }
       }
     %% as atividades à parte
     \seq_map_inline:Nn \g__nro_itens_seq
@@ -1648,8 +1736,8 @@
               { \exp_not:N \__nro_apr_nome:n { \exp_not:n {##1} } \exp_not:N \__nro_limite:nn { \exp_not:n {##1} } { \int_use:N \l__nro_tmp_int } }
               { \exp_not:N \__nro_apr_disp:n { \exp_not:n {##1} } }
               { \exp_not:V \l__nro_base_tl }
-              { \exp_not:N \__nro_cred:n { \int_use:N \l__nro_tmp_int } }
-              { \exp_not:N \__nro_cred_horas:n { \int_use:N \l__nro_tmp_int } }
+              { \exp_not:N \__nro_col_cred:nn { \exp_not:n {##1} } { \int_use:N \l__nro_tmp_int } }
+              { \exp_not:N \__nro_col_horas:nn { \exp_not:n {##1} } { \int_use:N \l__nro_tmp_int } }
           }
       }
   }
@@ -2020,6 +2108,15 @@
 \tl_const:Nn \c__nro_logo_tl { nro/imagotipo-preto.png }
 \cs_new_protected:Npn \nro@folha #1
   { \bool_if:NF \g__nro_aux_encerrado_bool { \tl_gset:Nn \g__nro_folha_tl {#1} } }
+\tl_new:N \g__nro_posaval_tl
+\cs_new_protected:Npn \nro@posavaliacao #1 #2
+  {
+    \bool_if:NF \g__nro_aux_encerrado_bool
+      {
+        \tl_gset:Nx \g__nro_posaval_tl
+          { \fp_eval:n { round ( #1 / 65536 / 72.27 * 25.4 , 1 ) } , \fp_eval:n { round ( #2 / 65536 / 72.27 * 25.4 , 1 ) } }
+      }
+  }
 \AtBeginDocument
   {
     \bool_gset_true:N \g__nro_aux_encerrado_bool
@@ -2043,6 +2140,16 @@
           }
           { \tl_gset:Nn \g__nro_marca_tl { RASCUNHO } }
       }
+    \__nro_escolher_competencias:
+    %% o enquadramento OUT: a descrição vem do pedido e a norma, de \equipe
+    \__nro_se_dado:nT { pedido/outro }
+      {
+        \prop_get:NnN \g__nro_dados_prop { pedido/outro } \l__nro_tmp_tl
+        \prop_gput:NnV \g__nro_dados_prop { apr/OUT/nome } \l__nro_tmp_tl
+        \prop_gput:NnV \g__nro_dados_prop { apr/OUT/frase } \l__nro_tmp_tl
+        \prop_get:NnN \g__nro_dados_prop { equipe/normacurta } \l__nro_tmp_tl
+        \prop_gput:NnV \g__nro_dados_prop { apr/OUT/dispositivo } \l__nro_tmp_tl
+      }
     \__nro_semestres:
     \__nro_totais:
     %% os metadados do PDF: cópias expandidas (o \exp_not:n do \prop_item
@@ -2065,6 +2172,7 @@
             principal = \g__nro_principal_tl ; ~
             creditos = \int_eval:n { \g__nro_principal_cred_int + \g__nro_itens_cred_int } ; ~
             principalcreditos = \int_use:N \g__nro_principal_cred_int ; ~
+            avaliacao = \tl_if_empty:NTF \g__nro_posaval_tl { 0 } { \g__nro_posaval_tl } ; ~
             itens = \int_use:N \g__nro_itens_cred_int ; ~
             semestres = \int_use:N \g__nro_sem_conta_int ; ~
             exemplo = \bool_if:NTF \g__nro_exemplo_bool { sim } { nao }
@@ -2286,9 +2394,10 @@
 \pagestyle{empty}
 \let\ps@plain\ps@empty
 \newif\ifnro@nacapa
+\newif\ifnro@semnota
 \newcommand\nro@notarodape{%
   Registro destinado à análise do aproveitamento de AACC pelo Colegiado do curso. Contém dados
-  pessoais do estudante e informações da \nro@dado{equipe/nome}; não deve ser divulgado para outros fins.}
+  pessoais de \nro@dado{estudante/nome} e informações da \nro@nrocurto; não deve ser divulgado para outros fins.}
 \AddToHook{shipout/background}{%
   \setlength\unitlength{1mm}%
   \normalfont\color{nro-tinta}%
@@ -2309,9 +2418,10 @@
     \put(197.5,-12.6){\llap{\nro@fcabn\nro@corpo{9.5}\nro@dado{serie/emissor}}}%
     \put(197.5,-16.8){\llap{\nro@fcab\nro@corpo{9.5}\nro@dado{serie/titulo}}}%
     \put(197.5,-21){\llap{\nro@fcab\nro@corpo{9.5}\nro@codigo\ Rev.~\nro@dado{serie/revisao}}}%
-    % o rodapé: a nota, a linha, o código e a página
+    % o rodapé: a nota (fora da folha reservada), a linha, o código e a página
+    \ifnro@semnota\global\nro@semnotafalse\else
     \put(105,-283.4){\makebox(0,0)[b]{\parbox[b]{172mm}{\centering
-      \nro@fcab\nro@corpo{7.2}\itshape\color{nro-cab-cinza}\nro@notarodape}}}%
+      \nro@fcab\nro@corpo{7.2}\itshape\color{nro-cab-cinza}\nro@notarodape}}}\fi
     \put(15,-286.6){{\color{nro-cab-linha}\rule{182.5mm}{0.2mm}}}%
     \put(15,-290){\nro@fcab\nro@corpo{7.2}\color{nro-cab-claro}\nro@codigo\ Rev.~\nro@dado{serie/revisao}%
       \secampo{estudante/nome}{, \nro@dado{estudante/nome}}{}}%
@@ -2343,8 +2453,13 @@
 
 %% o rótulo formal: Archivo, caixa de frase, cinza (nunca caixa alta em fonte de código)
 \newcommand\nro@rotulo[1]{{\nro@rot\nro@corpo{8}\color{nro-cinza}#1}}
-%% para os arquivos da equipe e o texto do membro: o nome da equipe e o rótulo
-\newcommand\NRO{\nro@nome}
+%% o nome da equipe: na primeira menção, o completo com o significado
+%% ("NeuroDynamics PD&I (Pesquisa, Desenvolvimento e Inovação)"); depois,
+%% o curto. \NRO* é sempre o curto (títulos, sumário). Nunca quebra.
+\newif\ifnro@nrocitado
+\newcommand\nro@nrocurto{\mbox{\secampo{equipe/nomecurto}{\nro@dado{equipe/nomecurto}}{\nro@nome}}}
+\DeclareRobustCommand\NRO{\@ifstar{\nro@nrocurto}{\ifnro@nrocitado\nro@nrocurto\else
+  \global\nro@nrocitadotrue\mbox{\nro@nome}\secampo{equipe/significado}{ (\nro@dado{equipe/significado})}{}\fi}}
 %% a norma, curta (também no sumário e nos marcadores do PDF)
 \newcommand\normacurta{\nro@dado{equipe/normacurta}}
 \newcommand\rotulo[1]{\nro@rotulo{#1}}
@@ -2557,7 +2672,7 @@
 %% as evidências: a seção e a tabela
 \NewDocumentEnvironment{evidencias}{}{%
   \nro@exigiratividade{evidencias}\nro@secao{evidencias}%
-  \nro@titulosecao{Uma linha por evidência: o que é, o identificador (o código no SOMA, o commit, o arquivo), o que ela mostra e onde quem avalia confere. Sem evidência, a atividade não conta.}{Evidências}%
+  \nro@titulosecao{Uma linha por evidência: o tipo, o identificador, o que mostra e onde conferir. Sem registro no SOMA (atividade anterior a ele, ou registro sem acesso), use o arquivo do projeto, o repositório, fotos datadas, e-mails ou a confirmação do supervisor, e anexe o que puder em anexos/.}{Evidências}%
   \nro@abreevidencias\ignorespaces}{\nro@fechaevidencias\par}
 \newcommand\nro@linhaevidencia[5]{%
   \cod{#1} & #2 & {\nro@rot\nro@corpo{8}#3} & #4 & #5 \\ \nro@fino}
@@ -2589,27 +2704,28 @@
     {\color{nro-cortex}\rule{15mm}{0.8mm}}\par\vspace{6mm}%
     {\nro@rot\nro@corpo{10}\color{nro-cinza}Aproveitamento de atividades acadêmicas curriculares
       complementares\par}\vspace{5mm}%
-    {\nro@serif\fontsize{38}{41}\selectfont\color{nro-tinta}\hyphenpenalty=10000\exhyphenpenalty=10000
-      Atividades de \campo{estudante/nome} na \mbox{\nro@dado{equipe/nome}}\par}%
-    \vspace{6mm}%
-    {\nro@corpo{11.2}\linespread{1.3}\selectfont\color{nro-texto2}Relatório das atividades realizadas
-      \nro@periodomembro, para análise do \campo{estudante/colegiado} da Universidade Federal de Minas
-      Gerais\nro@seprincipal{. Pede o aproveitamento como \nro@principalfrase\
-      (\nro@principaldisp, da \nro@dado{equipe/normacurta})\nro@seitens{ e de atividades à parte}{}}{}.\par}%
-    \vspace{20mm}%
+    {\nro@serif\fontsize{40}{43}\selectfont\color{nro-tinta}Relatório de atividades\par}%
+    \vspace{3mm}%
+    {\nro@serif\fontsize{24}{28}\selectfont\color{nro-cinza}\hyphenpenalty=10000\exhyphenpenalty=10000
+      \campo{estudante/nome}\par}%
+    \vspace{4mm}%
+    {\nro@corpo{11}\color{nro-texto2}\nro@nrocurto, \nro@periodomembro\par}%
+    \vspace{22mm}%
     {\color{nro-tinta}\rule{\linewidth}{0.4pt}}\par\vspace{4mm}%
-    \nro@capacel{Estudante}{\campo{estudante/nome}}\hfill
     \nro@capacel{Curso}{\campo{estudante/curso}}\hfill
-    \nro@capacel{Matrícula}{\campo{estudante/matricula}}\par\vspace{5mm}%
+    \nro@capacel{Matrícula}{\campo{estudante/matricula}}\hfill
+    \nro@capacel{Data}{\nro@datadoc}\par\vspace{5mm}%
     \nro@capacel{Pedido}{\nro@seprincipal
-      {\nro@setematividades{\nro@totalcreditos\ (\nro@principalchave\nro@seitens{ e à parte}{})}%
-        {\nro@seauxlido{\nro@marca{nenhuma atividade}}{na próxima compilação}}}%
+      {\nro@seprincipalcolegiado
+        {\nro@principalnome, créditos a definir}%
+        {\nro@setematividades{\nro@totalcreditos\ (\nro@principalchave\nro@seitens{ e à parte}{})}%
+          {\nro@seauxlido{\nro@marca{nenhuma atividade}}{na próxima compilação}}}}%
       {\nro@marca{o enquadramento}}}\hfill
-    \nro@capacel{Data}{\nro@datadoc}\hfill
-    \nro@capacel{Situação}{\nro@situacaocurta}\par
+    \nro@capacel{Situação}{\nro@situacaocurta}\hfill
+    \nro@capacel{Avaliação da equipe}{\nro@marcaposicao Pendente}\par
     \seexemplo{\vspace{6mm}{\nro@corpo{8.6}\itshape\color{nro-cinza}Exemplo fictício: a pessoa, os
       códigos, os números e os dados são inventados e não correspondem a ninguém nem a registro
-      algum do SOMA. O exemplo mostra o nível de detalhe que a equipe espera.\par}}{}%
+      algum do SOMA.\par}}{}%
   \end{minipage}\par
   \vspace*{4mm}%
   \clearpage
@@ -2621,34 +2737,24 @@
       {\textcolor{nro-impulso-escuro}{\nro@pendanteriores\ pendência(s)\sefinal{, não encaminhe}{}}}%
       {\textcolor{nro-cortex}{\sefinal{Sem pendências}{Rascunho sem pendências}}}}%
     {\textcolor{nro-cinza}{na próxima compilação}}}
+%% onde fica, na capa, o "Pendente" da avaliação da equipe: o SOMA escreve
+%% por cima dele, no PDF final, a data da aprovação. A posição vai para o
+%% .aux e, na compilação seguinte, para as palavras-chave do PDF.
+\newcommand\nro@marcaposicao{%
+  \ifdefined\pdfsavepos\pdfsavepos
+    \write\@auxout{\string\nro@posavaliacao{\the\pdflastxpos}{\the\pdflastypos}}\fi}
 
 %% a folha reservada: o SOMA a troca pela folha de aprovação
 \newcommand\nro@folhaaprovacao{%
   \nro@definircontexto{Folha de aprovação}%
   \protected@write\@auxout{}{\string\nro@folha{\thepage}}%
   \label{nro:folhasoma}%
+  \global\nro@semnotatrue
   \nro@kicker{Folha de aprovação}{}%
-  \vspace{6mm}%
-  {\nro@serif\fontsize{28}{31.5}\selectfont\color{nro-tinta}Folha reservada ao SOMA\par}%
-  \vspace{5mm}%
-  {\nro@corpo{11}\linespread{1.25}\selectfont\color{nro-texto2}Depois das aprovações, o SOMA, o
-   sistema de gestão da \nro@dado{equipe/nome}, troca esta folha pela folha de aprovação do
-   relatório, que registra:\par}%
-  \vspace{2mm}%
-  \begin{itemize}[leftmargin=6mm, itemsep=3pt]
-    \item a aprovação da direção da equipe, em cada uma das suas etapas, com o nome de quem
-      aprovou e a data;
-    \item a aprovação do professor orientador, com a nota de 0 a 100 (art.~3\textordmasculine, II)
-      e a declaração do período de participação (art.~11, I e II);
-    \item o código verificador e o QR Code, que qualquer pessoa confere em
-      \textbf{\nro@dado{equipe/validacao}}.
-  \end{itemize}
-  \vspace{4mm}%
-  \begin{nota}
-    Se esta folha chegou ao Colegiado assim, sem as aprovações, o relatório não passou pelo SOMA.
-    Peça ao estudante a versão emitida pelo SOMA, ou confira o código verificador dela em
-    \nro@dado{equipe/validacao}.
-  \end{nota}
+  \vspace{8mm}%
+  \noindent{\setlength\fboxsep{0pt}\colorbox{nro-medula-claro}{\begin{minipage}[c][190mm][c]{\linewidth}
+    \centering{\nro@serif\itshape\nro@corpo{14}\color{nro-cinza}Documento não submetido à avaliação da equipe.\par}
+  \end{minipage}}}\par
   \clearpage}
 
 %% a assinatura do registro formal: a régua, o nome serifado e o que a pessoa é
@@ -2668,9 +2774,16 @@
   {\nro@corpo{10}\color{nro-texto2}Universidade Federal de Minas Gerais\par}\vspace{7mm}%
   Eu, \textbf{\campo{estudante/nome}}, estudante do curso de \campo{estudante/curso}, matrícula
   n\textordmasculine~\campo{estudante/matricula}, com ingresso no \nro@ingresso, integrante da
-  \nro@dado{equipe/nome} \nro@periodomembro, requeiro, nos termos da \nro@dado{equipe/norma}, o
+  \NRO{} \nro@periodomembro, requeiro, nos termos da \nro@dado{equipe/norma}, o
   aproveitamento de
-  \nro@setematividades{\textbf{\nro@totalcreditos} em atividades acadêmicas curriculares
+  \nro@seprincipalcolegiado
+  {atividades acadêmicas curriculares complementares, conforme o Quadro~1:
+  \begin{itemize}[leftmargin=6mm, itemsep=2pt]
+    \item a participação na equipe como \nro@principalfrase\ (\nro@principaldisp), por
+      \nro@principalbase, com os créditos que a norma do Colegiado atribuir\nro@seitens{;}{.}
+    \nro@itensrequerimento
+  \end{itemize}}
+  {\nro@setematividades{\textbf{\nro@totalcreditos} em atividades acadêmicas curriculares
   complementares, assim discriminados no Quadro~1:}{\nro@marca{os créditos}.}
   \nro@setematividades{%
   \begin{itemize}[leftmargin=6mm, itemsep=2pt]
@@ -2679,7 +2792,7 @@
        por \nro@principalbase\ de participação na equipe (Quadro~3)\nro@seitens{;}{.}}
       {\nro@marca{o enquadramento principal};}
     \nro@itensrequerimento
-  \end{itemize}}{}
+  \end{itemize}}{}}
 
   \nro@sealternativas{Subsidiariamente, caso o Colegiado não acolha o enquadramento principal,
   requeiro que a participação seja apreciada como \nro@alternativasrequerimento, conforme o
@@ -2687,7 +2800,7 @@
   {Caso o Colegiado não acolha o enquadramento pedido, requeiro que a participação seja apreciada
   noutro enquadramento que entenda cabível, no todo ou em parte.}
 
-  As atividades foram realizadas na \nro@dado{equipe/nome}, no \nro@dado{equipe/laboratorios}, e
+  As atividades foram realizadas na \NRO, no \nro@dado{equipe/laboratorios}, e
   estão descritas e comprovadas neste relatório: cada uma traz o que foi feito, como, com que
   resultado e com que evidência. A folha de aprovação emitida pelo SOMA, logo depois da capa,
   traz a aprovação da direção da equipe e a do professor orientador, com a nota
@@ -2701,7 +2814,7 @@
   \vspace{12mm}
 
   \nro@assinatura{\campo{estudante/nome}}{Matrícula \campo{estudante/matricula}. Requerimento
-    firmado pelo envio do relatório no SOMA, com a conta do estudante.}
+    firmado pelo envio do relatório no SOMA.}
   \clearpage}
 
 %% os quadros do pedido
@@ -2711,9 +2824,9 @@
 \newcommand\quadrospedido{%
   \nro@conferirpedido
   \nro@kicker{Resumo do pedido}{}%
-  \vspace{6mm}{\nro@serif\fontsize{28}{31.5}\selectfont O que se pede, e com que base\par}\vspace{6mm}%
+  \vspace{6mm}{\nro@serif\fontsize{28}{31.5}\selectfont Créditos e enquadramento\par}\vspace{6mm}%
   \nro@setematividades{%
-    \nro@titquadro{Quadro 1}{O pedido, pelos dispositivos da \nro@dado{equipe/normacurta}}%
+    \nro@titquadro{Quadro 1}{Créditos por enquadramento}%
     \nro@montarquadropedido
     \begingroup\nro@corpo{8.8}\renewcommand\arraystretch{1.45}%
     \setlength\LTpre{0pt}\setlength\LTpost{1.5mm}%
@@ -2721,22 +2834,20 @@
       \nro@cab{} & \nro@cab{Enquadramento} & \nro@cab{Dispositivo} & \nro@cab{Base} &
       \nro@cab{Créditos} & \nro@cab{Horas} \\ \nro@meio\endhead
       \nro@linhas
-      & \nro@rotf Total pedido & & & \nro@rotf\nro@totalcreditos & \nro@rotf\nro@totalhoraslancar \\ \nro@base
+      & \nro@rotf Total pedido & & & \nro@rotf\nro@seprincipalcolegiado{a definir}{\nro@totalcreditos} & \nro@rotf\nro@seprincipalcolegiado{\nro@escrevetotalhoras}{\nro@totalhoraslancar} \\ \nro@base
     \end{xltabular}\endgroup
     \nro@sealternativas{%
-      \vspace{1mm}{\nro@corpo{9}\color{nro-texto2}Se o Colegiado não acolher o principal, a participação
-        pode ser apreciada assim (fora da soma):\par}\vspace{0.5mm}%
+      \vspace{1mm}{\nro@corpo{9}\color{nro-texto2}Alternativas, fora da soma:\par}\vspace{0.5mm}%
       \nro@montaralternativas
       \begingroup\nro@corpo{8.8}\renewcommand\arraystretch{1.45}%
       \setlength\LTpre{0pt}\setlength\LTpost{1.5mm}%
       \begin{xltabular}{\linewidth}{@{}L{17mm}YL{30mm}L{34mm}R{19mm}R{14mm}@{}}\nro@topo
         \nro@linhas\nro@base
       \end{xltabular}\endgroup}{}%
-    {\nro@corpo{8.4}\color{nro-cinza}Horas: os créditos lançados a \nro@hpc\,h cada, como o quadro de
-     AACC dos cursos os registra. Cada atividade conta numa AACC só (art.~7\textordmasculine): as
-     atividades à parte não entram na participação.\par}
+    {\nro@corpo{8.4}\color{nro-cinza}Horas: \nro@hpc\,h por crédito. Cada atividade conta numa AACC
+     só (art.~7\textordmasculine).\par}
     \vspace{5mm}%
-    \nro@titquadro{Quadro 2}{As atividades, e como cada uma se aproveita}%
+    \nro@titquadro{Quadro 2}{Atividades}%
     \nro@montarquadroatividades
     \begingroup\nro@corpo{8.8}\renewcommand\arraystretch{1.45}%
     \setlength\LTpre{0pt}\setlength\LTpost{1.5mm}%
@@ -2747,19 +2858,16 @@
       & \nro@rotf Total & & & & \nro@rotf\nro@escrevetotalhoras & & \\ \nro@base
     \end{xltabular}\endgroup
     \vspace{5mm}%
-    \nro@titquadro{Quadro 3}{Os semestres letivos de participação}%
+    \nro@titquadro{Quadro 3}{Semestres letivos}%
     \nro@quadrosemestres}
    {\nro@seauxlido{\preencher[Pedido: nenhuma atividade]{O relatório ainda não tem nenhuma atividade (Parte~III).}}
      {\begin{nota}Os quadros se montam na segunda compilação.\end{nota}}}%
   \vspace{4mm}%
   \begin{nota}
-    \textbf{Como conferir este relatório.} A folha de aprovação e os documentos emitidos pelo SOMA,
-    o sistema de gestão da equipe (as declarações de vínculo e de participação em eventos), trazem
-    um código verificador: qualquer pessoa confere a autenticidade em
-    \textbf{\nro@dado{equipe/validacao}}. Os demais registros citados (os certificados de
-    treinamento, os arquivos controlados, as atividades, os apontamentos semanais e a presença no
-    laboratório) ficam no SOMA e são apresentados ao Colegiado sempre que pedidos. O Anexo~A lista
-    as \nro@totalevidencias\ evidências citadas.
+    \textbf{Verificação.} A folha de aprovação e as declarações emitidas pelo SOMA, o sistema de
+    gestão da equipe, se conferem em \textbf{\nro@dado{equipe/validacao}}, pelo código verificador.
+    Os demais registros são apresentados ao Colegiado quando pedidos. O Anexo~A lista as
+    \nro@totalevidencias\ evidências citadas.
   \end{nota}
   \nro@listapendencias
   \clearpage}
@@ -2771,22 +2879,20 @@
 \newcommand\nro@semconta{Conta}
 \newcommand\nro@semparcial{\textcolor{nro-cinza}{Parcial, não conta}}
 \newcommand\nro@semantes{\textcolor{nro-cinza}{Antes do ingresso (art.~5\textordmasculine)}}
-\newcommand\nro@linhasemestre[5]{\cod{#1} & #2 & #3 & #4 & #5 \\ \nro@fino}
+\newcommand\nro@linhasemestre[5]{\cod{#1} & #2 & #3 & #4 \\ \nro@fino}
 \newcommand\nro@quadrosemestres{%
   \nro@sesemestres{%
     \nro@montarsemestres
     \begingroup\nro@corpo{8.8}\renewcommand\arraystretch{1.45}%
     \setlength\LTpre{0pt}\setlength\LTpost{1.5mm}%
-    \begin{xltabular}{\linewidth}{@{}L{22mm}R{28mm}YL{24mm}L{24mm}@{}}\nro@topo
+    \begin{xltabular}{\linewidth}{@{}L{22mm}R{28mm}YL{30mm}@{}}\nro@topo
       \nro@cab{Semestre} & \nro@cab{Meses na equipe} & \nro@cab{Situação} &
-      \nro@cab{\nro@secolsiex{Registro no SIEX}{}} & \nro@cab{\nro@secolic{Vínculo de IC}{}} \\ \nro@meio\endhead
+      \nro@cab{\nro@secolsiex{Registro no SIEX}{}} \\ \nro@meio\endhead
       \nro@linhas
-      & & \nro@rotf\nro@semestrescontam & & \\ \nro@base
+      & & \nro@rotf\nro@semestrescontam & \\ \nro@base
     \end{xltabular}\endgroup
-    {\nro@corpo{8.4}\color{nro-cinza}O 1\textordmasculine\ semestre vai de fevereiro a julho e o
-     2\textordmasculine, de agosto a janeiro. Conta o semestre com ao menos \nro@mesesmin\ meses de
-     participação, descontados os afastamentos (Parte~II), e posterior ao ingresso no curso
-     (art.~5\textordmasculine). O calendário de cada ano pode deslocar as datas: o Colegiado confere.\par}}
+    {\nro@corpo{8.4}\color{nro-cinza}Conta o semestre com ao menos \nro@mesesmin\ meses de
+     participação, sem os afastamentos (art.~5\textordmasculine).\par}}
    {\nro@marca{os semestres: falta o período na equipe}\par}}
 
 %% a lista das pendências (da compilação anterior)
@@ -2825,10 +2931,8 @@
 %% ------------------------------------------------------------
 %% Parte I: a equipe (nro/institucional.tex)
 \newcommand\parteinstitucional{%
-  \parte[Esta parte é escrita e mantida pela direção da equipe, igual em todos os relatórios.
-    Ela apresenta a \nro@dado{equipe/nome} ao Colegiado: o vínculo com a UFMG, a estrutura, o
-    método de trabalho, o enquadramento na \nro@dado{equipe/normacurta} e como cada informação
-    deste relatório pode ser conferida.]{A \NRO}%
+  \parte[O vínculo com a UFMG, a organização, o processo de desenvolvimento e a verificação dos
+    registros.]{A \texorpdfstring{\NRO*}{NeuroDynamics}}%
   \IfFileExists{nro/institucional.tex}{\input{nro/institucional.tex}}
     {\preencher[Parte I: falta nro/institucional.tex]{Falta o arquivo \cod{nro/institucional.tex}: baixe o template de novo.}}}
 
@@ -2860,7 +2964,7 @@
   \vspace{3mm}
   \nro@fichatab[40mm]{%
     \nro@par{Registro no SOMA}{\campo{membro/registro}}
-    \nro@par{Situação}{\nro@textosituacao{Egresso da equipe}{Membro ativo}, \nro@periodomembro}
+    \nro@par{Situação}{\nro@textosituacao{\pron{Egresso}{Egressa}{Egresse} da equipe}{Membro ativo}, \nro@periodomembro}
     \nro@par{Cargo atual ou último}{\campo{membro/cargo}}
     \nro@par{Departamento}{\campo{membro/departamento}}
     \nro@par{Projetos}{\secampo{membro/projetos}{\nro@dado{membro/projetos}}{\nro@vazio}}
@@ -2869,19 +2973,13 @@
     \nro@par{Pedido no SOMA}{\cod{\nro@codigo}, emitido com a folha de aprovação e conferível em
       \nro@dado{equipe/validacao}}
     \nro@fimficha}
-  \subsection{Situação no projeto de extensão}
   \sesiex
-    {\campo{estudante/nome} consta da equipe da ação de extensão \enquote{\campo{equipe/siextitulo}},
-     registrada no SIEX/UFMG sob o n\textordmasculine~\campo{equipe/siexnumero} e coordenada
-     \pelocoordenador\ \campo{equipe/siexcoordenador} (vigência: \campo{equipe/siexvigencia})%
-     \secampo{pedido/siex}{, nos semestres \nro@dado{pedido/siex}}{}, o que pode ser conferido no
-     próprio SIEX.}
-    {\campo{estudante/nome} não consta, até a data deste relatório, da equipe registrada no SIEX/UFMG
-     da ação de extensão da \nro@dado{equipe/nome}\secampo{equipe/siextitulo}{ (\enquote{\nro@dado{equipe/siextitulo}})}{}.
-     Isso não afeta o enquadramento como participação em equipe de competição estudantil, que a
-     \nro@dado{equipe/normacurta} não condiciona a registro (art.~11): ela pede o relatório aprovado
-     pelo responsável pela equipe e pelo professor responsável e a declaração do período de
-     participação, que a folha de aprovação traz.}}
+    {\subsection{Extensão}
+     \campo{estudante/nome} consta da equipe da ação de extensão \enquote{\campo{equipe/siextitulo}},
+     registrada no \mbox{SIEX/UFMG} sob o n\textordmasculine~\campo{equipe/siexnumero}%
+     \secampo{equipe/siexcoordenador}{ e coordenada \pelocoordenador\ \nro@dado{equipe/siexcoordenador}}{}%
+     \secampo{pedido/siex}{, nos semestres \nro@dado{pedido/siex}}{}.}
+    {}}
 
 %% a trajetória: \begin{trajetoria} \marco{2023-03}{…} \end{trajetoria}
 \ExplSyntaxOn
@@ -2948,9 +3046,8 @@
 
 %% Parte III: a abertura das atividades
 \newcommand\parteatividades{%
-  \parte[Uma seção por atividade. Cada uma traz a ficha (projeto, período, horas, aproveitamento,
-    quem confirma), o contexto, a contribuição individual, o desenvolvimento técnico, os resultados,
-    as evidências e o que ela ensinou. O Quadro~2, no começo, lista todas.]{Atividades desenvolvidas}}
+  \parte[Uma seção por atividade: a ficha, o contexto, a contribuição individual, o desenvolvimento,
+    os resultados, as evidências e os aprendizados. O Quadro~2 lista todas.]{Atividades desenvolvidas}}
 
 %% Parte IV: os quadros de síntese
 \newcommand\quadrohoras{%
@@ -2991,9 +3088,8 @@
       \nro@linhas
       \nro@rotf Atividades por competência\nro@totcompetencias \\ \nro@base
     \end{xltabular}\endgroup
-    {\nro@corpo{8.6}\color{nro-cinza}As competências gerais do egresso de Engenharia, conforme o
-     art.~4\textordmasculine\ da Resolução CNE/CES n\textordmasculine~2, de 24 de abril de 2019 (Diretrizes
-     Curriculares Nacionais dos cursos de Engenharia):\par}
+    {\nro@corpo{8.6}\color{nro-cinza}Competências do egresso de \campo{estudante/curso}, conforme
+     \nro@dado{compref}:\par}
     \begin{description}[leftmargin=9mm, labelwidth=7mm, itemsep=0pt, parsep=0pt,
         font=\normalfont\nro@rotm\nro@corpo{8.6}\color{nro-cinza}]
       \nro@corpo{8.6}\color{nro-cinza}\nro@legendacompetencias
@@ -3034,20 +3130,19 @@
 \newcommand\nro@opcao[1]{\mbox{\nro@quadrinho\hspace{1.8mm}{\nro@corpo{9.5}#1}}}
 \newcommand\nro@linhaescrever[1]{\textcolor{nro-pia}{\rule{#1}{0.4pt}}}
 \newcommand\pareceres{%
-  \parte[A declaração do estudante, a régua da avaliação e o espaço do Colegiado. As aprovações da
-    equipe e a nota do professor orientador são dadas no SOMA e vêm na folha de aprovação, logo
-    depois da capa.]{Declaração, avaliação e deliberação}%
+  \parte[As aprovações da equipe e a nota do professor orientador constam da folha de aprovação,
+    logo depois da capa.]{Declaração, avaliação e deliberação}%
   \nro@conferirpartes
   \nro@declaracao
   \nro@avaliacao
   \nro@deliberacao}
 
 \newcommand\nro@declaracao{%
-  \section{Declaração do estudante}
+  \section{Declaração}
   Declaro, para os devidos fins, que:
   \begin{enumerate}[label={\nro@rotm\alph*)}, leftmargin=7mm, itemsep=1.5pt]
     \item as informações deste relatório são verdadeiras e as atividades descritas foram realizadas por
-      mim, nos períodos indicados, no âmbito da \nro@dado{equipe/nome}, depois do meu ingresso no curso
+      mim, nos períodos indicados, no âmbito da \NRO, depois do meu ingresso no curso
       (art.~5\textordmasculine);
     \item cada atividade é pedida numa AACC só (art.~7\textordmasculine): as horas não foram contadas duas
       vezes neste relatório e não foram nem serão aproveitadas em outra atividade acadêmica (estágio,
@@ -3057,17 +3152,15 @@
     \item não incluí informação confidencial da equipe nem dado pessoal de terceiros sem autorização, e
       as figuras de projeto foram liberadas pelo supervisor;
     \item estou ciente de que a declaração falsa leva à anulação do aproveitamento e às sanções previstas
-      nas normas da UFMG e da \nro@dado{equipe/nome}.
+      nas normas da UFMG e da \NRO.
   \end{enumerate}
-  {\nro@corpo{9}\color{nro-texto2}Esta declaração é firmada pelo envio do relatório no SOMA, com a conta
-   do estudante; o envio consta da folha de aprovação.\par}}
+  {\nro@corpo{9}\color{nro-texto2}Declaração firmada pelo envio do relatório no SOMA.\par}}
 
 \newcommand\nro@avaliacao{%
-  \section{A avaliação do professor orientador}
-  O professor orientador avalia o relatório no SOMA, pelos critérios abaixo. Cada critério recebe uma
-  nota de 0 a 10, de meio em meio ponto; os pontos são a nota multiplicada pelo peso e dividida por 10, e a nota final é a soma
-  dos pontos (0 a \nro@somapesos). A nota mínima para o aproveitamento é 60 (art.~3\textordmasculine, II).
-  A nota e os pontos de cada critério vêm na folha de aprovação.\par
+  \section{Avaliação do professor orientador}
+  Notas de 0 a 10 por critério, de meio em meio ponto; pontos iguais à nota vezes o peso, sobre 10;
+  nota final de 0 a \nro@somapesos, com mínimo de 60 (art.~3\textordmasculine, II). A nota e os pontos
+  constam da folha de aprovação.\par
   \vspace{1mm}
   \nro@montarbarema
   \begingroup\nro@corpo{8.6}\renewcommand\arraystretch{1.45}%
@@ -3084,9 +3177,7 @@
   \clearpage
   \section{Espaço do Colegiado}
   \nro@instrucao{Se o Colegiado tem formulário próprio, este relatório vai como anexo dele.}
-  {\nro@corpo{9.8}Espaço reservado ao \campo{estudante/colegiado}. O pedido está no Quadro~1; o
-   Colegiado pode aprovar os créditos noutro enquadramento ou noutro código do curso, no todo ou em
-   parte, e decide os casos omissos com a Congregação (art.~19).\par}
+  {\nro@corpo{9.8}Espaço reservado ao \campo{estudante/colegiado}. O pedido está no Quadro~1.\par}
   \vspace{1mm}
   \nro@montarcolegiado
   \begingroup\nro@corpo{8.8}\renewcommand\arraystretch{1.9}%
@@ -3119,13 +3210,12 @@
 \renewcommand\thenroanexo{\Alph{nroanexo}}
 %% Anexo A: o índice das evidências (monta-se sozinho)
 \newcommand\anexoevidencias{%
-  \parte[Os documentos que acompanham o relatório. O Anexo~A se monta sozinho, com as evidências
-    citadas nas atividades; os demais são os PDFs anexados pelo estudante.]{Anexos}%
+  \parte[O Anexo~A lista as evidências citadas nas atividades; os demais são documentos anexados ao
+    relatório.]{Anexos}%
   \refstepcounter{nroanexo}%
   \section*{Anexo \thenroanexo, índice das evidências}
   \addcontentsline{toc}{section}{\protect\numberline{\thenroanexo}Índice das evidências}
-  Todas as evidências citadas neste relatório, na ordem em que aparecem. O identificador é o que se
-  informa a quem guarda o registro; os documentos emitidos pelo SOMA se conferem em
+  As evidências citadas, na ordem em que aparecem. Os documentos emitidos pelo SOMA se conferem em
   \textbf{\nro@dado{equipe/validacao}}.\par\vspace{1mm}
   \nro@indiceevidencias}
 \newcommand\nro@linhaindice[6]{\cod{#1} & \cod{#2} & #3 & {\nro@rot\nro@corpo{7.8}#4} & #5 & #6 \\ \nro@fino}
@@ -3164,5 +3254,6 @@
 \InputIfFileExists{nro/aproveitamento.tex}{}{\ClassWarningNoLine{nro-aacc}{Falta nro/aproveitamento.tex}}
 \InputIfFileExists{nro/tipos.tex}{}{\ClassWarningNoLine{nro-aacc}{Falta nro/tipos.tex}}
 \InputIfFileExists{nro/avaliacao.tex}{}{\ClassWarningNoLine{nro-aacc}{Falta nro/avaliacao.tex}}
+\InputIfFileExists{nro/competencias.tex}{}{\ClassWarningNoLine{nro-aacc}{Falta nro/competencias.tex}}
 
 \endinput

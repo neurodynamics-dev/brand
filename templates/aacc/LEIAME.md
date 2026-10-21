@@ -6,14 +6,18 @@ modelo de documentos da equipe (NRO-PUB-002) e no registro formal do design
 system. O aproveitamento na Escola de Engenharia segue a **Resolução nº 02/2019,
 de 31 de maio de 2019, da Congregação**, e o relatório é escrito em cima dela.
 
-A equipe não é um órgão registrado da UFMG, e quem decide é o Colegiado. A
-resolução não pede esse registro: para a equipe de competição estudantil, pede o
-relatório das atividades aprovado pelo responsável pela equipe e pelo professor
-responsável, e a declaração do período de participação (art. 11). O template é
-exigente de propósito: ele pede, de cada atividade, o que foi feito, como, com
-que resultado e com que evidência. Quem trabalhou de verdade tem o que escrever;
-quem não trabalhou fica com as pendências, e o SOMA não aceita relatório com
-pendência.
+Quem decide é o Colegiado. Para a equipe de competição estudantil, a resolução
+pede o relatório das atividades aprovado pelo responsável pela equipe e pelo
+professor responsável, e a declaração do período de participação (art. 11). A
+participação no Cybathlon está registrada no SIEX/UFMG como a ação de extensão
+*Competição Cybathlon 2024* (nº 205234), o que sustenta tanto o enquadramento
+como equipe de competição quanto o de extensão. O template pede, de cada
+atividade, o que foi feito, como, com que resultado e com que evidência; o que
+falta vira pendência, e o SOMA não aceita relatório com pendência.
+
+A resolução é da Escola de Engenharia. Estudantes de outras unidades (EEFFTO,
+Faculdade de Medicina, Escola de Enfermagem, ICEx, FACE) pedem pelo
+enquadramento **OUT**, com a norma do próprio Colegiado.
 
 **Veja o exemplo antes de começar:** `exemplo-relatorio-aacc.pdf` (no ZIP e em
 brand.neurodynamics.dev, *Downloads*). É uma pessoa fictícia, com oito
@@ -25,8 +29,9 @@ O pedido começa e termina no SOMA, em **Serviços, Aproveitamento de AACC**
 (`membro.neurodynamics.dev/aproveitamento`).
 
 1. **Os seus dados.** A página confere o que falta na sua ficha (os dados do
-   recadastro) e os dados acadêmicos: o curso, a matrícula, o semestre de
-   ingresso, a entrada e a saída da equipe.
+   recadastro, inclusive os pronomes, com que o relatório concorda) e os dados
+   acadêmicos: o curso (de uma lista; o curso escolhe as competências da Parte
+   IV), a matrícula, o semestre de ingresso, a entrada e a saída da equipe.
 2. **O enquadramento.** O painel mostra o que a resolução permite e quantos
    créditos cada opção rende com os seus semestres. Você escolhe o principal e,
    se quiser, alternativas para o Colegiado.
@@ -39,15 +44,17 @@ O pedido começa e termina no SOMA, em **Serviços, Aproveitamento de AACC**
    do SOMA. Ele confere que o PDF é deste template, do seu pedido e sem
    pendência.
 6. **As aprovações.** O pedido passa por três instâncias da equipe, nesta ordem:
-   o PMO, o Departamento de Pessoal e a Coordenação. Aprova uma pessoa de cada
+   o PMO, o Departamento de Pessoal e a Diretoria. Aprova uma pessoa de cada
    grupo, nunca quem pediu, e cada uma pode devolver o pedido com o motivo. Na
-   última etapa, a Coordenação indica o professor orientador (nome, título e
-   e-mail), que recebe o pedido por e-mail, lê o relatório, atribui a nota pelo
-   barema e aprova no próprio SOMA. Você é avisado por e-mail a cada passo.
+   última etapa, a Diretoria indica o professor orientador (nome, título,
+   e-mail, departamento e unidade acadêmica), que recebe o pedido por e-mail, lê
+   o relatório, atribui a nota pelo barema e aprova no próprio SOMA. Você é
+   avisado por e-mail a cada passo.
 7. **A folha de aprovação.** Aprovado, o SOMA troca a segunda folha do PDF (a
    *folha reservada*) pela folha de aprovação: as aprovações, a nota, a
    declaração do período e o código verificador, conferível em
-   `auth.neurodynamics.dev`. Baixe o PDF final e entregue ao seu Colegiado, pelo
+   `auth.neurodynamics.dev`. Na capa, o *Pendente* da avaliação da equipe vira a
+   data da aprovação. Baixe o PDF final e entregue ao seu Colegiado, pelo
    meio que ele usar (o Centro de Graduação, o SEI, o formulário do curso; art.
    6º).
 8. **Se o Colegiado apontar algo.** Reabra o pedido no SOMA: a folha de
@@ -66,8 +73,12 @@ quiser, em alternativas:
 |---|---|---|---|
 | EQC | Participação em equipe de competição estudantil | art. 1º, II, c; art. 11 | 3 por semestre letivo |
 | EXT | Projeto de extensão com vínculo formal | art. 1º, I, c; arts. 3º e 8º | 3 por semestre com registro no SIEX |
-| IC | Iniciação científica com vínculo formal | art. 1º, I, a; arts. 3º e 8º | 3 por semestre com vínculo na PRPq |
 | VPC | Vivência profissional complementar | art. 1º, IV, a; art. 17 | 1 a cada 300 horas |
+| OUT | Outro enquadramento, pela norma do Colegiado | a norma do Colegiado | a definir pelo Colegiado |
+
+No OUT, descreva o enquadramento em `outro` (no `\pedido`) e troque a norma com
+`\equipe{norma = …, normacurta = …}`; o Quadro 1 mostra as horas e deixa os
+créditos a definir.
 
 **As atividades que contam à parte** (art. 7º: uma atividade conta numa AACC
 só), cada uma com a sua regra:
@@ -117,6 +128,13 @@ Abra no Overleaf ou compile localmente com `latexmk -pdf relatorio-aacc.tex`
   `\evidencia{tipo}{identificador}{o que mostra}{onde conferir}`. O código de um
   arquivo controlado, de um cartão, um commit, uma declaração com código
   verificador. Atividade sem evidência não conta.
+- **Sem registro no SOMA** (atividade anterior a ele, ou registro a que você não
+  tem acesso): use o arquivo do projeto, o repositório, fotos datadas, e-mails
+  ou a confirmação do supervisor, e anexe o que puder em `anexos/`. Os
+  comentários da Parte III do `relatorio-aacc.tex` e de cada modelo trazem
+  exemplos.
+- **A trajetória** é uma lista editável: um `\marco{AAAA-MM}{texto}` por linha,
+  em ordem.
 - **Códigos** (`NRO-PRO-003-7`, `CERT-…`) vão com `\cod{…}`: saem na fonte dos
   rótulos e nunca quebram.
 - **Figuras**: exporte do KiCad, do CAD, do simulador (PDF, de preferência) para
@@ -135,9 +153,9 @@ rascunho, vermelha no final), entra na lista do começo e na conta da capa.
 
 | Confere | Como |
 |---|---|
-| Os seus dados | cada campo obrigatório vazio; o ingresso como AAAA/1 ou AAAA/2 |
+| Os seus dados | cada campo obrigatório vazio (inclusive os pronomes); o ingresso como AAAA/1 ou AAAA/2 |
 | O pedido | o enquadramento principal; os semestres do SIEX, se pede EXT; os dados da ação no SIEX |
-| A ficha de cada atividade | tipo, horas, período, projeto, papel, quem confirma, registros, competências |
+| A ficha de cada atividade | tipo, horas, período, projeto, papel, quem confirma, registros, competências (só as do curso) |
 | O art. 5º | a atividade que começou antes do ingresso no curso |
 | As atividades à parte | a espécie da publicação, a duração do evento ou do curso, e se chegam a um crédito |
 | As seções da atividade | as seis têm de existir |
@@ -150,8 +168,13 @@ rascunho, vermelha no final), entra na lista do começo e na conta da capa.
 E calcula: os semestres que contam, os créditos do principal, das alternativas e
 de cada atividade à parte, o requerimento ao Colegiado, a lista das atividades
 com a página de cada uma, a média semanal das horas (e avisa acima de 20 h), a
-matriz das competências das DCN de Engenharia, o quadro das disciplinas e o
-índice de todas as evidências (Anexo A).
+matriz das competências das DCN do curso, o quadro das disciplinas e o índice de
+todas as evidências (Anexo A).
+
+**Os pronomes** (`pronomes = ela`, `ele` ou `elu`) escolhem a forma do texto que
+a classe escreve (egressa, egresso, egresse). **O nome da equipe** sai por
+extenso na primeira menção, com o significado de PD&I, e curto nas demais;
+`\NRO` faz isso sozinho, e nunca quebra no fim da linha.
 
 ### Antes de enviar
 
@@ -182,9 +205,9 @@ Overleaf, no Windows, no Mac e no Linux.
 
 ## Para a Diretoria
 
-**Antes de publicar**, preencha em `nro/equipe.tex` os dados da ação de
-extensão no SIEX (título, número, coordenador, vigência): eles só viram
-pendência para quem pede o enquadramento EXT. O professor responsável é
+**Antes de publicar**, confira em `nro/equipe.tex` os dados da ação de extensão
+no SIEX (título e número; o coordenador e a vigência são opcionais): eles só
+viram pendência para quem pede o enquadramento EXT. O professor responsável é
 opcional ali; o professor orientador de cada pedido é indicado no SOMA.
 
 **As regras moram em `nro/`**, fora da classe, para a equipe ajustar sem mexer
@@ -193,24 +216,32 @@ em código:
 | Arquivo | O que tem |
 |---|---|
 | `nro/equipe.tex` | a série, o SIEX, a norma, horas por crédito, média semanal máxima, meses por semestre |
-| `nro/institucional.tex` | a Parte I: a equipe apresentada ao Colegiado e o enquadramento na resolução |
+| `nro/institucional.tex` | a Parte I: a equipe, a competição, o vínculo com a UFMG, a organização e as normas |
 | `nro/aproveitamento.tex` | o catálogo do aproveitamento: os enquadramentos e as atividades à parte |
 | `nro/tipos.tex` | os tipos de atividade: a ficha técnica, as figuras mínimas e o roteiro de cada um |
-| `nro/avaliacao.tex` | o barema do professor (os pesos somam 100) e as competências das DCN |
+| `nro/avaliacao.tex` | o barema do professor (os pesos somam 100) |
+| `nro/competencias.tex` | as competências do egresso, uma lista por conjunto de cursos, e os cursos de cada lista |
 
 **O que anda junto com o SOMA.** O catálogo (`nro/aproveitamento.tex`), a regra
-dos semestres e o barema (`nro/avaliacao.tex`) têm uma cópia no portal
-(`mod-aproveitamento.js`, `doc-nro.js` e a configuração do aproveitamento no
-banco). Mudou aqui, mude lá no mesmo dia, e publique o ZIP de novo.
+dos semestres, o barema (`nro/avaliacao.tex`) e a lista de cursos
+(`nro/competencias.tex`, que espelha `AAC_CURSOS` no portal) têm uma cópia no
+SOMA (`mod-aproveitamento.js`, `doc-nro.js` e a configuração do aproveitamento
+no banco). Mudou aqui, mude lá no mesmo dia, e publique o ZIP de novo.
+
+**As competências.** Cada curso aponta para uma lista
+(`\cursos{eng-eletrica}{Engenharia Elétrica; …}`), que traz as competências
+gerais das DCN da área e as específicas do curso. Curso fora das listas cai na
+lista `geral`. A competência que não é do curso vira pendência na ficha.
 
 O SOMA lê do PDF enviado as palavras-chave que a classe grava: `nro-aacc`, e
 `documento`, `modo`, `pendencias`, `folha` (a página da folha reservada),
-`principal`, `creditos`, `principalcreditos`, `itens`, `semestres` e
-`exemplo`. Ele recusa o PDF que não é do template, que é de outro pedido, em
+`principal`, `creditos`, `principalcreditos`, `avaliacao` (a posição, em mm a
+partir do canto inferior esquerdo, do *Pendente* da capa), `itens`, `semestres`
+e `exemplo`. Ele recusa o PDF que não é do template, que é de outro pedido, em
 rascunho, com pendência ou sem a folha reservada. Mexer na classe sem manter
 essas chaves quebra o envio.
 
-A lista de repercussão e as competições da Parte I espelham a imprensa do site
+A lista de repercussão e a competição da Parte I espelham a imprensa do site
 institucional (SOMA, Studio, Configurações, Imprensa do site); quando entrar
 matéria nova lá, atualize aqui.
 
@@ -230,9 +261,9 @@ formação (15), profundidade técnica (25), contribuição individual (20),
 evidências e rastreabilidade (15), resultados e impacto (15) e comunicação (10).
 Cada critério recebe de 0 a 10, de meio em meio ponto; os pontos são a nota
 vezes o peso, dividida por 10; a nota final é a soma (0 a 100), com o conceito
-da UFMG. A folha de aprovação imprime a nota e os pontos de cada critério. A nota mínima para o aproveitamento é 60 (art. 3º,
-II). O mesmo barema está na autoavaliação do estudante, na Parte IV, e na
-Parte V do relatório.
+da UFMG. A folha de aprovação imprime a nota e os pontos de cada critério. A
+nota mínima para o aproveitamento é 60 (art. 3º, II). O mesmo barema está na
+autoavaliação, na Parte IV, e na Parte V do relatório.
 
 ## Os arquivos
 

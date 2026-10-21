@@ -43,8 +43,9 @@
 %% ------------------------------------------------------------
 \estudante{
   nome      = {},   % o nome completo, como no registro acadêmico
+  pronomes  = {},   % ela, ele ou elu: o texto do relatório concorda com eles
   matricula = {},
-  curso     = {},   % ex.: Engenharia Elétrica
+  curso     = {},   % ex.: Engenharia Elétrica (o nome escolhe as competências da Parte IV)
   colegiado = {},   % ex.: Colegiado do Curso de Graduação em Engenharia Elétrica
   email     = {},
   ingresso  = {},   % o semestre de ingresso no curso: AAAA/1 ou AAAA/2
@@ -69,31 +70,31 @@
 
 %% ------------------------------------------------------------
 %% 2. O PEDIDO
-%% O enquadramento vem do painel do SOMA. Os que existem (a lista
-%% completa, com a regra de cada um, está na Parte I):
+%% O enquadramento vem do painel do SOMA. Os que existem:
 %%   EQC  participação em equipe de competição estudantil, 3 créditos
 %%        por semestre (art. 1º, II, c; art. 11)
 %%   EXT  projeto de extensão com vínculo formal, 3 por semestre com
 %%        registro no SIEX (art. 1º, I, c; arts. 3º e 8º)
-%%   IC   iniciação científica com vínculo formal, 3 por semestre com
-%%        vínculo na PRPq (art. 1º, I, a; arts. 3º e 8º)
 %%   VPC  vivência profissional complementar, 1 crédito a cada 300 h
 %%        (art. 1º, IV, a; art. 17)
+%%   OUT  outro, para quem é de curso que não segue a Resolução nº
+%%        02/2019 da Escola de Engenharia: descreva em "outro" e troque a
+%%        norma em \equipe, abaixo; o Colegiado define os créditos
 %% As atividades que contam à parte (publicação, organização ou
 %% participação em evento, curso, voluntariado) se indicam na própria
 %% atividade, com aproveitamento = PUB, EVO, EVP, CUR ou VOL.
 %% ------------------------------------------------------------
 \pedido{
-  principal    = {},   % EQC, EXT, IC ou VPC
+  principal    = {},   % EQC, EXT, VPC ou OUT
   alternativas = {},   % ex.: {EXT, VPC}, para o Colegiado que não acolher o principal
   siex         = {},   % os semestres com registro no SIEX, se pede EXT: {2024/1, 2024/2}
-  ic           = {},   % os semestres com vínculo de IC, se pede IC
+  outro        = {},   % se OUT: o nome da atividade na norma do seu Colegiado (a norma vai em \equipe, abaixo)
 }
 %% Se o quadro de AACC do seu curso tem o código da atividade, ou um
 %% limite de créditos, informe (opcional):
 % \modalidade{EQC}{codigo = {ENG… Participação em Equipe de Competição III (45 h)}, limite = 12}
 
-%% Se a norma do seu colegiado é outra (outra unidade da UFMG), troque:
+%% Se a norma do seu colegiado é outra (outra unidade da UFMG, com OUT), troque:
 % \equipe{norma = {Resolução n\textordmasculine~…/…, do Colegiado de …}, normacurta = {Resolução n\textordmasculine~…/…}}
 
 %% as suas referências (datasheets, normas, artigos), em referencias.bib
@@ -111,8 +112,8 @@
 %% ============================================================
 %% PARTE II: VOCÊ NA EQUIPE
 %% ============================================================
-\parte[Quem é o estudante, como ele chegou à equipe e o que fez nela, em linhas gerais. As
-  atividades, uma a uma, estão na Parte~III.]{O estudante na equipe}
+\parte[Identificação, resumo, trajetória, afastamentos e formação recebida. As atividades estão na
+  Parte~III.]{Participação na equipe}
 
 \identificacao
 
@@ -122,17 +123,16 @@
   (o que você entregou), não genérico (o que a equipe faz).}
 
 \section{Trajetória na equipe}
-\instrucao{Do processo seletivo até hoje, em ordem: a entrada, o trainee, os projetos, as mudanças de
-  cargo, os marcos de entrega. Um marco por linha.}
+\instrucao{Um marco por linha, em ordem, com \cod{\textbackslash marco\{AAAA-MM\}\{texto\}}: a entrada,
+  o trainee, os projetos, as mudanças de cargo, as entregas.}
 \begin{trajetoria}
   % \marco{2023-03}{Aprovação no processo seletivo (edital de 2023/1) e período trainee.}
   % \marco{2023-06}{Entrada no projeto NEBULA, no subsistema eletrônico.}
 \end{trajetoria}
 
 \section{Afastamentos e interrupções}
-\instrucao{Os afastamentos registrados no SOMA entram sozinhos. Declare os outros (pausa, período
-  sem atividade) ou, se não houve nenhum, escreva \cod{\textbackslash semafastamentos}. Os meses
-  afastados saem da conta dos semestres e da média semanal. Omitir afastamento é declaração falsa.}
+\instrucao{Os afastamentos registrados no SOMA entram sozinhos. Declare os outros, ou escreva
+  \cod{\textbackslash semafastamentos}.}
 \begin{afastamentos}
   % \afastamento{2024-07}{2024-08}{Intercâmbio acadêmico, afastamento aprovado pelo Depto. de Pessoal.}
   % ou, se não houve nenhum:
@@ -151,6 +151,16 @@
 %% de modelos/ para atividades/, e inclua o arquivo aqui.
 %% Os tipos: pcb, mecanico, simulacao, software, ensaio, clinico,
 %% pesquisa, extensao, ensino, evento, gestao, comunicacao, outro.
+%%
+%% AS EVIDÊNCIAS, SEM O SOMA. Atividade de antes do SOMA, ou registro a
+%% que você não tem acesso: use o que você tem.
+%%   \evidencia{Arquivo}{placa-revB.kicad_pcb}{O layout da revisão B}{Anexo B}
+%%   \evidencia{Repositório}{github.com/…/commit/3f2a1c}{O firmware da medição}{GitHub}
+%%   \evidencia{Foto}{Bancada, 12/05/2024}{O ensaio com a carga equivalente}{Anexo C}
+%%   \evidencia{E-mail}{De: supervisor, 03/06/2024}{A entrega aceita}{Anexo D}
+%%   \evidencia{Confirmação}{Nome do supervisor, cargo}{Que a atividade foi sua}{A pedido da equipe}
+%% Os anexos vão em anexos/, com \anexo{…}{anexos/arquivo.pdf} no fim.
+%% Na dúvida, peça ao Depto. de Pessoal o que o SOMA tem de você.
 %% ============================================================
 \parteatividades
 
@@ -161,10 +171,10 @@
 %% ============================================================
 %% PARTE IV: A SÍNTESE
 %% ============================================================
-\parte[O conjunto: as horas e a base delas, as competências desenvolvidas, a relação com o curso e a
-  autoavaliação pelo mesmo barema que o professor orientador usa.]{Síntese}
+\parte[As horas, as competências, a relação com o curso e a autoavaliação pelo barema do professor
+  orientador.]{Síntese}
 
-\section{As horas declaradas}
+\section{Horas declaradas}
 \quadrohoras
 
 \subsection{Memória de cálculo}
@@ -172,10 +182,10 @@
   registros usados (apontamentos semanais, check-ins no laboratório, cartões do quadro, relatórios) e a
   conta feita. Horas sem base não se declaram. Se a média semanal passou do limite, justifique aqui.}
 
-\section{As competências desenvolvidas}
+\section{Competências desenvolvidas}
 \matrizcompetencias
 
-\section{A relação com o curso}
+\section{Relação com o curso}
 \quadrodisciplinas
 \preencher[Parte IV, relação com o curso]{Mostre, não afirme: que conteúdos das disciplinas do quadro
   você aplicou, em que atividade, e o que a equipe ensinou que o curso não ensina. Use o projeto

@@ -23,6 +23,7 @@
 
 \estudante{
   nome      = Ana Clara Exemplo,
+  pronomes  = ela,
   matricula = 2021000000,
   curso     = Engenharia Elétrica,
   colegiado = Colegiado do Curso de Graduação em Engenharia Elétrica,
@@ -49,19 +50,16 @@
 %% acolher, vivência profissional complementar. A publicação conta à parte.
 \pedido{
   principal    = EQC,
-  alternativas = {VPC},
+  alternativas = {EXT, VPC},
+  siex         = {2024/1, 2024/2},
 }
 %% os códigos do quadro de AACC do curso também são de exemplo
 \modalidade{EQC}{codigo = {ENG-EX01 Participação em Equipe de Competição III (exemplo)}, limite = 24}
 \modalidade{PUB}{codigo = {ENG-EX05 Publicação I (exemplo)}}
-%% no exemplo, também a equipe é fictícia
+%% o professor do exemplo
 \equipe{
-  professor             = {Prof. Dr. João Modelo},
-  departamentoprofessor = {Departamento de Engenharia Mecânica},
-  siextitulo            = {Tecnologias assistivas para a reabilitação e o esporte adaptado (exemplo)},
-  siexnumero            = {000000},
-  siexcoordenador       = {Prof. Dr. João Modelo},
-  siexvigencia          = {2024 a 2026},
+  professor             = {Prof. Dr. Henrique Resende Martins},
+  departamentoprofessor = {Departamento de Engenharia Elétrica da Escola de Engenharia},
 }
 
 \addbibresource{exemplo/referencias-exemplo.bib}
@@ -76,8 +74,8 @@
 \parteinstitucional
 
 %% ============================================================
-\parte[Quem é a estudante, como ela chegou à equipe e o que fez nela, em linhas gerais. As atividades,
-  uma a uma, estão na Parte~III.]{A estudante na equipe}
+\parte[Identificação, resumo, trajetória, afastamentos e formação recebida. As atividades estão na
+  Parte~III.]{Participação na equipe}
 
 \identificacao
 
@@ -135,10 +133,10 @@ evidência.
 \input{exemplo/atividades/a8-publicacao}
 
 %% ============================================================
-\parte[O conjunto: as horas e a base delas, as competências desenvolvidas, a relação com o curso e a
-  autoavaliação pelo mesmo barema que o professor usa.]{Síntese}
+\parte[As horas, as competências, a relação com o curso e a autoavaliação pelo barema do professor
+  orientador.]{Síntese}
 
-\section{As horas declaradas}
+\section{Horas declaradas}
 \quadrohoras
 
 \subsection{Memória de cálculo}
@@ -152,10 +150,10 @@ dias de bancada, com os check-ins. Ficaram de fora o período trainee, as reuni�
 em outros subsistemas e toda hora sem cartão. A Atividade~6 conta 20 horas de preparação e quatro dias
 de dez horas de competição, como diz a declaração \cod{NRO-DIR-006-901}.
 
-\section{As competências desenvolvidas}
+\section{Competências desenvolvidas}
 \matrizcompetencias
 
-\section{A relação com o curso}
+\section{Relação com o curso}
 \quadrodisciplinas
 
 As atividades aplicaram, com um usuário real, o núcleo do curso de Engenharia Elétrica: a fonte de
