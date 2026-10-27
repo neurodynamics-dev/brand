@@ -1,0 +1,125 @@
+% !TEX program = lualatex
+%% ============================================================
+%% MODELO DE APOSTILA (material didático da NeuroDynamics)
+%%
+%% 1. Peça o código ao controle de documentos (NRO-PUB-001) e preencha
+%%    \documento{...} abaixo. O código sai como NRO-XXX-000-N.
+%% 2. Compile com LuaLaTeX (no Overleaf: Menu, Compilador, LuaLaTeX; na
+%%    linha de comando: latexmk -lualatex modelo-apostila.tex). Compile
+%%    duas vezes: o sumário, os totais e a ficha de progresso vêm da
+%%    compilação anterior.
+%% 3. Troque o que está entre colchetes e apague o que não usar. As
+%%    partes, os níveis e os tópicos se numeram sozinhos.
+%% O exemplo completo é o NRO-PRO-014-1.tex.
+%% ============================================================
+\documentclass{nro-apostila}
+
+\documento{
+  codigo        = NRO-XXX-000,            % do NRO-PUB-001
+  numero        = 1,                      % a cópia, no fim do código
+  revisao       = A,                      % A, B, C... a cada alteração
+  emissor       = {Departamento de Pesquisa e Desenvolvimento},
+  tipo          = {Manual ou guia},       % o subtipo do NRO-PUB-002
+  categoria     = {Material didático},    % o rótulo da capa
+  titulo        = {Título da apostila},
+  subtitulo     = {Uma frase dizendo para quem é e o que ensina.},
+  eixos         = {Área um\hspace{9mm}Área dois\hspace{9mm}Área três},
+  data          = {27 de outubro de 2026},
+  redator       = {Nome de quem escreveu},
+  revisor       = {},
+  aprovador     = {},
+  rotuloproduto = {No produto},           % o rótulo do quadro de aplicação
+  autoria       = {NeuroDynamics},
+}
+
+\begin{document}
+
+\capa
+\sumario
+
+%% ---------- páginas de introdução ----------
+\pagina{Introdução}{Boas-vindas}
+\lede{Um parágrafo de abertura, maior, que diz o que o leitor vai encontrar.}
+
+Texto corrido. Use \textbf{negrito} só para termos que o leitor precisa guardar, \code{codigo\_inline} para nomes de arquivo, comandos e registradores, e \cod{NRO-XXX-000} para códigos de documento (nunca quebram na linha).
+
+\begin{estatisticas}[4]
+  \estatistica{\totalpartes}{Partes}
+  \estatistica{\totaltopicos}{Tópicos}
+  \estatistica{3}{Níveis}
+  \estatistica{\totalexercicios}{Exercícios}
+\end{estatisticas}
+
+\secao{Princípios}
+\begin{cartoes}[2]
+  \cartao{Primeiro princípio}{Uma frase.}
+  \cartao{Segundo princípio}{Uma frase.}
+\end{cartoes}
+
+\begin{nota}
+  Uma nota neutra, para um esclarecimento.
+\end{nota}
+\begin{atencao}
+  Um alerta, para o que não pode ser ignorado (segurança, risco, dado perdido).
+\end{atencao}
+\begin{definicao}{Termo}
+  A definição curta de um termo, em uma ou duas frases.
+\end{definicao}
+
+\secao{Uma tabela}
+\begin{tabularx}{\linewidth}{@{}L{30mm}Y L{24mm}@{}}\reguatopo
+  \cab{Coluna} & \cab{Outra coluna} & \cab{Código} \\ \reguameio
+  Linha um  & Texto da célula & \cod{1.1} \\ \reguafina
+  Linha dois & Texto da célula & \cod{1.2} \\ \reguabase
+\end{tabularx}
+
+%% ---------- uma parte: \iniciarpartes{1} antes do \capa começa na Parte 1 ----------
+\begin{parte}{Título da parte}{Uma frase de abertura: o que esta parte cobre e para quem é.}
+  \item O que o leitor sabe fazer ao terminar (um objetivo por item).
+  \item Outro objetivo.
+\end{parte}
+
+%% um nível (opcional): a capa da parte mostra os níveis sozinha; sem nível, mostra a lista dos tópicos
+\nivel{Básico}{O que este nível cobre.}
+
+\topico{Título do tópico}
+O conceito explicado de forma geral, válido para qualquer projeto, em duas ou três frases.
+
+\begin{noproduto}
+  Onde o conceito aparece no produto: repositório, esquemático, módulo.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://exemplo.org}{Título da fonte}
+  \item Livro: Título (autor), capítulos tais
+\end{paraestudar}
+
+\begin{pratique}
+  \item Exercício conceitual.
+  \item Exercício prático, ligado ao código ou ao hardware real.
+\end{pratique}
+
+\topico{Outro tópico}
+Texto.
+
+%% ---------- apêndices ----------
+\apendice{Glossário}
+\begin{glossario}
+  \termo{Termo}{Significado em uma frase.}
+\end{glossario}
+
+\apendice{Ficha de progresso}
+Marque cada tópico concluído e anote a data.
+\par\vspace{2mm}
+\fichaprogresso
+
+\apendice{Controle do documento}
+\controledocumento
+\secao{Histórico de revisões}
+\begin{historico}
+  \linharevisao{27/10/2026}{A}{Nome}{Primeira edição.}
+\end{historico}
+
+\contracapa{Uma frase de fechamento: onde reportar erros e como contribuir.}
+
+\end{document}

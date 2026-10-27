@@ -21,6 +21,13 @@ Mono. Só cores do conjunto primário e do neutro, salvo onde indicado.
 | Cartão de visita | [`business-card/BusinessCard.html`](business-card/BusinessCard.html) | 85×55 mm, frente Cortex dark e verso branco |
 | Apresentação formal | [`formal-deck/FormalDeck.html`](formal-deck/FormalDeck.html) | 16:9, 24 slides |
 
+## Documentos em LaTeX
+
+| Peça | Pasta | Uso |
+|---|---|---|
+| Relatório de AACC | [`aacc/`](aacc/) | Pedido de aproveitamento de AACC |
+| Apostila (material didático) | [`apostila/`](apostila/) | Apostilas, trilhas de formação e guias de estudo; exemplo: NRO-PRO-014-1 |
+
 ## Os dois modos
 
 | Peça | Arquivo | Formato |
