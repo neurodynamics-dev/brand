@@ -1,0 +1,410 @@
+% Parte 3: Software
+\begin{parte}{Software}{Desenvolvimento de aplicativos móveis com Flutter, do Dart básico à comunicação com dispositivos por Bluetooth, backend e lojas de aplicativo. O app do Connect é o caso de estudo do começo ao fim.}
+  \item Construir telas, estado e navegação em Flutter com arquitetura em camadas.
+  \item Falar com um dispositivo por BLE respeitando o contrato com o firmware.
+  \item Testar, integrar com backend e publicar um app de forma confiável.
+\end{parte}
+
+\nivel{Básico}{Dart, Flutter, ambiente e projetos Android e iOS.}
+
+\topico{Linguagem Dart}
+Tipos, null safety, classes e mixins, \code{async}/\code{await}, \code{Future} e \code{Stream}. Dart é a linguagem do Flutter e tem um modelo assíncrono que aparece em todo lugar.
+
+\begin{noproduto}
+Dados que chegam do dispositivo de forma contínua, como bateria e estado, são modelados naturalmente como \code{Stream}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://dart.dev/language}{Dart language tour}
+  \item \leitura{https://dart.dev/null-safety}{Sound null safety}
+  \item \leitura{https://dartpad.dev/}{DartPad, para testar no navegador}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Escreva um \code{Stream} que emita a contagem regressiva de um exercício de 10 s e consuma com \code{await for}.
+  \item Reescreva uma classe com campos anuláveis para que o compilador garanta a inicialização.
+\end{pratique}
+
+\topico{Fundamentos de Flutter}
+Widgets, árvore de widgets, Stateless e Stateful, ciclo de vida, layout (Row, Column, Flex) e navegação. Em Flutter, toda a interface é uma árvore de widgets reconstruída a partir do estado.
+
+\begin{noproduto}
+Todas as telas do \code{app\_main} são composições de widgets sobre esses fundamentos.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://docs.flutter.dev/}{Documentação do Flutter}
+  \item Flutterando (comunidade brasileira) no YouTube
+\end{paraestudar}
+
+\begin{pratique}
+  \item Monte uma tela de controle com slider de amplitude e botão iniciar/parar, usando só estado local.
+  \item Explique quando o \code{build} é chamado e como evitar reconstruções desnecessárias.
+\end{pratique}
+
+\topico{Ambiente de desenvolvimento}
+Flutter SDK, FVM para fixar a versão, \code{pubspec.yaml}, pacotes e Android Studio/Xcode. Um ambiente reprodutível evita o clássico “na minha máquina funciona”.
+
+\begin{noproduto}
+O projeto fixa o Flutter 3.19.6 no \code{.fvmrc}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://fvm.app/}{FVM}
+  \item \leitura{https://pub.dev/}{pub.dev}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Configure o FVM, rode o \code{app\_main} num emulador e anote cada problema encontrado (vira FAQ deste documento).
+  \item Explique a diferença entre \code{pubspec.yaml} e \code{pubspec.lock} e qual deles vai para o git.
+\end{pratique}
+
+\topico{Projetos Android e iOS}
+Estrutura das pastas \code{android/} e \code{ios/}, permissões, assinatura e build de release. Por baixo do Flutter continuam existindo dois projetos nativos.
+
+\begin{noproduto}
+Escanear e conectar a dispositivos BLE exige permissões específicas em cada plataforma; confira as que o projeto declara.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://docs.flutter.dev/deployment}{Flutter: deployment}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Liste as permissões de Bluetooth declaradas em Android e iOS e explique por que cada uma existe.
+  \item Gere um APK de release assinado com uma chave de teste.
+\end{pratique}
+
+\nivel{Intermediário}{Estado, módulos, camadas, pacotes, dados e qualidade.}
+
+\topico{Gerência de estado com BLoC}
+\code{flutter\_bloc}: eventos, estados, Bloc e Cubit. Separa a lógica da interface e torna o comportamento previsível e testável.
+
+\begin{noproduto}
+O app usa \code{flutter\_bloc}, com Blocs e Cubits.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://bloclibrary.dev/}{bloclibrary.dev}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Refaça a tela do exercício 3.2 com um Cubit.
+  \item Desenhe o fluxo evento → estado de um Bloc real do app.
+\end{pratique}
+
+\topico{Modularização e injeção de dependência}
+Dividir o app em módulos com rotas e dependências próprias, e injetar serviços em vez de criá-los à mão. Facilita trabalho em paralelo e testes.
+
+\begin{noproduto}
+O app usa \code{flutter\_modular}, com módulos como \code{fes}, \code{breath}, \code{devices}, \code{patient} e \code{medic}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://modular.flutterando.com.br/}{Documentação do flutter\_modular}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Mapeie os módulos do app e as rotas de cada um.
+  \item Crie um módulo vazio com uma rota e um bind e navegue até ele.
+\end{pratique}
+
+\topico{Arquitetura em camadas}
+Services, repositories, adapters e helpers organizados em camadas com regras claras de quem pode importar quem. A interface não deve saber como os dados chegam.
+
+\begin{noproduto}
+O \code{app\_main} separa \code{core}, \code{domain}, \code{modules} e \code{ui}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Código do app\_main
+  \item Livro: Clean Architecture (Robert C. Martin), capítulos sobre dependências
+\end{paraestudar}
+
+\begin{pratique}
+  \item Siga uma funcionalidade do botão na tela até o service que fala com o BLE e nomeie cada camada.
+  \item Encontre uma dependência que viole as camadas, ou mostre que não há.
+\end{pratique}
+
+\topico{Pacotes locais e monorepo}
+Dependências por \code{path}, submódulos git e reuso de pacotes entre projetos. Permite compartilhar código sem publicar nada.
+
+\begin{noproduto}
+O app usa pacotes locais como \code{we\_bluetooth} e \code{we\_exception}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://dart.dev/tools/pub/dependencies}{Dart: package dependencies}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Altere uma função num pacote local e verifique a mudança no app sem publicar nada.
+  \item Explique o que acontece se o submódulo de um pacote estiver num commit diferente do esperado.
+\end{pratique}
+
+\topico{Serialização e geração de código}
+\code{json\_serializable}, \code{build\_runner} e \code{equatable}. Gerar o código repetitivo evita erros de digitação em centenas de campos.
+
+\begin{noproduto}
+O app usa \code{json\_serializable}, \code{build\_runner} e \code{equatable}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://pub.dev/packages/json_serializable}{json\_serializable no pub.dev}
+  \item \leitura{https://pub.dev/packages/equatable}{equatable no pub.dev}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Crie um modelo com \code{json\_serializable}, gere o código e escreva um teste de ida e volta.
+  \item Explique por que estados do BLoC costumam estender \code{Equatable}.
+\end{pratique}
+
+\topico{Internacionalização}
+Textos traduzidos, datas, números e formatos por idioma. Pensar em idiomas desde o início custa pouco; adaptar depois custa caro.
+
+\begin{noproduto}
+O app usa \code{slang} e \code{intl}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://pub.dev/packages/slang}{slang no pub.dev}
+  \item \leitura{https://pub.dev/packages/intl}{intl no pub.dev}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Adicione uma string nova em português e inglês e use-a numa tela.
+  \item Formate a data de uma sessão nos dois idiomas.
+\end{pratique}
+
+\topico{Persistência local}
+Banco local, armazenamento seguro e caminhos de arquivos. Dados de sessão e credenciais exigem cuidados diferentes.
+
+\begin{noproduto}
+O app usa Hive, armazenamento seguro de sessão e \code{path\_provider}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://pub.dev/packages/hive}{hive no pub.dev}
+  \item \leitura{https://pub.dev/packages/path_provider}{path\_provider no pub.dev}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Liste o que o app guarda localmente e onde.
+  \item Explique o que não deve ir para armazenamento comum e por quê.
+\end{pratique}
+
+\topico{Formulários e validação}
+Formulários, máscaras de entrada e validação de dados como CPF. Validar na entrada é mais barato que corrigir no banco.
+
+\begin{noproduto}
+O app tem máscaras, validação de CPF e helpers de formato.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://docs.flutter.dev/cookbook/forms/validation}{Flutter: form validation}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Implemente a validação de CPF pelos dígitos verificadores e escreva testes com casos válidos e inválidos.
+  \item Adicione uma máscara de telefone a um campo existente.
+\end{pratique}
+
+\topico{Lint e qualidade}
+\code{analysis\_options.yaml}, regras de lint e \code{dart format}. O analisador estático pega erros antes de o app rodar.
+
+\begin{noproduto}
+O projeto usa as regras do \code{flutter\_lints}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://dart.dev/tools/analysis}{Dart: customizing static analysis}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Rode \code{flutter analyze} e corrija três avisos.
+  \item Proponha uma regra de lint a mais para o projeto e justifique.
+\end{pratique}
+
+\nivel{Avançado}{BLE, bytes, backend, fluxos clínicos, testes e publicação.}
+
+\topico{Bluetooth Low Energy: lado central}
+Scan, conexão, descoberta de serviços, leitura, escrita e notify, permissões e diferenças entre Android e iOS. É o lado do celular na conversa BLE.
+
+\begin{noproduto}
+O app usa \code{flutter\_reactive\_ble}, junto com o pacote local \code{bluetooth}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://pub.dev/packages/flutter_reactive_ble}{flutter\_reactive\_ble no pub.dev}
+  \item \leitura{https://academy.nordicsemi.com/}{Nordic DevAcademy: Bluetooth Low Energy Fundamentals}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Escreva um app mínimo que encontre o Connect, conecte e mostre o nível de bateria em tempo real.
+  \item Trate a desconexão no meio de uma sessão e defina o que a interface deve mostrar.
+\end{pratique}
+
+\topico{Conversão de bytes}
+Serialização binária com \code{ByteData}, endianness e o espelho, no app, das structs definidas no firmware. Um byte fora do lugar muda o valor inteiro.
+
+\begin{noproduto}
+O pacote \code{byte\_conversion} faz essa ponte com o firmware.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://api.dart.dev/stable/dart-typed_data/ByteData-class.html}{ByteData (dart:typed\_data)}
+  \item Pacote byte\_conversion do repositório
+\end{paraestudar}
+
+\begin{pratique}
+  \item Converta uma struct do firmware (com \code{int16}, \code{uint32} e \code{float}) para bytes e de volta, com teste.
+  \item Mostre o bug que aparece quando app e firmware discordam do endianness.
+\end{pratique}
+
+\topico{Contrato entre app e firmware}
+UUIDs, layout de cada característica, versionamento de protocolo e como evoluir sem quebrar dispositivos ou apps antigos. O contrato é o documento mais importante entre duas equipes.
+
+\begin{noproduto}
+O contrato do Connect está no documento técnico e no pacote \code{bluetooth}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Documento técnico do Connect e código do pacote bluetooth
+\end{paraestudar}
+
+\begin{pratique}
+  \item Monte uma tabela característica × layout de bytes × quem escreve × quem lê.
+  \item Proponha como o app deve se comportar ao encontrar um firmware com versão de protocolo mais nova.
+\end{pratique}
+
+\topico{Concorrência no app}
+Streams, locks assíncronos e controle de comandos simultâneos, para que uma escrita não atropele outra.
+
+\begin{noproduto}
+O app usa o pacote \code{synchronized} para serializar comandos BLE.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://pub.dev/packages/synchronized}{synchronized no pub.dev}
+  \item \leitura{https://dart.dev/libraries/async/async-await}{Dart: asynchronous programming}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Dispare duas escritas BLE ao mesmo tempo sem lock e observe o resultado; depois proteja com \code{synchronized}.
+  \item Explique a diferença entre isolates e código assíncrono no mesmo isolate.
+\end{pratique}
+
+\topico{Comunicação com backend}
+HTTP (interceptors, timeouts), gRPC, autenticação JWT e upload de arquivos. É como o app guarda e busca dados fora do celular.
+
+\begin{noproduto}
+O app usa Dio para HTTP, gRPC e autenticação JWT.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://pub.dev/packages/dio}{dio no pub.dev}
+  \item \leitura{https://grpc.io/docs/languages/dart/}{gRPC para Dart}
+  \item \leitura{https://jwt.io/introduction}{Introdução a JWT}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Mapeie as chamadas do app ao backend e quais usam HTTP e quais usam gRPC.
+  \item Explique como o app renova um token expirado sem deslogar o usuário.
+\end{pratique}
+
+\topico{Firebase}
+Autenticação, banco de documentos, notificações push e relatórios de falha como serviço.
+
+\begin{noproduto}
+O app usa Firebase Auth, Firestore, Cloud Messaging e Crashlytics.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://firebase.google.com/docs/flutter/setup}{Firebase para Flutter}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Liste o que o app usa de cada serviço Firebase.
+  \item Force um erro não tratado num build de teste e encontre-o no Crashlytics.
+\end{pratique}
+
+\topico{Tratamento de erros padronizado}
+Códigos de erro únicos e mapeamento de falhas de rede, de protocolo e de dispositivo para mensagens que o usuário entende.
+
+\begin{noproduto}
+O pacote \code{we\_exception} padroniza os erros e mapeia respostas HTTP e gRPC.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Código do pacote we\_exception
+\end{paraestudar}
+
+\begin{pratique}
+  \item Siga um erro 401 do backend até a mensagem exibida na tela.
+  \item Adicione um código de erro para falha de conexão BLE e use-o em um ponto do app.
+\end{pratique}
+
+\topico{Fluxos clínicos no app}
+Pré e pós-sessão, execução e interrupção de exercício, relatório e agenda. Em um app de saúde, o fluxo do usuário é parte da segurança.
+
+\begin{noproduto}
+Os módulos \code{fes}, \code{breath}, \code{patient} e \code{medic} implementam esses fluxos, incluindo o chat de pré e pós- sessão.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Código dos módulos fes, breath, patient e medic
+\end{paraestudar}
+
+\begin{pratique}
+  \item Desenhe a sequência de telas de uma sessão completa, do login ao relatório.
+  \item Liste todos os caminhos pelos quais uma sessão pode ser interrompida e o que acontece no dispositivo em cada um.
+\end{pratique}
+
+\topico{Gráficos e visualização}
+Gráficos de sessão e de evolução, e indicadores de progresso. Bons gráficos ajudam o profissional a decidir.
+
+\begin{noproduto}
+O app usa Syncfusion Charts.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://pub.dev/packages/syncfusion_flutter_charts}{syncfusion\_flutter\_charts no pub.dev}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Crie um gráfico de linha com a amplitude ao longo de uma sessão simulada.
+  \item Verifique a licença do Syncfusion usada pelo projeto e suas condições.
+\end{pratique}
+
+\topico{Testes}
+Testes unitários, de widget e de integração, e mocks da camada de hardware para testar sem dispositivo.
+
+\begin{noproduto}
+Com um mock do serviço BLE, a maior parte do app pode ser testada sem o Connect por perto.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://docs.flutter.dev/testing/overview}{Flutter: testing}
+  \item \leitura{https://pub.dev/packages/mocktail}{mocktail no pub.dev}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Escreva um teste de Cubit para o fluxo iniciar → executando → parar.
+  \item Crie um mock do serviço BLE e teste a tela de controle sem dispositivo.
+\end{pratique}
+
+\topico{Distribuição}
+Builds de release, Play Store e App Store, trilhas de teste e versionamento.
+
+\begin{noproduto}
+A versão do app é definida no campo \code{version} do \code{pubspec.yaml}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://docs.flutter.dev/deployment}{Flutter: deployment}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Descreva o processo de release do app passo a passo (vira checklist da equipe).
+  \item Explique a diferença entre \code{versionName} e \code{versionCode} e como o pubspec define os dois.
+\end{pratique}

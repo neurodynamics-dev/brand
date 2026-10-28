@@ -1,0 +1,131 @@
+% Parte 0: Fundamentos comuns
+\begin{parte}{Fundamentos comuns}{A base que todo membro precisa, de qualquer área: como funciona um dispositivo de neuroestimulação, o mínimo de fisiologia e de segurança elétrica, e as ferramentas do dia a dia de engenharia.}
+  \item Explicar a arquitetura de um eletroestimulador e o papel de cada camada.
+  \item Trabalhar com binário, hexadecimal, terminal e Git sem travar.
+  \item Ler datasheets, esquemáticos e normas com objetivo claro.
+\end{parte}
+
+\topico{Dispositivos de neuroestimulação}
+Eletroestimuladores aplicam corrente controlada ao corpo para ativar nervos e músculos (FES, TENS) ou para modular a atividade do cérebro e do sistema vestibular (tDCS, GVS). Por trás de qualquer um deles há a mesma arquitetura: uma interface com o usuário, um enlace de comunicação, um microcontrolador que gera a forma de onda e um estágio de saída que entrega a corrente com segurança.
+
+\begin{noproduto}
+O Connect segue essa cadeia, nos dois sentidos: app, BLE, ESP32, UART, ATSAM, estágio de saída e paciente. O app vive em \code{ErgoFES\_Connect\_software}, a ponte BLE em \code{ergo\_fes\_connect\_ble\_firmware}, a geração do estímulo em \code{ergo\_fes\_connect\_stimulus\_firmware} e o estágio de saída nos esquemáticos \code{SCH070105} (CFCU) e \code{SCH070102} (CTCE).
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://en.wikipedia.org/wiki/Functional_electrical_stimulation}{Wikipedia: Functional electrical stimulation}
+  \item \leitura{https://en.wikipedia.org/wiki/Transcranial_direct-current_stimulation}{Wikipedia: Transcranial direct-current stimulation}
+  \item \leitura{https://en.wikipedia.org/wiki/Galvanic_vestibular_stimulation}{Wikipedia: Galvanic vestibular stimulation}
+  \item Documento técnico interno do Connect e READMEs dos repositórios
+\end{paraestudar}
+
+\begin{pratique}
+  \item Desenhe o diagrama de blocos de um eletroestimulador genérico e, ao lado, o do Connect. Indique em cada seta o protocolo ou sinal usado.
+  \item Para cada repositório do Connect, escreva uma frase dizendo o que ele faz e com quem conversa.
+  \item Explique com suas palavras a diferença entre um pulso de FES e a corrente contínua de tDCS.
+\end{pratique}
+
+\topico{Fisiologia básica para engenharia}
+Nervo e músculo, potencial de ação, contração evocada por estímulo elétrico, a interface pele-eletrodo (e sua impedância) e o sistema vestibular. É o mínimo de biologia para entender por que os parâmetros de estímulo têm os limites que têm.
+
+\begin{noproduto}
+Esses conceitos explicam os parâmetros que o firmware permite configurar, como amplitude e largura de pulso, e por que o hardware precisa detectar eletrodo solto.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://nba.uth.tmc.edu/neuroscience/}{Neuroscience Online (UTHealth), capítulos de neurônio e músculo}
+  \item Livro: Princípios de Neurociências (Kandel et al.), capítulos introdutórios
+\end{paraestudar}
+
+\begin{pratique}
+  \item Explique por que um pulso precisa de amplitude e duração mínimas para recrutar uma fibra (curva intensidade-duração).
+  \item Modele pele e eletrodo como um circuito RC simples e esboce a tensão sobre ele sob um degrau de corrente.
+\end{pratique}
+
+\topico{Segurança elétrica e normas de equipamento médico}
+Efeitos da corrente no corpo, as normas IEC 60601-1 (segurança geral de equipamento médico) e IEC 60601-2-10 (estimuladores de nervo e músculo), a gestão de risco pela ISO 14971 e o ciclo de vida de software médico pela IEC 62304.
+
+\begin{noproduto}
+O estágio de saída trabalha com +125 V. Por isso o Connect combina proteções em hardware (sobrecorrente, parada de emergência, eletrodo solto) com regras de firmware, como só habilitar a alta tensão em build Release.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Normas IEC 60601-1, IEC 60601-2-10, ISO 14971 e IEC 62304 (verifique o acesso pela UFMG ou pela equipe)
+  \item \leitura{https://www.allaboutcircuits.com/textbook/direct-current/chpt-3/}{All About Circuits: Electrical Safety}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Liste três perigos de um eletroestimulador e, para cada um, uma mitigação em hardware, em firmware ou no app.
+  \item Encontre na IEC 60601-2-10 os limites aplicáveis à saída de um estimulador e compare com os do Connect.
+\end{pratique}
+
+\topico{Sistemas numéricos e representação de dados}
+Binário, hexadecimal, complemento de dois, endianness e operações bit a bit. É a linguagem comum entre quem escreve firmware (registradores, protocolos) e quem escreve software (conversão de bytes).
+
+\begin{noproduto}
+Firmware e app trocam structs em binário. O \code{WeProtocol} no firmware e o pacote \code{byte\_conversion} no app precisam concordar byte a byte.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://learn.sparkfun.com/tutorials/binary}{SparkFun: Binary}
+  \item \leitura{https://learn.sparkfun.com/tutorials/hexadecimal}{SparkFun: Hexadecimal}
+  \item \leitura{https://www.youtube.com/@BenEater}{Ben Eater no YouTube (vídeos sobre complemento de dois)}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Converta −1000 para int16 em complemento de dois e escreva os bytes em little-endian e em big-endian.
+  \item Dado um registrador de 8 bits, escreva as máscaras para ligar o bit 3, desligar o bit 5 e testar o bit 7.
+\end{pratique}
+
+\topico{Linha de comando Linux}
+Shell, navegação, permissões, variáveis de ambiente e PATH. Quase toda ferramenta de engenharia (compiladores, build systems, SDKs) é usada a partir do terminal.
+
+\begin{noproduto}
+CMake e Ninja no firmware stimulus, \code{idf.py} no firmware BLE e o Flutter SDK com FVM no app: as três bases de código são compiladas pelo terminal.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://missing.csail.mit.edu/}{The Missing Semester of Your CS Education (MIT)}
+  \item \leitura{https://linuxjourney.com/}{Linux Journey}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Adicione uma pasta ao PATH de forma permanente e explique em qual arquivo a configuração ficou.
+  \item Escreva um script que compile um projeto e copie o binário gerado para uma pasta com a data no nome.
+\end{pratique}
+
+\topico{Git e fluxo de trabalho}
+Branches, merge e rebase, submódulos, mensagens no padrão Conventional Commits e code review. É como uma equipe trabalha no mesmo código sem pisar no trabalho do outro.
+
+\begin{noproduto}
+O firmware usa a pasta \code{Modules/} como submódulo compartilhado e o app depende de pacotes locais (\code{we\_bluetooth}, \code{we\_exception}...). Saber mover um submódulo de commit é rotina.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://git-scm.com/book/pt-br/v2}{Pro Git (em português), capítulos 1 a 3 e a seção de submódulos}
+  \item \leitura{https://learngitbranching.js.org/?locale=pt_BR}{Learn Git Branching}
+  \item \leitura{https://www.conventionalcommits.org/pt-br/v1.0.0/}{Conventional Commits}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Clone um repositório com submódulos, mude o submódulo de commit e explique o que aparece no \code{git} \code{status} do repositório pai.
+  \item Faça um rebase interativo juntando três commits em um, com mensagem no padrão Conventional Commits.
+  \item Revise o PR de um colega e deixe ao menos dois comentários construtivos.
+\end{pratique}
+
+\topico{Leitura de documentação técnica}
+Como ler datasheet, reference manual, esquemático e mapa de registradores: onde estão os limites absolutos, as condições típicas, os diagramas de tempo e os valores de reset. Ler com uma pergunta em mente economiza horas.
+
+\begin{noproduto}
+Os esquemáticos do Connect e os datasheets do ATSAMC20, do DAC53204 e do BQ25792 são as leituras de referência das trilhas de hardware e firmware.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://learn.sparkfun.com/tutorials/how-to-read-a-schematic}{SparkFun: How to Read a Schematic}
+  \item Datasheet do DAC53204 (Texas Instruments) como caso de estudo
+\end{paraestudar}
+
+\begin{pratique}
+  \item No datasheet do DAC53204, encontre a tensão máxima de alimentação, o tempo de acomodação e o formato do quadro SPI.
+  \item Escolha um registrador do ATSAMC20 e explique cada campo e o seu valor de reset.
+\end{pratique}

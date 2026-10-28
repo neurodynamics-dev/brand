@@ -1,0 +1,108 @@
+% Parte 4: Integração do sistema
+\begin{parte}{Integração do sistema}{A trilha final, comum a todas as áreas. Aqui o membro deixa de olhar só para a sua camada e passa a responder pelo sistema inteiro: do toque na tela até a corrente no eletrodo.}
+  \item Seguir um comando por todas as camadas e localizar onde um problema nasce.
+  \item Implementar uma funcionalidade ponta a ponta, do firmware ao app.
+  \item Documentar, analisar riscos e validar um sistema completo.
+\end{parte}
+
+\topico{O caminho completo de um comando}
+Todo sistema embarcado conectado tem uma cadeia de ida (comando) e de volta (telemetria). Conhecer cada elo, sua latência e seus pontos de falha é o que separa quem conserta sintomas de quem resolve causas.
+
+\begin{noproduto}
+Ida: app → BLE → ESP32 → UART → ATSAM → DAC → fonte de corrente → eletrodos. Volta: bateria, impedância e estado fazem o caminho inverso.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Documento técnico do Connect
+  \item Tópicos 2.21, 2.22, 2.26, 3.14 e 3.16 deste documento
+\end{paraestudar}
+
+\begin{pratique}
+  \item Desenhe um diagrama de sequência (Mermaid) do comando “iniciar estímulo”, com todas as mensagens e camadas.
+  \item Estime a latência de cada trecho e meça a latência total do toque ao primeiro pulso.
+\end{pratique}
+
+\topico{Uma funcionalidade ponta a ponta}
+Adicionar uma funcionalidade a um produto com várias camadas exige mudanças coordenadas e compatíveis em cada uma. Planejar antes de codar evita retrabalho.
+
+\begin{noproduto}
+Estudo de caso: o GVS, que exigiu quatro passos no ATSAM, uma característica nova no ESP32 e suporte no app.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Histórico de commits e PRs da implementação do GVS nos três repositórios
+\end{paraestudar}
+
+\begin{pratique}
+  \item Reconstrua, a partir dos commits, a lista de mudanças que o GVS exigiu em cada repositório.
+  \item Escreva o plano de implementação de uma funcionalidade simples (por exemplo, um contador de sessões) nas três camadas.
+\end{pratique}
+
+\topico{Depuração entre camadas}
+Sniffer BLE, analisador lógico e logs com horário correlacionados. A técnica é sempre a mesma: observar a fronteira entre duas camadas para descobrir de qual lado o problema está.
+
+\begin{noproduto}
+As fronteiras observáveis do Connect são o enlace BLE (nRF Connect) e a UART entre ESP32 e ATSAM (analisador lógico).
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://sigrok.org/}{sigrok / PulseView}
+  \item \leitura{https://www.saleae.com/}{Saleae Logic}
+  \item App nRF Connect for Mobile (Nordic)
+\end{paraestudar}
+
+\begin{pratique}
+  \item Capture ao mesmo tempo o tráfego BLE e a UART durante um comando e alinhe os eventos numa linha do tempo.
+  \item Introduza um atraso artificial no firmware BLE e localize-o só pelas capturas.
+\end{pratique}
+
+\topico{Documentação de engenharia}
+Documento técnico e diagramas de arquitetura, sequência e estados, mantidos junto do código. Documentação boa é a que o próximo membro consegue usar sem perguntar.
+
+\begin{noproduto}
+Módulos novos, como o de tDCS, devem terminar com um documento técnico próprio.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://mermaid.js.org/}{Mermaid}
+  \item \leitura{https://c4model.com/}{C4 model, para diagramas de arquitetura}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Escreva a documentação técnica de um módulo que você estudou, com ao menos um diagrama.
+  \item Revise a documentação de um colega e aponte o que não daria para entender sem ler o código.
+\end{pratique}
+
+\topico{Análise de segurança do sistema}
+FMEA, árvore de falhas e o mapeamento de cada mitigação entre hardware, firmware e app. Em equipamento médico, todo risco relevante precisa de pelo menos uma barreira registrada.
+
+\begin{noproduto}
+Um bom exercício é perda de BLE durante o estímulo: o que o app, o ESP32, o ATSAM e o hardware fazem.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item ISO 14971 (gestão de risco)
+  \item Material de FMEA de disciplinas de confiabilidade ou da equipe
+\end{paraestudar}
+
+\begin{pratique}
+  \item Faça o FMEA de uma falha com causa, efeito, severidade e mitigação em cada camada.
+  \item Monte a árvore de falhas do evento “corrente acima do limite no paciente”.
+\end{pratique}
+
+\topico{Verificação e validação}
+Testes de bancada, testes ponta a ponta, regressão e rastreabilidade de requisito até teste. Verificar é provar que se construiu certo; validar é provar que se construiu a coisa certa.
+
+\begin{noproduto}
+Um roteiro de regressão ponta a ponta antes de cada release protege as três bases de código ao mesmo tempo.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item IEC 62304 (verificação de software médico)
+  \item Tópicos 1.19, 2.29 e 3.23 deste documento
+\end{paraestudar}
+
+\begin{pratique}
+  \item Monte uma matriz de rastreabilidade para três requisitos: requisito → implementação → teste → resultado.
+  \item Escreva um roteiro de regressão ponta a ponta que possa ser rodado antes de cada release.
+\end{pratique}

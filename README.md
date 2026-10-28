@@ -38,6 +38,10 @@ A pasta [`templates/aacc/`](templates/aacc/) é o template com que um membro ou 
 
 O site serve `assets/template-relatorio-aacc.zip` (o SOMA o baixa) e `assets/exemplo-relatorio-aacc.pdf`. Mudou o template? Rode `templates/aacc/empacotar.sh`, que compila tudo e gera os dois de novo; as prévias da peça (`assets/manual/aacc-capa.jpg` e `aacc-atividade.jpg`) são as páginas 1 e 13 do exemplo, com `pdftoppm -jpeg -scale-to-x 800`.
 
+## Apostila (LaTeX)
+
+[`templates/apostila/`](templates/apostila/) é o template de material didático (apostilas, trilhas de formação, guias de estudo): a classe `nro-apostila.cls` (LuaLaTeX, com as fontes da marca em `fonts/`), o modelo em branco `modelo-apostila.tex` e o exemplo completo NRO-PRO-014-1, General onboarding: Projects practical technologies introduction. O passo a passo está no [`LEIAME.md`](templates/apostila/LEIAME.md).
+
 ## Decisões de marca pendentes
 
 As regras de redução mínima da marca, unidade de área de proteção e equivalências oficiais CMYK/Pantone dependem da validação dos responsáveis pela marca. Não foram inventadas medidas ou equivalências nesta implementação.

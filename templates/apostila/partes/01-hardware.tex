@@ -1,0 +1,338 @@
+% Parte 1: Hardware
+\begin{parte}{Hardware}{Da lei de Ohm ao estágio de saída de alta tensão. A trilha ensina eletrônica analógica, digital e de potência de forma geral e usa os esquemáticos do Connect como material de estudo real.}
+  \item Analisar e dimensionar circuitos analógicos e digitais de uma placa real.
+  \item Entender fontes chaveadas, gate drivers, bateria e proteções.
+  \item Planejar e executar a validação de um hardware em bancada.
+\end{parte}
+
+\nivel{Básico}{Circuitos, componentes, bancada e leitura de esquemático.}
+
+\topico{Circuitos elétricos}
+Lei de Ohm, leis de Kirchhoff, divisor de tensão, potência e dissipação. É a base para dimensionar qualquer componente de uma placa.
+
+\begin{noproduto}
+Divisores de tensão, resistores de sense e a dissipação dos componentes do estágio de saída são dimensionados com essas ferramentas.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://learn.sparkfun.com/tutorials/voltage-current-resistance-and-ohms-law}{SparkFun: Voltage, Current, Resistance, and Ohm's Law}
+  \item \leitura{https://learn.sparkfun.com/tutorials/voltage-dividers}{SparkFun: Voltage Dividers}
+  \item \leitura{https://www.allaboutcircuits.com/textbook/}{All About Circuits: textbook, volume de corrente contínua}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Encontre um divisor de tensão no esquemático e calcule a tensão de saída e a corrente quiescente.
+  \item Calcule a potência dissipada no resistor de sense da fonte de corrente na corrente máxima de estímulo.
+\end{pratique}
+
+\topico{Componentes passivos}
+Resistor (potência e tolerância), capacitor (tipos, ESR, desacoplamento, perda de capacitância com tensão DC) e indutor (saturação e corrente RMS). Escolher o passivo certo é metade de um projeto confiável.
+
+\begin{noproduto}
+Cada capacitor dos esquemáticos tem um motivo para seu tipo e sua tensão nominal, principalmente perto dos trilhos de alta tensão.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://learn.sparkfun.com/tutorials/capacitors}{SparkFun: Capacitors}
+  \item Livro: The Art of Electronics (Horowitz e Hill), capítulo 1
+\end{paraestudar}
+
+\begin{pratique}
+  \item Escolha três capacitores do esquemático e justifique o tipo (cerâmico, eletrolítico) e a tensão nominal de cada um.
+  \item Explique por que um cerâmico X7R de 10 µF perde capacitância quando recebe tensão DC.
+\end{pratique}
+
+\topico{Semicondutores}
+Diodo, zener, LED, BJT (inclusive o par Darlington) e MOSFET como chave: regiões de operação, ganho, tensão de limiar e perdas.
+
+\begin{noproduto}
+O estágio de saída usa transistores como o Darlington FJD5304D. Entender saturação e ganho mínimo é o que garante que eles conduzam a corrente prevista.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://learn.sparkfun.com/tutorials/diodes}{SparkFun: Diodes}
+  \item \leitura{https://learn.sparkfun.com/tutorials/transistors}{SparkFun: Transistors}
+  \item Datasheet do FJD5304D
+\end{paraestudar}
+
+\begin{pratique}
+  \item Calcule a corrente de base necessária para saturar um BJT do esquemático a partir do ganho mínimo do datasheet.
+  \item Compare o uso de um MOSFET e de um Darlington como chave em alta tensão.
+\end{pratique}
+
+\topico{Instrumentação de bancada}
+Multímetro, osciloscópio (trigger, acoplamento, largura de banda), fonte de bancada com limite de corrente, carga resistiva e ponteiras de alta tensão e diferenciais. Medir errado é pior que não medir.
+
+\begin{noproduto}
+Medir pulsos no estágio de saída exige carga resistiva e cuidado com a referência: GND e GND\_HV não são o mesmo ponto.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter}{SparkFun: How to Use a Multimeter}
+  \item \leitura{https://learn.sparkfun.com/tutorials/how-to-use-an-oscilloscope}{SparkFun: How to Use an Oscilloscope}
+  \item \leitura{https://www.youtube.com/@EEVblog}{EEVblog no YouTube}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Meça um pulso bifásico numa carga resistiva e registre amplitude, largura e intervalo.
+  \item Explique por que não se deve prender a referência da ponteira no GND\_HV sem isolação ou ponteira diferencial.
+\end{pratique}
+
+\topico{Leitura de esquemático}
+Hierarquia de páginas, net labels, designators, notas de montagem e grounds separados. Saber navegar num esquemático grande é a habilidade mais usada no dia a dia.
+
+\begin{noproduto}
+Os esquemáticos \code{SCH070105} (CFCU) e \code{SCH070102} (CTCE) têm várias páginas e dois grounds, GND e GND\_HV.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://learn.sparkfun.com/tutorials/how-to-read-a-schematic}{SparkFun: How to Read a Schematic}
+  \item Esquemáticos SCH070105 e SCH070102
+\end{paraestudar}
+
+\begin{pratique}
+  \item Siga um sinal de controle desde o pino do ATSAM até o estágio de saída, listando cada página por onde ele passa.
+  \item Liste onde GND e GND\_HV se encontram (ou não) e explique o motivo.
+\end{pratique}
+
+\nivel{Intermediário}{Op-amps, fontes de corrente, conversores e chaves.}
+
+\topico{Amplificadores operacionais}
+Op-amp ideal e real (offset, GBW, slew rate, saída rail-to-rail), buffer, inversor e não inversor, comparador, histerese e Schmitt trigger.
+
+\begin{noproduto}
+Op-amps aparecem como fonte de corrente, como comparadores das proteções e como buffers de sinal ao longo das placas.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Livro: Op Amps for Everyone (Texas Instruments, Ron Mancini), gratuito
+  \item \leitura{https://www.allaboutcircuits.com/textbook/}{All About Circuits: textbook, capítulo de op-amps}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Projete um comparador com histerese de 100 mV e simule no LTspice.
+  \item Encontre no esquemático um op-amp em cada configuração (buffer, não inversor, comparador) e calcule o ganho ou os limiares.
+\end{pratique}
+
+\topico{Fontes de corrente controladas por tensão}
+Um op-amp, um transistor e um resistor de sense formam uma malha que força a tensão no shunt a seguir a referência. O resultado é I = Vref / Rsense, independente da carga até o limite de compliance. É o coração de qualquer estimulador por corrente.
+
+\begin{noproduto}
+No Connect, a fonte de corrente é o conjunto TLV9151 + Q36 + R196, com a referência vinda do DAC.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Livro: The Art of Electronics, seção de fontes de corrente com op-amp
+  \item Datasheet do TLV9151
+\end{paraestudar}
+
+\begin{pratique}
+  \item Calcule a corrente de saída para Vref = 1 V com o valor de R196 do esquemático.
+  \item Encontre a tensão de compliance: até que impedância de carga a fonte mantém a corrente com +125 V?
+  \item Simule o circuito no LTspice com uma carga RC representando pele e eletrodo.
+\end{pratique}
+
+\topico{Medição de corrente}
+Resistor shunt, amplificador de sense de corrente e comparador com latch para desligamento por sobrecorrente. Medir corrente com precisão é o que permite controlá-la e limitá-la.
+
+\begin{noproduto}
+O INA310 combina amplificador de sense e comparador, e alimenta a proteção de sobrecorrente.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Datasheet do INA310 (Texas Instruments)
+  \item TI Precision Labs, série de vídeos sobre current sensing (site da TI)
+\end{paraestudar}
+
+\begin{pratique}
+  \item Calcule a tensão de saída do amplificador de sense na corrente máxima e verifique se cabe na faixa do ADC.
+  \item Explique por que o comparador de proteção precisa travar (latch) em vez de apenas comparar.
+\end{pratique}
+
+\topico{Lógica digital}
+Portas lógicas, buffers e inversores Schmitt, saídas open-drain com pull-up e compatibilidade de níveis lógicos entre 3,3 V e 5 V.
+
+\begin{noproduto}
+Buffers e inversores como o 74LVC1G14 e o 74LVC1G17 limpam sinais que cruzam a placa e montam a lógica de desligamento.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://learn.sparkfun.com/tutorials/logic-levels}{SparkFun: Logic Levels}
+  \item \leitura{https://learn.sparkfun.com/tutorials/pull-up-resistors}{SparkFun: Pull-up Resistors}
+  \item Datasheets 74LVC1G14 e 74LVC1G17
+\end{paraestudar}
+
+\begin{pratique}
+  \item Dimensione o pull-up de uma linha open-drain para um tempo de subida de 1 µs com 50 pF.
+  \item Explique por que usar um buffer Schmitt num sinal que vem de outra placa.
+\end{pratique}
+
+\topico{Conversores DAC e ADC}
+Resolução, LSB, tensão de referência (VDD, interna ou externa), erros de offset e ganho, INL e DNL. Conversores são a fronteira entre o mundo digital do firmware e o analógico do circuito.
+
+\begin{noproduto}
+O DAC53204 define a referência da fonte de corrente, ou seja, a amplitude do estímulo.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://learn.sparkfun.com/tutorials/analog-to-digital-conversion}{SparkFun: Analog to Digital Conversion}
+  \item Datasheet do DAC53204 (Texas Instruments)
+\end{paraestudar}
+
+\begin{pratique}
+  \item Calcule o passo de corrente na saída correspondente a 1 LSB do DAC.
+  \item Compare a precisão da saída usando referência VDD e referência interna.
+\end{pratique}
+
+\topico{Chaves analógicas e multiplexação}
+Resistência on, carga injetada e faixa de sinal das chaves analógicas, usadas para rotear um sinal entre caminhos diferentes.
+
+\begin{noproduto}
+O NLAS4157 compartilha o sinal entre os modos FES e tDCS.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Datasheet do NLAS4157 (onsemi)
+\end{paraestudar}
+
+\begin{pratique}
+  \item Encontre o NLAS4157 no esquemático e descreva quais sinais ele seleciona e quem o controla.
+  \item Estime o erro introduzido pela resistência on da chave no caminho do sinal.
+\end{pratique}
+
+\topico{Relés de estado sólido e isolação}
+Relés PhotoMOS: LED de entrada, MOSFETs de saída, isolação galvânica e acionamento por transistor. Permitem abrir um caminho de alta tensão a partir de um sinal lógico.
+
+\begin{noproduto}
+O AQW280SX é acionado via transistor e abre o caminho de saída quando necessário.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Datasheet do AQW280SX (Panasonic)
+\end{paraestudar}
+
+\begin{pratique}
+  \item Calcule o resistor de entrada do relé para a corrente de LED recomendada.
+  \item Explique qual falha o relé previne quando aberto e o que acontece se ele colar fechado.
+\end{pratique}
+
+\nivel{Avançado}{Potência, bateria, proteções, layout e validação.}
+
+\topico{Fontes chaveadas}
+Topologias buck, boost e push-pull, malha de controle, transformador e retificação. É como se gera, com eficiência, uma tensão muito maior ou menor que a da bateria.
+
+\begin{noproduto}
+Os +125 V do estágio de saída vêm de um conversor push-pull com o controlador LM5030.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Livro: Fundamentals of Power Electronics (Erickson e Maksimović), capítulos 1 a 6
+  \item Nota de aplicação TI SLVA477: Basic Calculation of a Buck Converter's Power Stage
+  \item Datasheet do LM5030
+\end{paraestudar}
+
+\begin{pratique}
+  \item Desenhe o caminho de energia da bateria até os +125 V, indicando cada conversor.
+  \item Calcule o ciclo de trabalho e a relação de espiras esperados no push-pull.
+\end{pratique}
+
+\topico{Gate drivers e ponte H}
+Half-bridge e ponte H, gate drivers com bootstrap e seus limites: o capacitor de bootstrap precisa ser recarregado, então não sustenta condução contínua indefinidamente. A ponte H permite inverter a polaridade da corrente na carga.
+
+\begin{noproduto}
+O IRS25752 aciona o estágio bifásico do FES. O tDCS, por ser corrente contínua, exige outra solução.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Infineon (IR) AN-978: HV Floating MOS-Gate Driver ICs
+  \item Datasheet do IRS25752
+\end{paraestudar}
+
+\begin{pratique}
+  \item Calcule o capacitor de bootstrap mínimo para a maior largura de pulso usada.
+  \item Explique por que corrente contínua de longa duração não combina com bootstrap.
+\end{pratique}
+
+\topico{Gerenciamento de bateria}
+Química Li-ion (carga CC/CV, limites de temperatura), carregadores controlados por I²C, power path e proteções. Bateria mal gerenciada é risco de segurança, não só de autonomia.
+
+\begin{noproduto}
+O carregador é o BQ25792, configurado pelo firmware via I²C.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://batteryuniversity.com/}{Battery University}
+  \item Datasheet do BQ25792 (Texas Instruments)
+\end{paraestudar}
+
+\begin{pratique}
+  \item Liste os registradores do BQ25792 que definem corrente de carga, tensão final e limite de entrada.
+  \item Explique o que o power path faz quando o carregador está conectado e a bateria está descarregada.
+\end{pratique}
+
+\topico{Sequenciamento de energia e load switches}
+Habilitação ordenada dos trilhos de alimentação, corrente de inrush, soft-start e descarga ativa ao desligar. A ordem em que a placa liga define se ela liga direito.
+
+\begin{noproduto}
+Os trilhos do Connect, inclusive o de alta tensão, são habilitados em sequência.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Notas de aplicação da TI sobre load switches (site da TI)
+\end{paraestudar}
+
+\begin{pratique}
+  \item Monte a tabela de sequência de ligação dos trilhos a partir do esquemático.
+  \item Meça com o osciloscópio a subida de dois trilhos e compare com a ordem esperada.
+\end{pratique}
+
+\topico{Proteções de hardware}
+Sobrecorrente, parada de emergência, detecção de eletrodo solto e uma lógica OR que desliga a saída sem depender do firmware. Em equipamento médico, a última linha de defesa precisa ser física.
+
+\begin{noproduto}
+As proteções do Connect se juntam numa lógica OR de desligamento, documentada nas páginas de proteção do \code{SCH070102}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item IEC 60601-2-10, requisitos de proteção de estimuladores
+  \item Esquemático SCH070102, páginas de proteção
+\end{paraestudar}
+
+\begin{pratique}
+  \item Desenhe a lógica OR de desligamento: quais entradas, qual saída e o que ela comanda.
+  \item Para cada proteção, indique o tempo de resposta esperado e quem rearma o sistema.
+\end{pratique}
+
+\topico{Integridade de sinal e layout}
+Desacoplamento, laços de corrente, planos de referência, distâncias de isolação (creepage e clearance) e EMC. Um esquemático certo pode falhar por causa de um layout ruim.
+
+\begin{noproduto}
+A placa convive com +125 V e lógica de 3,3 V, então as distâncias de isolação seguem a IEC 60601-1.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://www.youtube.com/@PhilsLab}{Phil's Lab no YouTube}
+  \item Palestras de Rick Hartley sobre aterramento e retorno de corrente (YouTube)
+  \item Livro: Electromagnetic Compatibility Engineering (Henry Ott)
+\end{paraestudar}
+
+\begin{pratique}
+  \item No layout, encontre o laço de maior di/dt do conversor e proponha como reduzi-lo.
+  \item Verifique a distância de isolação entre a região de alta tensão e a de baixa tensão e compare com a tabela da IEC 60601-1.
+\end{pratique}
+
+\topico{Validação de hardware}
+Plano de teste, teste de disparo de cada proteção e caracterização da saída (linearidade, erro, ripple). Validar é provar, com dados, que o hardware faz o que o projeto promete.
+
+\begin{noproduto}
+A caracterização principal é a curva corrente de saída × código do DAC, medida em carga resistiva.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Modelo de plano de teste da equipe (a criar)
+\end{paraestudar}
+
+\begin{pratique}
+  \item Escreva um plano de teste para a proteção de sobrecorrente: setup, passos e critério de aprovação.
+  \item Levante a curva corrente de saída × código do DAC e calcule o erro máximo.
+\end{pratique}

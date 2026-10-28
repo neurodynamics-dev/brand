@@ -1,0 +1,3 @@
+# compila com LuaLaTeX (as fontes da marca só carregam nele); o Overleaf lê este arquivo
+$pdf_mode = 4;
+$lualatex = 'lualatex -interaction=nonstopmode -file-line-error %O %S';

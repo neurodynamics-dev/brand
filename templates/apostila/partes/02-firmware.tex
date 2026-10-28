@@ -1,0 +1,498 @@
+% Parte 2: Firmware
+\begin{parte}{Firmware}{Programação de microcontroladores do registrador ao sistema completo: C e C++ embarcado, periféricos, protocolos, arquitetura, tempo real, Bluetooth e segurança. Os dois processadores do Connect, um ATSAMC20 bare-metal e um ESP32 com FreeRTOS, servem de laboratório.}
+  \item Escrever código embarcado seguro, sem heap e sem bloqueio, em C e C++.
+  \item Configurar periféricos, escrever drivers e depurar direto no hardware.
+  \item Projetar arquitetura, protocolos e testes de um firmware crítico.
+\end{parte}
+
+\nivel{Básico}{C, C++ embarcado, microcontrolador, GPIO e ferramentas de build.}
+
+\topico{Linguagem C}
+Tipos de largura fixa (\code{uint8\_t}, \code{int16\_t}), ponteiros, structs, \code{volatile}, \code{static}, bitfields e máscaras. É a base de qualquer código que toca registradores.
+
+\begin{noproduto}
+Mesmo com o firmware escrito em C++20, a interface com o hardware (registradores e código gerado pelo Harmony) é C puro.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://beej.us/guide/bgc/}{Beej's Guide to C Programming}
+  \item Livro: The C Programming Language (Kernighan e Ritchie)
+\end{paraestudar}
+
+\begin{pratique}
+  \item Escreva uma função que empacote três valores (4, 6 e 6 bits) num \code{uint16\_t} e outra que os desempacote.
+  \item Mostre, com um exemplo, o que pode acontecer se uma flag alterada numa interrupção não for \code{volatile}.
+\end{pratique}
+
+\topico{C++ para embarcados}
+Classes, namespaces, \code{enum class}, \code{constexpr}, templates, \code{std::array} e \code{std::span} e RAII, usados sem exceções, sem RTTI e sem alocação dinâmica. C++ bem usado dá segurança de tipos sem custo de desempenho.
+
+\begin{noproduto}
+O \code{ergo\_fes\_connect\_stimulus\_firmware} é C++20 bare-metal, sem exceções, sem RTTI e sem heap.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://en.cppreference.com/}{cppreference}
+  \item \leitura{https://embeddedartistry.com/}{Embedded Artistry, artigos sobre C++ em embarcados}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Reescreva um conjunto de \code{\#define} de estados como \code{enum class} e mostre o erro de compilação que isso passa a evitar.
+  \item Implemente um guard RAII que desabilita interrupções no construtor e as restaura no destrutor.
+\end{pratique}
+
+\topico{Arquitetura de microcontroladores}
+CPU, memória flash e RAM, barramento, periféricos mapeados em memória e árvore de clock. Entender o mapa do chip é entender o que o código realmente faz.
+
+\begin{noproduto}
+O processador de estímulo é o ATSAMC20N17A, um Cortex-M0+ da Microchip.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://www.youtube.com/@StateMachineCOM}{Quantum Leaps (Miro Samek): Modern Embedded Systems Programming}
+  \item Datasheet do SAM C20/C21 (Microchip), visão geral e mapa de memória
+\end{paraestudar}
+
+\begin{pratique}
+  \item A partir do datasheet, desenhe o mapa de memória do ATSAMC20N17A (flash, RAM, periféricos).
+  \item Explique como o clock chega a um SERCOM: fonte, gerador de clock e habilitação.
+\end{pratique}
+
+\topico{GPIO}
+Entrada, saída, pull-up interno, leitura de botões com debounce e acesso direto aos registradores de porta. O primeiro contato real com o hardware.
+
+\begin{noproduto}
+No ATSAMC20 os pinos são controlados pelo periférico PORT.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://learn.sparkfun.com/tutorials/pull-up-resistors}{SparkFun: Pull-up Resistors}
+  \item Datasheet do SAM C20, capítulo PORT
+\end{paraestudar}
+
+\begin{pratique}
+  \item Pisque um LED escrevendo direto nos registradores do PORT, sem bibliotecas.
+  \item Implemente um debounce não bloqueante, baseado em tempo, para um botão.
+\end{pratique}
+
+\topico{Toolchain}
+Compilador, assembler e linker; \code{arm-none-eabi-gcc}, arquivos objeto, ELF, binário e map file. Saber o que cada etapa produz ajuda a entender erros de build e problemas de memória.
+
+\begin{noproduto}
+O firmware stimulus é compilado com \code{arm-none-eabi-gcc} e gera um ELF com map file.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://interrupt.memfault.com/blog/zero-to-main-1}{Memfault Interrupt: From Zero to main()}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Compile o firmware e use \code{arm-none-eabi-size} para ver quanto de flash e RAM é usado.
+  \item Abra o map file e encontre as três funções que mais ocupam flash.
+\end{pratique}
+
+\topico{Build system}
+CMake, Ninja, toolchain files e \code{compile\_commands.json}, o arquivo que alimenta clangd e clang-tidy. Um build reprodutível é o que permite que qualquer pessoa compile o projeto.
+
+\begin{noproduto}
+O firmware stimulus usa CMake e Ninja com um toolchain file para ARM.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://cmake.org/cmake/help/latest/guide/tutorial/index.html}{Tutorial oficial do CMake}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Configure e compile o firmware do zero numa pasta de build nova, nas configurações Debug e Release.
+  \item Explique o que o toolchain file do projeto define e por que ele é necessário.
+\end{pratique}
+
+\nivel{Intermediário}{Cortex-M, periféricos, protocolos seriais, drivers e depuração.}
+
+\topico{Cortex-M0+}
+Registradores do núcleo, modos de execução, NVIC, interrupções e prioridades, exceções e SysTick. É o comportamento comum a todos os microcontroladores dessa família.
+
+\begin{noproduto}
+O ATSAMC20 é um Cortex-M0+; tudo deste tópico vale diretamente para ele.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item ARM: Cortex-M0+ Devices Generic User Guide
+  \item Livro: The Definitive Guide to ARM Cortex-M0 and Cortex-M0+ Processors (Joseph Yiu)
+\end{paraestudar}
+
+\begin{pratique}
+  \item Configure o SysTick para gerar uma interrupção a cada 1 ms e conte o tempo desde o boot.
+  \item Explique o que acontece quando duas interrupções de mesma prioridade chegam ao mesmo tempo.
+\end{pratique}
+
+\topico{Startup e linker script}
+Tabela de vetores, handler de reset, cópia de \code{.data}, zeragem de \code{.bss} e o linker script que diz onde cada coisa mora na memória. É o que acontece antes do \code{main()}.
+
+\begin{noproduto}
+O firmware stimulus tem seu próprio \code{Startup.c} e arquivo \code{.ld}.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://interrupt.memfault.com/blog/zero-to-main-1}{Memfault Interrupt: série From Zero to main()}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Leia o \code{Startup.c} do firmware e descreva cada passo até chegar ao \code{main()}.
+  \item Crie uma variável numa seção própria pelo linker script e confirme o endereço no map file.
+\end{pratique}
+
+\topico{Periféricos de um microcontrolador}
+Portas, interfaces seriais configuráveis (SPI, I²C, USART), timers, ADC, EEPROM e controlador de memória não volátil. Cada periférico tem registradores de configuração, de status e de dados.
+
+\begin{noproduto}
+No ATSAMC20: PORT, SERCOM (SPI, I²C, USART), TC (timers), ADC, EEPROM e NVM.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Datasheet do SAM C20/C21 (Microchip), capítulos de cada periférico
+\end{paraestudar}
+
+\begin{pratique}
+  \item Liste quais SERCOMs o firmware usa, em qual modo e para qual CI externo.
+  \item Configure um timer para gerar uma onda quadrada de 1 kHz num pino e meça no osciloscópio.
+\end{pratique}
+
+\topico{Geradores de código de fabricante}
+Ferramentas como MPLAB Harmony/MCC geram o BSP e as bibliotecas de periféricos (PLIBs) a partir de uma configuração gráfica. A regra de ouro: código gerado não se edita à mão; muda-se a configuração e regenera.
+
+\begin{noproduto}
+O firmware stimulus usa MPLAB Harmony/MCC, com fronteira clara entre o código gerado e o código da equipe.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://github.com/Microchip-MPLAB-Harmony}{MPLAB Harmony no GitHub (repositórios csp e documentação)}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Altere a frequência de um SPI pelo MCC, regenere e mostre o diff resultante.
+  \item Explique onde fica a fronteira entre código gerado e código da equipe no repositório.
+\end{pratique}
+
+\topico{Protocolos seriais}
+SPI, I²C e UART: modos de clock, endereçamento, framing e checksum. São as estradas por onde um microcontrolador conversa com CIs e com outros processadores.
+
+\begin{noproduto}
+SPI fala com o DAC, I²C com o carregador e a UART liga o ATSAM ao ESP32.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi}{SparkFun: Serial Peripheral Interface (SPI)}
+  \item \leitura{https://learn.sparkfun.com/tutorials/i2c}{SparkFun: I2C}
+  \item \leitura{https://learn.sparkfun.com/tutorials/serial-communication}{SparkFun: Serial Communication}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Capture com um analisador lógico uma escrita SPI no DAC e decodifique o quadro.
+  \item Capture um quadro na UART entre ATSAM e ESP32 e identifique cabeçalho, payload e checksum.
+\end{pratique}
+
+\topico{Drivers de CIs externos}
+Como escrever um driver a partir do mapa de registradores: camada de transporte, definição de registradores, API de alto nível e tratamento de erro. Um bom driver esconde o protocolo e expõe intenções.
+
+\begin{noproduto}
+Os drivers do DAC53204 e do BQ25792 são os modelos de referência da equipe.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Datasheets do DAC53204 e do BQ25792
+  \item Drivers existentes no repositório
+\end{paraestudar}
+
+\begin{pratique}
+  \item Leia o driver do DAC53204 e desenhe a sequência de comandos de inicialização.
+  \item Implemente a leitura de um registrador de status do BQ25792 que ainda não tenha função no driver.
+\end{pratique}
+
+\topico{Gravação e depuração}
+SWD, J-Link, OpenOCD e GDB: breakpoints, watchpoints e inspeção de registradores e memória. Depurador bem usado substitui horas de \code{printf}.
+
+\begin{noproduto}
+O ATSAMC20 é gravado e depurado por SWD.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://wiki.segger.com/}{SEGGER Wiki}
+  \item \leitura{https://openocd.org/}{OpenOCD}
+  \item \leitura{https://sourceware.org/gdb/documentation/}{Documentação do GDB}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Grave o firmware, pare num breakpoint dentro de um Handler e inspecione uma variável e um registrador de periférico.
+  \item Use um watchpoint para descobrir quem altera um campo do \code{SystemData}.
+\end{pratique}
+
+\topico{Qualidade de código}
+clang-format, clang-tidy, warnings tratados como erros, padrão de nomes e comentários com autor. Qualidade é o que torna o código revisável por outra pessoa.
+
+\begin{noproduto}
+O firmware usa \code{.clang-format}, clang-tidy e warnings como erros.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://clang.llvm.org/docs/ClangFormat.html}{ClangFormat}
+  \item \leitura{https://clang.llvm.org/extra/clang-tidy/}{clang-tidy}
+  \item Guia de estilo interno do repositório
+\end{paraestudar}
+
+\begin{pratique}
+  \item Rode clang-tidy no projeto e corrija dois avisos, explicando cada um.
+  \item Configure o editor para formatar ao salvar usando o \code{.clang-format} do repositório.
+\end{pratique}
+
+\nivel{Avançado}{Arquitetura, tempo real, BLE, protocolo próprio, segurança e testes.}
+
+\topico{Arquitetura superloop cooperativa}
+Services com \code{Init}, \code{DeInit} e \code{Handler} chamados em sequência no laço principal. Funciona desde que nenhum Handler bloqueie: cada um tem um orçamento de latência.
+
+\begin{noproduto}
+O firmware stimulus é organizado assim; o \code{main} chama os Handlers de todos os services a cada volta.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Livro: Making Embedded Systems (Elecia White), capítulos de arquitetura
+  \item Código do main e dos services no firmware stimulus
+\end{paraestudar}
+
+\begin{pratique}
+  \item Meça com um GPIO e o osciloscópio o tempo de uma volta do superloop e o do Handler mais lento.
+  \item Converta um trecho com espera ativa (\code{delay}) numa versão não bloqueante.
+\end{pratique}
+
+\topico{Máquinas de estados}
+Modelagem de estados e transições, implementação com \code{switch} ou tabela, e diagramas. É a forma mais clara de descrever comportamento que depende do histórico.
+
+\begin{noproduto}
+O \code{StimulusService} e o \code{SystemController} são máquinas de estados.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Livro: Practical UML Statecharts in C/C++ (Miro Samek)
+  \item \leitura{https://mermaid.js.org/}{Mermaid: diagramas de estado}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Desenhe o diagrama de estados do \code{StimulusService} a partir do código.
+  \item Encontre uma transição não tratada, ou justifique por que todas estão.
+\end{pratique}
+
+\topico{Temporização precisa}
+Base de tempo em microssegundos, geração de pulsos com largura e intervalo exatos e medição de jitter. Em estimulação, tempo é parâmetro clínico.
+
+\begin{noproduto}
+O \code{MicroTimerService} fornece a base de µs usada para gerar os pulsos bifásicos.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Datasheet do SAM C20, capítulo TC
+  \item Código do MicroTimerService
+\end{paraestudar}
+
+\begin{pratique}
+  \item Meça o jitter da largura do pulso em 1000 pulsos e relacione com a carga do superloop.
+  \item Explique como o firmware trata o overflow do contador de µs.
+\end{pratique}
+
+\topico{Concorrência com interrupções}
+Seções críticas, condições de corrida, acesso atômico a variáveis multibyte e buffers circulares entre interrupção e laço principal. Bugs de concorrência são raros, intermitentes e caros.
+
+\begin{noproduto}
+Num superloop, dados que chegam por interrupção, como os bytes da UART, precisam de um caminho seguro até o laço principal.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://embeddedartistry.com/}{Embedded Artistry: Creating a Circular Buffer in C and C++}
+  \item \leitura{https://interrupt.memfault.com/}{Memfault Interrupt, artigos sobre interrupções no Cortex-M}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Implemente um buffer circular de um produtor e um consumidor sem desabilitar interrupções e justifique por que é seguro.
+  \item Crie de propósito uma condição de corrida numa variável de 32 bits lida em duas partes e reproduza o erro.
+\end{pratique}
+
+\topico{Tratamento de erros}
+Propagação de erro sem exceções, guards de escopo e transição para estados de falha seguros. Todo erro precisa de um destino definido.
+
+\begin{noproduto}
+O firmware usa o tipo \code{ReturnStatus} e guards de escopo.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Código de ReturnStatus e dos guards no repositório
+\end{paraestudar}
+
+\begin{pratique}
+  \item Rastreie o que acontece desde uma falha de escrita SPI no DAC até o estado do sistema.
+  \item Proponha um código de erro novo e liste todos os lugares que precisariam tratá-lo.
+\end{pratique}
+
+\topico{Persistência}
+EEPROM e memória não volátil, layout versionado dos dados, escrita atrasada para poupar ciclos e desgaste. Dados persistidos sobrevivem a versões de firmware, então precisam de versão.
+
+\begin{noproduto}
+O firmware stimulus persiste dados em EEPROM usando escrita atrasada.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Datasheet do SAM C20, capítulos NVMCTRL e RWW EEPROM
+\end{paraestudar}
+
+\begin{pratique}
+  \item Estime quantos anos a EEPROM dura com a política atual de escrita.
+  \item Explique como o firmware deve reagir a dados gravados por uma versão antiga.
+\end{pratique}
+
+\topico{Estado central e sincronização}
+Uma fonte única do estado do dispositivo e a forma de espelhá-lo em outros processadores. Evita que cada módulo tenha sua própria versão da verdade.
+
+\begin{noproduto}
+O singleton \code{SystemData} concentra o estado, e os valores são espelhados no ESP32 para leitura via BLE.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Código do SystemData e da camada de sincronização
+\end{paraestudar}
+
+\begin{pratique}
+  \item Liste os campos do \code{SystemData} e, para cada um, quem escreve e quem lê.
+  \item Desenhe a sequência de uma mudança no nível da bateria até o valor chegar ao app.
+\end{pratique}
+
+\topico{Protocolo binário próprio}
+Framing, serialização de structs, identificadores de mensagem, versionamento e regras de compatibilidade. Um protocolo vive mais que qualquer versão de firmware ou de app.
+
+\begin{noproduto}
+O \code{WeProtocol} liga ATSAM, ESP32 e app, com wire IDs que precisam permanecer compatíveis.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Documentação e código do WeProtocol no repositório
+\end{paraestudar}
+
+\begin{pratique}
+  \item Monte manualmente, byte a byte, um quadro de comando e confira com uma captura real.
+  \item Adicione um campo a uma mensagem sem quebrar app ou firmware antigos e explique a estratégia.
+\end{pratique}
+
+\topico{ESP32 e ESP-IDF}
+Estrutura de projeto ESP-IDF (componentes, \code{main}), \code{idf.py}, \code{sdkconfig} e menuconfig, tabela de partições e logs.
+
+\begin{noproduto}
+O \code{ergo\_fes\_connect\_ble\_firmware} é um projeto ESP-IDF.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://docs.espressif.com/projects/esp-idf/en/latest/esp32/}{Documentação do ESP-IDF, seção Get Started}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Compile e grave o firmware BLE e acompanhe o boot pelo monitor serial.
+  \item Mude uma opção pelo menuconfig e mostre o diff no \code{sdkconfig}.
+\end{pratique}
+
+\topico{FreeRTOS}
+Tasks e prioridades, escalonador preemptivo, filas, semáforos, mutexes e callbacks. Um RTOS troca a previsibilidade do superloop por concorrência real.
+
+\begin{noproduto}
+O firmware BLE roda sobre FreeRTOS, integrado ao ESP-IDF.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://www.freertos.org/}{FreeRTOS.org e o livro gratuito Mastering the FreeRTOS Real Time Kernel}
+\end{paraestudar}
+
+\begin{pratique}
+  \item Liste as tasks do firmware BLE com prioridade e tamanho de stack, e meça o stack livre de cada uma.
+  \item Explique como um dado sai da task da UART e chega à pilha BLE sem condição de corrida.
+\end{pratique}
+
+\topico{Bluetooth Low Energy: lado periférico}
+GAP e advertising, GATT (services, characteristics, descriptor CCC), notify e indicate, MTU. É como um dispositivo se anuncia e expõe dados para um celular.
+
+\begin{noproduto}
+O ESP32 do Connect é o periférico BLE e usa a pilha Bluedroid do ESP-IDF.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://academy.nordicsemi.com/}{Nordic DevAcademy: Bluetooth Low Energy Fundamentals}
+  \item \leitura{https://www.novelbits.io/}{Novel Bits, artigos introdutórios de BLE}
+  \item Exemplos gatt\_server do ESP-IDF
+\end{paraestudar}
+
+\begin{pratique}
+  \item Conecte-se com o nRF Connect, liste services e characteristics do Connect e associe cada UUID à sua função.
+  \item Explique a diferença prática entre notify e indicate e onde cada um é usado no projeto.
+\end{pratique}
+
+\topico{Ponte entre BLE e UART}
+Roteamento de comandos entre characteristics BLE e quadros seriais, validação de toda entrada vinda do celular e limites da tabela de atributos.
+
+\begin{noproduto}
+O firmware BLE faz exatamente essa ponte entre o app e o ATSAM.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Código da ponte no firmware BLE
+\end{paraestudar}
+
+\begin{pratique}
+  \item Desenhe o caminho de uma escrita BLE até o quadro UART correspondente.
+  \item Envie pelo nRF Connect um payload malformado e verifique se o firmware o rejeita.
+\end{pratique}
+
+\topico{Código compartilhado entre plataformas}
+Bibliotecas comuns como submódulo e uma camada de abstração de plataforma, para que o mesmo código rode em microcontroladores diferentes e até no PC.
+
+\begin{noproduto}
+A pasta \code{Modules/} é compartilhada entre os firmwares, com abstração para ATSAM, ESP e STM32.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item Pasta Modules/ do repositório
+\end{paraestudar}
+
+\begin{pratique}
+  \item Identifique o que, em \code{Modules/}, depende de plataforma e como essa dependência é injetada.
+  \item Compile um módulo comum para o PC com um stub de plataforma.
+\end{pratique}
+
+\topico{Firmware de segurança crítica}
+Defesa em profundidade, watchdog, falha segura, interação com as proteções de hardware e diferenças entre builds de depuração e de produção. O firmware nunca é a única barreira, mas precisa ser uma boa barreira.
+
+\begin{noproduto}
+No firmware stimulus, a alta tensão só é habilitada em build Release (com \code{NDEBUG}).
+\end{noproduto}
+
+\begin{paraestudar}
+  \item IEC 62304 (ciclo de vida de software médico)
+  \item Livro: Embedded Software Development for Safety-Critical Systems (Chris Hobbs)
+\end{paraestudar}
+
+\begin{pratique}
+  \item Liste o que impede o firmware de ligar a alta tensão num build Debug e confirme no código.
+  \item Simule um travamento do superloop e verifique se o watchdog leva o sistema a um estado seguro.
+\end{pratique}
+
+\topico{Testes de firmware}
+Testes unitários no PC, testes de bancada, regressão e rastreabilidade entre requisito, código e teste. Firmware testado no PC é firmware que pode mudar sem medo.
+
+\begin{noproduto}
+A lógica pura (protocolo, máquinas de estados) pode ser testada no PC; o resto, em bancada.
+\end{noproduto}
+
+\begin{paraestudar}
+  \item \leitura{https://google.github.io/googletest/}{GoogleTest}
+  \item \leitura{https://github.com/ThrowTheSwitch/Unity}{Unity}
+  \item \leitura{https://cpputest.github.io/}{CppUTest}
+  \item Livro: Test-Driven Development for Embedded C (James Grenning)
+\end{paraestudar}
+
+\begin{pratique}
+  \item Escreva testes no PC para a serialização de uma mensagem do \code{WeProtocol}.
+  \item Escreva um roteiro de teste de bancada para a sequência de início e parada de estímulo.
+\end{pratique}
