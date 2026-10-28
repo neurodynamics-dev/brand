@@ -40,7 +40,7 @@ O site serve `assets/template-relatorio-aacc.zip` (o SOMA o baixa) e `assets/exe
 
 ## Apostila (LaTeX)
 
-[`templates/apostila/`](templates/apostila/) é o template de material didático (apostilas, trilhas de formação, guias de estudo): a classe `nro-apostila.cls` (LuaLaTeX, com as fontes da marca em `fonts/`), o modelo em branco `modelo-apostila.tex` e o exemplo completo NRO-PRO-014-1, General onboarding: projects practical technologies introduction. O passo a passo está no [`LEIAME.md`](templates/apostila/LEIAME.md).
+[`templates/apostila/`](templates/apostila/) é o template de material didático (apostilas, trilhas de formação, guias de estudo): a classe `nro-apostila.cls` (LuaLaTeX, com as fontes da marca em `fonts/`), o modelo em branco `modelo-apostila.tex` e o exemplo completo NRO-PRO-014-1, General onboarding: Projects practical technologies introduction. O passo a passo está no [`LEIAME.md`](templates/apostila/LEIAME.md).
 
 ## Decisões de marca pendentes
 

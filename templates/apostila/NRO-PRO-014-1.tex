@@ -1,7 +1,7 @@
 % !TEX program = lualatex
 %% ============================================================
 %% NRO-PRO-014-1: General onboarding: projects practical technologies
-%% introduction (a apostila NeuroDev, a formação técnica da equipe)
+%% introduction (a formação técnica da equipe)
 %%
 %% O conteúdo de cada parte fica em partes/. Para compilar:
 %%   latexmk -lualatex NRO-PRO-014-1.tex     (ou, no Overleaf, o compilador LuaLaTeX)
@@ -13,31 +13,55 @@
   numero        = 1,
   revisao       = A,
   emissor       = {Departamento de Pesquisa e Desenvolvimento},
-  tipo          = {Manual ou guia},
-  categoria     = {Apostila de formação técnica},
-  titulo        = {General onboarding: projects practical technologies introduction},
-  subtitulo     = {NeuroDev: hardware, firmware e software para dispositivos médicos e sistemas embarcados, do básico ao avançado.},
-  eixos         = {Hardware\hspace{9mm}Firmware\hspace{9mm}Software\hspace{9mm}Integração},
+  tipo          = {General onboarding},
+  categoria     = {Formação técnica},
+  titulo        = {Projects practical technologies introduction},
+  subtitulo     = {Hardware, firmware e software para dispositivos médicos e sistemas embarcados, do básico ao avançado.},
   data          = {25 de outubro de 2026},
+  autor         = {Gabriel Matos Veneziano},
   redator       = {Gabriel Matos Veneziano},
   rotuloproduto = {No Connect},
-  autoria       = {NeuroDynamics},
+  equipe        = {NeuroDynamics},
 }
 
 \begin{document}
 
+
 \capa
+
+%% ------------------------------------------------------------
+%% FOLHA DE CONTROLE (NRO-PUB-001 e NRO-PUB-002)
+%% ------------------------------------------------------------
+\pagina{Controle}{Sobre este documento}
+\par\vspace{-1mm}
+\begin{tabularx}{\linewidth}{@{}>{\celrot}L{36mm}Y@{}}\reguatopo
+  Objetivo & Conduzir qualquer membro da equipe, do primeiro dia até o nível de quem projeta e revisa sistemas completos, em quatro áreas: hardware, firmware, software e integração. \\ \reguafina
+  Escopo & Conceitos gerais de sistemas embarcados e dispositivos médicos, cada um localizado no Connect, a plataforma de eletroestimulação da equipe, usada como estudo de caso. \\ \reguafina
+  Público & Quem está chegando (como curso) e quem já é da equipe (como referência). \\ \reguafina
+  Pré-requisito & A Parte~0 é obrigatória para todos e precede as trilhas de área. \\ \reguafina
+  Resultado esperado & Seguir um comando por todas as camadas e localizar onde um problema nasce; implementar uma funcionalidade ponta a ponta; documentar, analisar riscos e validar um sistema completo. \\ \reguafina
+  Referências normativas & \cod{IEC 60601-1}, \cod{IEC 60601-2-10}, \cod{ISO 14971} e \cod{IEC 62304}. \\ \reguabase
+\end{tabularx}
+
+\secao{Controle do documento}
+\controledocumento
+
+\secao{Histórico de revisões}
+\begin{historico}
+  \linharevisao{25/10/2026}{A}{Gabriel Matos Veneziano}{Primeira edição: 5 partes, 85 tópicos, glossário e ficha de progresso.}
+\end{historico}
+
 \sumario
 
 %% ------------------------------------------------------------
 %% INTRODUÇÃO
 %% ------------------------------------------------------------
-\pagina{Introdução}{Boas-vindas à NeuroDev}
-\lede{A NeuroDev é o caminho de formação técnica da equipe NeuroDynamics. Ela leva qualquer membro, do primeiro dia até o nível de quem projeta e revisa sistemas completos, por quatro áreas: hardware, firmware, software e integração.}
+\pagina{Introdução}{Boas-vindas}
+\lede{Este documento é o caminho de formação técnica da equipe NeuroDynamics. Ele leva qualquer membro, do primeiro dia até o nível de quem projeta e revisa sistemas completos, por quatro áreas: hardware, firmware, software e integração.}
 
 Os conceitos são gerais e valem para qualquer sistema embarcado ou dispositivo médico. Para que o estudo não fique no abstrato, cada tópico mostra onde aquele conceito aparece no \textbf{Connect}, a plataforma de eletroestimulação que a equipe desenvolve. Assim, quem estuda aprende a teoria e, ao mesmo tempo, conhece o produto por dentro.
 
-A apostila atende a dois públicos. Para quem está chegando, é um curso: comece pela Parte~0 e siga a trilha da sua área. Para quem já é da equipe, é uma referência: use o sumário para ir direto ao tópico e às fontes de estudo.
+O documento atende a dois públicos. Para quem está chegando, é um curso: comece pela Parte~0 e siga a trilha da sua área. Para quem já é da equipe, é uma referência: use o sumário para ir direto ao tópico e às fontes de estudo.
 
 \begin{estatisticas}[4]
   \estatistica{\totalpartes}{Partes}
@@ -46,19 +70,19 @@ A apostila atende a dois públicos. Para quem está chegando, é um curso: comec
   \estatistica{\totalexercicios}{Exercícios}
 \end{estatisticas}
 
-\secao{Princípios da NeuroDev}
+\secao{Princípios}
 \begin{cartoes}[2]
   \cartao{Geral, com os pés no produto}{Cada conceito é ensinado de forma geral e logo depois localizado no Connect.}
   \cartao{Do porquê ao como}{Antes de implementar, entenda por que a solução existe e que problema ela resolve.}
   \cartao{Aprender fazendo}{Todo tópico termina em exercícios práticos, de preferência no código e no esquemático reais.}
-  \cartao{Documento vivo}{A apostila melhora a cada atualização. Quem estuda um tópico deixa-o melhor para o próximo.}
+  \cartao{Documento vivo}{O documento melhora a cada atualização. Quem estuda um tópico deixa-o melhor para o próximo.}
 \end{cartoes}
 
 %% ------------------------------------------------------------
-\pagina{Guia}{Como usar esta apostila}
-A NeuroDev tem cinco partes. A Parte~0 é obrigatória para todos. As Partes~1, 2 e 3 são trilhas de área, cada uma com três níveis: básico, intermediário e avançado. A Parte~4 fecha a formação e é comum a todas as áreas.
+\pagina{Guia}{Como usar este documento}
+O documento tem cinco partes. A Parte~0 é obrigatória para todos. As Partes~1, 2 e 3 são trilhas de área, cada uma com três níveis: básico, intermediário e avançado. A Parte~4 fecha a formação e é comum a todas as áreas.
 
-Também é altamente recomendável que, ao estudar um tópico, você crie o hábito de pesquisar o assunto na internet e de estudar por conta própria, orientado pelas suas necessidades. Guarde as fontes estudadas e contribua com a apostila! Nem todos temos a mesma bagagem de conhecimento: a apostila serve como guia e exposição dos tópicos mais importantes, mas o verdadeiro aprendizado vem da curiosidade, da descoberta própria e da resolução de problemas. Seja consciente e sincero consigo mesmo ao avançar nos tópicos.
+Também é altamente recomendável que, ao estudar um tópico, você crie o hábito de pesquisar o assunto na internet e de estudar por conta própria, orientado pelas suas necessidades. Guarde as fontes estudadas e contribua com o documento! Nem todos temos a mesma bagagem de conhecimento: o documento serve como guia e exposição dos tópicos mais importantes, mas o verdadeiro aprendizado vem da curiosidade, da descoberta própria e da resolução de problemas. Seja consciente e sincero consigo mesmo ao avançar nos tópicos.
 
 \par\vspace{2mm}
 \begin{tabularx}{\linewidth}{@{}L{14mm}L{50mm}L{40mm}Y@{}}\reguatopo
@@ -74,9 +98,9 @@ Também é altamente recomendável que, ao estudar um tópico, você crie o háb
 Todos os tópicos seguem o mesmo formato, para que você saiba onde encontrar cada coisa:
 
 \par\vspace{1mm}
-\begin{tabularx}{\linewidth}{@{}>{\fonttitulo\color{nro-axon}}L{36mm}Y@{}}\reguatopo
-  1.7 Título & Número e nome do tópico. O número diz a parte e a ordem sugerida. \\ \reguafina
-  Texto de abertura & O conceito explicado de forma geral, válido para qualquer projeto. \\ \reguafina
+\begin{tabularx}{\linewidth}{@{}>{\celrot}L{36mm}Y@{}}\reguatopo
+  {\fonttitulo\color{nro-axon}1.7 Título} & Número e nome do tópico. O número diz a parte e a ordem sugerida. \\ \reguafina
+  {\fonttitulo\color{nro-axon}Texto de abertura} & O conceito explicado de forma geral, válido para qualquer projeto. \\ \reguafina
   \rotulo{No Connect} & Quadro que mostra onde o conceito aparece nos repositórios e esquemáticos da equipe. \\ \reguafina
   \rotulo{Para estudar} & Sites, livros, vídeos e documentos internos. Os itens sublinhados são links. \\ \reguafina
   \rotulo{Pratique} & Exercícios para fixar, quase sempre ligados ao código ou ao hardware real. \\ \reguabase
@@ -88,7 +112,7 @@ Todos os tópicos seguem o mesmo formato, para que você saiba onde encontrar ca
   \item Use as referências para responder aos exercícios. Não é preciso ler tudo de ponta a ponta.
   \item Tente os exercícios antes de abrir o código ou pedir ajuda; anote onde travou.
   \item Leve o tópico para o repositório: encontre no código ou no esquemático o que o quadro No Connect descreve.
-  \item Marque o tópico na Ficha de progresso, no fim da apostila.
+  \item Marque o tópico na Ficha de progresso, no fim do documento.
   \item E principalmente, anote suas dúvidas e converse com seus colegas de equipe sobre elas. Discuta soluções, resolva problemas e não deixe suas incertezas quanto aos tópicos acumularem.
 \end{enumerate}
 
@@ -138,7 +162,7 @@ Para atravessar para outra área, estude os tópicos da mesma linha juntos:
 
 %% ------------------------------------------------------------
 \pagina{Estudo de caso}{O Connect em uma página}
-O Connect é a plataforma de eletroestimulação da equipe e o laboratório desta apostila. Ele tem os blocos de qualquer dispositivo médico conectado: um aplicativo, um enlace sem fio, processadores com firmware e um estágio de potência que chega ao paciente. Cada bloco vive em um repositório e é estudado em uma trilha.
+O Connect é a plataforma de eletroestimulação da equipe e o laboratório deste documento. Ele tem os blocos de qualquer dispositivo médico conectado: um aplicativo, um enlace sem fio, processadores com firmware e um estágio de potência que chega ao paciente. Cada bloco vive em um repositório e é estudado em uma trilha.
 
 \par\vspace{3mm}\noindent
 \begin{tikzpicture}[x=1mm, y=-1mm, node distance=0mm]
@@ -188,7 +212,7 @@ O Connect é a plataforma de eletroestimulação da equipe e o laboratório dest
 %% APÊNDICES
 %% ------------------------------------------------------------
 \apendice{Glossário}
-Termos que aparecem ao longo da apostila, em ordem alfabética.
+Termos que aparecem ao longo do documento, em ordem alfabética.
 \par\vspace{2mm}
 \begin{glossario}
   \input{partes/glossario}
@@ -200,13 +224,13 @@ Marque cada tópico concluído e anote a data. A ficha também ajuda quem acompa
 \fichaprogresso
 
 \apendice{Como contribuir}
-A NeuroDev é um documento vivo. Sempre que estudar um tópico, deixe-o um pouco melhor: troque um link quebrado, acrescente um vídeo que ajudou, proponha um exercício ou corrija algo que mudou no código.
+Este é um documento vivo. Sempre que estudar um tópico, deixe-o um pouco melhor: troque um link quebrado, acrescente um vídeo que ajudou, proponha um exercício ou corrija algo que mudou no código.
 
 \begin{enumerate}
-  \item Faça a mudança no documento-fonte da apostila, nunca só no PDF.
+  \item Faça a mudança no documento-fonte deste material, nunca só no PDF.
   \item Siga o modelo de tópico abaixo, mantendo a numeração da trilha.
   \item Confira se o quadro No Connect ainda corresponde ao código atual.
-  \item Registre a mudança no histórico de revisões e peça a revisão de um colega.
+  \item Registre a mudança no histórico de revisões (página \enquote{Sobre este documento}) e peça a revisão de um colega.
 \end{enumerate}
 
 \secao{Modelo de tópico}
@@ -228,14 +252,6 @@ A NeuroDev é um documento vivo. Sempre que estudar um tópico, deixe-o um pouco
 \end{tcolorbox}
 \endgroup
 
-\secao{Controle do documento}
-\controledocumento
-
-\secao{Histórico de revisões}
-\begin{historico}
-  \linharevisao{25/10/2026}{A}{Gabriel Matos Veneziano}{Primeira edição: 5 partes, 85 tópicos, glossário e ficha de progresso.}
-\end{historico}
-
-\contracapa{Apostila de formação técnica da equipe NeuroDynamics. Encontrou um erro ou tem uma sugestão? Veja \enquote{Como contribuir} e ajude com o desenvolvimento da apostila.}
+\contracapa{Documento de formação técnica da equipe NeuroDynamics. Encontrou um erro ou tem uma sugestão? Veja \enquote{Como contribuir} e ajude com o desenvolvimento do documento.}
 
 \end{document}

@@ -19,22 +19,34 @@
   numero        = 1,                      % a cópia, no fim do código
   revisao       = A,                      % A, B, C... a cada alteração
   emissor       = {Departamento de Pesquisa e Desenvolvimento},
-  tipo          = {Manual ou guia},       % o subtipo do NRO-PUB-002
-  categoria     = {Material didático},    % o rótulo da capa
+  tipo          = {Manual ou guia},       % na capa e no cabeçalho, acima do código
+  categoria     = {Material didático},    % metadado do PDF
   titulo        = {Título da apostila},
   subtitulo     = {Uma frase dizendo para quem é e o que ensina.},
-  eixos         = {Área um\hspace{9mm}Área dois\hspace{9mm}Área três},
   data          = {27 de outubro de 2026},
+  autor         = {Nome de quem escreveu},  % na capa, em Autoria
   redator       = {Nome de quem escreveu},
   revisor       = {},
   aprovador     = {},
   rotuloproduto = {No produto},           % o rótulo do quadro de aplicação
-  autoria       = {NeuroDynamics},
+  equipe        = {NeuroDynamics},
 }
 
 \begin{document}
 
 \capa
+
+%% folha de controle: objetivo, escopo, controle do documento e histórico de revisões
+\pagina{Controle}{Sobre este documento}
+\secao{Objetivo e escopo}
+O que o documento ensina, para quem e até onde vai.
+\secao{Controle do documento}
+\controledocumento
+\secao{Histórico de revisões}
+\begin{historico}
+  \linharevisao{27/10/2026}{A}{Nome}{Primeira edição.}
+\end{historico}
+
 \sumario
 
 %% ---------- páginas de introdução ----------
@@ -112,13 +124,6 @@ Texto.
 Marque cada tópico concluído e anote a data.
 \par\vspace{2mm}
 \fichaprogresso
-
-\apendice{Controle do documento}
-\controledocumento
-\secao{Histórico de revisões}
-\begin{historico}
-  \linharevisao{27/10/2026}{A}{Nome}{Primeira edição.}
-\end{historico}
 
 \contracapa{Uma frase de fechamento: onde reportar erros e como contribuir.}
 

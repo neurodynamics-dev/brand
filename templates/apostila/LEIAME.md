@@ -2,7 +2,7 @@
 
 Template de apostilas, trilhas de formação e guias de estudo da NeuroDynamics, no modelo de documento controlado (NRO-PUB-002) e no modo operacional do design system: Cortex chapado nas capas, Archivo nos títulos, Instrument Sans no texto, IBM Plex Mono só em códigos. Derivado do template de AACC (`../aacc/`).
 
-O exemplo completo é o **NRO-PRO-014-1, General onboarding: projects practical technologies introduction** (a apostila NeuroDev, 67 páginas, 5 partes, 85 tópicos).
+O exemplo completo é o **NRO-PRO-014-1, General onboarding: Projects practical technologies introduction** (68 páginas, 5 partes, 85 tópicos).
 
 ## Arquivos
 
@@ -28,8 +28,9 @@ O sumário, os totais (partes, tópicos, exercícios), os níveis na capa de cad
 
 ## Como escrever
 
-1. Peça o código ao controle de documentos (NRO-PUB-001) e preencha `\documento{...}`. O código sai como `NRO-XXX-000-N` e a revisão (A, B, C) no cabeçalho, como pede o NRO-PUB-002.
-2. Estrutura de estudo, tudo numerado sozinho:
+1. Na capa, `tipo` vai no canto superior direito (acima do código), `titulo` é o destaque, `emissor` aparece acima do título e `autor`, `data` e `revisao` formam a ficha logo abaixo da síntese (`subtitulo`). A primeira folha interna, "Sobre este documento", reúne objetivo, escopo, controle do documento e histórico de revisões.
+2. Peça o código ao controle de documentos (NRO-PUB-001) e preencha `\documento{...}`. O código sai como `NRO-XXX-000-N` e a revisão (A, B, C) no cabeçalho, como pede o NRO-PUB-002.
+3. Estrutura de estudo, tudo numerado sozinho:
 
 | Comando | Faz |
 |---|---|
@@ -41,8 +42,8 @@ O sumário, os totais (partes, tópicos, exercícios), os níveis na capa de cad
 | `nota`, `atencao`, `definicao`, `\cartao`, `estatisticas` | Quadros e números em destaque |
 | `glossario` com `\termo`, `\fichaprogresso`, `\controledocumento`, `historico`, `\contracapa` | O fecho do documento |
 
-3. Tabelas: `tabularx` com `\reguatopo`, `\reguameio`, `\reguafina`, `\reguabase` e `\cab{}` (o DataTable do design system, sem zebra). Diagramas: estilos de TikZ `nro bloco`, `nro claro`, `nro medio`, `nro forte`, `nro seta`, `nro ponte` (veja o mapa das trilhas no exemplo).
-4. `\iniciarpartes{1}` faz a primeira parte ser a 1 (o padrão é a Parte 0).
+4. Tabelas: `tabularx` com `\reguatopo`, `\reguameio`, `\reguafina`, `\reguabase` e `\cab{}` (o DataTable do design system, sem zebra). Diagramas: estilos de TikZ `nro bloco`, `nro claro`, `nro medio`, `nro forte`, `nro seta`, `nro ponte` (veja o mapa das trilhas no exemplo).
+5. `\iniciarpartes{1}` faz a primeira parte ser a 1 (o padrão é a Parte 0).
 
 ## Regras da marca que o template já cumpre
 
@@ -50,5 +51,6 @@ Texto alinhado à esquerda; títulos em caixa de frase; rótulos em Archivo 600 
 
 ## Observações
 
+- Os exercícios se numeram pelo tópico (0.1.1, 0.1.2) para poderem ser citados.
 - A numeração `-N` do código (NRO-PRO-014-**1**) é a chave `numero`.
 - O PDF do exemplo foi gerado sem revisor e aprovador: o quadro de controle mostra "a preencher" até a Diretoria registrar os nomes no NRO-PUB-001.

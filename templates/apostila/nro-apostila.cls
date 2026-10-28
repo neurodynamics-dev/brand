@@ -147,7 +147,8 @@
   revisor/.store in=\nro@revisor,
   aprovador/.store in=\nro@aprovador,
   rotuloproduto/.store in=\nro@rotuloproduto,
-  autoria/.store in=\nro@autoria,
+  autor/.store in=\nro@autor,
+  equipe/.store in=\nro@equipe,
 }
 \newcommand\nro@codigobase{NRO-XXX-000}
 \newcommand\nro@numero{}
@@ -164,12 +165,13 @@
 \newcommand\nro@revisor{}
 \newcommand\nro@aprovador{}
 \newcommand\nro@rotuloproduto{No produto}
-\newcommand\nro@autoria{NeuroDynamics}
+\newcommand\nro@autor{}
+\newcommand\nro@equipe{NeuroDynamics}
 \NewDocumentCommand\documento{+m}{\pgfkeys{/nro/.cd,#1}}
 %% o código com o número da cópia (NRO-PRO-014-1), que nunca quebra
 \newcommand\nro@codigo{\nro@codigobase\ifx\nro@numero\@empty\else-\nro@numero\fi}
 \DeclareRobustCommand\cod[1]{\mbox{\nro@rotulomedio #1}}
-\newcommand\nro@tituloheader{\ifx\nro@titulocurto\@empty\nro@titulo@doc\else\nro@titulocurto\fi}
+\newcommand\nro@tituloheader{\ifx\nro@titulocurto\@empty\nro@tipo: \nro@titulo@doc\else\nro@titulocurto\fi}
 \newcommand\codigodocumento{\cod{\nro@codigo}}
 
 %% ------------------------------------------------------------
@@ -199,7 +201,7 @@
 \hypersetup{colorlinks=true, linkcolor=nro-tinta, urlcolor=nro-axon, citecolor=nro-axon,
   filecolor=nro-axon, bookmarksnumbered=false, pdfcreator={nro-apostila.cls, NeuroDynamics}}
 \AtBeginDocument{%
-  \hypersetup{pdftitle={\nro@codigo\space\nro@titulo@doc}, pdfauthor={\nro@autoria},
+  \hypersetup{pdftitle={\nro@codigo\space\nro@titulo@doc}, pdfauthor={\ifx\nro@autor\@empty\nro@equipe\else\nro@autor\fi},
     pdfsubject={\nro@categoria, Rev.~\nro@revisao}, pdfkeywords={\nro@codigo, NeuroDynamics}}}
 \urlstyle{same}
 %% o código de verdade: Plex Mono, o único uso da fonte monoespaçada
@@ -318,23 +320,25 @@
 \newcommand\nro@fundocapa{%
   \put(0,-297){\color{nro-cortex}\rule{210mm}{297mm}}%
   \put(0,0){\nro@pontos{140}{28}}%
-  \put(0,0){\nro@ondas{0}{236}{210}{26}{14}}%
+  \put(0,0){\nro@ondas{0}{252}{210}{22}{14}}%
   \put(22,-31){\includegraphics[height=7.4mm]{\nro@logo{branco}}}%
   % o tipo do documento e o código, à direita, na mesma fonte e tamanho (regra de documento controlado)
   \put(188,-25){\llap{\nro@corpo{9}\color{nro-cortex-claro}\nro@tipo}}%
   \put(188,-30){\llap{\nro@corpo{9}\color{nro-cortex-claro}\nro@codigo}}%
-  \put(22,-103){\color{nro-synapse}\rule{15mm}{0.9mm}}%
-  \put(22,-112){\nro@rotulofonte\nro@corpo{8.6}\color{nro-cortex-medio}\MakeUppercase{\nro@categoria}}%
-  \put(22,-129){\parbox[t]{166mm}{\RaggedRight\nro@display\fontsize{35}{38.5}\selectfont\color{white}\hyphenpenalty=10000\nro@titulo@doc}}%
-  \ifx\nro@subtitulo\@empty\else
-    \put(22,-181){\parbox[t]{128mm}{\RaggedRight\nro@corpo{12}\linespread{1.22}\selectfont\color{nro-cortex-claro}\nro@subtitulo}}\fi
-  \ifx\nro@eixos\@empty\else
-    \put(22,-209){\parbox[t]{166mm}{\RaggedRight\nro@rotulofonte\nro@corpo{7.2}\color{nro-cortex-medio}\nro@eixos}}\fi
-  \put(22,-278){\nro@capaficha{Departamento}{\nro@emissor}}%
-  \put(92,-278){\nro@capaficha{Data}{\nro@data}}%
-  \put(142,-278){\nro@capaficha{Revisão}{\nro@revisao}}}
+  % o bloco de título: o emissor, o título em destaque, a síntese e a ficha do documento
+  \put(22,-92){\parbox[t]{166mm}{\RaggedRight
+    {\color{nro-synapse}\rule{15mm}{0.9mm}}\par\vspace{5.5mm}%
+    {\nro@rotulofonte\nro@corpo{8.6}\color{nro-cortex-medio}\MakeUppercase{\nro@emissor}}\par\vspace{5mm}%
+    {\nro@display\fontsize{44}{45}\selectfont\color{white}\hyphenpenalty=10000 \nro@titulo@doc\par}%
+    \ifx\nro@subtitulo\@empty\else\vspace{7mm}%
+      {\parbox{136mm}{\RaggedRight\nro@corpo{12}\linespread{1.2}\selectfont\color{nro-cortex-claro}\nro@subtitulo}}\par\fi
+    \vspace{11mm}%
+    {\color{nro-axon}\rule{166mm}{0.4pt}}\par\vspace{4mm}%
+    \nro@capaficha{Autoria}{\nro@autor}\hfill
+    \nro@capaficha{Data}{\nro@data}\hfill
+    \nro@capaficha{Revisão}{\nro@revisao}}}}
 \newcommand\nro@capaficha[2]{%
-  \begin{minipage}[t]{46mm}\RaggedRight
+  \begin{minipage}[t]{52mm}\RaggedRight
     {\nro@corpo{8}\color{nro-cortex-medio}#1}\par\vspace{1mm}%
     {\nro@rotulomedio\nro@corpo{9.2}\color{white}#2}\par
   \end{minipage}}
@@ -450,7 +454,7 @@
 %% \naocontarexercicios: os exercícios seguintes (de um modelo, por exemplo) não entram no total
 \newcommand\naocontarexercicios{\nro@contarfalse}
 \newlist{nro@pratique}{enumerate}{1}
-\setlist[nro@pratique]{label={\nro@rotulomedio\color{nro-axon}\arabic*.}, leftmargin=6mm, itemsep=2pt, topsep=1pt, parsep=0pt}
+\setlist[nro@pratique]{label={\nro@rotulomedio\color{nro-axon}\thenrotp.\arabic*}, leftmargin=10mm, itemsep=2pt, topsep=1pt, parsep=0pt}
 \NewDocumentEnvironment{pratique}{}{\nro@rotbloco{Pratique}\begin{nro@pratique}\nro@corpo{9.3}}
   {\ifnro@contar\addtocounter{nro@nex}{\value{nro@pratiquei}}\fi\end{nro@pratique}\vspace{4pt}}
 %% VOCÊ VAI APRENDER A: os objetivos, com ✓
@@ -631,7 +635,7 @@
   \clearpage\gdef\nro@pagina{contra}\thispagestyle{empty}%
   \vspace*{58mm}\noindent
   {\color{nro-synapse}\rule{15mm}{0.9mm}}\par\vspace{6mm}%
-  {\nro@display\fontsize{26}{29}\selectfont\color{white}\nro@autoria\par}\vspace{3mm}%
+  {\nro@display\fontsize{26}{29}\selectfont\color{white}\nro@equipe\par}\vspace{3mm}%
   \parbox{128mm}{\RaggedRight\nro@corpo{11.2}\linespread{1.2}\selectfont\color{nro-cortex-claro}#1}\par
   \clearpage}
 
