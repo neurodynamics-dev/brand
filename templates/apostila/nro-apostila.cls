@@ -151,27 +151,27 @@
   equipe/.store in=\nro@equipe,
 }
 \newcommand\nro@codigobase{NRO-XXX-000}
-\newcommand\nro@numero{}
+\def\nro@numero{}
 \newcommand\nro@revisao{A}
 \newcommand\nro@emissor{Departamento}
 \newcommand\nro@tipo{Manual ou guia}
 \newcommand\nro@categoria{Material didático}
 \newcommand\nro@titulo@doc{Título do material}
-\newcommand\nro@titulocurto{}
-\newcommand\nro@subtitulo{}
-\newcommand\nro@eixos{}
-\newcommand\nro@data{}
-\newcommand\nro@redator{}
-\newcommand\nro@revisor{}
-\newcommand\nro@aprovador{}
+\def\nro@titulocurto{}
+\def\nro@subtitulo{}
+\def\nro@eixos{}
+\def\nro@data{}
+\def\nro@redator{}
+\def\nro@revisor{}
+\def\nro@aprovador{}
 \newcommand\nro@rotuloproduto{No produto}
-\newcommand\nro@autor{}
+\def\nro@autor{}
 \newcommand\nro@equipe{NeuroDynamics}
 \NewDocumentCommand\documento{+m}{\pgfkeys{/nro/.cd,#1}}
 %% o código com o número da cópia (NRO-PRO-014-1), que nunca quebra
 \newcommand\nro@codigo{\nro@codigobase\ifx\nro@numero\@empty\else-\nro@numero\fi}
 \DeclareRobustCommand\cod[1]{\mbox{\nro@rotulomedio #1}}
-\newcommand\nro@tituloheader{\ifx\nro@titulocurto\@empty\nro@tipo: \nro@titulo@doc\else\nro@titulocurto\fi}
+\newcommand\nro@tituloheader{\ifx\nro@titulocurto\@empty\nro@tipo\else\nro@titulocurto\fi}
 \newcommand\codigodocumento{\cod{\nro@codigo}}
 
 %% ------------------------------------------------------------
@@ -370,11 +370,11 @@
 \newcommand\nro@kicker[1]{\par\noindent{\color{nro-axon}\nro@rot{#1}}\par}
 \newcommand\nro@regua{\par\vspace{5mm}\noindent{\color{nro-axon}\rule{14mm}{1.2mm}}\par\vspace{5mm}}
 %% \pagina{rótulo}{Título}: folha nova, no sumário
-\NewDocumentCommand\pagina{m m}{%
+\NewDocumentCommand\pagina{s m m}{%
   \clearpage\phantomsection
-  \addcontentsline{toc}{nropagina}{#2}%
-  \nro@kicker{#1}\vspace{2.5mm}%
-  {\nro@display\fontsize{29}{33}\selectfont\color{nro-cortex}\RaggedRight\hyphenpenalty=10000 #2\par}%
+  \IfBooleanF{#1}{\addcontentsline{toc}{nropagina}{#3}}%
+  \nro@kicker{#2}\vspace{2.5mm}%
+  {\nro@display\fontsize{29}{33}\selectfont\color{nro-cortex}\RaggedRight\hyphenpenalty=10000 #3\par}%
   \nro@regua}
 \NewDocumentCommand\apendice{m}{\pagina{Apêndice}{#1}}
 %% o parágrafo de abertura, maior
@@ -387,22 +387,22 @@
 \renewcommand\numberline[1]{\hb@xt@\@tempdima{\nro@titulo\color{nro-axon}\nro@corpo{8.4}#1\hfil}}
 \renewcommand\@pnumwidth{9mm}
 \renewcommand\@dotsep{2.2}
-\newcommand\l@nropagina[2]{\par\addvspace{9pt plus 1pt}%
+\newcommand\l@nropagina[2]{\par\addvspace{7pt plus 1pt}%
   {\parindent\z@ \rightskip\@tocrmarg \parfillskip-\rightskip \leavevmode
    {\nro@titulo\nro@corpo{11.4}\color{nro-cortex}#1}\nobreak\hfil
    \nobreak\hb@xt@\@pnumwidth{\hss{\nro@titulo\nro@corpo{10}\color{nro-axon}#2}}\par}}
-\newcommand\l@nroparte[2]{\par\addvspace{11pt plus 2pt}%
+\newcommand\l@nroparte[2]{\par\addvspace{8pt plus 1pt}%
   {\parindent\z@ \rightskip\@tocrmarg \parfillskip-\rightskip \leavevmode
    {\nro@titulo\nro@corpo{11.4}\color{nro-cortex}#1}\nobreak\hfil
    \nobreak\hb@xt@\@pnumwidth{\hss{\nro@titulo\nro@corpo{10}\color{nro-axon}#2}}\par}\addvspace{1pt}}
 \newcommand\l@nrotopico[2]{{\nro@corpo{9}\color{nro-tinta}%
-  \@dottedtocline{2}{0mm}{9mm}{#1}{{\nro@rotulomedio\color{nro-cinza}#2}}}}
+  \@dottedtocline{2}{0mm}{9mm}{#1}{{\nro@titulo\color{nro-axon}\nro@corpo{9}#2}}}}
 \newcommand*\toclevel@nropagina{0}
 \newcommand*\toclevel@nroparte{0}
 \newcommand*\toclevel@nrotopico{1}
 \renewcommand\@tocrmarg{12mm}
 \newcommand\sumario{%
-  \pagina{Conteúdo}{Sumário}%
+  \pagina*{Conteúdo}{Sumário}%
   \vspace{-2mm}{\setlength\parskip{1.5pt}\@starttoc{toc}}}
 
 %% ------------------------------------------------------------
