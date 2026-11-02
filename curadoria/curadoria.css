@@ -3,9 +3,9 @@
    Tela única, celular primeiro: a foto no centro, dentro de uma
    peça da marca (Feed, Story, Banda, Site), e as decisões embaixo.
    Interface no registro expressivo (Void, Painel, Synapse no CTA
-   único: Aprovar). As peças seguem as regras de aplicação: foto
-   retangular ou com raio de 18px, sem filtro; gradiente só em
-   Cortex; famílias secundárias sempre chapadas.
+   único: Aprovar). Tudo chapado: nenhum degradê, brilho, véu ou
+   desfoque, nem na tela nem nas peças. Foto retangular ou com raio
+   de 18px, sem filtro; cada superfície numa família, em cor sólida.
    ============================================================ */
 
 html,body{height:100%}
@@ -31,7 +31,7 @@ body{min-height:0;overflow:hidden;overscroll-behavior:none}
 .topo-badge{position:absolute;top:5px;right:5px;min-width:17px;height:17px;padding:0 4px;border-radius:var(--r-badge);
   display:grid;place-items:center;background:var(--ink);color:var(--bg);font:600 10px/1 var(--fm)}
 .barra{height:3px;border-radius:3px;background:rgba(var(--tom),.06);overflow:hidden}
-.barra-fill{height:100%;width:0;background:linear-gradient(90deg,var(--axon),var(--syn));transition:width var(--t) var(--ease)}
+.barra-fill{height:100%;width:0;background:var(--syn);transition:width var(--t) var(--ease)}
 
 /* ---------- palco e cartões ------------------------------- */
 .palco{flex:1;min-height:0;position:relative;padding-block:14px}
@@ -180,38 +180,25 @@ body{min-height:0;overflow:hidden;overscroll-behavior:none}
 .eb{display:inline-flex;align-items:center;font-family:var(--fd);font-weight:600;text-transform:uppercase;letter-spacing:.16em;line-height:1}
 .eb i{flex:none;background:var(--synapse)}
 
-/* fundo das peças escuras: grade técnica e o blob de Axon */
-.fundo-cx{position:absolute;inset:0;
-  background:radial-gradient(95% 42% at 88% 0%,color-mix(in srgb,var(--axon) 62%,transparent),transparent 72%)}
-.fundo-cx::after{content:'';position:absolute;inset:0;
+/* fundo das peças escuras: Void sólido com a grade técnica em linhas finas */
+.fundo-grade{position:absolute;inset:0;background:var(--void)}
+.fundo-grade::after{content:'';position:absolute;inset:0;
   background-image:linear-gradient(color-mix(in srgb,var(--paper) 4.5%,transparent) 1px,transparent 1px),
                    linear-gradient(90deg,color-mix(in srgb,var(--paper) 4.5%,transparent) 1px,transparent 1px);
   background-size:6.66cqw 6.66cqw}
 
-/* ---- Feed 4:5, Cortex: foto sangrada e véu em gradiente ---- */
-.enq-feed .moldura{inset:0}
-.enq-feed .veu-cx{position:absolute;inset:0;
-  background:linear-gradient(to bottom,color-mix(in srgb,var(--cortex-dark) 80%,transparent) 0%,transparent 26%),
-             linear-gradient(to top,color-mix(in srgb,var(--cortex-dark) 97%,transparent) 0%,color-mix(in srgb,var(--cortex-dark) 84%,transparent) 34%,transparent 66%)}
-.enq-feed .a-topo{position:absolute;left:8cqw;right:8cqw;top:8cqw;display:flex;align-items:center;justify-content:space-between;gap:4cqw}
-.enq-feed .logo{width:27cqw;color:var(--paper)}
-.enq-feed .eb{gap:1.6cqw;font-size:2.4cqw;color:var(--pia-light)}
-.enq-feed .eb i{width:1.5cqw;height:1.5cqw}
-.enq-feed .a-baixo{position:absolute;left:8cqw;right:8cqw;bottom:8cqw}
-.enq-feed h2{font-size:7.4cqw;color:var(--paper)}
-.enq-feed p{margin-top:2.6cqw;font-size:3.1cqw;color:var(--pia-medium);max-width:74cqw}
-.enq-feed .a-pe{margin-top:5cqw;padding-top:3.4cqw;border-top:1px solid color-mix(in srgb,var(--paper) 16%,transparent);
-  display:flex;justify-content:space-between;gap:4cqw;font:500 2.7cqw/1.2 var(--f);color:var(--pia-medium)}
-
-/* ---- Feed 4:5, família: foto em cima e faixa chapada ------- */
-.enq-feed.chapado .moldura{inset:0 0 auto 0;height:57%}
-.enq-feed.chapado .faixa{position:absolute;left:0;right:0;bottom:0;height:43%;background:var(--fam-dark);
+/* ---- Feed 4:5: foto em cima e faixa sólida da família ----- */
+.enq-feed .moldura{inset:0 0 auto 0;height:57%}
+.enq-feed .faixa{position:absolute;left:0;right:0;bottom:0;height:43%;background:var(--fam-dark);
   padding:6.4cqw 8cqw 7cqw;display:flex;flex-direction:column}
-.enq-feed.chapado .a-topo{position:static;margin-bottom:auto}
-.enq-feed.chapado .eb{color:var(--fam-light)}
-.enq-feed.chapado .eb i{background:var(--fam-medium)}
-.enq-feed.chapado h2{font-size:6.3cqw;margin-top:4cqw}
-.enq-feed.chapado .a-pe{margin-top:4cqw;padding-top:3cqw;border-top-color:color-mix(in srgb,var(--fam-light) 22%,transparent);color:var(--fam-medium)}
+.enq-feed .a-topo{display:flex;align-items:center;justify-content:space-between;gap:4cqw;margin-bottom:auto}
+.enq-feed .logo{width:27cqw;color:var(--paper)}
+.enq-feed .eb{gap:1.6cqw;font-size:2.4cqw;color:var(--fam-light)}
+.enq-feed .eb i{width:1.5cqw;height:1.5cqw;background:var(--fam-medium)}
+.enq-feed.f-cortex .eb i{background:var(--synapse)}
+.enq-feed h2{font-size:6.3cqw;margin-top:4cqw;color:var(--paper)}
+.enq-feed .a-pe{margin-top:4cqw;padding-top:3cqw;border-top:1px solid var(--fam-primary);
+  display:flex;justify-content:space-between;gap:4cqw;font:500 2.7cqw/1.2 var(--f);color:var(--fam-medium)}
 
 /* ---- Story 9:16: o modelo de story da marca ----------------- */
 .enq-story .st-topo{position:absolute;left:9cqw;right:9cqw;top:11cqw;display:flex;align-items:center;justify-content:space-between}
@@ -261,6 +248,10 @@ body{min-height:0;overflow:hidden;overscroll-behavior:none}
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .enq-site .si-link{display:inline-block;margin-top:3.4cqw;font:600 2.9cqw/1 var(--fd);color:var(--synapse)}
 .enq-site:not(.f-cortex) .si-link{color:var(--fam-medium)}
+
+/* sem desfoque nem brilho: véu sólido atrás das folhas, botão sem halo */
+.veu{background:rgba(var(--veu-rgb),.8);backdrop-filter:none;-webkit-backdrop-filter:none}
+.btn.solid:hover{box-shadow:none}
 
 /* aviso logo abaixo do topo, sem cobrir as decisões */
 .nd-toast{top:calc(env(safe-area-inset-top,0px) + 70px);bottom:auto;pointer-events:none}

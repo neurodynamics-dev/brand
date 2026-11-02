@@ -15,12 +15,12 @@ No celular, cada foto aparece dentro de uma peça da marca. Quem avalia arrasta 
 
 ## Enquadramentos
 
-As quatro peças seguem as regras de aplicação: foto retangular ou com raio de 18px, sem filtro nem duotone; gradiente só em Cortex; famílias secundárias sempre chapadas; texto sobre o primary da família no dark dela, exceto Cortex, Retina e Nexo, que levam branco.
+Tudo é chapado: nenhum degradê, brilho, véu ou desfoque, nem nas peças nem na tela da curadoria. A foto é retangular ou tem raio de 18px, sem filtro nem duotone; cada superfície usa uma família em cor sólida; o texto sobre o primary da família vai no dark dela, exceto em Cortex, Retina e Nexo, que levam branco.
 
 | Peça | Proporção | O que testa |
 | --- | --- | --- |
-| Feed | 4:5 | Em Cortex, a foto sangrada com o véu em gradiente. Nas outras famílias, a foto em cima e a faixa chapada no dark da família. |
-| Story | 9:16 | O modelo de story da marca: Void, grade técnica, foto com raio de 18px e o botão (Synapse em Cortex; medium da família nas outras). |
+| Feed | 4:5 | A foto em cima e a faixa sólida no dark da família (em Cortex, o Cortex escuro com o marcador em Synapse). |
+| Story | 9:16 | O modelo de story da marca, em Void sólido com a grade técnica: foto com raio de 18px e o botão (Synapse em Cortex; medium da família nas outras). |
 | Banda | 1:1 | A foto sobre uma banda de família, com o símbolo grande e discreto na borda direita. |
 | Site | 4:5 | O cartão de projeto do site institucional. |
 

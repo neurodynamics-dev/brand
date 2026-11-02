@@ -164,18 +164,15 @@
     const pe = '<div class="a-pe"><span>LABBIO, UFMG</span><span>neurodynamics.dev</span></div>';
     const cls = `arte enq-${enq} f-${fam}`;
 
-    if (enq === 'feed' && fam === 'cortex') return `<div class="${cls}">${foto}<div class="veu-cx"></div>
-      <div class="a-topo">${logo}${eb}</div>
-      <div class="a-baixo"><h2>${esc(T.titulo)}</h2><p>${esc(T.sub)}</p>${pe}</div></div>`;
-    if (enq === 'feed') return `<div class="${cls} chapado">${foto}
+    if (enq === 'feed') return `<div class="${cls}">${foto}
       <div class="faixa"><div class="a-topo">${logo}${eb}</div><h2>${esc(T.titulo)}</h2>${pe}</div></div>`;
-    if (enq === 'story') return `<div class="${cls}"><div class="fundo-cx"></div>
+    if (enq === 'story') return `<div class="${cls}"><div class="fundo-grade"></div>
       <div class="st-topo">${logo}<span class="st-data">2026</span></div>${foto}
       <div class="st-texto">${eb}<h2>${esc(T.titulo)}</h2><p>${esc(T.sub)}</p></div>
       <span class="st-cta">Conheça o trabalho</span></div>`;
     if (enq === 'banda') return `<div class="${cls}">${foto}
       <div class="bd-faixa"><span class="bd-icone"></span><div class="bd-linha">${eb}${logo}</div><h2>${esc(T.titulo)}</h2></div></div>`;
-    return `<div class="${cls}"><div class="fundo-cx"></div>
+    return `<div class="${cls}"><div class="fundo-grade"></div>
       <div class="si-topo">${logo}<span class="si-menu" aria-hidden="true"><i></i><i></i><i></i></span></div>
       <div class="si-cartao">${foto}<div class="si-corpo"><span class="si-tag"><i></i>${esc(T.nome)}</span>
       <h2>${esc(T.titulo)}</h2><p>${esc(T.sub)}</p><span class="si-link">Ver projeto</span></div></div></div>`;
