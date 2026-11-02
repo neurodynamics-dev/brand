@@ -2,6 +2,8 @@
 
 Site estático em `brand.neurodynamics.dev`, com páginas independentes: `/marca`, `/cores`, `/tipografia`, `/escrita`, `/elementos`, `/aplicacoes` e `/galeria`. A página inicial redireciona os hashes anteriores. Assinaturas, materiais controlados e ferramentas de criação ficam em **SOMA › Marca**.
 
+Fora da navegação, `/curadoria/` é a campanha de seleção de fotos para a galeria: a foto aparece dentro das peças da marca e a pessoa aprova ou descarta arrastando o cartão. Ver [`curadoria/LEIAME.md`](curadoria/LEIAME.md).
+
 ## Desenvolvimento
 
 ```sh
