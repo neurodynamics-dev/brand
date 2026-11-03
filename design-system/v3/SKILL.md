@@ -10,3 +10,4 @@ If the user invokes this skill without any other guidance, ask them what they wa
 Choose the register first: expressive (dark, grid, glow) for public/social/internal; formal (paper, serif, Cortex rule) for documents, reports, presentations, invitations, certificates.
 
 For any screen or interface work, read interface-rules.md first; it carries the rules and points to the card templates to copy from.
+For photos, use only the team's photo bank (the `banco-de-fotos` skill in `.claude/skills/`, or `node scripts/fotos.mjs` from the repository root): approved photos with theme, tags, author and licence, downloaded at the size the piece needs. The team prefers flat pieces: no gradients, glows or blur, even where the expressive templates still have them.

@@ -32,6 +32,17 @@ As fontes dos renderizadores vêm das dependências locais `@fontsource`; não �
 
 Não há backend nem login no manual público. Documentos controlados continuam sujeitos à permissão de Arquivos no SOMA. A versão publicada deve acompanhar a atualização do portal para que os downloads novos estejam disponíveis.
 
+## Banco de fotos
+
+As fotos da marca moram no banco de fotos do SOMA: a gestão do Studio escolhe o que entra (Studio › Curadoria de fotos) e a equipe vê tudo em Marca › Galeria de fotos. Para peças, wallpapers e banners, leia o banco daqui:
+
+```sh
+node scripts/fotos.mjs --tema hospital               # lista
+node scripts/fotos.mjs --baixar saida/ --largura 2560 --tag UTI
+```
+
+O script usa a função pública `fotos_banco_publico` do SOMA (2.25.0), só com as fotos aprovadas e os campos públicos, e grava um `creditos.json` junto das imagens. As regras de uso (chapado, sem filtro, crédito, tamanhos) estão na skill `.claude/skills/banco-de-fotos/`, que o Claude lê ao criar peças.
+
 ## Relatório de AACC (LaTeX)
 
 A pasta [`templates/aacc/`](templates/aacc/) é o template com que um membro ou egresso pede ao Colegiado do curso o aproveitamento de Atividades Acadêmicas Curriculares Complementares, pela Resolução nº 02/2019 da Congregação da Escola de Engenharia (ou pela norma de outro Colegiado), no desenho do relatório formal: a classe `nro-aacc.cls`, o relatório que a pessoa edita, um modelo por tipo de atividade, as regras da equipe em `nro/` e um exemplo fictício completo. O pedido começa no SOMA (Serviços, Aproveitamento de AACC), que gera o ZIP com os dados da pessoa, conduz as aprovações e devolve o PDF com a folha de aprovação autenticável. O passo a passo está no [`LEIAME.md`](templates/aacc/LEIAME.md); a peça está em `/aplicacoes/relatorio-aacc`.
