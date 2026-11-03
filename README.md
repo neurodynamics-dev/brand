@@ -32,16 +32,16 @@ As fontes dos renderizadores vêm das dependências locais `@fontsource`; não �
 
 Não há backend nem login no manual público. Documentos controlados continuam sujeitos à permissão de Arquivos no SOMA. A versão publicada deve acompanhar a atualização do portal para que os downloads novos estejam disponíveis.
 
-## Banco de fotos
+## Banco de imagens
 
-As fotos da marca moram no banco de fotos do SOMA: a gestão do Studio escolhe o que entra (Studio › Curadoria de fotos) e a equipe vê tudo em Marca › Galeria de fotos. Para peças, wallpapers e banners, leia o banco daqui:
+As fotos da marca moram no banco de imagens do SOMA (Studio › Banco de imagens): o admin põe fotos novas, a gestão do Studio aprova uma de cada vez, vendo a foto nas peças da marca, e a equipe vê as aprovadas em Marca › Galeria de fotos. Para peças, wallpapers e banners, leia o banco daqui:
 
 ```sh
 node scripts/fotos.mjs --tema hospital               # lista
 node scripts/fotos.mjs --baixar saida/ --largura 2560 --tag UTI
 ```
 
-O script usa a função pública `fotos_banco_publico` do SOMA (2.25.0), só com as fotos aprovadas e os campos públicos, e grava um `creditos.json` junto das imagens. As regras de uso (chapado, sem filtro, crédito, tamanhos) estão na skill `.claude/skills/banco-de-fotos/`, que o Claude lê ao criar peças.
+O script usa a função pública `fotos_banco_publico` do SOMA (2.25.0), só com as fotos aprovadas e os campos públicos, e grava um `creditos.json` junto das imagens. As regras de uso (chapado, sem filtro, crédito, tamanhos) estão na skill `.claude/skills/banco-de-imagens/`, que o Claude lê ao criar peças.
 
 ## Relatório de AACC (LaTeX)
 

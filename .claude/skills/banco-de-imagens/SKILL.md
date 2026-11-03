@@ -1,14 +1,15 @@
 ---
-name: banco-de-fotos
-description: Use ao criar artes, publicações, wallpapers, banners do LinkedIn, capas, apresentações ou qualquer asset da NeuroDynamics que leve foto. Busca as fotos que a equipe pôs no banco de fotos da marca (SOMA), com tema, tags, autor e licença, e baixa as imagens no tamanho certo.
+name: banco-de-imagens
+description: Use ao criar artes, publicações, wallpapers, banners do LinkedIn, capas, apresentações ou qualquer asset da NeuroDynamics que leve foto. Busca as fotos aprovadas no banco de imagens da marca (SOMA), com tema, tags, autor e licença, e baixa as imagens no tamanho certo.
 ---
 
-# O banco de fotos da marca
+# O banco de imagens da marca
 
-As fotos da NeuroDynamics moram no **banco de fotos do SOMA**. A gestão do
-Studio escolhe o que entra (Studio › Curadoria de fotos) e a equipe vê tudo em
-Marca › Galeria de fotos. Para peças da marca, use **só fotos do banco**. Não
-busque fotos fora dele sem a pessoa pedir.
+As fotos da NeuroDynamics moram no **banco de imagens do SOMA** (Studio ›
+Banco de imagens). O admin põe fotos novas, a gestão do Studio aprova uma de
+cada vez, vendo cada foto dentro das peças da marca, e a equipe vê as
+aprovadas em Marca › Galeria de fotos. Para peças da marca, use **só fotos do
+banco**. Não busque fotos fora dele sem a pessoa pedir.
 
 ## Como ler o banco
 
@@ -40,10 +41,10 @@ A função devolve só as fotos aprovadas e só os campos públicos: `banco`,
 `licenca`, `enquadramento` e `paleta`.
 
 - O banco muda. Consulte na hora de criar e não guarde a lista como verdade.
-- Se a função não responder (antes da migração 2.25.0 do SOMA no Supabase),
+- Se a função não responder (antes das migrações 2.25.0 e 2.26.0 do SOMA no Supabase),
   peça à pessoa a lista de *Copiar a lista*, em Marca › Galeria de fotos.
 - Foto sem `imagem` ainda não tem o endereço do CDN e fica de fora. Quem tem a
-  chave do banco resolve isso abrindo a foto na curadoria do SOMA.
+  chave do banco resolve isso no banco de imagens do SOMA.
 
 ## Como usar as fotos
 
@@ -51,6 +52,9 @@ A função devolve só as fotos aprovadas e só os campos públicos: `banco`,
   degradê, brilho, desfoque nem halo. Texto sobre foto ganha um véu uniforme
   ou uma faixa sólida, nunca um degradê. Vale também para os modelos
   expressivos de `templates/`, que ainda têm brilho.
+- **A peça da aprovação.** `enquadramento` (feed, story, banda, site) e
+  `paleta` dizem em que peça e em que família a foto foi aprovada. Prefira
+  usá-la num formato e numa família parecidos.
 - **A foto como está.** Retangular ou com raio de 18px, sem filtro, sem
   duotone, sem recolorir. Recorte com `object-fit: cover`, nunca estique.
 - **Uma família por superfície.** A `familia` da foto sugere a família da

@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 /* ============================================================
-   O banco de fotos da marca, para quem cria peças (gente e o Claude).
+   O banco de imagens da marca, para quem cria peças (gente e o Claude).
 
-   O banco mora no SOMA (Studio › Curadoria de fotos, Marca › Galeria
-   de fotos): a gestão do Studio escolhe e a foto entra. Este script lê
-   o banco pela função pública fotos_banco_publico (SOMA 2.25.0), só
-   com as fotos aprovadas e os campos públicos, e baixa as imagens.
+   O banco mora no SOMA (Studio › Banco de imagens, Marca › Galeria de
+   fotos): o admin põe fotos novas e a gestão do Studio aprova uma de
+   cada vez (SOMA 2.26.0). Este script lê o banco pela função pública
+   fotos_banco_publico, só com as fotos aprovadas e os campos públicos,
+   e baixa as imagens.
 
    Uso, da raiz do repositório:
      node scripts/fotos.mjs                          o banco todo, em tabela
@@ -78,7 +79,7 @@ async function banco({ tags, tema }){
     throw e;
   }
   const r = JSON.parse(txt);
-  if (r?.status !== 'ok') throw new Error('O banco de fotos respondeu: ' + txt.slice(0, 200));
+  if (r?.status !== 'ok') throw new Error('O banco de imagens respondeu: ' + txt.slice(0, 200));
   return r.fotos || [];
 }
 
@@ -105,7 +106,7 @@ if (a.busca){
   fotos = fotos.filter(f => termos.every(t => norm([f.descricao, f.autor, f.tema_nome, ...(f.tags || [])].join(' ')).includes(t)));
 }
 
-if (a.json){ console.log(JSON.stringify({ fonte:'Banco de fotos da NeuroDynamics (SOMA)', lido_em:new Date().toISOString(), fotos }, null, 2)); process.exit(0); }
+if (a.json){ console.log(JSON.stringify({ fonte:'Banco de imagens da NeuroDynamics (SOMA)', lido_em:new Date().toISOString(), fotos }, null, 2)); process.exit(0); }
 
 if (!a.baixar){
   if (!fotos.length){ console.log('Nenhuma foto com esse filtro.'); process.exit(0); }
@@ -132,5 +133,5 @@ for (const [i, f] of fotos.entries()){
     ok++; console.log(`baixei ${nome} (${Math.round(bin.length / 1024)} KB), ${credito(f)}`);
   } catch(e){ console.log(`não baixei ${f.descricao}: ${e.message}`); }
 }
-writeFileSync(join(a.baixar, 'creditos.json'), JSON.stringify({ fonte:'Banco de fotos da NeuroDynamics (SOMA)', baixado_em:new Date().toISOString(), fotos:creditos }, null, 2));
+writeFileSync(join(a.baixar, 'creditos.json'), JSON.stringify({ fonte:'Banco de imagens da NeuroDynamics (SOMA)', baixado_em:new Date().toISOString(), fotos:creditos }, null, 2));
 console.log(`\n${ok} de ${fotos.length} em ${a.baixar}, com creditos.json.`);
