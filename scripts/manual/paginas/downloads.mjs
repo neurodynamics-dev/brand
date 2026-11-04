@@ -22,9 +22,8 @@ const galeria = (itens, classe = '') => `<div class="m-galeria ${classe}">${iten
    "perfil" é o banner de cada pessoa, com a logo; "empresa" é a capa da página da NeuroDynamics.
    O SOMA (Marca, Capas do LinkedIn) lê o mesmo manifesto. */
 const LINKEDIN = JSON.parse(readFileSync(path.join(raiz, 'downloads/linkedin/index.json'), 'utf8')).capas;
-const GRUPOS_LI = [['en', 'foto', 'Em inglês, a foto inteira', 'Uma frase só, no espaço calmo da foto.'],
-  ['en', 'faixa', 'Em inglês, foto e faixa', 'A foto e o painel chapado de uma família.'],
-  ['pt', 'faixa', 'Em português', 'A foto, o painel chapado e o tema.']];
+const GRUPOS_LI = [['en', 'foto', 'A foto inteira', 'Uma frase só, no espaço calmo da foto.'],
+  ['en', 'faixa', 'Foto e faixa', 'A foto e o painel chapado de uma família.']];
 const capaLi = c => item({ src: '/' + c.previa, titulo: c.frase, fundo: 'faixa',
   texto: `Foto: ${esc(c.foto.autor)} / ${esc(c.foto.banco)}`,
   acoes: baixar('/' + c.perfil.arquivo, 'Perfil') + baixar('/' + c.empresa.arquivo, 'Página da empresa') });
@@ -55,7 +54,7 @@ export default function () {
       }).join('')
       + `<h3 class="m-sub">Do modelo social</h3>${galeria([item({ src: '/downloads/linkedin/capa.jpg', titulo: 'Tools for health.', fundo: 'faixa',
         texto: 'O banner do modelo de redes sociais.', acoes: baixar('/downloads/linkedin/capa.jpg', 'Perfil') })], 'larga')}`,
-      'Para o perfil de cada pessoa, com a logo (1584 × 396), e para a página da NeuroDynamics (1128 × 191). Os arquivos vêm no dobro do tamanho, para ficarem nítidos em telas de alta densidade. No perfil, o canto de baixo à esquerda fica sob a sua foto: ali vai só foto. As fotos são do <a href="https://membro.neurodynamics.dev/#/marca/fotos">banco de imagens do SOMA</a>, com o crédito em <a href="/downloads/linkedin/index.json">index.json</a>.')
+      'Em inglês, para o perfil de cada pessoa, com a logo (1584 × 396), e para a página da NeuroDynamics (1128 × 191). Os arquivos vêm no dobro do tamanho, em JPG de alta qualidade, para ficarem nítidos em telas de alta densidade. No perfil, o canto de baixo à esquerda fica sob a sua foto: ali vai só foto. As fotos são do <a href="https://membro.neurodynamics.dev/#/marca/fotos">banco de imagens do SOMA</a>, com o crédito em <a href="/downloads/linkedin/index.json">index.json</a>.')
     + sec('tokens', 'Para interfaces', grade([
       cartao('Design system', 'Os mesmos arquivos que os sites e o SOMA usam.', `<div class="m-baixas">${[['/design-system/tokens.css', 'tokens.css'], ['/design-system/neuro.css', 'neuro.css'], ['/design-system/casca.css', 'casca.css'], ['/design-system/casca.js', 'casca.js']].map(([h, n]) => baixar(h, n)).join('')}</div>`)]));
   return pagina({ rota: '/downloads', titulo: 'Downloads', descricao: 'Marcas, apresentações, modelos, papéis de parede e capas do LinkedIn, com a prévia de cada um.', eyebrow: 'Arquivos', corpo,
