@@ -1,0 +1,630 @@
+{
+  "sobre": "Capas de LinkedIn da NeuroDynamics, com fotos do banco de imagens do SOMA. \"perfil\" é o banner do perfil de cada pessoa (1584 x 396, aqui no dobro), com a logo; \"empresa\" é a capa da página da NeuroDynamics (1128 x 191, aqui no dobro). \"foto\" é a foto inteira com uma frase; \"faixa\" é a foto com o painel chapado de uma família.",
+  "capas": [
+    {
+      "id": "en-tools-for-health",
+      "idioma": "en",
+      "estilo": "foto",
+      "frase": "Tools for health.",
+      "familia": "cortex",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-tools-for-health.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-tools-for-health.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-tools-for-health.jpg",
+      "foto": {
+        "descricao": "Cérebro humano sobre fundo preto",
+        "autor": "Shawn Day",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/ii6BOPjAtVY"
+      }
+    },
+    {
+      "id": "en-signals-into-decisions",
+      "idioma": "en",
+      "estilo": "foto",
+      "frase": "Signals into decisions.",
+      "familia": "neuron",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-signals-into-decisions.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-signals-into-decisions.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-signals-into-decisions.jpg",
+      "foto": {
+        "descricao": "Batimento verde sobre fundo preto",
+        "autor": "Joshua Chehov",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/oCSol-lBtVA"
+      }
+    },
+    {
+      "id": "en-where-neurons-meet-engineering",
+      "idioma": "en",
+      "estilo": "foto",
+      "frase": "Where neurons meet engineering.",
+      "familia": "dendrito",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-where-neurons-meet-engineering.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-where-neurons-meet-engineering.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-where-neurons-meet-engineering.jpg",
+      "foto": {
+        "descricao": "Cérebro colorido com relevo",
+        "autor": "Stefano Bucciarelli",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/16IN3v0V12M"
+      }
+    },
+    {
+      "id": "en-neurotech-built-for-people",
+      "idioma": "en",
+      "estilo": "foto",
+      "frase": "Neurotech, built for people.",
+      "familia": "iris",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-neurotech-built-for-people.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-neurotech-built-for-people.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-neurotech-built-for-people.jpg",
+      "foto": {
+        "descricao": "Feixes de luz azul e roxa formando uma cabeça",
+        "autor": "Mirella Callage",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/Kile7-U74s0"
+      }
+    },
+    {
+      "id": "en-built-for-those-who-care",
+      "idioma": "en",
+      "estilo": "foto",
+      "frase": "Built for those who care.",
+      "familia": "glia",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-built-for-those-who-care.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-built-for-those-who-care.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-built-for-those-who-care.jpg",
+      "foto": {
+        "descricao": "Cirurgião se preparando para a operação",
+        "autor": "Antonio Zarza",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/h2RT2cl7mxA"
+      }
+    },
+    {
+      "id": "en-from-bench-to-bedside",
+      "idioma": "en",
+      "estilo": "foto",
+      "frase": "From bench to bedside.",
+      "familia": "nexo",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-from-bench-to-bedside.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-from-bench-to-bedside.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-from-bench-to-bedside.jpg",
+      "foto": {
+        "descricao": "Análise de uma peça de metal ao microscópio",
+        "autor": "Bermix Studio",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/JlVqUaGW2A0"
+      }
+    },
+    {
+      "id": "en-small-chips-big-care",
+      "idioma": "en",
+      "estilo": "foto",
+      "frase": "Small chips. Big care.",
+      "familia": "lumen",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-small-chips-big-care.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-small-chips-big-care.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-small-chips-big-care.jpg",
+      "foto": {
+        "descricao": "Pinça posiciona um microcontrolador RP2040",
+        "autor": "Vishnu Mohanan",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/zs4gtT8thO0"
+      }
+    },
+    {
+      "id": "en-health-engineered",
+      "idioma": "en",
+      "estilo": "faixa",
+      "frase": "Health, engineered.",
+      "familia": "cortex",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-health-engineered.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-health-engineered.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-health-engineered.jpg",
+      "foto": {
+        "descricao": "Braço robótico sobre placa de circuito",
+        "autor": "Louis Reed",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/wSTCaQpiLtc"
+      }
+    },
+    {
+      "id": "en-care-doesnt-stop-between-visits",
+      "idioma": "en",
+      "estilo": "faixa",
+      "frase": "Care doesn’t stop between visits.",
+      "familia": "retina",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-care-doesnt-stop-between-visits.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-care-doesnt-stop-between-visits.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-care-doesnt-stop-between-visits.jpg",
+      "foto": {
+        "descricao": "Frascos de quimioterapia e soro",
+        "autor": "National Cancer Institute",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/KMvoHcB-w5g"
+      }
+    },
+    {
+      "id": "en-science-that-leaves-the-lab",
+      "idioma": "en",
+      "estilo": "faixa",
+      "frase": "Science that leaves the lab.",
+      "familia": "nexo",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-science-that-leaves-the-lab.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-science-that-leaves-the-lab.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-science-that-leaves-the-lab.jpg",
+      "foto": {
+        "descricao": "Cientista ao microscópio no laboratório",
+        "autor": "National Cancer Institute",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/JxoWb7wHqnA"
+      }
+    },
+    {
+      "id": "en-code-close-to-the-metal",
+      "idioma": "en",
+      "estilo": "faixa",
+      "frase": "Code close to the metal.",
+      "familia": "lumen",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-code-close-to-the-metal.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-code-close-to-the-metal.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-code-close-to-the-metal.jpg",
+      "foto": {
+        "descricao": "Pinça posiciona um microcontrolador RP2040",
+        "autor": "Vishnu Mohanan",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/zs4gtT8thO0"
+      }
+    },
+    {
+      "id": "en-movement-restored",
+      "idioma": "en",
+      "estilo": "faixa",
+      "frase": "Movement, restored.",
+      "familia": "ritmo",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-movement-restored.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-movement-restored.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-movement-restored.jpg",
+      "foto": {
+        "descricao": "Corredor com prótese de perna",
+        "autor": "Vladyslav Tobolenko",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/aX3fjxKrgTI"
+      }
+    },
+    {
+      "id": "en-real-projects-real-deadlines",
+      "idioma": "en",
+      "estilo": "faixa",
+      "frase": "Real projects. Real deadlines.",
+      "familia": "impulso",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/en-real-projects-real-deadlines.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/en-real-projects-real-deadlines.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/en-real-projects-real-deadlines.jpg",
+      "foto": {
+        "descricao": "Reunião de desenvolvedores diante da tela",
+        "autor": "Mushvig Niftaliyev",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/VTZ4PVhLFFg"
+      }
+    },
+    {
+      "id": "pt-sistemas-inteligentes-para-a-saude-humana",
+      "idioma": "pt",
+      "estilo": "faixa",
+      "frase": "Sistemas inteligentes para a saúde humana.",
+      "familia": "cortex",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/pt-sistemas-inteligentes-para-a-saude-humana.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/pt-sistemas-inteligentes-para-a-saude-humana.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/pt-sistemas-inteligentes-para-a-saude-humana.jpg",
+      "foto": {
+        "descricao": "Braço robótico sobre placa de circuito",
+        "autor": "Louis Reed",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/wSTCaQpiLtc"
+      }
+    },
+    {
+      "id": "pt-dispositivos-que-ajudam-o-cuidado-a-chegar-as-pessoas",
+      "idioma": "pt",
+      "estilo": "faixa",
+      "frase": "Dispositivos que ajudam o cuidado a chegar às pessoas.",
+      "familia": "ion",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/pt-dispositivos-que-ajudam-o-cuidado-a-chegar-as-pessoas.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/pt-dispositivos-que-ajudam-o-cuidado-a-chegar-as-pessoas.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/pt-dispositivos-que-ajudam-o-cuidado-a-chegar-as-pessoas.jpg",
+      "foto": {
+        "descricao": "Eletroterapia aplicada no joelho",
+        "autor": "Terry Shultz P.T.",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/mvHuY-t4QII"
+      }
+    },
+    {
+      "id": "pt-do-sinal-fisiologico-a-conclusao-defensavel",
+      "idioma": "pt",
+      "estilo": "faixa",
+      "frase": "Do sinal fisiológico à conclusão defensável.",
+      "familia": "neuron",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/pt-do-sinal-fisiologico-a-conclusao-defensavel.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/pt-do-sinal-fisiologico-a-conclusao-defensavel.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/pt-do-sinal-fisiologico-a-conclusao-defensavel.jpg",
+      "foto": {
+        "descricao": "Batimento verde sobre fundo preto",
+        "autor": "Joshua Chehov",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/oCSol-lBtVA"
+      }
+    },
+    {
+      "id": "pt-tecnologia-pensada-para-a-beira-do-leito",
+      "idioma": "pt",
+      "estilo": "faixa",
+      "frase": "Tecnologia pensada para a beira do leito.",
+      "familia": "glia",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/pt-tecnologia-pensada-para-a-beira-do-leito.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/pt-tecnologia-pensada-para-a-beira-do-leito.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/pt-tecnologia-pensada-para-a-beira-do-leito.jpg",
+      "foto": {
+        "descricao": "Corredor longo com luz do sol",
+        "autor": "Chris Wang",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/_f7aNucnTuU"
+      }
+    },
+    {
+      "id": "pt-o-cuidado-acompanhado-entre-as-consultas",
+      "idioma": "pt",
+      "estilo": "faixa",
+      "frase": "O cuidado acompanhado entre as consultas.",
+      "familia": "retina",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/pt-o-cuidado-acompanhado-entre-as-consultas.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/pt-o-cuidado-acompanhado-entre-as-consultas.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/pt-o-cuidado-acompanhado-entre-as-consultas.jpg",
+      "foto": {
+        "descricao": "Frascos de quimioterapia e soro",
+        "autor": "National Cancer Institute",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/KMvoHcB-w5g"
+      }
+    },
+    {
+      "id": "pt-da-bancada-a-clinica",
+      "idioma": "pt",
+      "estilo": "faixa",
+      "frase": "Da bancada à clínica.",
+      "familia": "nexo",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/pt-da-bancada-a-clinica.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/pt-da-bancada-a-clinica.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/pt-da-bancada-a-clinica.jpg",
+      "foto": {
+        "descricao": "Cientista ao microscópio no laboratório",
+        "autor": "National Cancer Institute",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/JxoWb7wHqnA"
+      }
+    },
+    {
+      "id": "pt-do-sinal-a-decisao",
+      "idioma": "pt",
+      "estilo": "faixa",
+      "frase": "Do sinal à decisão.",
+      "familia": "dendrito",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/pt-do-sinal-a-decisao.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/pt-do-sinal-a-decisao.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/pt-do-sinal-a-decisao.jpg",
+      "foto": {
+        "descricao": "Close de um modelo de cérebro",
+        "autor": "Lisa Yount",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/JkAxfH5ktpw"
+      }
+    },
+    {
+      "id": "pt-codigo-que-vive-perto-do-metal",
+      "idioma": "pt",
+      "estilo": "faixa",
+      "frase": "Código que vive perto do metal.",
+      "familia": "lumen",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/pt-codigo-que-vive-perto-do-metal.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/pt-codigo-que-vive-perto-do-metal.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/pt-codigo-que-vive-perto-do-metal.jpg",
+      "foto": {
+        "descricao": "Pinça posiciona um microcontrolador RP2040",
+        "autor": "Vishnu Mohanan",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/zs4gtT8thO0"
+      }
+    },
+    {
+      "id": "pt-reabilitacao-com-os-proprios-musculos",
+      "idioma": "pt",
+      "estilo": "faixa",
+      "frase": "Reabilitação com os próprios músculos.",
+      "familia": "ritmo",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/pt-reabilitacao-com-os-proprios-musculos.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/pt-reabilitacao-com-os-proprios-musculos.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/pt-reabilitacao-com-os-proprios-musculos.jpg",
+      "foto": {
+        "descricao": "Corredor com prótese de perna",
+        "autor": "Vladyslav Tobolenko",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/aX3fjxKrgTI"
+      }
+    },
+    {
+      "id": "pt-projetos-reais-prazos-reais",
+      "idioma": "pt",
+      "estilo": "faixa",
+      "frase": "Projetos reais, prazos reais.",
+      "familia": "impulso",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/pt-projetos-reais-prazos-reais.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/pt-projetos-reais-prazos-reais.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/pt-projetos-reais-prazos-reais.jpg",
+      "foto": {
+        "descricao": "Reunião de desenvolvedores diante da tela",
+        "autor": "Mushvig Niftaliyev",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/VTZ4PVhLFFg"
+      }
+    },
+    {
+      "id": "pt-dados-do-dia-a-dia-resumidos-para-a-clinica",
+      "idioma": "pt",
+      "estilo": "faixa",
+      "frase": "Dados do dia a dia, resumidos para a clínica.",
+      "familia": "plexo",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/pt-dados-do-dia-a-dia-resumidos-para-a-clinica.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/pt-dados-do-dia-a-dia-resumidos-para-a-clinica.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/pt-dados-do-dia-a-dia-resumidos-para-a-clinica.jpg",
+      "foto": {
+        "descricao": "Close de smartwatch no pulso",
+        "autor": "Al Amin Mir",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/3uvS3ce7sk0"
+      }
+    },
+    {
+      "id": "pt-neurotecnologia-aplicada-a-saude",
+      "idioma": "pt",
+      "estilo": "faixa",
+      "frase": "Neurotecnologia aplicada à saúde.",
+      "familia": "iris",
+      "perfil": {
+        "arquivo": "downloads/linkedin/perfil/pt-neurotecnologia-aplicada-a-saude.jpg",
+        "largura": 3168,
+        "altura": 792
+      },
+      "empresa": {
+        "arquivo": "downloads/linkedin/empresa/pt-neurotecnologia-aplicada-a-saude.jpg",
+        "largura": 2256,
+        "altura": 382
+      },
+      "previa": "assets/manual/linkedin/pt-neurotecnologia-aplicada-a-saude.jpg",
+      "foto": {
+        "descricao": "Feixes de luz azul e roxa formando uma cabeça",
+        "autor": "Mirella Callage",
+        "banco": "Unsplash",
+        "licenca": "Licença Unsplash",
+        "pagina": "https://unsplash.com/photos/Kile7-U74s0"
+      }
+    }
+  ]
+}
