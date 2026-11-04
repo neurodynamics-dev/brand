@@ -30,7 +30,20 @@ node design-system/build.mjs --check
 
 As fontes dos renderizadores vêm das dependências locais `@fontsource`; não é necessário liberar TLS nem carregar fontes remotas para gerar imagens. `assets/manual/index.json` registra a origem de cada miniatura. `downloads/index.json` lista as dimensões dos 16 wallpapers e da capa de LinkedIn. Os scripts sobrescrevem somente as imagens geradas correspondentes.
 
+As **capas do LinkedIn** feitas com fotos do banco de imagens ficam em `downloads/linkedin/`: `perfil/` (o banner de cada pessoa, com a logo, 3168 × 792, o dobro de 1584 × 396) e `empresa/` (a capa da página da NeuroDynamics, 2256 × 382, o dobro de 1128 × 191), com as prévias em `assets/manual/linkedin/`. O manifesto `downloads/linkedin/index.json` traz a frase, o idioma, o estilo (`foto`, a foto inteira com uma frase; `faixa`, a foto e o painel chapado), a família e o crédito de cada foto. A página Downloads (seção LinkedIn) e o SOMA (Marca, Capas do LinkedIn) leem esse manifesto; capa nova entra por ele.
+
 Não há backend nem login no manual público. Documentos controlados continuam sujeitos à permissão de Arquivos no SOMA. A versão publicada deve acompanhar a atualização do portal para que os downloads novos estejam disponíveis.
+
+## Banco de imagens
+
+As fotos da marca moram no banco de imagens do SOMA (Studio › Banco de imagens): o admin põe fotos novas, a gestão do Studio aprova uma de cada vez, vendo a foto nas peças da marca, e a equipe vê as aprovadas em Marca › Galeria de fotos. Para peças, wallpapers e banners, leia o banco daqui:
+
+```sh
+node scripts/fotos.mjs --tema hospital               # lista
+node scripts/fotos.mjs --baixar saida/ --largura 2560 --tag UTI
+```
+
+O script usa a função pública `fotos_banco_publico` do SOMA (2.25.0), só com as fotos aprovadas e os campos públicos, e grava um `creditos.json` junto das imagens. As regras de uso (chapado, sem filtro, crédito, tamanhos) estão na skill `.claude/skills/banco-de-imagens/`, que o Claude lê ao criar peças.
 
 ## Relatório de AACC (LaTeX)
 

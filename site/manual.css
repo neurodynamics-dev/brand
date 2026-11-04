@@ -150,6 +150,11 @@ main{max-width:none;margin:0;padding:0}
 .m-dl-prev.logo img{inset:18% 14%;width:72%;height:64%;object-fit:contain}
 .m-dl-prev.escuro{background:var(--void)}
 .m-dl-prev.claro{background:var(--paper)}
+/* as capas de LinkedIn: a prévia na proporção do banner (4:1), em colunas mais largas */
+.m-dl-prev.faixa{aspect-ratio:4/1}
+.m-galeria.larga{grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr))}
+.m-sub{margin:var(--s7) 0 0;font-family:var(--fd);font-weight:600;font-size:var(--fs-h3, 18px)}
+.m-sub-lead{margin:var(--s1) 0 0;color:var(--muted);font-size:var(--fs-sm)}
 .m-dl-info{display:flex;flex-direction:column;gap:6px;flex:1;padding:var(--s4)}
 .m-dl-info h3{margin:0;font-family:var(--fd);font-weight:500;font-size:var(--fs-body)}
 .m-dl-info p{margin:0;color:var(--muted);font-size:var(--fs-xs)}
