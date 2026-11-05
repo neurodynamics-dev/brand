@@ -3,6 +3,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { raiz } from '../layout.mjs';
 import { PECAS } from './aplicacoes.mjs';
+import { FUNDOS, FORMATOS as STING_FORMATOS, RESOLUCOES, video, previa, PACOTE, MB } from './sting.mjs';
 
 /* Downloads em galeria: cada arquivo com a prévia, o nome e os botões.
    Só as marcas principais aparecem (imagotipo branco e preto); ícones, símbolos e as versões
@@ -28,12 +29,16 @@ const capaLi = c => item({ src: '/' + c.previa, titulo: c.frase, fundo: 'faixa',
   texto: `Foto: ${esc(c.foto.autor)} / ${esc(c.foto.banco)}`,
   acoes: baixar('/' + c.perfil.arquivo, 'Perfil') + baixar('/' + c.empresa.arquivo, 'Página da empresa') });
 const ver = (href, rot = 'Ver o modelo') => `<a class="btn ghost mini" href="${esc(href)}">${esc(rot)}</a>`;
+/* o sting: um item por fundo, com um botão por formato e resolução (assets/sting) */
+const STING_USO = { claro: 'Para conteúdo de saúde e cuidado.', escuro: 'Para engenharia, bancada e eventos.' };
+const sting = ([f, n]) => item({ src: previa(f), titulo: n, texto: STING_USO[f],
+  acoes: RESOLUCOES.map(r => `<div class="m-baixas m-res"><span>${r}</span>${STING_FORMATOS.map(([fm]) => baixar(video(f, fm, r), fm)).join('')}</div>`).join('') });
 const arquivos = p => (p.arquivos || []).filter(([h]) => h !== '/downloads').map(([h, n]) => baixar(h, n)).join('');
 
 export default function () {
   const formatos = ls('downloads/wallpapers', /\.jpg$/);
   const APRES = PECAS.filter(p => p.grupo === 'Apresentações');
-  const MODELOS = PECAS.filter(p => p.grupo !== 'Apresentações' && p.k !== 'wallpapers');
+  const MODELOS = PECAS.filter(p => p.grupo !== 'Apresentações' && !['wallpapers', 'sting'].includes(p.k));
 
   const corpo =
     sec('marcas', 'Marcas', galeria([
@@ -55,8 +60,10 @@ export default function () {
       + `<h3 class="m-sub">Do modelo social</h3>${galeria([item({ src: '/downloads/linkedin/capa.jpg', titulo: 'Tools for health.', fundo: 'faixa',
         texto: 'O banner do modelo de redes sociais.', acoes: baixar('/downloads/linkedin/capa.jpg', 'Perfil') })], 'larga')}`,
       'Em inglês, para o perfil de cada pessoa, com a logo (1584 × 396), e para a página da NeuroDynamics (1128 × 191). Os arquivos vêm no dobro do tamanho, em JPG de alta qualidade, para ficarem nítidos em telas de alta densidade. No perfil, o canto de baixo à esquerda fica sob a sua foto: ali vai só foto. As fotos são do <a href="https://membro.neurodynamics.dev/#/marca/fotos">banco de imagens do SOMA</a>, com o crédito em <a href="/downloads/linkedin/index.json">index.json</a>.')
+    + sec('sting', 'Sting', galeria(FUNDOS.map(sting)) + `<div class="m-baixas">${baixar(PACOTE, `Pacote completo (ZIP, ${MB(PACOTE)})`)}${ver('/aplicacoes/sting', 'Ver as regras')}</div>`,
+      'A assinatura em vídeo, em 7,27 s: 4K (H.264) para o dia a dia e 8K (HEVC 10-bit) para projetos em 8K, em quatro formatos: 16x9, 9x16, 4x5 e 1x1. Baixe o formato igual ao do seu vídeo; quando e como usar estão em <a href="/aplicacoes/sting">Aplicações, Sting</a>.')
     + sec('tokens', 'Para interfaces', grade([
       cartao('Design system', 'Os mesmos arquivos que os sites e o SOMA usam.', `<div class="m-baixas">${[['/design-system/tokens.css', 'tokens.css'], ['/design-system/neuro.css', 'neuro.css'], ['/design-system/casca.css', 'casca.css'], ['/design-system/casca.js', 'casca.js']].map(([h, n]) => baixar(h, n)).join('')}</div>`)]));
-  return pagina({ rota: '/downloads', titulo: 'Downloads', descricao: 'Marcas, apresentações, modelos, papéis de parede e capas do LinkedIn, com a prévia de cada um.', eyebrow: 'Arquivos', corpo,
-    toc: [['marcas', 'Marcas'], ['apresentacoes', 'Apresentações'], ['modelos', 'Modelos'], ['fundos', 'Papéis de parede'], ['linkedin', 'LinkedIn'], ['tokens', 'Interfaces']] });
+  return pagina({ rota: '/downloads', titulo: 'Downloads', descricao: 'Marcas, apresentações, modelos, papéis de parede, capas do LinkedIn e o sting, com a prévia de cada um.', eyebrow: 'Arquivos', corpo,
+    toc: [['marcas', 'Marcas'], ['apresentacoes', 'Apresentações'], ['modelos', 'Modelos'], ['fundos', 'Papéis de parede'], ['linkedin', 'LinkedIn'], ['sting', 'Sting'], ['tokens', 'Interfaces']] });
 }
