@@ -39,10 +39,11 @@ function assinaturas() {
       + `<div class="m-marcas">${marcaTile('icon-monochromatic.png', 'Onda branca', 'Uso interno.', 'escuro')}</div>`)
     + sec('selo', 'Selo solene', `<p>A onda dentro de uma coroa de louros, para certificados, diplomas e atos oficiais. Axon sobre papel claro, ou branco sobre Cortex.</p>`
       + `<div class="m-marcas">${marcaTile('seal-axon.png', 'Selo Axon', 'Sobre papel claro.', 'claro')}${marcaTile('seal-white.png', 'Selo branco', 'Sobre Cortex.', 'cortex')}</div>`)
+    + sec('sting', 'Sting', `<p>Em vídeo, a assinatura é o sting: a logo sobre um fundo limpo, sincronizada a quatro notas de piano, em 7,27 s. Uma vez por vídeo, de preferência no encerramento, sempre o arquivo pronto. Os vídeos e as regras estão em <a href="/aplicacoes/sting">Aplicações, Sting</a>.</p>`)
     + sec('colocacao', 'Onde a marca aparece', `<p>O logo não vai em toda página. Em apresentações, aparece só na capa e na contracapa; as páginas de conteúdo levam o rodapé (nome da apresentação, número da página e “Proprietário e confidencial”), sem logo. Uma marca por lugar.</p>`
       + assimEvite('Logo legível, sem texto ou fotografia por baixo.', 'Logo sobre imagem carregada, ou repetido em todas as páginas.')
       + pendente('Tamanho mínimo (em mm e em px) e a unidade da área de proteção ainda não foram definidos pelo responsável pela marca. Sugestão em estudo: usar a altura do ícone quadrado como unidade. Enquanto isso, preserve espaço livre ao redor e confira a leitura no tamanho final.'));
-  return pagina(pg(1, { corpo, toc: [['imagotipo', 'Imagotipo'], ['icone', 'Ícone quadrado'], ['simbolo', 'Símbolo'], ['onda', 'Onda branca'], ['selo', 'Selo solene'], ['colocacao', 'Onde aparece']] }));
+  return pagina(pg(1, { corpo, toc: [['imagotipo', 'Imagotipo'], ['icone', 'Ícone quadrado'], ['simbolo', 'Símbolo'], ['onda', 'Onda branca'], ['selo', 'Selo solene'], ['sting', 'Sting'], ['colocacao', 'Onde aparece']] }));
 }
 
 /* ---------- cor ---------- */

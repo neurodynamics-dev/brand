@@ -162,3 +162,14 @@ main{max-width:none;margin:0;padding:0}
 .m-textos{display:grid;gap:var(--s4);margin:var(--s5) 0}
 .m-textos .m-cartao p{margin-bottom:var(--s3)}
 .m-baixas{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s3)}
+/* sting: os vídeos de prévia, os passos numerados e uma linha de botões por resolução */
+.m-videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:var(--s4);margin:var(--s5) 0}
+.m-videos .m-fig{margin:0}
+.m-fig video{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:var(--r-md);border:1px solid var(--line);background:var(--bg)}
+.m-passos{margin:0 0 var(--s4);padding:0;list-style:none;counter-reset:passo;display:flex;flex-direction:column;gap:var(--s2);max-width:var(--measure)}
+.m-passos li{counter-increment:passo;padding-left:28px;position:relative}
+.m-passos li::before{content:counter(passo);position:absolute;left:0;top:.1em;font-family:var(--fm);font-size:var(--fs-xs);color:var(--cortex-medium)}
+.m-baixas .m-res{flex-basis:100%;align-items:center;margin-top:0}
+.m-res>span{flex-basis:100%;font-family:var(--fm);font-size:var(--fs-xs);color:var(--dim)}
+.tabela.trabalho.texto td{white-space:normal;vertical-align:top}
+.tabela.trabalho.texto .m-baixas{margin-top:0;flex-wrap:nowrap}

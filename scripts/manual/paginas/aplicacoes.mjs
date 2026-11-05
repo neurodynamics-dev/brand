@@ -1,4 +1,5 @@
 import { pagina, sec, assimEvite, lista, esc, figura, baixar } from '../layout.mjs';
+import { fichaSting } from './sting.mjs';
 
 /* As peças do manual. Imagens em assets/manual; modelos em templates/. As regras vêm do readme do design system. */
 export const PECAS = [
@@ -47,6 +48,8 @@ export const PECAS = [
   { k: 'email', n: 'Boletim e comunicado', grupo: 'Digital', modo: 'Operacional', img: ['email-boletim', 'email-comunicado-retina'], modelo: 'templates/email/Boletim.html', arquivos: [['/templates/email/Boletim.html', 'Boletim (Cortex)', 'HTML'], ['/templates/email/Comunicado.html', 'Comunicado (Cortex)', 'HTML'], ['/templates/email/Cabecalhos.html', 'Sete cabeçalhos', 'HTML']],
     d: 'E-mails prontos para envio: 600px, em tabelas e estilos embutidos.', quando: 'Boletim da equipe e comunicados internos.',
     regras: ['Há sete blocos de cabeçalho, o Boletim e o Comunicado em Cortex, e versões em cada família secundária (pasta variantes), com o logo recolorido por família.', 'A data fica no cabeçalho; títulos nunca em negrito.', 'As células de imagem trazem comentários SWAP para trocar pelos endereços hospedados.'], assim: 'Uma família por e-mail, com o logo na mesma família.', evite: 'Trocar a família só no botão.' },
+  { k: 'sting', n: 'Sting', grupo: 'Digital', modo: 'Ambos', img: ['sting-escuro', 'sting-claro'], modelo: null, pagina: fichaSting,
+    d: 'A assinatura em vídeo: a logo sobre um fundo limpo, sincronizada a quatro notas de piano, em 7,27 s. Em 4K e 8K, nos fundos branco e verde e em quatro formatos.' },
   { k: 'cracha', n: 'Crachá', grupo: 'Ambientes', modo: 'Operacional', img: ['cracha-sinal', 'cracha-retrato', 'cracha-ficha'], modelo: 'templates/badges/Badges.html',
     d: 'CR80 em três propostas (A Sinal, B Retrato, C Ficha), com frente, verso e a versão de visitante.', quando: 'Identificação de membros e visitantes no laboratório.',
     regras: ['A Sinal: campo de onda e faixa de função em Synapse. B Retrato: foto de página inteira com painel em degraus. C Ficha: ficha técnica com marcas de registro.', 'Foto só se fornecida.'], assim: 'Uma proposta só por lote de crachás.', evite: 'Foto com filtro.' },
@@ -79,7 +82,8 @@ function ficha(p) {
     ${sec('regras', 'Regras desta peça', lista(p.regras.map(esc)))}
     ${sec('assim', 'Assim e evite', assimEvite(esc(p.assim), esc(p.evite)))}</div>
     <aside class="lateral"><div class="card m-dl"><div class="item"><span>Tipo<small>${esc(p.grupo)}</small></span></div><div class="item"><span>Modo<small>${esc(p.modo)}</small></span></div></div>${dl ? '<div style="height:16px"></div>' + dl : ''}</aside></div>`;
-  return pagina({ rota: `/aplicacoes/${p.k}`, titulo: p.n, descricao: p.d, eyebrow: 'Aplicações', corpo,
-    proximo: (() => { const i = PECAS.indexOf(p); const q = PECAS[i + 1]; return q ? [`/aplicacoes/${q.k}`, q.n] : ['/aplicacoes', 'Todas as aplicações']; })() });
+  return pagina({ rota: `/aplicacoes/${p.k}`, titulo: p.n, descricao: p.d, eyebrow: 'Aplicações', corpo, proximo: proxima(p) });
 }
-export default () => [catalogo(), ...PECAS.map(ficha)];
+const proxima = p => { const q = PECAS[PECAS.indexOf(p) + 1]; return q ? [`/aplicacoes/${q.k}`, q.n] : ['/aplicacoes', 'Todas as aplicações']; };
+/* uma peça com página própria (pagina) monta o corpo sozinha; as demais usam a ficha */
+export default () => [catalogo(), ...PECAS.map(p => p.pagina ? p.pagina(p, proxima(p)) : ficha(p))];

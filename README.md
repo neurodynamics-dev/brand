@@ -32,6 +32,8 @@ As fontes dos renderizadores vêm das dependências locais `@fontsource`; não �
 
 As **capas do LinkedIn**, em inglês, feitas com fotos do banco de imagens, ficam em `downloads/linkedin/` (JPG de qualidade 95, sem subamostragem de cor, a partir das fotos no tamanho original): `perfil/` (o banner de cada pessoa, com a logo, 3168 × 792, o dobro de 1584 × 396) e `empresa/` (a capa da página da NeuroDynamics, 2256 × 382, o dobro de 1128 × 191), com as prévias em `assets/manual/linkedin/`. O manifesto `downloads/linkedin/index.json` traz a frase, o idioma, o estilo (`foto`, a foto inteira com uma frase; `faixa`, a foto e o painel chapado), a família e o crédito de cada foto. A página Downloads (seção LinkedIn) e o SOMA (Marca, Capas do LinkedIn) leem esse manifesto; capa nova entra por ele.
 
+O **sting**, a assinatura em vídeo, fica em `assets/sting/`: os 16 vídeos soltos (`NeuroDynamics-sting-<claro|escuro>-<16x9|9x16|4x5|1x1>-<4K|8K>.mp4`; 4K em H.264, 8K em HEVC 10-bit, 60 fps, 7,27 s), o pacote `NeuroDynamics-sting.zip` com todos eles e o `README` com as regras de uso (o mesmo do pacote, como `README.md`). A página `/aplicacoes/sting` e a seção Sting de Downloads saem de `scripts/manual/paginas/sting.mjs`, que falha na montagem se faltar algum arquivo; as prévias são `assets/manual/sting-claro.jpg` e `sting-escuro.jpg`, o quadro de 4 s do `16x9` em 4K. Mudou o README do sting? Atualize também a página e o `README.md` dentro do ZIP.
+
 Não há backend nem login no manual público. Documentos controlados continuam sujeitos à permissão de Arquivos no SOMA. A versão publicada deve acompanhar a atualização do portal para que os downloads novos estejam disponíveis.
 
 ## Banco de imagens

@@ -56,8 +56,7 @@ Use 4K como padrão. Ela abre em mais programas e serve para qualquer projeto de
 | Versão | Quando usar | Limite |
 | --- | --- | --- |
 | 4K, H.264 | Padrão para edição, publicação e envio | Não atende projetos em 8K |
-| 8K, AV1 | Projetos em 8K e arquivo de maior qualidade | Exige programa com suporte a AV1 e computador capaz de reproduzir 8K |
-| 1080p, H.264 | Envio rápido e prévias | Tem 30 fps. Não amplie para resoluções maiores |
+| 8K, HEVC | Projetos em 8K e arquivo de maior qualidade | Exige programa com suporte a HEVC 10-bit e computador capaz de reproduzir 8K |
 
 ## Como usar
 
@@ -125,10 +124,9 @@ Não use a logo como thumbnail.
 
 | Versão | `16x9` (px) | `9x16` (px) | `1x1` (px) | `4x5` (px) | Quadros | Vídeo |
 | --- | --- | --- | --- | --- | --- | --- |
-| 8K | 7680×4320 | 4320×7680 | 4320×4320 | 4320×5400 | 60 fps | AV1 8-bit |
+| 8K | 7680×4320 | 4320×7680 | 4320×4320 | 4320×5400 | 60 fps | HEVC 10-bit |
 | 4K | 3840×2160 | 2160×3840 | 2160×2160 | 2160×2700 | 60 fps | H.264 8-bit |
-| 1080p | 1920×1080 | 1080×1920 | 1080×1080 | 1080×1350 | 30 fps | H.264 8-bit |
 
 Todos os arquivos têm 7,27 s, contêiner MP4 e áudio AAC.
 
-Se a versão 8K não abrir, teste no Chrome ou no Edge. Se o erro continuar, use a versão 4K. Não use os arquivos 8K em HEVC gerados antes da versão AV1, que abriram sem imagem no Chromium.
+Programas e navegadores sem suporte a HEVC 10-bit podem abrir a versão 8K sem imagem. Nesse caso, use a versão 4K.
