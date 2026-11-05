@@ -1,0 +1,134 @@
+# README: Stings NeuroDynamics
+
+Nov 5, 2026 · @Matheus Marcondes
+
+## O que é
+
+O sting é a assinatura em vídeo da NeuroDynamics: a logo aparece sobre um fundo limpo, sincronizada a quatro notas de piano, em 7,27 s. Use o arquivo pronto, sem alterar imagem, som ou duração, exceto pelo corte descrito em "Como usar".
+
+Cada versão combina três escolhas: fundo, formato e resolução. Nos nomes dos arquivos, "claro" é o fundo branco e "escuro" é o fundo verde (`#00352F`).
+
+Exemplo: `NeuroDynamics-sting-escuro-16x9-4K.mp4`.
+
+## Quando usar
+
+Use o sting uma vez por vídeo, na abertura ou no encerramento.
+
+O encerramento é o padrão. A abertura é exceção, para quando o público já escolheu assistir.
+
+| Posição | Quando usar | Exemplos |
+| --- | --- | --- |
+| Encerramento (padrão) | Em todo vídeo oficial, salvo os casos de abertura | Demonstrações, redes sociais, anúncios, vídeos de até 1 min |
+| Abertura (exceção) | Em vídeos com mais de 1 min e público já atento | Exibição em evento, aula, pitch gravado, vídeo institucional |
+
+Em vídeos para redes sociais, comece pelo conteúdo, não pelo sting. Se a abertura for necessária, coloque o sting depois de um trecho curto do vídeo.
+
+Não use em conteúdo que não seja da NeuroDynamics ou que ela não tenha aprovado. Em cortes de até 15 s, avalie se os 7,27 s do sting cabem no vídeo.
+
+## Como escolher a versão
+
+Escolha nesta ordem: o fundo pelo conteúdo, o formato pelo destino e a resolução pelo projeto de edição.
+
+### Fundo
+
+| Fundo | Nome do arquivo | Use quando o conteúdo for | Exemplos |
+| --- | --- | --- | --- |
+| Branco | `claro` | Calmo e visualmente limpo, com foco em saúde e cuidado | Demonstrações em ambientes médicos, hospital, clínica, uso do dispositivo com pessoas |
+| Verde | `escuro` | Técnico e cheio de movimento, com foco em engenharia | Bancada, prototipagem, testes, bastidores, competições, eventos, institucional |
+
+Se o vídeo tiver os dois tipos de conteúdo, escolha pelo plano que fica ao lado do sting.
+
+### Formato
+
+O formato do sting deve ser igual ao do vídeo.
+
+| Formato | Proporção na tela | Destino |
+| --- | --- | --- |
+| `16x9` | Horizontal | YouTube, sites, projeção, apresentações |
+| `9x16` | Vertical inteira | Reels, Stories, Shorts, TikTok |
+| `4x5` | Vertical de feed | Feed do Instagram e do LinkedIn |
+| `1x1` | Quadrada | Feeds que aceitam vídeo quadrado |
+
+### Resolução
+
+Use 4K como padrão. Ela abre em mais programas e serve para qualquer projeto de até 4K.
+
+| Versão | Quando usar | Limite |
+| --- | --- | --- |
+| 4K, H.264 | Padrão para edição, publicação e envio | Não atende projetos em 8K |
+| 8K, AV1 | Projetos em 8K e arquivo de maior qualidade | Exige programa com suporte a AV1 e computador capaz de reproduzir 8K |
+| 1080p, H.264 | Envio rápido e prévias | Tem 30 fps. Não amplie para resoluções maiores |
+
+## Como usar
+
+1. Crie o projeto de edição no formato final do vídeo.
+2. Coloque o arquivo correspondente na abertura ou no encerramento, ocupando a tela inteira.
+3. Faça um corte seco entre o sting e o vídeo. O sting já começa e termina no fundo limpo, sem logo.
+4. Deixe o piano como som principal. Durante o sting, retire voz e efeitos e mantenha a música em silêncio ou bem abaixo do piano.
+5. Exporte e confira o trecho final: logo nítida, tempo original e piano audível.
+
+### Referência de tempo
+
+| Tempo | O que acontece |
+| --- | --- |
+| 0 a 1,03 s | Fundo em silêncio. O piano entra em 1,03 s |
+| 1,35 s | O símbolo começa a surgir |
+| 2,05 s | O nome começa a ser revelado |
+| 3,10 s a 5,40 s | Logo completa em tela |
+| 5,40 s a 6,40 s | A logo some em fade |
+| 6,40 s a 7,27 s | Fundo em silêncio |
+
+Se precisar encurtar, corte só o fundo em silêncio: até 1 s no início e até 0,8 s no fim. O restante fica intacto.
+
+### Áudio
+
+O pico do piano fica em -12,3 dBFS. Se houver outro som durante o sting, mantenha-o pelo menos 12 dB abaixo, ou seja, com pico em até -24 dBFS. Nesse trecho, nenhum som deve competir com o piano.
+
+### Thumbnail
+
+Não use a logo como thumbnail.
+
+- **Redes sociais:** use uma captura de um momento dinâmico do vídeo, para gerar interesse em quem vê.
+- **Conteúdo institucional, como aulas e apresentações:** crie a thumbnail no Studio.
+
+## O que não fazer
+
+**Imagem**
+
+- Não distorça, estique, gire ou recorte o sting.
+- Não use um formato dentro de outro, como um `9x16` ou `1x1` centralizado em vídeo `16x9`, com barras ou fundo preenchido.
+- Não reduza o sting a uma janela na tela. Ele ocupa o quadro inteiro.
+- Não amplie uma versão de resolução menor para um projeto maior.
+- Não aplique filtros, correção de cor, sombras, molduras ou texto.
+- Não sobreponha legendas, marcas, logos de parceiros ou outros elementos.
+- Não troque as cores nem o fundo.
+
+**Tempo**
+
+- Não altere a velocidade de reprodução.
+- Não inverta, repita em loop nem congele quadros.
+- Não corte a animação nem o piano. Corte só o fundo em silêncio.
+- Não use transições sobre a logo. Se precisar de um fade, faça-o só no fundo.
+
+**Áudio**
+
+- Não deixe música, voz ou efeitos sobressaírem ao piano.
+- Não substitua o piano, separe-o da imagem nem altere sua afinação.
+- Não remova o áudio, exceto onde a plataforma ou o local de exibição não tiver som.
+
+**Arquivo**
+
+- Não recrie a logo ou a animação em outro programa.
+- Não reexporte um vídeo já comprimido para gerar uma nova versão. Volte ao arquivo original.
+
+## Especificações
+
+| Versão | `16x9` (px) | `9x16` (px) | `1x1` (px) | `4x5` (px) | Quadros | Vídeo |
+| --- | --- | --- | --- | --- | --- | --- |
+| 8K | 7680×4320 | 4320×7680 | 4320×4320 | 4320×5400 | 60 fps | AV1 8-bit |
+| 4K | 3840×2160 | 2160×3840 | 2160×2160 | 2160×2700 | 60 fps | H.264 8-bit |
+| 1080p | 1920×1080 | 1080×1920 | 1080×1080 | 1080×1350 | 30 fps | H.264 8-bit |
+
+Todos os arquivos têm 7,27 s, contêiner MP4 e áudio AAC.
+
+Se a versão 8K não abrir, teste no Chrome ou no Edge. Se o erro continuar, use a versão 4K. Não use os arquivos 8K em HEVC gerados antes da versão AV1, que abriram sem imagem no Chromium.
