@@ -34,6 +34,7 @@ Mono. Só cores do conjunto primário e do neutro, salvo onde indicado.
 | Apresentação de marca | [`brand-deck/BrandDeck.html`](brand-deck/BrandDeck.html) | 16:9, 24 slides com a paleta expandida |
 | Certificado de marca | [`certificate-brand/CertificateBrand.html`](certificate-brand/CertificateBrand.html) | A4 paisagem, faixa da família à esquerda (Cortex, Ion, Retina, Lúmen, Dendrito) |
 | Redes sociais | [`social/Social.html`](social/Social.html) | Feed 1080×1350, story 1080×1920, banner LinkedIn 1584×396 |
+| Feed com foto | [`social/FeedFoto.html`](social/FeedFoto.html) | Feed 1080×1350: foto em cima, faixa chapada na família, eyebrow à direita, título e subtítulo editáveis; uma peça por família (12) |
 | Crachás | [`badges/Badges.html`](badges/Badges.html) | CR80, três propostas (Sinal, Retrato, Ficha), frente, verso e visitante |
 | Wallpapers | [`wallpapers/Wallpapers.html`](wallpapers/Wallpapers.html) | Quatro estilos em desktop, celular, tablet e videochamada |
 | Pôsteres | [`posters/Posters.html`](posters/Posters.html) | Quatro frases e quatro pranchas técnicas do NeuroAmp-32 |
