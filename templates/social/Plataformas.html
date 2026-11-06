@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capas para outras plataformas | NeuroDynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../design-system/tokens.css">
+<style>
+  /* As capas de LinkedIn, nas medidas de outras redes. Foto sem filtro,
+     fundo preto (o da foto), título em branco com "health." em Synapse,
+     logo e crédito. Cada capa abre o título num bloco da largura segura. */
+  body{margin:0;background:#1A1F1D;font-family:'Instrument Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .capa{position:relative;overflow:hidden;background:#000;color:#fff;margin:0 0 40px}
+  /* a foto fica inteira, à esquerda, sobre o preto: o cérebro ocupa essa parte, o texto a direita */
+  .capa .foto{position:absolute;top:50%;transform:translateY(-50%);height:auto}
+  .capa .bloco{position:absolute;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.45em}
+  .capa h1{margin:0;font-family:Archivo,sans-serif;font-weight:600;letter-spacing:-.03em;line-height:1;white-space:nowrap;color:#fff}
+  .capa h1 em{font-style:normal;color:#CEDC00}
+  .capa .logo{display:block;height:auto}
+  .capa .credito{position:absolute;right:2.2%;bottom:3.2%;font:500 13px/1 'Instrument Sans',sans-serif;color:rgba(255,255,255,.45);white-space:nowrap}
+  /* YouTube, banner do canal: 2560 x 1440. A área segura, no centro, tem 1546 x 423. */
+  .youtube{width:2560px;height:1440px}
+  .youtube .foto{left:40px;width:1400px}
+  .youtube .bloco{left:1250px;width:900px}
+  .youtube h1{font-size:124px}
+  .youtube .logo{width:270px}
+  /* Facebook, capa da página: 1640 x 624. */
+  .facebook{width:1640px;height:624px}
+  .facebook .foto{left:-25px;width:1000px}
+  .facebook .bloco{left:800px;width:800px}
+  .facebook h1{font-size:100px}
+  .facebook .logo{width:240px}
+  /* X, cabeçalho: 1500 x 500. */
+  .x{width:1500px;height:500px}
+  .x .foto{left:10px;width:900px}
+  .x .bloco{left:770px;width:700px}
+  .x h1{font-size:88px}
+  .x .logo{width:220px}
+</style>
+</head>
+<body>
+
+<section class="capa youtube" data-screen-label="YouTube banner 2560x1440">
+  <img class="foto" src="fotos/ii6BOPjAtVY.jpg" alt="">
+  <div class="bloco">
+    <h1>Tools for <em>health.</em></h1>
+    <img class="logo" src="../../assets/logo-imagotipo-white.png" alt="NeuroDynamics">
+  </div>
+  <span class="credito">Photo: Shawn Day / Unsplash</span>
+</section>
+
+<section class="capa facebook" data-screen-label="Facebook capa 1640x624">
+  <img class="foto" src="fotos/ii6BOPjAtVY.jpg" alt="">
+  <div class="bloco">
+    <h1>Tools for <em>health.</em></h1>
+    <img class="logo" src="../../assets/logo-imagotipo-white.png" alt="NeuroDynamics">
+  </div>
+  <span class="credito">Photo: Shawn Day / Unsplash</span>
+</section>
+
+<section class="capa x" data-screen-label="X cabeçalho 1500x500">
+  <img class="foto" src="fotos/ii6BOPjAtVY.jpg" alt="">
+  <div class="bloco">
+    <h1>Tools for <em>health.</em></h1>
+    <img class="logo" src="../../assets/logo-imagotipo-white.png" alt="NeuroDynamics">
+  </div>
+  <span class="credito">Photo: Shawn Day / Unsplash</span>
+</section>
+
+</body>
+</html>
