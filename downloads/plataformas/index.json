@@ -1,0 +1,32 @@
+{
+ "frase": "Tools for health.",
+ "idioma": "en",
+ "familia": "cortex",
+ "foto": {
+  "descricao": "Cérebro humano sobre fundo preto",
+  "autor": "Shawn Day",
+  "banco": "Unsplash",
+  "licenca": "Licença Unsplash",
+  "pagina": "https://unsplash.com/photos/ii6BOPjAtVY"
+ },
+ "capas": [
+  {
+   "file": "plataformas/youtube-tools-for-health.jpg",
+   "plataforma": "YouTube",
+   "width": 2560,
+   "height": 1440
+  },
+  {
+   "file": "plataformas/facebook-tools-for-health.jpg",
+   "plataforma": "Facebook",
+   "width": 1640,
+   "height": 624
+  },
+  {
+   "file": "plataformas/x-tools-for-health.jpg",
+   "plataforma": "X",
+   "width": 1500,
+   "height": 500
+  }
+ ]
+}
