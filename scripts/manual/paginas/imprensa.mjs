@@ -5,11 +5,12 @@ const TEXTOS = [
   ['English', 'en', 'NeuroDynamics is a nonprofit health-tech research and development initiative at the School of Engineering of the Federal University of Minas Gerais (UFMG). Software, firmware, embedded systems and AI in service of human health.'],
   ['Français', 'fr', "NeuroDynamics est une initiative à but non lucratif de recherche et développement en technologies de la santé, à l'École d'Ingénierie de l'Université Fédérale du Minas Gerais (UFMG). Logiciel, firmware, systèmes embarqués et IA au service de la santé humaine."],
 ];
+/* cada logo em SVG (vetor, a preferência) e PNG */
 const LOGOS = [
-  ['Imagotipo branco', '/assets/logo-imagotipo-white.png', 'Para fundos escuros'],
-  ['Imagotipo preto', '/assets/logo-imagotipo-black.png', 'Para fundos claros', 'claro'],
-  ['Ícone colorido', '/assets/icon-colored-transparent.png', 'Fundo transparente'],
-  ['Ícone monocromático', '/assets/icon-monochromatic.png', 'Uma cor, para carimbos e impressão simples'],
+  ['Imagotipo branco', '/assets/logo-imagotipo-white', 'Para fundos escuros'],
+  ['Imagotipo preto', '/assets/logo-imagotipo-black', 'Para fundos claros', 'claro'],
+  ['Ícone colorido', '/assets/icon-colored-transparent', 'Fundo transparente'],
+  ['Ícone monocromático', '/assets/icon-monochromatic', 'Uma cor, para carimbos e impressão simples'],
 ];
 
 export default function () {
@@ -19,8 +20,8 @@ export default function () {
     + sec('nome', 'Como escrever o nome', `<p>Escreva <b>NeuroDynamics</b>, junto, com N e D maiúsculos. Na primeira menção, acrescente o vínculo: “NeuroDynamics, iniciativa da Escola de Engenharia da UFMG”.</p>`
       + assimEvite('NeuroDynamics', 'Neurodynamics, Neuro Dynamics, NEURODYNAMICS, ND')
       + assimEvite('o LABBIO, Escola de Engenharia, UFMG', 'laboratório da NeuroDynamics na UFMG, sem citar o LABBIO'))
-    + sec('logos', 'Logos para publicação', `<p>Escolha pelo fundo da peça. Não recolora, não distorça, não aplique sombra. As demais assinaturas estão em <a href="/fundamentos/assinaturas">Fundamentos, Assinaturas</a>.</p>`
-      + grade(LOGOS.map(([n, src, d, fundo = '']) => `<article class="card m-cartao"><div class="m-logo-prev ${fundo}"><img src="${src}" alt="${esc(n)}" loading="lazy"></div><h3>${esc(n)}</h3><p>${esc(d)}</p>${baixar(src, 'Baixar PNG')}</article>`)))
+    + sec('logos', 'Logos para publicação', `<p>Escolha pelo fundo da peça. Não recolora, não distorça, não aplique sombra. Prefira o SVG, que é vetor e fica nítido em qualquer tamanho; use o PNG só onde o SVG não é aceito. As demais assinaturas estão em <a href="/fundamentos/assinaturas">Fundamentos, Assinaturas</a>.</p>`
+      + grade(LOGOS.map(([n, base, d, fundo = '']) => `<article class="card m-cartao"><div class="m-logo-prev ${fundo}"><img src="${base}.png" alt="${esc(n)}" loading="lazy"></div><h3>${esc(n)}</h3><p>${esc(d)}</p><div class="m-baixas">${baixar(base + '.svg', 'Baixar SVG')}${baixar(base + '.png', 'Baixar PNG')}</div></article>`)))
     + sec('uso', 'Antes de publicar', lista([
       'Logo inteiro, em fundo com contraste. Ao redor, deixe espaço livre.',
       'Citações e números vêm de fonte da equipe. Em dúvida, pergunte.',
