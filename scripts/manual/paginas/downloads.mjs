@@ -42,9 +42,9 @@ export default function () {
 
   const corpo =
     sec('marcas', 'Marcas', galeria([
-      item({ src: '/assets/logo-imagotipo-white.png', titulo: 'Imagotipo branco', texto: 'Para fundos escuros. PNG transparente.', logo: true, fundo: 'escuro', acoes: baixar('/assets/logo-imagotipo-white.png', 'Baixar PNG') }),
-      item({ src: '/assets/logo-imagotipo-black.png', titulo: 'Imagotipo preto', texto: 'Para fundos claros. PNG transparente.', logo: true, fundo: 'claro', acoes: baixar('/assets/logo-imagotipo-black.png', 'Baixar PNG') })]),
-      'O imagotipo é a assinatura de uso geral. As demais versões e quando usar cada uma estão em <a href="/fundamentos/assinaturas">Fundamentos, Assinaturas</a>.')
+      item({ src: '/assets/logo-imagotipo-white.png', titulo: 'Imagotipo branco', texto: 'Para fundos escuros. Vetor (SVG) e PNG, com fundo transparente.', logo: true, fundo: 'escuro', acoes: baixar('/assets/logo-imagotipo-white.svg', 'Baixar SVG') + baixar('/assets/logo-imagotipo-white.png', 'Baixar PNG') }),
+      item({ src: '/assets/logo-imagotipo-black.png', titulo: 'Imagotipo preto', texto: 'Para fundos claros. Vetor (SVG) e PNG, com fundo transparente.', logo: true, fundo: 'claro', acoes: baixar('/assets/logo-imagotipo-black.svg', 'Baixar SVG') + baixar('/assets/logo-imagotipo-black.png', 'Baixar PNG') })]),
+      'O imagotipo é a assinatura de uso geral. Prefira o SVG: é vetor e fica nítido em qualquer tamanho. As demais versões e quando usar cada uma estão em <a href="/fundamentos/assinaturas">Fundamentos, Assinaturas</a>.')
     + sec('apresentacoes', 'Apresentações', galeria(APRES.map(p =>
       item({ src: mini(p.img[0]), titulo: p.n, texto: esc(p.d), acoes: arquivos(p) + ver(`/aplicacoes/${p.k}`, 'Ver os leiautes') }))))
     + sec('modelos', 'Modelos e exemplos de aplicação', galeria(MODELOS.map(p =>
